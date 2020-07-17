@@ -17,20 +17,38 @@
 -->
     <properties>
         <spring.plugin.version>1.2.0.RELEASE</spring.plugin.version>
-        <spring.boot.version>2.1.7.RELEASE</spring.boot.version>
+        <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
         <spring.data.version>2.1.10.RELEASE</spring.data.version>
-        <spring.version>5.1.9.RELEASE</spring.version>
+        <spring.version>5.2.6.RELEASE</spring.version>
+		<spring.cloud.version>2.2.2.RELEASE</spring.cloud.version>
+		<spring.cloud.alibaba.version>2.2.1.RELEASE</spring.cloud.alibaba.version>
+		<sentinel.version>1.7.1</sentinel.version>
 
-        <easyjson.version>2.0.5</easyjson.version>
-        <sqlhelper.version>2.0.6</sqlhelper.version>
-        <langx-java.version>0.0.9</langx-java.version>
+        <easyjson.version>3.0.0</easyjson.version>
+        <sqlhelper.version>3.1.1</sqlhelper.version>
+        <langx-java.version>2.5.2</langx-java.version>
+		<audit.version>1.1.2</audit.version>
 
     </properties>
 	<dependencies>
-	  
+		<dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-batchinsert</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-common</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.github.fangjinuo.sqlhelper</groupId>
             <artifactId>sqlhelper-dialect</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-dbutils</artifactId>
             <version>${sqlhelper.version}</version>
         </dependency>
         <dependency>
@@ -50,12 +68,22 @@
         </dependency>
         <dependency>
             <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-jfinal</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-jsqlparser</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
             <artifactId>sqlhelper-mybatis</artifactId>
             <version>${sqlhelper.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.fangjinuo.sqlhelper</groupId>
-            <artifactId>sqlhelper-mybatis-spring-boot-starter</artifactId>
+            <artifactId>sqlhelper-mybatis-over-pagehelper</artifactId>
             <version>${sqlhelper.version}</version>
         </dependency>
         <dependency>
@@ -65,10 +93,72 @@
         </dependency>
         <dependency>
             <groupId>com.github.fangjinuo.sqlhelper</groupId>
-            <artifactId>sqlhelper-mybatis-over-pagehelper</artifactId>
+            <artifactId>sqlhelper-mybatis-spring-boot-starter</artifactId>
             <version>${sqlhelper.version}</version>
         </dependency>
-		
+        <dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-mybatisplus</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-mybatisplus-spring-boot-autoconfigure</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>       
+        <dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-mybatisplus-spring-boot-starter</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency> 
+        <dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-springjdbc</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>      
+        <dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-springjdbc-spring-boot-autoconfigure</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-springjdbc-spring-boot-starter</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>      
+		<dependency>
+            <groupId>com.github.fangjinuo.sqlhelper</groupId>
+            <artifactId>sqlhelper-tkmapper-spring-boot-starter</artifactId>
+            <version>${sqlhelper.version}</version>
+        </dependency>  
+
+
+		<dependency>
+            <groupId>com.github.fangjinuo.audit</groupId>
+            <artifactId>audit-core</artifactId>
+            <version>${audit.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.audit</groupId>
+            <artifactId>audit-servlet</artifactId>
+            <version>${audit.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.audit</groupId>
+            <artifactId>audit-spring</artifactId>
+            <version>${audit.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.audit</groupId>
+            <artifactId>audit-spring-boot-autoconfigure</artifactId>
+            <version>${audit.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.audit</groupId>
+            <artifactId>audit-spring-boot-starter</artifactId>
+            <version>${audit.version}</version>
+        </dependency>
+    
 
 
         <dependency>
@@ -111,6 +201,11 @@
             <artifactId>jsonlib-to-easyjson</artifactId>
             <version>${easyjson.version}</version>
         </dependency>
+         <dependency>
+            <groupId>com.github.fangjinuo.easyjson</groupId>
+            <artifactId>boonjson-to-easyjson</artifactId>
+            <version>${easyjson.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.github.fangjinuo.easyjson</groupId>
             <artifactId>jsonsmart-to-easyjson</artifactId>
@@ -126,6 +221,21 @@
             <artifactId>fastjson-to-easyjson</artifactId>
             <version>${easyjson.version}</version>
         </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.easyjson</groupId>
+            <artifactId>easyjson-core</artifactId>
+            <version>${easyjson.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.easyjson</groupId>
+            <artifactId>moshi-to-easyjson</artifactId>
+            <version>${easyjson.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.easyjson.supports</groupId>
+            <artifactId>easyjson-supports-feign</artifactId>
+            <version>${easyjson.version}</version>
+        </dependency>
 
 
         <dependency>
@@ -133,8 +243,18 @@
             <artifactId>langx-java</artifactId>
             <version>${langx-java.version}</version>
         </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.langx</groupId>
+            <artifactId>langx-java8</artifactId>
+            <version>${langx-java.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.github.fangjinuo.langx</groupId>
+            <artifactId>langx-java-reflect-aspectj</artifactId>
+            <version>${langx-java.version}</version>
+        </dependency>
 
-	<!--
+	
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-parent</artifactId>
@@ -328,6 +448,11 @@
             <artifactId>spring-boot-starter-web-services</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
 
 
 
@@ -424,19 +549,78 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
 
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>${spring.boot.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-gateway</artifactId>
+		    <version>${spring.cloud.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-context</artifactId>
+		    <version>${spring.cloud.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		    <version>${spring.cloud.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+		    <version>${spring.cloud.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		    <version>${spring.cloud.alibaba.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		    <version>${spring.cloud.alibaba.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-circuitbreaker-sentinel</artifactId>
+		    <version>${spring.cloud.alibaba.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-circuitbreaker-sentinel</artifactId>
+		    <version>${spring.cloud.alibaba.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-spring-cloud-gateway-adapter</artifactId>
+			<version>${sentinel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-transport-simple-http</artifactId>
+			<version>${sentinel.version}</version>
+		</dependency>
+
+
+
 		<dependency>
 		    <groupId>com.lmax</groupId>
 		    <artifactId>disruptor</artifactId>
 		    <version>3.4.2</version>
 		</dependency>
-	-->
+		
 	</dependencies>
 
     <build>

@@ -46,21 +46,44 @@ public class GAV implements Comparable<GAV>{
         return StringTemplates.formatWithPlaceholder("{}:{}:{}", groupId, artifactId, version);
     }
 
+    /**
+     * @return pom文件所在的本地仓库的相对路径
+     */
+    public String getLocation(){
+       return StringTemplates.format("{0}/{1}/{2}", groupId.replace(".","/"), artifactId, version);
+    }
+
+    /**
+     * @return 获取 pom 文件的相对路径，相对于仓库根目录
+     */
     public String getPomPath(){
         return getLikeUnixPath()+".pom";
     }
 
+    /**
+     * @return 获取 jar 文件的相对路径，相对于仓库根目录
+     */
     public String getJarPath(){
         return getLikeUnixPath()+".jar";
     }
+
+    /**
+     * @return 获取 tests 文件的相对路径，相对于仓库根目录
+     */
     public String getTestsPath(){
         return getLikeUnixPath()+"-tests.jar";
     }
 
+    /**
+     * @return 获取 sources 文件的相对路径，相对于仓库根目录
+     */
     public String getSourcesPath(){
         return getLikeUnixPath()+"-sources.jar";
     }
 
+    /**
+     * @return 获取 javadoc 文件的相对路径，相对于仓库根目录
+     */
     public String getJavaDocPath(){
         return getLikeUnixPath()+"-javadoc.jar";
     }

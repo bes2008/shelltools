@@ -86,32 +86,34 @@ public class MavenLocalRepositoryUpdatedScanner {
                     }
                     if (pomFile.exists()) {
                         MavenArtifact mavenArtifact = null;
-                        if (!readPoms.containsKey(pomFile.getAbsolutePath())) {
+                        String absolutePath = pomFile.getAbsolutePath();
+                        if (!readPoms.containsKey(absolutePath)) {
                             FileInputStream inputStream = null;
                             try {
                                 inputStream = new FileInputStream(pomFile);
                                 Document document = getXmlDoc(null, inputStream, new IgnoreErrorHandler());
-                                mavenArtifact = new MavenArtifactPomParser(pomFile.getAbsolutePath()).parse(document);
+                                mavenArtifact = new MavenArtifactPomParser(absolutePath).parse(document);
 
                                 if (rootDirectory.get() == null) {
-                                    String filepath = Filenames.asUnixFilePath(pomFile.getAbsolutePath());
+                                    String filepath = Filenames.asUnixFilePath(absolutePath);
                                     String rootPath = filepath.replace(filepath, mavenArtifact.getGav().getPomPath());
                                     rootDirectory.set(new File(rootPath));
                                 }
-                                readPoms.put(pomFile.getAbsolutePath(), mavenArtifact.getGav());
+                                readPoms.put(absolutePath, mavenArtifact.getGav());
                             } catch (Throwable ex) {
-                                logger.error("Error occur when parse {} , error: {}", pomFile.getAbsolutePath(), ex.getMessage(), ex);
+                                logger.error("Error occur when parse {} , error: {}", absolutePath, ex.getMessage(), ex);
                             } finally {
                                 IOs.close(inputStream);
                             }
                         } else {
-                            GAV gav = readPoms.get(pomFile.getAbsolutePath());
+                            GAV gav = readPoms.get(absolutePath);
                             mavenArtifact = readMavenArtifactMap.get(gav);
                         }
 
                         if (mavenArtifact != null) {
                             // do filter
                             mavenArtifact.setLastModifiedTime(pomFile.lastModified());
+                            mavenArtifact.setLocalPath(pomFile.getParentFile().getAbsolutePath());
                             if (filter.accept(mavenArtifact)) {
                                 map.put(mavenArtifact.getGav(), mavenArtifact);
                             }

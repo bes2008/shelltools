@@ -11,6 +11,10 @@ public class MavenArtifact {
     private DependencyScope scope;
     private long lastModifiedTime;
     private List<MavenArtifact> dependencies;
+    /**
+     * pom 文件所在的本地仓库的目录
+     */
+    private String localPath;
 
     public GAV getGav() {
         return gav;
@@ -66,6 +70,14 @@ public class MavenArtifact {
 
     public void setLastModifiedTime(long lastModifiedTime) {
         this.lastModifiedTime = lastModifiedTime;
+    }
+
+    public String getLocalPath() {
+        return localPath;
+    }
+
+    public void setLocalPath(String localPath) {
+        this.localPath = localPath;
     }
 
     public List<MavenArtifact> getDependencies() {

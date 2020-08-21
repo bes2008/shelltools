@@ -33,7 +33,7 @@ public class MavenLocalRepositoryUpdatedScanCommands {
      */
     @ShellMethod(key = "maven_local_repo_updated_scan", value = "scan all dependencies after the specified time")
     public void scanUpdated(@ShellOption(defaultValue = ".") String repositoryLocation,
-                            @ShellOption(value = "--date", defaultValue = ".") String date) {
+                            @ShellOption(value = "--date", defaultValue = ".", help = "format: yyyy-MM-dd_HH:mm, the default is the day of you execute it") String date) {
         Map<GAV, MavenArtifact> map = scanUpdated0(repositoryLocation, date);
         Collects.forEach(map, new Consumer2<GAV, MavenArtifact>() {
             @Override
@@ -70,7 +70,7 @@ public class MavenLocalRepositoryUpdatedScanCommands {
 
     @ShellMethod(key = "maven_local_repo_copyUpdated", value = "scan all dependencies after the specified time")
     public void copyUpdated(@ShellOption(defaultValue = ".") String repositoryLocation,
-                            @ShellOption(value = "--date", defaultValue = ".") String date,
+                            @ShellOption(value = "--date", defaultValue = ".", help = "format: yyyy-MM-dd_HH:mm, the default is the day of you execute it") String date,
                             @ShellOption(defaultValue = ".") String destLocation
                             ){
         File destRootDirectory = new File(destLocation);

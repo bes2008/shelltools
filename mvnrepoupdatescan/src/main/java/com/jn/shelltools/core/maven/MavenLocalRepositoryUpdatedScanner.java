@@ -3,7 +3,7 @@ package com.jn.shelltools.core.maven;
 import com.jn.langx.Filter;
 import com.jn.langx.annotation.NonNull;
 import com.jn.langx.io.resource.DirectoryBasedFileResourceLoader;
-import com.jn.langx.text.xml.Xmls;
+import com.jn.langx.text.xml.resolver.NullEntityResolver;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.io.IOs;
@@ -154,7 +154,7 @@ public class MavenLocalRepositoryUpdatedScanner {
             factory.setValidating(true);
         }
         final DocumentBuilder builder = factory.newDocumentBuilder();
-        entityResolver = ((entityResolver == null) ? new Xmls.NullEntityResolver() : entityResolver);
+        entityResolver = ((entityResolver == null) ? new NullEntityResolver() : entityResolver);
         builder.setEntityResolver(entityResolver);
         builder.setErrorHandler(errorHandler);
         return builder.parse(xml);

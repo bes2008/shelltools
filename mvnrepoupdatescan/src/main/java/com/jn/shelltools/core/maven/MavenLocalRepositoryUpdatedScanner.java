@@ -101,7 +101,7 @@ public class MavenLocalRepositoryUpdatedScanner {
                                 }
                                 readPoms.put(absolutePath, mavenArtifact.getGav());
                             } catch (Throwable ex) {
-                                logger.error("Error occur when parse {} , error: {}", absolutePath, ex.getMessage(), ex);
+                                logger.error("Error occur when parse {} , error: {}", absolutePath, ex.getMessage());
                             } finally {
                                 IOs.close(inputStream);
                             }

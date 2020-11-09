@@ -3,21 +3,31 @@ package com.jn.shelltools.core.maven;
 import com.jn.langx.Parser;
 import com.jn.langx.text.StringTemplates;
 import com.jn.langx.text.xml.Namespaces;
+import com.jn.langx.text.xml.NodeListIterator;
 import com.jn.langx.text.xml.XmlAccessor;
+import com.jn.langx.util.Emptys;
 import com.jn.langx.util.Preconditions;
+import com.jn.langx.util.Strings;
+import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.collection.Pipeline;
+import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Supplier;
 import com.jn.shelltools.core.maven.model.GAV;
+import com.jn.shelltools.core.maven.model.License;
 import com.jn.shelltools.core.maven.model.MavenArtifact;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.XPathFactory;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MavenArtifactPomParser implements Parser<Document, MavenArtifact> {
     private static final Map<String, String> gavXPathMap = new HashMap<>();
-    private static final Map<String, String> gavXPathMap_CustomNamespace = new HashMap<>();
 
     static {
         gavXPathMap.put("groupIdXPath", "/project/groupId");
@@ -28,23 +38,30 @@ public class MavenArtifactPomParser implements Parser<Document, MavenArtifact> {
         gavXPathMap.put("parentVersionXPath", "/project/parent/version");
     }
 
-    static {
-        gavXPathMap_CustomNamespace.put("groupIdXPath", "/x:project/x:groupId");
-        gavXPathMap_CustomNamespace.put("artifactIdXPath", "/x:project/x:artifactId");
-        gavXPathMap_CustomNamespace.put("nameXPath", "/x:project/x:name");
-        gavXPathMap_CustomNamespace.put("versionXPath", "/x:project/x:version");
-        gavXPathMap_CustomNamespace.put("parentGroupIdXPath", "/x:project/x:parent/x:groupId");
-        gavXPathMap_CustomNamespace.put("parentVersionXPath", "/x:project/x:parent/x:version");
-    }
-
     private String pomPath;
 
     public MavenArtifactPomParser(String pomPath) {
         this.pomPath = pomPath;
     }
 
-    public static String getGavXpath(String key, boolean usingCustomNamespace) {
-        return usingCustomNamespace ? gavXPathMap_CustomNamespace.get(key) : gavXPathMap.get(key);
+    public static String getGavXpath(String key, boolean usingCustomNamespace, String namespacePrefix) {
+        String xpath = gavXPathMap.get(key);
+
+        if (usingCustomNamespace && Emptys.isNotEmpty(xpath)) {
+            return useNamespacePrefix(xpath, namespacePrefix);
+        }
+        return xpath;
+    }
+
+    private static String useNamespacePrefix(String xpath, final String namespacePrefix) {
+        String[] segments = Strings.split(xpath, "/");
+        List<String> prefixedSegments = Pipeline.of(segments).clearNulls().map(new Function<String, String>() {
+            @Override
+            public String apply(String segment) {
+                return namespacePrefix + ":" + segment;
+            }
+        }).asList();
+        return "/" + Strings.join("/", prefixedSegments);
     }
 
     @Override
@@ -52,20 +69,23 @@ public class MavenArtifactPomParser implements Parser<Document, MavenArtifact> {
         MavenArtifact mavenArtifact = new MavenArtifact();
         GAV gav = parseGav(pom);
         mavenArtifact.setGav(gav);
+        List<License> licenses = parseLicenses(pom);
+        mavenArtifact.setLicenses(licenses);
         return mavenArtifact;
     }
 
     private GAV parseGav(Document doc) {
         boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc);
-        String groupIdXPath = getGavXpath("groupIdXPath", usingCustomNamespace);
-        String artifactIdXPath = getGavXpath("artifactIdXPath", usingCustomNamespace);
-        String nameXPath = getGavXpath("nameXPath", usingCustomNamespace);
-        String versionXPath = getGavXpath("versionXPath", usingCustomNamespace);
-        String parentGroupIdXPath = getGavXpath("parentGroupIdXPath", usingCustomNamespace);
-        String parentVersionXPath = getGavXpath("parentVersionXPath", usingCustomNamespace);
+        String namespacePrefix = "x";
+        String groupIdXPath = getGavXpath("groupIdXPath", usingCustomNamespace, namespacePrefix);
+        String artifactIdXPath = getGavXpath("artifactIdXPath", usingCustomNamespace, namespacePrefix);
+        String nameXPath = getGavXpath("nameXPath", usingCustomNamespace, namespacePrefix);
+        String versionXPath = getGavXpath("versionXPath", usingCustomNamespace, namespacePrefix);
+        String parentGroupIdXPath = getGavXpath("parentGroupIdXPath", usingCustomNamespace, namespacePrefix);
+        String parentVersionXPath = getGavXpath("parentVersionXPath", usingCustomNamespace, namespacePrefix);
 
         XPathFactory xPathFactory = XPathFactory.newInstance();
-        XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor("x") : new XmlAccessor();
+        XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
         try {
             // groupId
             Element groupIdElement = xmlAccessor.getElement(doc, xPathFactory, groupIdXPath);
@@ -113,4 +133,54 @@ public class MavenArtifactPomParser implements Parser<Document, MavenArtifact> {
             throw new PomParseException(ex);
         }
     }
+
+    private List<License> parseLicenses(Document doc) {
+        boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc);
+        String namespacePrefix = "x";
+        XPathFactory xPathFactory = XPathFactory.newInstance();
+        XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
+
+        String xpath = "/licenses/license";
+        if (usingCustomNamespace) {
+            xpath = useNamespacePrefix(xpath, namespacePrefix);
+        }
+        List<License> licenses = Collects.emptyArrayList();
+        try {
+            NodeList licenseNodes = xmlAccessor.getNodeList(doc, xPathFactory, xpath);
+            Collects.forEach(new NodeListIterator(licenseNodes), new Consumer<Node>() {
+                @Override
+                public void accept(Node node) {
+                    if (node instanceof Element) {
+                        Element licenseElement = (Element) node;
+                        NodeList children = licenseElement.getChildNodes();
+                        final License license = new License();
+                        Collects.forEach(new NodeListIterator(children), new Consumer<Node>() {
+                            @Override
+                            public void accept(Node node) {
+                                if (node instanceof Element) {
+                                    Element element = (Element) node;
+                                    String tag = element.getTagName();
+                                    if ("name".equalsIgnoreCase(tag)) {
+                                        license.setName(element.getTextContent());
+                                    } else if ("url".equalsIgnoreCase(tag)) {
+                                        license.setUrl(element.getTextContent());
+                                    } else if ("distribution".equalsIgnoreCase(tag)) {
+                                        license.setDistribution(element.getTextContent());
+                                    } else if ("comments".equalsIgnoreCase(tag)) {
+                                        license.setComments(element.getTextContent());
+                                    }
+                                }
+                            }
+                        });
+
+                        licenses.add(license);
+                    }
+                }
+            });
+        } catch (Throwable ex) {
+            throw new PomParseException(ex);
+        }
+        return licenses;
+    }
+
 }

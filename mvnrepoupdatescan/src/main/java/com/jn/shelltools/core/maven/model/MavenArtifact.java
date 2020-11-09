@@ -11,6 +11,7 @@ public class MavenArtifact {
     private DependencyScope scope;
     private long lastModifiedTime;
     private List<MavenArtifact> dependencies;
+    private List<License> licenses;
     /**
      * pom 文件所在的本地仓库的目录
      */
@@ -86,5 +87,13 @@ public class MavenArtifact {
 
     public void setDependencies(List<MavenArtifact> dependencies) {
         this.dependencies = dependencies;
+    }
+
+    public List<License> getLicenses() {
+        return licenses;
+    }
+
+    public void setLicenses(List<License> licenses) {
+        this.licenses = licenses;
     }
 }

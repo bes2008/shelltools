@@ -4,6 +4,7 @@ import com.jn.langx.Filter;
 import com.jn.langx.annotation.NonNull;
 import com.jn.langx.io.resource.DirectoryBasedFileResourceLoader;
 import com.jn.langx.text.xml.resolver.NullEntityResolver;
+import com.jn.langx.util.Maths;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.io.IOs;
@@ -112,7 +113,19 @@ public class MavenLocalRepositoryUpdatedScanner {
 
                         if (mavenArtifact != null) {
                             // do filter
-                            mavenArtifact.setLastModifiedTime(pomFile.lastModified());
+                            final Holder<Long> lastModified = new Holder<Long>(pomFile.lastModified());
+                            String[] relatedFileSuffixes = {"-javadoc.jar","-tests.jar","-sources.jar"};
+                            String artifactPrefix = pomFile.getAbsolutePath().substring(0, pomFile.getAbsolutePath().length() - ".pom".length());
+                            Collects.forEach(relatedFileSuffixes, new Consumer<String>() {
+                                @Override
+                                public void accept(String relatedFileSuffix) {
+                                    File relatedFile = new File(artifactPrefix+relatedFileSuffix);
+                                    if(relatedFile.exists()){
+                                        lastModified.set(Maths.maxLong(lastModified.get() , relatedFile.lastModified()));
+                                    }
+                                }
+                            });
+                            mavenArtifact.setLastModifiedTime(lastModified.get());
                             mavenArtifact.setLocalPath(pomFile.getParentFile().getAbsolutePath());
                             if (filter.accept(mavenArtifact)) {
                                 map.put(mavenArtifact.getGav(), mavenArtifact);

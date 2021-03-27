@@ -1,0 +1,2 @@
+set JAVA_HOEM=%JAVA_6_HOME%
+set PATH=%JAVA_6_HOME%\bin;%PATH%

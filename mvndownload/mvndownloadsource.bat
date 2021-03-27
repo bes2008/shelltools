@@ -1,2 +1,3 @@
 call setEnv.bat
-mvn dependency:sources -Dclassifier=sources -T 3 -s %MAVEN_REPO_DOWNLOAD%
+echo settings:  %MAVEN_REPO_DOWNLOAD%
+mvn dependency:sources -Dclassifier=sources -T 1 --settings %MAVEN_REPO_DOWNLOAD%

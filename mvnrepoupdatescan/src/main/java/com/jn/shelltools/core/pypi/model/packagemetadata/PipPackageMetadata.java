@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 包元数据 规范文档：
+ * https://www.python.org/dev/peps/pep-0345
+ *
+ * 获取包元数据的 链接：
  * https://pypi.org/pypi/<package>/json
  */
 public class PipPackageMetadata {

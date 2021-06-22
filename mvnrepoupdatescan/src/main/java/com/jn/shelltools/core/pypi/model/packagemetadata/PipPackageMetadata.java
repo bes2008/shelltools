@@ -1,4 +1,4 @@
-package com.jn.shelltools.core.pypi.model.summary;
+package com.jn.shelltools.core.pypi.model.packagemetadata;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * https://pypi.org/pypi/<package>/json
  */
-public class PipPackageSummary {
+public class PipPackageMetadata {
     private PipPackageInfo info;
     private int last_serial;
     /**

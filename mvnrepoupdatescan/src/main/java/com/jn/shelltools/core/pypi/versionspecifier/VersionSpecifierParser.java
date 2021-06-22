@@ -15,7 +15,7 @@ import com.jn.langx.util.struct.pair.NameValuePair;
  * https://www.python.org/dev/peps/pep-0345/#version-specifiers
  * https://www.python.org/dev/peps/pep-0440/
  */
-public class PackageVersionSpecifierParser implements Parser<String, NameValuePair<CommonExpressionBoundary>> {
+public class VersionSpecifierParser implements Parser<String, NameValuePair<CommonExpressionBoundary>> {
     @Override
     public NameValuePair<CommonExpressionBoundary> parse(String versionedPackageName) {
         Preconditions.checkNotEmpty(versionedPackageName);
@@ -63,7 +63,7 @@ public class PackageVersionSpecifierParser implements Parser<String, NameValuePa
         String packageName = Strings.trim(versionedPackageName.substring(0, index));
         // 去掉 (
         String versionExpression = Strings.trim(versionedPackageName.substring(index).replace("(", ""));
-        CommonExpressionBoundary boundary = new PackageVersionExpressionParser().parse(versionExpression);
+        CommonExpressionBoundary boundary = new VersionExpressionParser().parse(versionExpression);
 
         return new NameValuePair<CommonExpressionBoundary>(packageName, boundary);
 

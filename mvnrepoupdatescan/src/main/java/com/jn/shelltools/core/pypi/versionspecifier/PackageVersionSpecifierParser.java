@@ -15,7 +15,7 @@ import com.jn.langx.util.struct.pair.NameValuePair;
  * https://www.python.org/dev/peps/pep-0345/#version-specifiers
  * https://www.python.org/dev/peps/pep-0440/
  */
-public class PipPackageVersionSpecifierParser implements Parser<String, NameValuePair<CommonExpressionBoundary>> {
+public class PackageVersionSpecifierParser implements Parser<String, NameValuePair<CommonExpressionBoundary>> {
     @Override
     public NameValuePair<CommonExpressionBoundary> parse(String versionedPackageName) {
         Preconditions.checkNotEmpty(versionedPackageName);
@@ -35,12 +35,18 @@ public class PipPackageVersionSpecifierParser implements Parser<String, NameValu
             versionedPackageName = Strings.trim(versionedPackageName.substring(0, semicolonIndex));
         }
 
-        // 去掉 ( 和 )
-        versionedPackageName = Strings.trim(versionedPackageName.replace("(", "").replace(")", ""));
+
+        // 移除掉 ) 以及后面的内容
+        int rightBracketIndex = versionedPackageName.indexOf(")");
+        if (rightBracketIndex != -1) {
+            versionedPackageName = Strings.trim(versionedPackageName.substring(0, rightBracketIndex));
+        }
+
 
         // 找到开始位置
         final String _packageName = versionedPackageName;
         int index = Pipeline.of(VersionSpecifiers.VERSION_EXP_SPECIFIERS)
+                .add("(")
                 .map(new Function<String, Integer>() {
                     @Override
                     public Integer apply(String specifier) {
@@ -54,11 +60,12 @@ public class PipPackageVersionSpecifierParser implements Parser<String, NameValu
                     }
                 }).min(new IntegerComparator());
 
-        String packageName = versionedPackageName.substring(0, index);
-        String versionExpression = versionedPackageName.substring(index);
+        String packageName = Strings.trim(versionedPackageName.substring(0, index));
+        // 去掉 (
+        String versionExpression = Strings.trim(versionedPackageName.substring(index).replace("(", ""));
+        CommonExpressionBoundary boundary = new PackageVersionExpressionParser().parse(versionExpression);
 
-        return null;
-
+        return new NameValuePair<CommonExpressionBoundary>(packageName, boundary);
 
     }
 

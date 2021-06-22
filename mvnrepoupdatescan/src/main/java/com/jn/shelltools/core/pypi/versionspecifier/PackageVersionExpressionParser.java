@@ -3,10 +3,11 @@ package com.jn.shelltools.core.pypi.versionspecifier;
 import com.jn.langx.util.boundary.CommonExpressionBoundary;
 import com.jn.langx.util.boundary.ExpressionParser;
 
-public class PipPackageVersionExpressionParser implements ExpressionParser {
+public class PackageVersionExpressionParser implements ExpressionParser {
 
     @Override
-    public CommonExpressionBoundary parse(String s) {
+    public CommonExpressionBoundary parse(String expression) {
+
         return null;
     }
 }

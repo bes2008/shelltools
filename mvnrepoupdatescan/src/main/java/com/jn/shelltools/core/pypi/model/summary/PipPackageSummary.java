@@ -9,6 +9,10 @@ import java.util.Map;
 public class PipPackageSummary {
     private PipPackageInfo info;
     private int last_serial;
+    /**
+     * key: version
+     * value: 多次发布
+     */
     private Map<String, List<PipPackageRelease>> releases;
     private List<PipPackageRelease> urls;
 

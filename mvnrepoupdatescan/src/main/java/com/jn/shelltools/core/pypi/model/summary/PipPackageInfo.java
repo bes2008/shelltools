@@ -2,6 +2,7 @@ package com.jn.shelltools.core.pypi.model.summary;
 
 
 import java.util.List;
+import java.util.Map;
 
 public class PipPackageInfo {
     private String author;
@@ -22,8 +23,9 @@ public class PipPackageInfo {
     private String package_url;
     private String platform;
     private String project_url;
-    private List<PipPackageProjectUrl> project_urls;
+    private Map<String,String> project_urls;
     private String release_url;
+    private List<String> requires_dist;
     private String requires_python;
     private String summary;
     private String version;
@@ -174,14 +176,6 @@ public class PipPackageInfo {
         this.project_url = project_url;
     }
 
-    public List<PipPackageProjectUrl> getProject_urls() {
-        return project_urls;
-    }
-
-    public void setProject_urls(List<PipPackageProjectUrl> project_urls) {
-        this.project_urls = project_urls;
-    }
-
     public String getRelease_url() {
         return release_url;
     }
@@ -228,5 +222,21 @@ public class PipPackageInfo {
 
     public void setYanked_reason(String yanked_reason) {
         this.yanked_reason = yanked_reason;
+    }
+
+    public Map<String, String> getProject_urls() {
+        return project_urls;
+    }
+
+    public void setProject_urls(Map<String, String> project_urls) {
+        this.project_urls = project_urls;
+    }
+
+    public List<String> getRequires_dist() {
+        return requires_dist;
+    }
+
+    public void setRequires_dist(List<String> requires_dist) {
+        this.requires_dist = requires_dist;
     }
 }

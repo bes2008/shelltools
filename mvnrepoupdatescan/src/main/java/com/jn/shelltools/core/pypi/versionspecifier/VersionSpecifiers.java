@@ -1,6 +1,7 @@
 package com.jn.shelltools.core.pypi.versionspecifier;
 
 import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.function.Predicate;
 
 import java.util.List;
 
@@ -29,4 +30,22 @@ public class VersionSpecifiers {
             VERSION_EXP_ARBITRARY_EQUALITY,
             VERSION_EXP_VERSION_MATCHING
     );
+
+    public static final boolean isOmitSpecifier(String expression) {
+        return Collects.allMatch(VERSION_EXP_SPECIFIERS, new Predicate<String>() {
+            @Override
+            public boolean test(String specifier) {
+                return !expression.startsWith(specifier);
+            }
+        });
+    }
+
+    // https://www.python.org/dev/peps/pep-0440/#version-scheme
+    private static final String VERSION_SEG_EPOCH = "\\d!";
+    private static final String VERSION_SEG_RELEASE = "\\d(.\\d)*";
+    private static final String VERSION_SEG_PRE = "(a|alpha|b|beta|rc|c)\\d";
+    private static final String VERSION_SEG_POST = "post\\d";
+    private static final String VERSION_SEG_DEV = "dev\\d";
+    public static final String VERSION_PATTERN = "(" + VERSION_SEG_EPOCH + ")?" + VERSION_SEG_RELEASE + "(" + VERSION_SEG_PRE + ")?" + "(" + VERSION_SEG_POST + ")?" + "(" + VERSION_SEG_DEV + ")?";
+
 }

@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MavenArtifactPomParser implements Parser<Document, MavenArtifact> {
+public class MavenPomParser implements Parser<Document, MavenArtifact> {
     private static final Map<String, String> gavXPathMap = new HashMap<>();
 
     static {
@@ -40,7 +40,7 @@ public class MavenArtifactPomParser implements Parser<Document, MavenArtifact> {
 
     private String pomPath;
 
-    public MavenArtifactPomParser(String pomPath) {
+    public MavenPomParser(String pomPath) {
         this.pomPath = pomPath;
     }
 

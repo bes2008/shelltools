@@ -93,7 +93,7 @@ public class MavenLocalRepositoryUpdatedScanner {
                             try {
                                 inputStream = new FileInputStream(pomFile);
                                 Document document = getXmlDoc(null, inputStream, new IgnoreErrorHandler());
-                                mavenArtifact = new MavenArtifactPomParser(absolutePath).parse(document);
+                                mavenArtifact = new MavenPomParser(absolutePath).parse(document);
 
                                 if (rootDirectory.get() == null) {
                                     String filepath = Filenames.asUnixFilePath(absolutePath);

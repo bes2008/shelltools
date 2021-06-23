@@ -4,17 +4,22 @@ import com.jn.langx.util.Maths;
 import com.jn.langx.util.Numbers;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.MapAccessor;
-import com.jn.langx.util.function.Predicate;
+import com.jn.shelltools.core.pypi.versionspecifier.VersionPredicate;
 import com.jn.shelltools.core.pypi.versionspecifier.VersionSpecifiers;
 
 /**
+ *
+ * <pre>
+ *     >=, >, <, <=
+ * </pre>
+ *
  * @see com.jn.shelltools.core.pypi.versionspecifier.VersionSpecifiers#VERSION_PATTERN
  *
  * <pre>
  *      dev < pre < post < release
  *  </pre>
  */
-public class ComparisonPredicate implements Predicate<String> {
+public class ComparisonPredicate extends VersionPredicate{
 
     /**
      * 期望的版本
@@ -33,7 +38,7 @@ public class ComparisonPredicate implements Predicate<String> {
     private MapAccessor expectResult;
 
     public ComparisonPredicate(String expected, boolean inclusive, boolean lessThan) {
-        this.expected = expected;
+        super(expected);
         this.inclusive = inclusive;
         this.lessThan = lessThan;
         this.expectResult = VersionSpecifiers.extractVersionSegments(expected);

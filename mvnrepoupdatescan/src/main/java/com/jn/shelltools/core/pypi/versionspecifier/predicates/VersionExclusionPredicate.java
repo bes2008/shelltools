@@ -1,16 +1,17 @@
 package com.jn.shelltools.core.pypi.versionspecifier.predicates;
 
 
-import java.util.function.Predicate;
+import com.jn.shelltools.core.pypi.versionspecifier.VersionPredicate;
 
 /**
  * !=
  */
-public class VersionExclusionPredicate implements Predicate<String> {
+public class VersionExclusionPredicate extends VersionPredicate {
     private VersionMatchingPredicate delegate;
 
-    public VersionExclusionPredicate(String version, boolean isPrefix) {
-        this.delegate = new VersionMatchingPredicate(version, isPrefix);
+    public VersionExclusionPredicate(String excepted, boolean isPrefix) {
+        super(excepted);
+        this.delegate = new VersionMatchingPredicate(excepted, isPrefix);
     }
 
     @Override

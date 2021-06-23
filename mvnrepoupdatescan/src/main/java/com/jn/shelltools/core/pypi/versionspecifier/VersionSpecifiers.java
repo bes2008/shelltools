@@ -4,6 +4,7 @@ import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Predicate;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * 参考官方规范：
@@ -41,11 +42,13 @@ public class VersionSpecifiers {
     }
 
     // https://www.python.org/dev/peps/pep-0440/#version-scheme
-    private static final String VERSION_SEG_EPOCH = "\\d!";
-    private static final String VERSION_SEG_RELEASE = "\\d(.\\d)*";
-    private static final String VERSION_SEG_PRE = "(a|alpha|b|beta|rc|c)\\d";
-    private static final String VERSION_SEG_POST = "post\\d";
-    private static final String VERSION_SEG_DEV = "dev\\d";
-    public static final String VERSION_PATTERN = "(" + VERSION_SEG_EPOCH + ")?" + VERSION_SEG_RELEASE + "(" + VERSION_SEG_PRE + ")?" + "(" + VERSION_SEG_POST + ")?" + "(" + VERSION_SEG_DEV + ")?";
+    // https://www.pythonheidong.com/blog/article/187997/31fe90bd992afcd027a1/
+    private static final String VERSION_SEG_EPOCH = "\\d+!";
+    private static final String VERSION_SEG_RELEASE = "\\d+(\\.\\d+)*";
+    private static final String VERSION_SEG_PRE = "[-_.]?(a|alpha|b|beta|rc|c|pre|preview)([-_.]?\\d+)?";
+    private static final String VERSION_SEG_POST = "[-_.]?(post|rev|r)([-_.]?\\d+)?";
+    private static final String VERSION_SEG_DEV = "[-_.]?dev([-_.]?\\d+)?";
+    private static final String VERSION_PATTERN_STR = "(" + VERSION_SEG_EPOCH + ")?" + VERSION_SEG_RELEASE + "(" + VERSION_SEG_PRE + ")?" + "(" + VERSION_SEG_POST + ")?" + "(" + VERSION_SEG_DEV + ")?";
+    public static final Pattern VERSION_PATTERN=Pattern.compile(VERSION_PATTERN_STR);
 
 }

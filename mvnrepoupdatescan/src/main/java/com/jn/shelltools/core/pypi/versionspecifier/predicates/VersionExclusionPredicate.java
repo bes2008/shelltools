@@ -3,6 +3,9 @@ package com.jn.shelltools.core.pypi.versionspecifier.predicates;
 
 import java.util.function.Predicate;
 
+/**
+ * !=
+ */
 public class VersionExclusionPredicate implements Predicate<String> {
     private VersionMatchingPredicate delegate;
 

@@ -4,7 +4,6 @@ import com.jn.shelltools.core.pypi.versionspecifier.VersionSpecifiers;
 import org.junit.Test;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class VersionTests {
 

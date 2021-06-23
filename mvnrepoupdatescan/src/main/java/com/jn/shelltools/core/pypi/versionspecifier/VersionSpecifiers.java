@@ -1,9 +1,19 @@
 package com.jn.shelltools.core.pypi.versionspecifier;
 
+import com.jn.langx.exception.IllegalParameterException;
+import com.jn.langx.text.StringTemplates;
+import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.collection.LinkedCaseInsensitiveMap;
+import com.jn.langx.util.collection.MapAccessor;
+import com.jn.langx.util.collection.Pipeline;
+import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Predicate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -43,18 +53,53 @@ public class VersionSpecifiers {
 
     // https://www.python.org/dev/peps/pep-0440/#version-scheme
     // https://www.pythonheidong.com/blog/article/187997/31fe90bd992afcd027a1/
-    public static final String PUBLIC_VERSION_SEG_EPOCH = "(?:(?<epoch>\\d+)!)?";
-    public static final String PUBLIC_VERSION_SEG_RELEASE = "(?<release>\\d+(\\.\\d+)*)";
-    public static final String PUBLIC_VERSION_SEG_PRE = "(?<pre>[-_.]?(?<preLabel>(a|alpha|b|beta|rc|c|pre|preview))([-_.]?(?<preN>\\d+))?)?";
-    public static final String PUBLIC_VERSION_SEG_POST = "(?<post>[-_.]?(?<postLabel>(post|rev|r))([-_.]?(?<postN>\\d+))?)?";
-    public static final String PUBLIC_VERSION_SEG_DEV = "(?<dev>[-_.]?dev([-_.]?(?<devN>\\d+))?)?";
-    public static final String LOCAL_VERSION_SEG="(?:\\+(?<local>[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*))?";
-    public static final String VERSION_PATTERN_STR = PUBLIC_VERSION_SEG_EPOCH
+    private static final String PUBLIC_VERSION_SEG_EPOCH = "(?:(?<epoch>\\d+)!)?";
+    private static final String PUBLIC_VERSION_SEG_RELEASE = "(?<release>\\d+(\\.\\d+)*)";
+    private static final String PUBLIC_VERSION_SEG_PRE = "(?<pre>[-_.]?(?<preLabel>(a|alpha|b|beta|rc|c|pre|preview))([-_.]?(?<preN>\\d+))?)?";
+    private static final String PUBLIC_VERSION_SEG_POST = "(?<post>[-_.]?(?<postLabel>(post|rev|r))([-_.]?(?<postN>\\d+))?)?";
+    private static final String PUBLIC_VERSION_SEG_DEV = "(?<dev>[-_.]?dev([-_.]?(?<devN>\\d+))?)?";
+    private static final String LOCAL_VERSION_SEG = "(?:\\+(?<local>[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*))?";
+    private static final String VERSION_PATTERN_STR = PUBLIC_VERSION_SEG_EPOCH
             + PUBLIC_VERSION_SEG_RELEASE
             + PUBLIC_VERSION_SEG_PRE
             + PUBLIC_VERSION_SEG_POST
             + PUBLIC_VERSION_SEG_DEV
             + LOCAL_VERSION_SEG;
-    public static final Pattern VERSION_PATTERN=Pattern.compile(VERSION_PATTERN_STR);
+    public static final Pattern VERSION_PATTERN = Pattern.compile(VERSION_PATTERN_STR);
 
+
+    private static Map<String, Integer> preLabelMap =new LinkedCaseInsensitiveMap<Integer>();
+    static {
+        preLabelMap.put("alpha",1);
+        preLabelMap.put("a",1);
+        preLabelMap.put("beta",2);
+        preLabelMap.put("b",2);
+        preLabelMap.put("rc",3);
+        preLabelMap.put("c",3);
+        preLabelMap.put("pre",4);
+        preLabelMap.put("preview",4);
+    }
+
+    public static final int comparePreLabel(String label_1, String label_2){
+        Preconditions.checkTrue(preLabelMap.containsKey(label_1));
+        Preconditions.checkTrue(preLabelMap.containsKey(label_2));
+        return preLabelMap.get(label_2)-preLabelMap.get(label_1);
+    }
+
+
+    public static final MapAccessor extractVersionSegments(String version) {
+        Matcher matcher = VersionSpecifiers.VERSION_PATTERN.matcher(version);
+        if (matcher.matches()) {
+            final Map<String, Object> map = new HashMap<String, Object>();
+            Pipeline.of("epoch", "release", "pre", "preLabel", "preN", "post", "postLabel", "postN", "dev", "devN", "local")
+                    .forEach(new Consumer<String>() {
+                        @Override
+                        public void accept(String groupName) {
+                            map.put(groupName, matcher.group(groupName));
+                        }
+                    });
+            return new MapAccessor(map);
+        }
+        throw new IllegalParameterException(StringTemplates.formatWithPlaceholder("version : {} is illegal", version));
+    }
 }

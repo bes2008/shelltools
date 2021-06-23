@@ -43,12 +43,18 @@ public class VersionSpecifiers {
 
     // https://www.python.org/dev/peps/pep-0440/#version-scheme
     // https://www.pythonheidong.com/blog/article/187997/31fe90bd992afcd027a1/
-    private static final String VERSION_SEG_EPOCH = "\\d+!";
-    private static final String VERSION_SEG_RELEASE = "\\d+(\\.\\d+)*";
-    private static final String VERSION_SEG_PRE = "[-_.]?(a|alpha|b|beta|rc|c|pre|preview)([-_.]?\\d+)?";
-    private static final String VERSION_SEG_POST = "[-_.]?(post|rev|r)([-_.]?\\d+)?";
-    private static final String VERSION_SEG_DEV = "[-_.]?dev([-_.]?\\d+)?";
-    private static final String VERSION_PATTERN_STR = "(" + VERSION_SEG_EPOCH + ")?" + VERSION_SEG_RELEASE + "(" + VERSION_SEG_PRE + ")?" + "(" + VERSION_SEG_POST + ")?" + "(" + VERSION_SEG_DEV + ")?";
+    public static final String PUBLIC_VERSION_SEG_EPOCH = "(?:(?<epoch>\\d+)!)?";
+    public static final String PUBLIC_VERSION_SEG_RELEASE = "(?<release>\\d+(\\.\\d+)*)";
+    public static final String PUBLIC_VERSION_SEG_PRE = "(?<pre>[-_.]?(?<preLabel>(a|alpha|b|beta|rc|c|pre|preview))([-_.]?(?<preN>\\d+))?)?";
+    public static final String PUBLIC_VERSION_SEG_POST = "(?<post>[-_.]?(?<postLabel>(post|rev|r))([-_.]?(?<postN>\\d+))?)?";
+    public static final String PUBLIC_VERSION_SEG_DEV = "(?<dev>[-_.]?dev([-_.]?(?<devN>\\d+))?)?";
+    public static final String LOCAL_VERSION_SEG="(?:\\+(?<local>[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*))?";
+    public static final String VERSION_PATTERN_STR = PUBLIC_VERSION_SEG_EPOCH
+            + PUBLIC_VERSION_SEG_RELEASE
+            + PUBLIC_VERSION_SEG_PRE
+            + PUBLIC_VERSION_SEG_POST
+            + PUBLIC_VERSION_SEG_DEV
+            + LOCAL_VERSION_SEG;
     public static final Pattern VERSION_PATTERN=Pattern.compile(VERSION_PATTERN_STR);
 
 }

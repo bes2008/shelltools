@@ -86,6 +86,10 @@ public class VersionSpecifiers {
         return preLabelMap.get(label_2)-preLabelMap.get(label_1);
     }
 
+    public static final boolean validVersionExpression(String version){
+        Matcher matcher = VersionSpecifiers.VERSION_PATTERN.matcher(version);
+        return matcher.matches();
+    }
 
     public static final MapAccessor extractVersionSegments(String version) {
         Matcher matcher = VersionSpecifiers.VERSION_PATTERN.matcher(version);

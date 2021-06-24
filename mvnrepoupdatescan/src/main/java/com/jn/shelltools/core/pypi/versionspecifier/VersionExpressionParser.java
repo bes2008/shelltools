@@ -4,11 +4,15 @@ import com.jn.langx.util.Strings;
 import com.jn.langx.util.boundary.CommonExpressionBoundary;
 import com.jn.langx.util.boundary.ExpressionParser;
 import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.collection.MapAccessor;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Functions;
 import com.jn.langx.util.function.Predicate;
+import com.jn.shelltools.core.pypi.versionspecifier.predicates.ComparisonPredicate;
+import com.jn.shelltools.core.pypi.versionspecifier.predicates.EqualsPredicate;
+import com.jn.shelltools.core.pypi.versionspecifier.predicates.VersionMatchingPredicate;
 
 import java.util.List;
 
@@ -20,8 +24,8 @@ public class VersionExpressionParser implements ExpressionParser {
         boundary.setExpression(expression);
 
         // 根据 , 进行分割
-        List<String> segments = Collects.asList(Strings.split(expression, ","));
-        Pipeline.of(segments)
+        List<String> expressions = Collects.asList(Strings.split(expression, ","));
+        Pipeline.of(expressions)
                 .map(new Function<String, String>() {
                     @Override
                     public String apply(String s) {
@@ -50,57 +54,73 @@ public class VersionExpressionParser implements ExpressionParser {
                 .filter(Functions.notEmptyPredicate())
                 .map(new Function<String, List<String>>() {
                     @Override
-                    public List<String> apply(String segment) {
-                        if (segment.startsWith(VersionSpecifiers.VERSION_EXP_COMPATIBLE_RELEASE)) {
+                    public List<String> apply(String expression) {
+                        if (expression.startsWith(VersionSpecifiers.VERSION_EXP_COMPATIBLE_RELEASE)) {
                             // 移除 ~=
-                            segment = segment.substring(VersionSpecifiers.VERSION_EXP_COMPATIBLE_RELEASE.length());
+                            expression = expression.substring(VersionSpecifiers.VERSION_EXP_COMPATIBLE_RELEASE.length());
 
-                            List<String> segs = Pipeline.of(Strings.split(segment, ".")).filter(Functions.notEmptyPredicate()).asList();
-                            // 从后面往前开始查找，找到是整数的seg
-                            int i = segs.size() - 1;
-                            for (; i >= 0; i--) {
-                                try {
-                                    Integer.parseInt(segs.get(i));
-                                    break;
-                                } catch (Throwable ex) {
-                                    // ignore it
-                                }
-                            }
+
+                            MapAccessor versionSegments = VersionSpecifiers.extractVersionSegments(expression);
+                            // 拼接 == version.*
                             StringBuilder versionMatching = new StringBuilder("== ");
-                            for (int j = 0; j <= i; j++) {
-                                if (j != 0) {
-                                    versionMatching.append(".");
+                            if (versionSegments.has("epoch")) {
+                                versionMatching.append(versionSegments.getString("epoch") + "!");
+                            }
+                            String release = versionSegments.getString("release");
+                            String[] segments = Strings.split(release, ".");
+                            if (segments.length > 1) {
+                                for (int j = 0; j <= segments.length - 1; j++) {
+                                    if (j != 0) {
+                                        versionMatching.append(".");
+                                    }
+                                    versionMatching.append(segments[j]);
                                 }
-                                versionMatching.append(segs.get(j));
+                                versionMatching.append(".*");
                             }
 
-                            return Collects.newArrayList(">= " + Strings.join(".", segs), versionMatching.toString());
+                            return segments.length > 1 ? Collects.newArrayList(">= " + expression, versionMatching.toString()) : Collects.newArrayList(">= " + expression);
                         } else {
-                            return Collects.newArrayList(segment);
+                            return Collects.newArrayList(expression);
                         }
                     }
-                }).flatMap(new Function<String, Predicate<String>>() {
+                }).flatMap(new Function<String, VersionPredicate>() {
             @Override
-            public Predicate<String> apply(String segment) {
-                if (segment.startsWith(VersionSpecifiers.VERSION_EXP_VERSION_EXCLUSION)) {
-                    String seg = Strings.trim(segment.substring(VersionSpecifiers.VERSION_EXP_VERSION_EXCLUSION.length()));
+            public VersionPredicate apply(String expression) {
+                if (expression.startsWith(VersionSpecifiers.VERSION_EXP_ARBITRARY_EQUALITY)) {
+                    String seg = Strings.trim(expression.substring(VersionSpecifiers.VERSION_EXP_ARBITRARY_EQUALITY.length()));
+                    return new EqualsPredicate(seg);
+                } else if (expression.startsWith(VersionSpecifiers.VERSION_EXP_VERSION_MATCHING) || expression.startsWith(VersionSpecifiers.VERSION_EXP_VERSION_EXCLUSION)) {
+                    boolean isNon = expression.startsWith(VersionSpecifiers.VERSION_EXP_VERSION_EXCLUSION);
+                    String seg = Strings.trim(expression.substring(2));
+                    boolean isPrefix = Strings.endsWith(seg, ".*");
+                    if (isPrefix) {
+                        seg = seg.substring(0, seg.length() - ".*".length());
+                    }
+                    return new VersionMatchingPredicate(seg, isNon, isPrefix);
+                } else if (expression.startsWith(VersionSpecifiers.VERSION_EXP_INCLUSIVE_COMPARISON_GREAT_THAN)
+                        || expression.startsWith(VersionSpecifiers.VERSION_EXP_INCLUSIVE_COMPARISON_LESS_THAN)
+                        || expression.startsWith(VersionSpecifiers.VERSION_EXP_EXCLUSIVE_COMPARISON_LESS_THAN)
+                        || expression.startsWith(VersionSpecifiers.VERSION_EXP_EXCLUSIVE_COMPARISON_GREAT_THAN)) {
 
-                    return new Predicate<String>(){
-                        @Override
-                        public boolean test(String s) {
-                            return false;
-                        }
-                    };
+                    boolean lessThan = expression.startsWith(VersionSpecifiers.VERSION_EXP_INCLUSIVE_COMPARISON_LESS_THAN) || expression.startsWith(VersionSpecifiers.VERSION_EXP_EXCLUSIVE_COMPARISON_LESS_THAN);
+                    String seg = null;
+                    boolean inclusive = false;
+                    if (expression.charAt(1) == '=') {
+                        inclusive = true;
+                        seg = Strings.trim(expression.substring(2));
+                    } else {
+                        seg = Strings.trim(expression.substring(1));
+                    }
+                    return new ComparisonPredicate(seg, inclusive, lessThan);
                 }
                 return null;
             }
-        }).forEach(new Consumer<Predicate<String>>() {
+        }).forEach(new Consumer<VersionPredicate>() {
             @Override
-            public void accept(Predicate<String> predicate) {
+            public void accept(VersionPredicate predicate) {
                 boundary.addPredicate(predicate);
             }
         });
-
 
         return boundary;
     }

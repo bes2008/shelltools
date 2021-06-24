@@ -115,12 +115,13 @@ public class VersionExpressionParser implements ExpressionParser {
                 }
                 return null;
             }
-        }).forEach(new Consumer<VersionPredicate>() {
-            @Override
-            public void accept(VersionPredicate predicate) {
-                boundary.addPredicate(predicate);
-            }
-        });
+        }).clearNulls()
+                .forEach(new Consumer<VersionPredicate>() {
+                    @Override
+                    public void accept(VersionPredicate predicate) {
+                        boundary.addPredicate(predicate);
+                    }
+                });
 
         return boundary;
     }

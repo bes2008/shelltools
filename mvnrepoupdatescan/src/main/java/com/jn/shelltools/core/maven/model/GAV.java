@@ -1,10 +1,11 @@
 package com.jn.shelltools.core.maven.model;
 
+import com.jn.agileway.vfs.artifact.IGAV;
 import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Objects;
 import com.jn.langx.util.hash.HashCodeBuilder;
 
-public class GAV implements Comparable<GAV>{
+public class GAV implements Comparable<GAV>, IGAV {
     private String groupId;
     private String artifactId;
     private String version;

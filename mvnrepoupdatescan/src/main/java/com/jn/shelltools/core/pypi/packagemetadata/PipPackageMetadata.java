@@ -1,4 +1,4 @@
-package com.jn.shelltools.core.pypi.model.packagemetadata;
+package com.jn.shelltools.core.pypi.packagemetadata;
 
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package com.jn.shelltools.core.pypi;
 
-import com.jn.shelltools.core.pypi.model.packagemetadata.PipPackageMetadata;
+import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
 import feign.Param;
 import feign.RequestLine;
 

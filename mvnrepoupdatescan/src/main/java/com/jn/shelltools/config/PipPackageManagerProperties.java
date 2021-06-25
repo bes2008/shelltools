@@ -1,11 +1,10 @@
 package com.jn.shelltools.config;
 
 import com.jn.agileway.feign.HttpConnectionProperties;
-import com.jn.agileway.vfs.artifact.ArtifactProperties;
 
 import java.util.List;
 
-public class PipPackageManagerProperties extends ArtifactProperties {
+public class PipPackageManagerProperties {
     private HttpConnectionProperties server;
     private String destination;
     private List<String> sources;

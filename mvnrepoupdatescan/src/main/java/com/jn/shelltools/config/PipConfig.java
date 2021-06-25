@@ -3,7 +3,6 @@ package com.jn.shelltools.config;
 import com.jn.agileway.feign.HttpConnectionContext;
 import com.jn.agileway.feign.RestServiceProvider;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
-import com.jn.agileway.vfs.artifact.repository.ArtifactRepositoryProperties;
 import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
 import com.jn.easyjson.core.factory.JsonFactorys;
 import com.jn.langx.util.collection.Collects;
@@ -16,8 +15,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
-
 @Configuration
 public class PipConfig {
 
@@ -27,17 +24,9 @@ public class PipConfig {
         return new PipPackageManagerProperties();
     }
 
-
     @Bean
     public SynchronizedArtifactManager pipArtifactManager(DefaultArtifactRepositoryFactory factory, PipPackageManagerProperties pipPackageManagerProperties) {
         SynchronizedArtifactManager artifactManager = new SynchronizedArtifactManager();
-        List<ArtifactRepositoryProperties> repositories = pipPackageManagerProperties.getRepositories();
-        Collects.forEach(repositories, new Consumer<ArtifactRepositoryProperties>() {
-            @Override
-            public void accept(ArtifactRepositoryProperties artifactRepositoryProperties) {
-                factory.get(artifactRepositoryProperties);
-            }
-        });
         Collects.forEach(pipPackageManagerProperties.getSources(), new Consumer<String>() {
             @Override
             public void accept(String source) {

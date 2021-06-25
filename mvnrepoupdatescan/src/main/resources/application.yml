@@ -9,7 +9,7 @@ artifact:
     - name: local
       url: file://d:/pip_repo
 
-pip:
+pypi:
   server:
     protocol: https
     nodes:  www.python.org:80

@@ -7,8 +7,8 @@ import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
 import com.jn.easyjson.core.factory.JsonFactorys;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
-import com.jn.shelltools.core.pypi.PipPackageManager;
-import com.jn.shelltools.core.pypi.PipService;
+import com.jn.shelltools.core.pypi.PypiPackageManager;
+import com.jn.shelltools.core.pypi.PypiService;
 import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class PipConfig {
+public class PypiConfig {
 
     @Bean
-    @ConfigurationProperties(prefix = "pip")
+    @ConfigurationProperties(prefix = "pypi")
     public PipPackageManagerProperties pipPackageManagerProperties() {
         return new PipPackageManagerProperties();
     }
@@ -49,13 +49,13 @@ public class PipConfig {
     }
 
     @Bean
-    public PipService pipService(@Qualifier("pipRestServiceProvider") RestServiceProvider restServiceProvider) {
-        return restServiceProvider.getService(PipService.class);
+    public PypiService pipService(@Qualifier("pipRestServiceProvider") RestServiceProvider restServiceProvider) {
+        return restServiceProvider.getService(PypiService.class);
     }
 
     @Bean
-    public PipPackageManager pipPackageManager(PipService pipService) {
-        PipPackageManager manager = new PipPackageManager();
+    public PypiPackageManager pipPackageManager(PypiService pipService) {
+        PypiPackageManager manager = new PypiPackageManager();
         manager.setService(pipService);
         return manager;
     }

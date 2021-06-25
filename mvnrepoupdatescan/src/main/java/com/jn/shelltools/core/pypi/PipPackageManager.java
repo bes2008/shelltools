@@ -1,8 +1,8 @@
 package com.jn.shelltools.core.pypi;
 
+import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
 import com.jn.langx.util.boundary.CommonExpressionBoundary;
 import com.jn.langx.util.struct.pair.NameValuePair;
-import com.jn.shelltools.core.artifact.SynchronizedArtifactManager;
 import com.jn.shelltools.core.pypi.model.packagemetadata.PipPackageMetadata;
 import com.jn.shelltools.core.pypi.versionspecifier.VersionSpecifierParser;
 

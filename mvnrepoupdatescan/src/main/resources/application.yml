@@ -1,14 +1,19 @@
 agileway:
   httpclient:
     enabled: true
-pip:
-  server:
-    protocol: https
-    nodes:  www.python.org:80
+
+artifact:
   repositories:
     - name: pipserver
       url: https://www.python.org:80
     - name: local
       url: file://d:/pip_repo
+
+pip:
+  server:
+    protocol: https
+    nodes:  www.python.org:80
+  repositories:
+
   source: pipserver
   destination: local

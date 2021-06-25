@@ -6,8 +6,10 @@ artifact:
   repositories:
     - name: pipserver
       url: https://www.python.org:80
+      layout: pypi
     - name: local
       url: file://d:/pip_repo
+      layout: local
 
 pypi:
   server:

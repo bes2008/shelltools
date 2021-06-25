@@ -3,10 +3,13 @@ package com.jn.shelltools.config;
 import com.jn.agileway.feign.HttpConnectionContext;
 import com.jn.agileway.feign.RestServiceProvider;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
+import com.jn.agileway.vfs.artifact.repository.ArtifactRepositoryLayout;
 import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
 import com.jn.easyjson.core.factory.JsonFactorys;
+import com.jn.langx.registry.GenericRegistry;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
+import com.jn.shelltools.core.pypi.PypiPackageLayout;
 import com.jn.shelltools.core.pypi.PypiPackageManager;
 import com.jn.shelltools.core.pypi.PypiService;
 import org.apache.http.client.HttpClient;
@@ -25,7 +28,14 @@ public class PypiConfig {
     }
 
     @Bean
-    public SynchronizedArtifactManager pipArtifactManager(DefaultArtifactRepositoryFactory factory, PypiPackageManagerProperties pipPackageManagerProperties) {
+    public PypiPackageLayout pypiPackageLayout(@Qualifier("artifactRepositoryLayoutRegistry") GenericRegistry<ArtifactRepositoryLayout> artifactRepositoryLayoutRegistry) {
+        return new PypiPackageLayout();
+    }
+
+    @Bean
+    public SynchronizedArtifactManager pipArtifactManager(
+            DefaultArtifactRepositoryFactory factory,
+            PypiPackageManagerProperties pipPackageManagerProperties) {
         SynchronizedArtifactManager artifactManager = new SynchronizedArtifactManager();
         Collects.forEach(pipPackageManagerProperties.getSources(), new Consumer<String>() {
             @Override

@@ -3,6 +3,8 @@ package com.jn.shelltools.config;
 import com.jn.agileway.feign.HttpConnectionContext;
 import com.jn.agileway.feign.HttpConnectionProperties;
 import com.jn.agileway.feign.RestServiceProvider;
+import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
+import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
 import com.jn.easyjson.core.factory.JsonFactorys;
 import com.jn.shelltools.core.pypi.PipPackageManager;
 import com.jn.shelltools.core.pypi.PipService;
@@ -19,6 +21,14 @@ public class PipConfig {
     @ConfigurationProperties(prefix = "pip.server")
     public HttpConnectionProperties pipServerProperties(){
         return new HttpConnectionProperties();
+    }
+
+
+    @Bean
+    public SynchronizedArtifactManager pipArtifactManager(DefaultArtifactRepositoryFactory factory){
+        SynchronizedArtifactManager artifactManager = new SynchronizedArtifactManager();
+        artifactManager.addSourceArtifactRepository();
+        return artifactManager;
     }
 
     @Bean("pipRestServiceProvider")

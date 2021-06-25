@@ -20,12 +20,12 @@ public class PypiConfig {
 
     @Bean
     @ConfigurationProperties(prefix = "pypi")
-    public PipPackageManagerProperties pipPackageManagerProperties() {
-        return new PipPackageManagerProperties();
+    public PypiPackageManagerProperties pipPackageManagerProperties() {
+        return new PypiPackageManagerProperties();
     }
 
     @Bean
-    public SynchronizedArtifactManager pipArtifactManager(DefaultArtifactRepositoryFactory factory, PipPackageManagerProperties pipPackageManagerProperties) {
+    public SynchronizedArtifactManager pipArtifactManager(DefaultArtifactRepositoryFactory factory, PypiPackageManagerProperties pipPackageManagerProperties) {
         SynchronizedArtifactManager artifactManager = new SynchronizedArtifactManager();
         Collects.forEach(pipPackageManagerProperties.getSources(), new Consumer<String>() {
             @Override
@@ -38,7 +38,7 @@ public class PypiConfig {
     }
 
     @Bean("pipRestServiceProvider")
-    public RestServiceProvider pipRestServiceProvider(PipPackageManagerProperties props, HttpClient httpClient) {
+    public RestServiceProvider pipRestServiceProvider(PypiPackageManagerProperties props, HttpClient httpClient) {
         RestServiceProvider provider = new RestServiceProvider();
         provider.setJsonFactory(JsonFactorys.getJSONFactory());
         HttpConnectionContext context = new HttpConnectionContext();

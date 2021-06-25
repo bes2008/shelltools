@@ -4,7 +4,7 @@ import com.jn.agileway.feign.HttpConnectionProperties;
 
 import java.util.List;
 
-public class PipPackageManagerProperties {
+public class PypiPackageManagerProperties {
     private HttpConnectionProperties server;
     private String destination;
     private List<String> sources;

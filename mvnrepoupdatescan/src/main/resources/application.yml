@@ -14,6 +14,6 @@ artifact:
 pypi:
   server:
     protocol: https
-    nodes: www.python.org:80
+    nodes: www.python.org:443
   source: pipserver
   destination: local

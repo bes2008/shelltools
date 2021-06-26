@@ -16,7 +16,7 @@ public class PypiPackageManager {
     }
 
     public PipPackageMetadata getPackageMetadata(String packageName) {
-        return this.service.packageSummary(packageName);
+        return this.service.packageMetadata(packageName);
     }
 
     public void downloadPackage(String versionedPackageName) {

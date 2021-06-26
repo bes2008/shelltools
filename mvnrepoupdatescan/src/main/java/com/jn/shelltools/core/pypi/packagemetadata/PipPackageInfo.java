@@ -13,7 +13,7 @@ public class PipPackageInfo {
     private String description_content_type;
     private String docs_url;
     private String download_url;
-    private List<PipPackageDownload> downloads;
+    private PipPackageDownload downloads;
     private String home_page;
     private String keywords;
     private String license;
@@ -96,11 +96,11 @@ public class PipPackageInfo {
         this.download_url = download_url;
     }
 
-    public List<PipPackageDownload> getDownloads() {
+    public PipPackageDownload getDownloads() {
         return downloads;
     }
 
-    public void setDownloads(List<PipPackageDownload> downloads) {
+    public void setDownloads(PipPackageDownload downloads) {
         this.downloads = downloads;
     }
 

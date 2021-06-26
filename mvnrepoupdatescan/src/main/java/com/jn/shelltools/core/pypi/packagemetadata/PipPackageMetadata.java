@@ -15,7 +15,7 @@ public class PipPackageMetadata {
     private int last_serial;
     /**
      * key: version
-     * value: 多次发布
+     * value:  不同类型的介质
      */
     private Map<String, List<PipPackageRelease>> releases;
     private List<PipPackageRelease> urls;

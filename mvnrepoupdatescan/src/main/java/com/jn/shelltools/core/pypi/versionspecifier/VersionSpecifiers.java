@@ -59,7 +59,7 @@ public class VersionSpecifiers {
     private static final String PUBLIC_VERSION_SEG_POST = "(?<post>[-_.]?(?<postLabel>(post|rev|r))([-_.]?(?<postN>\\d+))?)?";
     private static final String PUBLIC_VERSION_SEG_DEV = "(?<dev>[-_.]?dev([-_.]?(?<devN>\\d+))?)?";
     private static final String LOCAL_VERSION_SEG = "(?:\\+(?<local>[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*))?";
-    private static final String VERSION_PATTERN_STR = PUBLIC_VERSION_SEG_EPOCH
+    public static final String VERSION_PATTERN_STR = PUBLIC_VERSION_SEG_EPOCH
             + PUBLIC_VERSION_SEG_RELEASE
             + PUBLIC_VERSION_SEG_PRE
             + PUBLIC_VERSION_SEG_POST

@@ -63,8 +63,10 @@ public class VersionSpecifierParser implements Parser<String, NameValuePair<Comm
         String packageName = Strings.trim(versionedPackageName.substring(0, index));
         // 去掉 (
         String versionExpression = Strings.trim(versionedPackageName.substring(index).replace("(", ""));
-        CommonExpressionBoundary boundary = new VersionExpressionParser().parse(versionExpression);
-
+        CommonExpressionBoundary boundary = null;
+        if (Strings.isNotEmpty(versionExpression)) {
+            boundary = new VersionExpressionParser().parse(versionExpression);
+        }
         return new NameValuePair<CommonExpressionBoundary>(packageName, boundary);
 
     }

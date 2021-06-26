@@ -1,15 +1,16 @@
 package com.jn.shelltools.core.pypi;
 
 import com.jn.agileway.vfs.artifact.AbstractArtifact;
+import com.jn.shelltools.core.pypi.packagemetadata.PipPackageRelease;
 
 public class PypiArtifact extends AbstractArtifact {
-    private String downloadUrl;
+    private PipPackageRelease release;
 
-    public String getDownloadUrl() {
-        return downloadUrl;
+    public PipPackageRelease getRelease() {
+        return release;
     }
 
-    public void setDownloadUrl(String downloadUrl) {
-        this.downloadUrl = downloadUrl;
+    public void setRelease(PipPackageRelease release) {
+        this.release = release;
     }
 }

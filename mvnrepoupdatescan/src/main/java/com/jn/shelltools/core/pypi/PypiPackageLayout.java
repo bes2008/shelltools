@@ -11,6 +11,11 @@ public class PypiPackageLayout implements ArtifactRepositoryLayout {
     }
 
     @Override
+    public String getDigitPath(ArtifactRepository artifactRepository, Artifact artifact, String s) {
+        return null;
+    }
+
+    @Override
     public void setName(String s) {
 
     }

@@ -58,7 +58,7 @@ public class Pypis {
 
     private static Pattern PACKAGE_FILE_NAME_PATTERN = Pattern.compile("(?<packageName>[a-zA-Z]\\w*)[-_.](?<version>" + VersionSpecifiers.VERSION_PATTERN_STR + ")");
 
-    public static Artifact gaussFileArtifact(@NonNull String filename, @NonNull String packageName, @NonNull String version,@Nullable String packageType) {
+    public static PypiArtifact gaussFileArtifact(@NonNull String filename, @NonNull String packageName, @NonNull String version,@Nullable String packageType) {
         Preconditions.checkNotNull(filename);
         Preconditions.checkNotNull(packageName);
         Preconditions.checkNotNull(version);

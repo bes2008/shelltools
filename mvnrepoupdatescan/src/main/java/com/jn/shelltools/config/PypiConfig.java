@@ -11,6 +11,7 @@ import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
 import com.jn.shelltools.core.pypi.PypiPackageLayout;
 import com.jn.shelltools.core.pypi.PypiPackageManager;
+import com.jn.shelltools.core.pypi.PypiPackageManagerProperties;
 import com.jn.shelltools.core.pypi.PypiService;
 import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.annotation.Qualifier;

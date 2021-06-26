@@ -1,4 +1,4 @@
-package com.jn.shelltools.config;
+package com.jn.shelltools.core.pypi;
 
 import com.jn.agileway.feign.HttpConnectionProperties;
 

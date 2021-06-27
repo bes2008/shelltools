@@ -6,6 +6,8 @@
 3. PEP 425: 包名上的标签  （pip 在安装时，也是依据这个来进行包筛选的）
 4. PEP 440 version specifiers
 5. PEP 508 
+6. requments file:  https://pip-cn.readthedocs.io/en/latest/reference/pip_install.html
+7. 
 
 
 

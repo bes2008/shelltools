@@ -19,8 +19,11 @@ public class PipPackageInfo {
     private String home_page;
     @Nullable
     private String keywords;
+    @Nullable
     private String license;
+    @Nullable
     private String maintainer;
+    @Nullable
     private String maintainer_email;
     private String name;
     private String package_url;

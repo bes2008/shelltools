@@ -1,6 +1,6 @@
 
 # Links
-1. PEP 241, PEP 314, PEP 345: Python Package Metadata
+1. PEP 241, PEP 314, PEP 345, PEP 566: Python Package Metadata
 2. Pip  https://pip.pypa.io/en/latest/development/
 3. PEP 430: Simple API (使用Pip命令下载时，会从依据该规范找下载链接)
     https://www.python.org/dev/peps/pep-0503/

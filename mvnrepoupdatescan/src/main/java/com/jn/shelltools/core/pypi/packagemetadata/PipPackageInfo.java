@@ -5,22 +5,28 @@ import java.util.List;
 import java.util.Map;
 
 public class PipPackageInfo {
+    @Nullable
     private String author;
     private String author_email;
     private String bugtrack_url;
     private List<String> classifiers;
+    @Nullable
     private String description;
     private String description_content_type;
     private String docs_url;
     private String download_url;
     private PipPackageDownload downloads;
     private String home_page;
+    @Nullable
     private String keywords;
     private String license;
     private String maintainer;
     private String maintainer_email;
     private String name;
     private String package_url;
+    /***
+     * 逗号分隔的字符串，例如：POSIX, Windows
+     */
     private String platform;
     private String project_url;
     private Map<String,String> project_urls;

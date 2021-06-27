@@ -1,5 +1,5 @@
 
-# Links
+# Refs
 1. PEP 241, PEP 314, PEP 345, PEP 426, PEP 566: Python Package Metadata
 2. PEP 508: Dependency specification （该提案还处于 Active状态，也就是还没有定义完毕）
 3. Pip 文档: https://pip.pypa.io/en/latest/development/

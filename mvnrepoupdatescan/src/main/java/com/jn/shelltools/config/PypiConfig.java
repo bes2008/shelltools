@@ -2,18 +2,15 @@ package com.jn.shelltools.config;
 
 import com.jn.agileway.feign.HttpConnectionContext;
 import com.jn.agileway.feign.RestServiceProvider;
-import com.jn.agileway.vfs.artifact.ArtifactManager;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
-import com.jn.agileway.vfs.artifact.repository.ArtifactRepositoryLayout;
 import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
 import com.jn.easyjson.core.factory.JsonFactorys;
-import com.jn.langx.registry.GenericRegistry;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
-import com.jn.shelltools.core.pypi.PypiPackageLayout;
-import com.jn.shelltools.core.pypi.PypiPackageManager;
-import com.jn.shelltools.core.pypi.PypiPackageManagerProperties;
-import com.jn.shelltools.core.pypi.PypiService;
+import com.jn.shelltools.core.pypi.*;
+import com.jn.shelltools.core.pypi.repository.PypiLocalRepositoryLayout;
+import com.jn.shelltools.core.pypi.repository.PypiPackageLayout;
+import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,14 +27,20 @@ public class PypiConfig {
     }
 
     @Bean
-    public PypiPackageLayout pypiPackageLayout(@Qualifier("artifactRepositoryLayoutRegistry") GenericRegistry<ArtifactRepositoryLayout> artifactRepositoryLayoutRegistry) {
+    public PypiLocalRepositoryLayout pypiLocalRepositoryLayout(){
+        return new PypiLocalRepositoryLayout();
+    }
+
+    @Bean
+    public PypiPackageLayout pypiPackageLayout() {
         return new PypiPackageLayout();
     }
 
     @Bean(name = "pipArtifactManager")
     public SynchronizedArtifactManager pipArtifactManager(
             DefaultArtifactRepositoryFactory factory,
-            PypiPackageManagerProperties pipPackageManagerProperties) {
+            PypiPackageManagerProperties pipPackageManagerProperties,
+            FileSystemManager fileSystemManager) {
         SynchronizedArtifactManager artifactManager = new SynchronizedArtifactManager();
         Collects.forEach(pipPackageManagerProperties.getSources(), new Consumer<String>() {
             @Override
@@ -46,6 +49,7 @@ public class PypiConfig {
             }
         });
         artifactManager.setDestination(factory.get(pipPackageManagerProperties.getDestination()));
+        artifactManager.setFileSystemManager(fileSystemManager);
         return artifactManager;
     }
 

@@ -1,5 +1,6 @@
 package com.jn.shelltools.config;
 
+import com.jn.agileway.vfs.AgilewayVFSManagerBootstrap;
 import com.jn.agileway.vfs.artifact.ArtifactProperties;
 import com.jn.agileway.vfs.artifact.repository.ArtifactRepositoryLayout;
 import com.jn.agileway.vfs.artifact.repository.ArtifactRepositoryProperties;
@@ -9,6 +10,8 @@ import com.jn.langx.registry.GenericRegistry;
 import com.jn.langx.util.Objs;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
+import org.apache.commons.vfs2.FileSystemManager;
+import org.apache.commons.vfs2.VFS;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -20,6 +23,12 @@ import java.util.List;
 
 @Configuration
 public class ArtifactRepositoryConfig {
+
+    @Bean
+    public FileSystemManager fileSystemManager() throws Throwable{
+        AgilewayVFSManagerBootstrap.startup();
+        return VFS.getManager();
+    }
 
     @Bean(name = "artifactProperties")
     @ConfigurationProperties(prefix = "artifact")
@@ -47,6 +56,7 @@ public class ArtifactRepositoryConfig {
             ArtifactProperties artifactProperties,
             ObjectProvider<List<ArtifactRepositoryLayout>> layoutObjectProvider) {
 
+        // 所有的layout
         List<ArtifactRepositoryLayout> layouts = layoutObjectProvider.getObject();
         if (Objs.isNotEmpty(layouts)) {
             Collects.forEach(layouts, new Consumer<ArtifactRepositoryLayout>() {

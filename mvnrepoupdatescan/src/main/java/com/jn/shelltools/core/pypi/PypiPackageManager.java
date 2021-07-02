@@ -4,6 +4,7 @@ import com.jn.agileway.vfs.VFSUtils;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
 import com.jn.langx.exception.IllegalParameterException;
 import com.jn.langx.text.StringTemplates;
+import com.jn.langx.util.Emptys;
 import com.jn.langx.util.Objs;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.Throwables;
@@ -107,40 +108,47 @@ public class PypiPackageManager {
 
     private List<String> selectVersions(PipPackageMetadata packageMetadata, CommonExpressionBoundary versionBoundary) {
         if (versionBoundary == null) {
-            // 取pypi中推荐的包
-            List<PipPackageRelease> recommendedReleases = packageMetadata.getUrls();
-            List<String> filenames = Pipeline.of(recommendedReleases)
-                    .map(new Function<PipPackageRelease, String>() {
+            // 当没有版本范围时，
+            // 优先选择 最新版本：
+            String latestVersion = packageMetadata.getInfo().getVersion();
+            if (Emptys.isNotEmpty(latestVersion)) {
+                return Collects.newArrayList(latestVersion);
+            } else {
+                // 取pypi中推荐的包
+                List<PipPackageRelease> recommendedReleases = packageMetadata.getUrls();
+                List<String> filenames = Pipeline.of(recommendedReleases)
+                        .map(new Function<PipPackageRelease, String>() {
+                            @Override
+                            public String apply(PipPackageRelease pipPackageRelease) {
+                                return pipPackageRelease.getFilename();
+                            }
+                        }).asList();
+                Map.Entry recommendedVersion = Collects.findFirst(packageMetadata.getReleases(), new Predicate2<String, List<PipPackageRelease>>() {
+                    @Override
+                    public boolean test(String version, List<PipPackageRelease> pipPackageReleases) {
+                        return Collects.anyMatch(pipPackageReleases, new Predicate<PipPackageRelease>() {
+                            @Override
+                            public boolean test(PipPackageRelease pipPackageRelease) {
+                                return filenames.contains(pipPackageRelease.getFilename());
+                            }
+                        });
+                    }
+                });
+                return Collects.newArrayList((String) recommendedVersion.getKey());
+            }
+        } else {
+            // 根据匹配规则进行匹配
+            Map<String, List<PipPackageRelease>> releases = packageMetadata.getReleases();
+            return Pipeline.of(releases.keySet())
+                    .filter(versionBoundary)
+                    .filter(new Predicate<String>() {
                         @Override
-                        public String apply(PipPackageRelease pipPackageRelease) {
-                            return pipPackageRelease.getFilename();
+                        public boolean test(String version) {
+                            List<PipPackageRelease> versionReleases = releases.get(version);
+                            return Objs.isNotEmpty(versionReleases);
                         }
                     }).asList();
-            Map.Entry recommendedVersion = Collects.findFirst(packageMetadata.getReleases(), new Predicate2<String, List<PipPackageRelease>>() {
-                @Override
-                public boolean test(String version, List<PipPackageRelease> pipPackageReleases) {
-                    return Collects.anyMatch(pipPackageReleases, new Predicate<PipPackageRelease>() {
-                        @Override
-                        public boolean test(PipPackageRelease pipPackageRelease) {
-                            return filenames.contains(pipPackageRelease.getFilename());
-                        }
-                    });
-                }
-            });
-            return Collects.newArrayList((String) recommendedVersion.getKey());
+
         }
-        // 取版本匹配的
-        Map<String, List<PipPackageRelease>> releases = packageMetadata.getReleases();
-        return Pipeline.of(releases.keySet())
-                .filter(versionBoundary)
-                .filter(new Predicate<String>() {
-                    @Override
-                    public boolean test(String version) {
-                        List<PipPackageRelease> versionReleases = releases.get(version);
-                        return Objs.isNotEmpty(versionReleases);
-                    }
-                }).asList();
-
-
     }
 }

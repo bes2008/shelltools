@@ -22,10 +22,6 @@ import com.jn.shelltools.core.pypi.versionspecifier.VersionSpecifiers;
 public class ComparisonPredicate extends VersionPredicate{
 
     /**
-     * 期望的版本
-     */
-    private String expected;
-    /**
      * 判定时是否判定 等于。
      */
     private boolean inclusive;
@@ -89,9 +85,9 @@ public class ComparisonPredicate extends VersionPredicate{
     }
 
     private int compareEpochSegment(MapAccessor expected, MapAccessor actual) {
-        if (expected.has("epoch") && actual.has("epoch")) {
-            int epoch1 = expected.getInteger("epoch");
-            int epoch2 = expected.getInteger("epoch");
+        if (!expected.isNull("epoch") && !actual.isNull("epoch")) {
+            int epoch1 = expected.getInteger("epoch",0);
+            int epoch2 = expected.getInteger("epoch",0);
 
             return epoch2 - epoch1;
         } else {
@@ -134,8 +130,8 @@ public class ComparisonPredicate extends VersionPredicate{
     }
 
     private int comparePreviewSegment(MapAccessor expected, MapAccessor actual) {
-        boolean isPre1 = expected.has("pre");
-        boolean isPre2 = actual.has("pre");
+        boolean isPre1 = !expected.isNull("pre");
+        boolean isPre2 = !actual.isNull("pre");
         if (!isPre1) {
             if (isPre2) {
                 return -1;
@@ -158,8 +154,8 @@ public class ComparisonPredicate extends VersionPredicate{
     }
 
     private int comparePostSegment(MapAccessor expected, MapAccessor actual) {
-        boolean isPost1 = expected.has("post");
-        boolean isPost2 = actual.has("post");
+        boolean isPost1 = !expected.isNull("post");
+        boolean isPost2 = !actual.isNull("post");
         if (!isPost1) {
             if (isPost2) {
                 return -1;
@@ -176,8 +172,8 @@ public class ComparisonPredicate extends VersionPredicate{
     }
 
     private int compareDevSegment(MapAccessor expected, MapAccessor actual) {
-        boolean isDev1 = expected.has("dev");
-        boolean isDev2 = actual.has("dev");
+        boolean isDev1 = !expected.isNull("dev");
+        boolean isDev2 = !actual.isNull("dev");
         if (!isDev1) {
             if (isDev2) {
                 return -1;

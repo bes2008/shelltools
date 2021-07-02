@@ -51,24 +51,24 @@ public class Pypis {
         return packageTypeToFileExtensions.get(packageType);
     }
 
-    public static Collection<String> getAllFileExtensions(){
+    public static Collection<String> getAllFileExtensions() {
         return Pipeline.of(packageTypeToFileExtensions.values()).flatMap(Functions.<String>noopFunction()).asList();
     }
 
     private static Pattern PACKAGE_FILE_NAME_PATTERN = Pattern.compile("(?<packageName>[a-zA-Z]\\w*)[-_.](?<version>" + VersionSpecifiers.VERSION_PATTERN_STR + ")");
 
-    public static PypiArtifact gaussFileArtifact(@NonNull String filename, @NonNull String packageName, @NonNull String version,@Nullable String packageType) {
+    public static PypiArtifact gaussFileArtifact(@NonNull String filename, @NonNull String packageName, @NonNull String version, @Nullable String packageType) {
         Preconditions.checkNotNull(filename);
         Preconditions.checkNotNull(packageName);
         Preconditions.checkNotNull(version);
-        Preconditions.checkTrue(filename.startsWith(packageName), "illegal file name : {} for package : {}", filename, packageName);
+        Preconditions.checkTrue(Strings.startsWith(filename, packageName, true), "illegal file name : {} for package : {}", filename, packageName);
         // 移除package name
         String str = filename.substring(packageName.length());
         if (Strings.startsWith(str, ".") || Strings.startsWith(str, "-") || Strings.startsWith(str, "_")) {
             str = str.substring(1);
         }
         // 移除 version
-        if (Strings.startsWith(str, version)) {
+        if (Strings.startsWith(str, version, true)) {
             str = str.substring(version.length());
         } else {
             throw new IllegalArgumentException(StringTemplates.formatWithPlaceholder("illegal file name: {}, for package version: {}", filename, version));
@@ -76,20 +76,23 @@ public class Pypis {
 
         // 移除 扩展名
         Collection<String> extensions = null;
-        if(Strings.isNotEmpty(packageType)){
+        if (Strings.isNotEmpty(packageType)) {
             extensions = getFileExtensions(packageType);
         }
-        if(Objs.isEmpty(extensions)){
+        if (Objs.isEmpty(extensions)) {
             extensions = getAllFileExtensions();
         }
         final String _str = str;
         String extension = Collects.findFirst(extensions, new Predicate<String>() {
             @Override
             public boolean test(String extension) {
-                return Strings.endsWith(_str, extension);
+                return Strings.endsWith(_str, extension, true);
             }
         });
-        str = str.substring(0, str.length()-extension.length());
+        str = str.substring(0, str.length() - extension.length());
+        if (Strings.endsWith(str, ".")) {
+            str = str.substring(0, str.length() - 1);
+        }
         if (Strings.startsWith(str, ".") || Strings.startsWith(str, "-") || Strings.startsWith(str, "_")) {
             str = str.substring(1);
         }
@@ -100,7 +103,7 @@ public class Pypis {
         artifact.setArtifactId(packageName);
         artifact.setVersion(version);
         artifact.setExtension(extension);
-        if(Strings.isNotEmpty(classifier)) {
+        if (Strings.isNotEmpty(classifier)) {
             artifact.setClassifier(classifier);
         }
 

@@ -61,7 +61,7 @@ public class PypiPackageManager {
 
         CommonExpressionBoundary versionBoundary = parsedResult.getValue();
         List<String> versions = selectVersions(packageMetadata, versionBoundary);
-        logger.info("selected versions: {}", Strings.join(",", versions));
+        logger.info("selected {} versions: {}",packageName, Strings.join(",", versions));
 
         PipPackageMetadata _packageMetadata = packageMetadata;
         List<Pair<String, List<PypiArtifact>>> versionArtifacts = Pipeline.of(versions)

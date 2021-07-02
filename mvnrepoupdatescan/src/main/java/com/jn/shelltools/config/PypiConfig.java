@@ -2,6 +2,7 @@ package com.jn.shelltools.config;
 
 import com.jn.agileway.feign.HttpConnectionContext;
 import com.jn.agileway.feign.RestServiceProvider;
+import com.jn.agileway.vfs.artifact.ArtifactManager;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
 import com.jn.agileway.vfs.artifact.repository.ArtifactRepositoryLayout;
 import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
@@ -33,7 +34,7 @@ public class PypiConfig {
         return new PypiPackageLayout();
     }
 
-    @Bean
+    @Bean(name = "pipArtifactManager")
     public SynchronizedArtifactManager pipArtifactManager(
             DefaultArtifactRepositoryFactory factory,
             PypiPackageManagerProperties pipPackageManagerProperties) {
@@ -66,9 +67,13 @@ public class PypiConfig {
     }
 
     @Bean
-    public PypiPackageManager pipPackageManager(PypiService pipService) {
+    public PypiPackageManager pipPackageManager(
+            PypiService pipService,
+            @Qualifier("pipArtifactManager")
+                    SynchronizedArtifactManager pipArtifactManager) {
         PypiPackageManager manager = new PypiPackageManager();
         manager.setService(pipService);
+        manager.setArtifactManager(pipArtifactManager);
         return manager;
     }
 }

@@ -1,5 +1,6 @@
 package com.jn.shelltools.core.pypi;
 
+import com.jn.agileway.vfs.VFSUtils;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
 import com.jn.langx.exception.IllegalParameterException;
 import com.jn.langx.text.StringTemplates;
@@ -9,7 +10,11 @@ import com.jn.langx.util.Throwables;
 import com.jn.langx.util.boundary.CommonExpressionBoundary;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
-import com.jn.langx.util.function.*;
+import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.function.Function;
+import com.jn.langx.util.function.Predicate;
+import com.jn.langx.util.function.Predicate2;
+import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageRelease;
@@ -39,7 +44,7 @@ public class PypiPackageManager {
         this.artifactManager = artifactManager;
     }
 
-    public void downloadPackage(String versionedPackageName, boolean whitDependencies) {
+    public void downloadPackage(String versionedPackageName, boolean whitDependencies, String targetDirectory) {
         VersionSpecifierParser parser = new VersionSpecifierParser();
         NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
         String packageName = parsedResult.getName();
@@ -58,12 +63,12 @@ public class PypiPackageManager {
         logger.info("selected versions: {}", Strings.join(",", versions));
 
         PipPackageMetadata _packageMetadata = packageMetadata;
-        List<PypiArtifact> artifacts = Pipeline.of(versions)
-                .map(new Function<String, List<PypiArtifact>>() {
+        List<Pair<String, List<PypiArtifact>>> versionArtifacts = Pipeline.of(versions)
+                .map(new Function<String, Pair<String, List<PypiArtifact>>>() {
                     @Override
-                    public List<PypiArtifact> apply(String version) {
+                    public Pair<String, List<PypiArtifact>> apply(String version) {
                         List<PipPackageRelease> versionReleases = _packageMetadata.getReleases().get(version);
-                        return Pipeline.of(versionReleases)
+                        List<PypiArtifact> artifacts = Pipeline.of(versionReleases)
                                 .map(new Function<PipPackageRelease, PypiArtifact>() {
                                     @Override
                                     public PypiArtifact apply(PipPackageRelease pipPackageRelease) {
@@ -74,17 +79,28 @@ public class PypiPackageManager {
                                 })
                                 .asList();
 
+                        return new NameValuePair<List<PypiArtifact>>(version, artifacts);
                     }
-                })
-                .flatMap(Functions.<PypiArtifact>noopFunction())
-                .asList();
+                }).asList();
 
-        // 开始下载，目前是串行方式，后面改为并行方式
-        Pipeline.of(artifacts)
-                .forEach(new Consumer<PypiArtifact>() {
+        // 下载 并 copy到 target 目录
+        versionArtifacts.parallelStream()
+                .forEach(new java.util.function.Consumer<Pair<String, List<PypiArtifact>>>() {
                     @Override
-                    public void accept(PypiArtifact pypiArtifact) {
-                        FileObject fileObject = artifactManager.getArtifactFile(pypiArtifact);
+                    public void accept(Pair<String, List<PypiArtifact>> versionArtifactPair) {
+                        List<PypiArtifact> artifacts = versionArtifactPair.getValue();
+                        Collects.forEach(artifacts, new Consumer<PypiArtifact>() {
+                            @Override
+                            public void accept(PypiArtifact pypiArtifact) {
+                                // 下载
+                                FileObject fileObject = artifactManager.getArtifactFile(pypiArtifact);
+                                // 如果已下载成功
+                                if (VFSUtils.isExists(fileObject)) {
+                                    // copy 到target 目录
+                                }
+                            }
+                        });
+
                     }
                 });
     }

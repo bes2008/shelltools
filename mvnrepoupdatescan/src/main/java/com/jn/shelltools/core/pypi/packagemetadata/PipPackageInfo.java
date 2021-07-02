@@ -1,6 +1,8 @@
 package com.jn.shelltools.core.pypi.packagemetadata;
 
 
+import com.jn.langx.annotation.Nullable;
+
 import java.util.List;
 import java.util.Map;
 

@@ -1,6 +1,5 @@
 package com.jn.shelltools.core.pypi;
 
-import com.jn.agileway.vfs.artifact.Artifact;
 import com.jn.langx.annotation.NonNull;
 import com.jn.langx.annotation.Nullable;
 import com.jn.langx.text.StringTemplates;

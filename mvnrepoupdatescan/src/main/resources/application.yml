@@ -1,16 +1,16 @@
 agileway:
   httpclient:
     enabled: true
-
-artifact:
-  repositories:
-    - name: pipserver
-      url: https://www.python.org:80
-      layout: pypi
-      supportedDigits: [md5, sha256]
-    - name: local
-      url: file:///d:/pip_repo
-      layout: pypi_local
+  artifact:
+    enabled: true
+    repositories:
+      - name: pipserver
+        url: https://www.python.org:80
+        layout: pypi
+        supportedDigits: [md5, sha256]
+      - name: local
+        url: file:///d:/pip_repo
+        layout: pypi_local
 
 pypi:
   server:

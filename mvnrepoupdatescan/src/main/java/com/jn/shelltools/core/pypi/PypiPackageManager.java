@@ -1,7 +1,10 @@
 package com.jn.shelltools.core.pypi;
 
-import com.jn.agileway.vfs.VFSUtils;
+import com.jn.agileway.vfs.FileObjects;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
+import com.jn.easyjson.core.JSONBuilderProvider;
+import com.jn.langx.annotation.NotEmpty;
+import com.jn.langx.annotation.Nullable;
 import com.jn.langx.exception.IllegalParameterException;
 import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Emptys;
@@ -15,12 +18,15 @@ import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Predicate;
 import com.jn.langx.util.function.Predicate2;
+import com.jn.langx.util.net.URLs;
 import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageRelease;
 import com.jn.shelltools.core.pypi.versionspecifier.VersionSpecifierParser;
 import org.apache.commons.vfs2.FileObject;
+import org.apache.commons.vfs2.FileSystemException;
+import org.apache.commons.vfs2.Selectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +51,7 @@ public class PypiPackageManager {
         this.artifactManager = artifactManager;
     }
 
-    public void downloadPackage(String versionedPackageName, boolean whitDependencies, String targetDirectory) {
+    public void downloadPackage(@NotEmpty String versionedPackageName, boolean whitDependencies, @Nullable String targetDirectory) {
         VersionSpecifierParser parser = new VersionSpecifierParser();
         NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
         String packageName = parsedResult.getName();
@@ -61,7 +67,7 @@ public class PypiPackageManager {
 
         CommonExpressionBoundary versionBoundary = parsedResult.getValue();
         List<String> versions = selectVersions(packageMetadata, versionBoundary);
-        logger.info("selected {} versions: {}",packageName, Strings.join(",", versions));
+        logger.info("selected {} versions: {}", packageName, Strings.join(",", versions));
 
         PipPackageMetadata _packageMetadata = packageMetadata;
         List<Pair<String, List<PypiArtifact>>> versionArtifacts = Pipeline.of(versions)
@@ -96,8 +102,33 @@ public class PypiPackageManager {
                                 // 下载
                                 FileObject fileObject = artifactManager.getArtifactFile(pypiArtifact);
                                 // 如果已下载成功
-                                if (VFSUtils.isExists(fileObject)) {
+                                if (FileObjects.isExists(fileObject)) {
                                     // copy 到target 目录
+                                    if (Objs.isNotEmpty(targetDirectory)) {
+                                        String targetUrl = targetDirectory;
+                                        if (!Strings.startsWith(targetDirectory, URLs.URL_PREFIX_FILE)) {
+                                            if (Strings.startsWith(targetDirectory, "/")) {
+                                                targetUrl = URLs.URL_PREFIX_FILE + targetDirectory;
+                                            } else {
+                                                targetUrl = URLs.URL_PREFIX_FILE + "/" + targetDirectory;
+                                            }
+                                            if (Strings.endsWith(targetUrl, "/")) {
+                                                targetUrl = targetUrl + FileObjects.getFileName(fileObject);
+                                            } else {
+                                                targetUrl = targetUrl + "/" + FileObjects.getFileName(fileObject);
+                                            }
+                                        }
+
+                                        try {
+                                            FileObject targetFile = artifactManager.getFileSystemManager().resolveFile(targetUrl);
+                                            targetFile.copyFrom(fileObject, Selectors.SELECT_SELF);
+                                        } catch (FileSystemException ex) {
+                                            logger.error(ex.getMessage(), ex);
+                                        }
+                                    }
+
+                                } else {
+                                    logger.info("Can't find the artifact: {}", JSONBuilderProvider.simplest().toJson(pypiArtifact));
                                 }
                             }
                         });

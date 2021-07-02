@@ -9,7 +9,7 @@ artifact:
       layout: pypi
       supportedDigits: [md5, sha256]
     - name: local
-      url: file://d:/pip_repo
+      url: file:///d:/pip_repo
       layout: pypi_local
 
 pypi:

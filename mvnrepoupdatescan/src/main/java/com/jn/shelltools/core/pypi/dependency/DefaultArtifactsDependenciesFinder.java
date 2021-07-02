@@ -1,22 +1,53 @@
 package com.jn.shelltools.core.pypi.dependency;
 
 import com.jn.langx.util.Objs;
+import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.function.Predicate;
+import com.jn.langx.util.struct.Holder;
 import com.jn.langx.util.struct.Pair;
 import com.jn.shelltools.core.pypi.PypiArtifact;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Map;
 
 public class DefaultArtifactsDependenciesFinder implements ArtifactsDependenciesFinder {
-    private static final Logger logger = LoggerFactory.getLogger(DefaultArtifactsDependenciesFinder.class);
+
+    /**
+     * key: file extension
+     * value: finder
+     */
+    private Map<String, ArtifactDependenciesFinder> delegates = Collects.emptyHashMap();
 
     @Override
     public List<String> get(Pair<String, List<PypiArtifact>> versionArtifactsPair) {
         List<PypiArtifact> artifacts = versionArtifactsPair.getValue();
-        if (Objs.isEmpty(artifacts)) {
-
-        }
-        return null;
+        Holder<List<String>> dependenciesHolder = new Holder<List<String>>();
+        Collects.forEach(artifacts, new Consumer<PypiArtifact>() {
+            @Override
+            public void accept(PypiArtifact artifact) {
+                String extension = artifact.getExtension();
+                ArtifactDependenciesFinder delegate = delegates.get(extension);
+                if (delegate != null) {
+                    dependenciesHolder.set(delegate.get(artifact));
+                }
+            }
+        }, new Predicate<PypiArtifact>() {
+            @Override
+            public boolean test(PypiArtifact artifact) {
+                return Objs.isNotEmpty(dependenciesHolder.get());
+            }
+        });
+        return dependenciesHolder.get();
     }
+
+    public void addArtifactDependenciesFinder(ArtifactDependenciesFinder finder) {
+        Collects.forEach(finder.supportedExtensions(), new Consumer<String>() {
+            @Override
+            public void accept(String extension) {
+                delegates.put(extension, finder);
+            }
+        });
+    }
+
 }

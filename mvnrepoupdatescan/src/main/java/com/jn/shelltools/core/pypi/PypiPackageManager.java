@@ -21,6 +21,8 @@ import com.jn.langx.util.function.Predicate2;
 import com.jn.langx.util.net.URLs;
 import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
+import com.jn.shelltools.core.pypi.dependency.ArtifactsDependenciesFinder;
+import com.jn.shelltools.core.pypi.dependency.DefaultArtifactsDependenciesFinder;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageRelease;
 import com.jn.shelltools.core.pypi.versionspecifier.VersionSpecifierParser;
@@ -133,6 +135,11 @@ public class PypiPackageManager {
                             }
                         });
 
+                        // 在 该版本的所有的artifact下载完毕后，进行依赖分析 & 下载
+                        if(whitDependencies){
+                            ArtifactsDependenciesFinder finder = new DefaultArtifactsDependenciesFinder();
+                            List<String> dependencies = finder.get(versionArtifactPair);
+                        }
                     }
                 });
     }

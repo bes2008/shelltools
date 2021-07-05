@@ -1,5 +1,6 @@
 package com.jn.shelltools.core.pypi.dependency;
 
+import com.jn.agileway.vfs.artifact.ArtifactManager;
 import com.jn.langx.util.Objs;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
@@ -18,6 +19,12 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
      * value: finder
      */
     private Map<String, ArtifactDependenciesFinder> delegates = Collects.emptyHashMap();
+
+    private ArtifactManager artifactManager;
+
+    public void setArtifactManager(ArtifactManager artifactManager) {
+        this.artifactManager = artifactManager;
+    }
 
     @Override
     public List<String> get(Pair<String, List<PypiArtifact>> versionArtifactsPair) {

@@ -144,7 +144,7 @@ public class ComparisonPredicate extends VersionPredicate{
         }
         String preLabel1 = expected.getString("preLabel");
         String preLabel2 = actual.getString("preLabel");
-        int labelDelta = VersionSpecifiers.comparePreLabel(preLabel2, preLabel1);
+        int labelDelta = VersionSpecifiers.comparePreLabel(preLabel1, preLabel2);
         if (labelDelta != 0) {
             return labelDelta;
         }

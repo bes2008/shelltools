@@ -61,7 +61,6 @@ public class PypiConfig {
         context.setConfiguration(props.getServer());
         context.setHttpClient(httpClient);
         provider.setContext(context);
-        provider.setUnifiedRestResponseClass(Object.class);
         return provider;
     }
 

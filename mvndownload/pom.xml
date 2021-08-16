@@ -10,13 +10,13 @@
 
 
 	<properties>
-	        <slf4j.version>1.7.22</slf4j.version>
-		<esmvc.version>1.2.4</esmvc.version>
-		<easyjson.version>3.1.1</easyjson.version>
-		<sqlhelper.version>3.4.14</sqlhelper.version>
-		<langx-java.version>3.4.2</langx-java.version>
-		<audit.version>2.3.2</audit.version>		
-		<agileway.version>2.4.1</agileway.version>
+	       <slf4j.version>1.7.22</slf4j.version>
+		<esmvc.version>1.3.1</esmvc.version>
+		<easyjson.version>3.2.3</easyjson.version>
+		<sqlhelper.version>3.6.0</sqlhelper.version>
+		<langx-java.version>3.6.6</langx-java.version>
+		<audit.version>2.3.8</audit.version>		
+		<agileway.version>2.6.2</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>
 		<kryo.version>5.0.0-RC9</kryo.version>
@@ -30,11 +30,6 @@
 		<msgpack.version>0.8.22</msgpack.version>
 	</properties>
 <dependencies>	
-	<dependency>
-	    <groupId>net.sf.proguard</groupId>
-	    <artifactId>proguard-base</artifactId>
-	    <version>6.2.2</version>
-	</dependency>
 
 	<dependency>
 		<groupId>com.github.fangjinuo.langx</groupId>
@@ -44,6 +39,16 @@
 	<dependency>
 		<groupId>com.github.fangjinuo.langx</groupId>
 		<artifactId>langx-java8</artifactId>
+		<version>${langx-java.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.langx</groupId>
+		<artifactId>langx-java-gmssl</artifactId>
+		<version>${langx-java.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.langx</groupId>
+		<artifactId>langx-java-security-gm</artifactId>
 		<version>${langx-java.version}</version>
 	</dependency>
 	<dependency>
@@ -212,7 +217,7 @@
 		<artifactId>audit-swagger</artifactId>
 		<version>${audit.version}</version>
 	</dependency>
-	
+
 
 	<dependency>
 		<groupId>com.github.fangjinuo.easyjson</groupId>
@@ -301,13 +306,36 @@
 		<artifactId>esmvc-service</artifactId>
 		<version>${esmvc.version}</version>
 	</dependency>
+		<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-service-rest</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-service-tcp</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
+		<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-spring-boot-common</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
 	<dependency>
 		<groupId>com.github.fangjinuo.esmvc</groupId>
 		<artifactId>esmvc-spring-boot-starter</artifactId>
 		<version>${esmvc.version}</version>
 	</dependency>
-
-
+	<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-spring-boot-starter-rest</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-spring-boot-starter-tcp</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
 
 	<dependency>
 		<groupId>com.lmax</groupId>
@@ -357,6 +385,11 @@
 	</dependency>
 	<dependency>
 		<groupId>com.github.fangjinuo.agileway</groupId>
+		<artifactId>agileway-shiro-redis-springdata2</artifactId>
+		<version>${agileway.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.agileway</groupId>
 		<artifactId>agileway-spring</artifactId>
 		<version>${agileway.version}</version>
 	</dependency>
@@ -368,6 +401,16 @@
 	<dependency>
 		<groupId>com.github.fangjinuo.agileway</groupId>
 		<artifactId>agileway-sshclient</artifactId>
+		<version>${agileway.version}</version>
+	</dependency>	
+	<dependency>
+		<groupId>com.github.fangjinuo.agileway</groupId>
+		<artifactId>agileway-vfs</artifactId>
+		<version>${agileway.version}</version>
+	</dependency>	
+	<dependency>
+		<groupId>com.github.fangjinuo.agileway</groupId>
+		<artifactId>agileway-zip</artifactId>
 		<version>${agileway.version}</version>
 	</dependency>		
 	

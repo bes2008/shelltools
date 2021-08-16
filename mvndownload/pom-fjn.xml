@@ -13,10 +13,10 @@
 	        <slf4j.version>1.7.22</slf4j.version>
 		<esmvc.version>1.2.4</esmvc.version>
 		<easyjson.version>3.1.1</easyjson.version>
-		<sqlhelper.version>3.4.14</sqlhelper.version>
-		<langx-java.version>3.4.2</langx-java.version>
+		<sqlhelper.version>3.5.1</sqlhelper.version>
+		<langx-java.version>3.5.0</langx-java.version>
 		<audit.version>2.3.2</audit.version>		
-		<agileway.version>2.4.1</agileway.version>
+		<agileway.version>2.4.5</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>
 		<kryo.version>5.0.0-RC9</kryo.version>
@@ -30,11 +30,6 @@
 		<msgpack.version>0.8.22</msgpack.version>
 	</properties>
 <dependencies>	
-	<dependency>
-	    <groupId>net.sf.proguard</groupId>
-	    <artifactId>proguard-base</artifactId>
-	    <version>6.2.2</version>
-	</dependency>
 
 	<dependency>
 		<groupId>com.github.fangjinuo.langx</groupId>
@@ -353,6 +348,11 @@
 	<dependency>
 		<groupId>com.github.fangjinuo.agileway</groupId>
 		<artifactId>agileway-shiro-redis</artifactId>
+		<version>${agileway.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.agileway</groupId>
+		<artifactId>agileway-shiro-redis-springdata2</artifactId>
 		<version>${agileway.version}</version>
 	</dependency>
 	<dependency>

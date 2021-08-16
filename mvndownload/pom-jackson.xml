@@ -59,7 +59,7 @@
 		</dependency>		
 		<dependency>
 		    <groupId>com.fasterxml.jackson.datatype</groupId>
-		    <artifactId>jackson-datatype-gson-org</artifactId>
+		    <artifactId>jackson-datatype-json-org</artifactId>
 		    <version>${jackson.version}</version>
 		</dependency>		
 		<dependency>
@@ -82,11 +82,7 @@
 		    <artifactId>jackson-datatype-eclipse-collections</artifactId>
 		    <version>${jackson.version}</version>
 		</dependency>	
-		<dependency>
-		    <groupId>com.fasterxml.jackson.datatype</groupId>
-		    <artifactId>jackson-datatype-jakarta-jsonp</artifactId>
-		    <version>${jackson.version}</version>
-		</dependency>	
+		
 		
 		<!--dataformat-->
 		<dependency>

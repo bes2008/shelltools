@@ -21,8 +21,8 @@ import java.util.Date;
 import java.util.Map;
 
 @ShellComponent
-public class MavenLocalRepositoryUpdatedScanCommands {
-    private static final Logger logger = LoggerFactory.getLogger(MavenLocalRepositoryUpdatedScanCommands.class);
+public class MavenLocalRepositoryCommands {
+    private static final Logger logger = LoggerFactory.getLogger(MavenLocalRepositoryCommands.class);
 
     /**
      * <pre>

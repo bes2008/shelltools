@@ -61,7 +61,7 @@ public class Pypis {
         Preconditions.checkNotNull(filename);
         Preconditions.checkNotNull(packageName);
         Preconditions.checkNotNull(version);
-        Preconditions.checkTrue(Strings.startsWith(filename, packageName.replace("-","_"), true), "illegal file name : {} for package : {}", filename, packageName);
+        Preconditions.checkTrue(Strings.startsWith(filename.replace("-","_"), packageName.replace("-","_"), true), "illegal file name : {} for package : {}", filename, packageName);
         // 移除package name
         String str = filename.substring(packageName.length());
         if (Strings.startsWith(str, ".") || Strings.startsWith(str, "-") || Strings.startsWith(str, "_")) {

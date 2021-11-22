@@ -12,6 +12,8 @@ import com.jn.langx.util.io.Charsets;
 import com.jn.langx.util.io.IOs;
 import com.jn.shelltools.core.pypi.PypiPackageManager;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
@@ -26,7 +28,7 @@ import java.util.List;
 @ShellComponent
 @ShellCommandGroup("pip")
 public class PypiCommands {
-
+    private static final Logger logger = LoggerFactory.getLogger(PypiCommands.class);
     @Autowired
     private PypiPackageManager pypiPackageManager;
 
@@ -46,7 +48,7 @@ public class PypiCommands {
             @ShellOption(value = "--out", defaultValue = "__NULL__", help = "the out directory") String outDirectory) {
 
         if (Strings.isBlank(outDirectory)) {
-            outDirectory = SystemPropertys.getUserWorkDir();
+            outDirectory = SystemPropertys.getUserWorkDir()+"/_tmp_";
         }
         final String out = outDirectory;
         File file = new File(packageName);
@@ -64,7 +66,11 @@ public class PypiCommands {
             Collects.forEach(lines, new Consumer<String>() {
                 @Override
                 public void accept(String line) {
-                    pypiPackageManager.downloadPackage(line, withDeps, out);
+                    try {
+                        pypiPackageManager.downloadPackage(line, withDeps, out);
+                    } catch (Throwable ex) {
+                        logger.error(ex.getMessage(), ex);
+                    }
                 }
             });
         }

@@ -4,11 +4,10 @@ import com.jn.agileway.vfs.FileObjects;
 import com.jn.agileway.vfs.artifact.ArtifactManager;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.SystemPropertys;
-import com.jn.langx.util.logging.Loggers;
 import com.jn.shelltools.core.pypi.PypiArtifact;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.Selectors;
-import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -29,13 +28,13 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
     public List<String> get(PypiArtifact pypiArtifact) {
         if (isArchive(pypiArtifact)) {
             try {
-                String tmpArtifactDir = expandArtifact(pypiArtifact);
-                if (Strings.isNotEmpty(tmpArtifactDir)) {
+                String tmpExpandDir = expandArtifact(pypiArtifact);
+                if (Strings.isNotEmpty(tmpExpandDir)) {
                     // 查找文件
-                    // 查找 setup.cfg, setup.py
+                    // 查找 setup.cfg, setup.py, metadata 等文件
                 }
             }catch (Throwable ex){
-                Loggers.getLogger(getClass()).error(ex.getMessage(),ex);
+                LoggerFactory.getLogger(getClass()).error(ex.getMessage(),ex);
             }
         }
         return null;
@@ -74,4 +73,6 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
      */
     protected abstract String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject);
 
+
+    protected abstract List<String> parseDependencies(PypiArtifact pypiArtifact, String tmpExpandDir);
 }

@@ -1,6 +1,7 @@
 package com.jn.shelltools.core.pypi.dependency;
 
-import com.jn.langx.factory.Factory;
+
+import com.jn.langx.Factory;
 
 import java.util.List;
 

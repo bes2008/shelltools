@@ -53,7 +53,7 @@ public class PypiPackageManager {
         this.artifactManager = artifactManager;
     }
 
-    public void downloadPackage(@NotEmpty String versionedPackageName, boolean whitDependencies, @Nullable String targetDirectory) {
+    public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory) {
         VersionSpecifierParser parser = new VersionSpecifierParser();
         NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
         String packageName = parsedResult.getName();
@@ -136,9 +136,16 @@ public class PypiPackageManager {
                         });
 
                         // 在 该版本的所有的artifact下载完毕后，进行依赖分析 & 下载
-                        if(whitDependencies){
+                        if (withDependencies) {
                             ArtifactsDependenciesFinder finder = new DefaultArtifactsDependenciesFinder();
+                            finder.setArtifactManager(artifactManager);
                             List<String> dependencies = finder.get(versionArtifactPair);
+                            Collects.forEach(dependencies, new Consumer<String>() {
+                                @Override
+                                public void accept(String dependency) {
+                                    downloadPackage(dependency, withDependencies, targetDirectory);
+                                }
+                            });
                         }
                     }
                 });

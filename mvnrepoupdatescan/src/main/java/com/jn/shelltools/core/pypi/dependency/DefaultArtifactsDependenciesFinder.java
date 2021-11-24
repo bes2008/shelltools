@@ -27,25 +27,28 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
     }
 
     @Override
+    public ArtifactManager getArtifactManager() {
+        return artifactManager;
+    }
+
+    @Override
     public List<String> get(Pair<String, List<PypiArtifact>> versionArtifactsPair) {
         List<PypiArtifact> artifacts = versionArtifactsPair.getValue();
-        Holder<List<String>> dependenciesHolder = new Holder<List<String>>();
+        final List<String> dependencies = Collects.emptyArrayList();
         Collects.forEach(artifacts, new Consumer<PypiArtifact>() {
             @Override
             public void accept(PypiArtifact artifact) {
                 String extension = artifact.getExtension();
                 ArtifactDependenciesFinder delegate = delegates.get(extension);
                 if (delegate != null) {
-                    dependenciesHolder.set(delegate.get(artifact));
+                    List<String> deps = delegate.get(artifact);
+                    if (!Objs.isEmpty(deps)) {
+                        dependencies.addAll(deps);
+                    }
                 }
             }
-        }, new Predicate<PypiArtifact>() {
-            @Override
-            public boolean test(PypiArtifact artifact) {
-                return Objs.isNotEmpty(dependenciesHolder.get());
-            }
         });
-        return dependenciesHolder.get();
+        return Collects.asList(Collects.asSet(dependencies));
     }
 
     public void addArtifactDependenciesFinder(ArtifactDependenciesFinder finder) {

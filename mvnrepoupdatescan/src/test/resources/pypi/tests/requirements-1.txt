@@ -16,7 +16,7 @@ idna==2.8
 importlib-metadata==0.19
 isort==4.3.21
 jaraco.functools==2.0
-Jinja2==2.10.1
+Jinja2==2.11.3
 lazy-object-proxy==1.4.1
 M2Crypto==0.35.2
 MarkupSafe==1.1.1

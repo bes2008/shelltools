@@ -3,12 +3,16 @@ package com.jn.shelltools.core.pypi.dependency;
 import com.jn.langx.util.collection.Collects;
 import com.jn.shelltools.core.pypi.PypiArtifact;
 import com.jn.shelltools.core.pypi.Pypis;
+import org.apache.commons.vfs2.FileObject;
 
 import java.util.List;
 
-public class SourceArtifactDependenciesFinder implements ArtifactDependenciesFinder{
+public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenciesFinder {
+
+
     @Override
-    public List<String> get(PypiArtifact artifact) {
+    protected String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject) {
+
 
         return null;
     }

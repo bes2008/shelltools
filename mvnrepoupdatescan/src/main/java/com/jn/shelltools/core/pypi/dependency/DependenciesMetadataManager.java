@@ -6,7 +6,7 @@ import java.util.List;
 
 public class DependenciesMetadataManager implements DependenciesFinder<Artifact> {
     @Override
-    public List<String> get(Artifact input) {
+    public List<String> get(Artifact artifact) {
         return null;
     }
 }

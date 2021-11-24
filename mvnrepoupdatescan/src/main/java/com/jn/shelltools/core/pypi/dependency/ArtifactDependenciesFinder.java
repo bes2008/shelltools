@@ -1,5 +1,6 @@
 package com.jn.shelltools.core.pypi.dependency;
 
+import com.jn.agileway.vfs.artifact.ArtifactManagerAware;
 import com.jn.shelltools.core.pypi.PypiArtifact;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @see SourceArtifactDependenciesFinder
  * @see WheelArtifactDependenciesFinder
  */
-public interface ArtifactDependenciesFinder extends DependenciesFinder<PypiArtifact> {
+public interface ArtifactDependenciesFinder extends DependenciesFinder<PypiArtifact>, ArtifactManagerAware {
     @Override
     List<String> get(PypiArtifact artifact);
 

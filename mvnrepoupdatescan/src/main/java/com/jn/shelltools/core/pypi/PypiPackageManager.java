@@ -72,6 +72,7 @@ public class PypiPackageManager {
         logger.info("selected {} versions: {}", packageName, Strings.join(",", versions));
 
         PipPackageMetadata _packageMetadata = packageMetadata;
+        // key: version, values: artifacts
         List<Pair<String, List<PypiArtifact>>> versionArtifacts = Pipeline.of(versions)
                 .map(new Function<String, Pair<String, List<PypiArtifact>>>() {
                     @Override

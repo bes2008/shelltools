@@ -3,9 +3,8 @@ package com.jn.shelltools.core.pypi.dependency;
 import com.jn.agileway.vfs.artifact.ArtifactManager;
 import com.jn.langx.util.Objs;
 import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
-import com.jn.langx.util.function.Predicate;
-import com.jn.langx.util.struct.Holder;
 import com.jn.langx.util.struct.Pair;
 import com.jn.shelltools.core.pypi.PypiArtifact;
 
@@ -22,8 +21,20 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
 
     private ArtifactManager artifactManager;
 
-    public void setArtifactManager(ArtifactManager artifactManager) {
+    public void setArtifactManager(final ArtifactManager artifactManager) {
         this.artifactManager = artifactManager;
+        Pipeline.of(delegates.values())
+                .forEach(new Consumer<ArtifactDependenciesFinder>() {
+                    @Override
+                    public void accept(ArtifactDependenciesFinder artifactDependenciesFinder) {
+                        artifactDependenciesFinder.setArtifactManager(artifactManager);
+                    }
+                });
+    }
+
+    public DefaultArtifactsDependenciesFinder(){
+        addArtifactDependenciesFinder(new SourceArtifactDependenciesFinder());
+        addArtifactDependenciesFinder(new WheelArtifactDependenciesFinder());
     }
 
     @Override
@@ -52,6 +63,7 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
     }
 
     public void addArtifactDependenciesFinder(ArtifactDependenciesFinder finder) {
+        finder.setArtifactManager(getArtifactManager());
         Collects.forEach(finder.supportedExtensions(), new Consumer<String>() {
             @Override
             public void accept(String extension) {

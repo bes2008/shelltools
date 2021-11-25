@@ -70,7 +70,15 @@ public class SetupcfgParser implements DependenciesParser {
 
 
     private List<String> parseDanglingListOrComma(String str) {
-        if(Strings.isBlank(str)){
+        return parseDanglingListOrSeparator(str, ",");
+    }
+
+    private List<String> parseDanglingListOrSemicolon(String str) {
+        return parseDanglingListOrSeparator(str, ";");
+    }
+
+    private List<String> parseDanglingListOrSeparator(String str, String separator) {
+        if (Strings.isBlank(str)) {
             return Collects.immutableList();
         }
         if (str.contains("\n") || str.contains("#")) {
@@ -78,7 +86,7 @@ public class SetupcfgParser implements DependenciesParser {
             Resources.readLines(new ByteArrayResource(str.getBytes(Charsets.UTF_8)), Charsets.UTF_8, new Consumer<String>() {
                 @Override
                 public void accept(String line) {
-                    if(Strings.isBlank(line)){
+                    if (Strings.isBlank(line)) {
                         return;
                     }
                     // 截取 # 之前的内容
@@ -91,6 +99,7 @@ public class SetupcfgParser implements DependenciesParser {
                     if (index != -1) {
                         line = line.substring(0, index);
                     }
+                    line = line.trim();
                     if (Strings.isNotBlank(line)) {
                         deps.add(line);
                     }
@@ -98,46 +107,12 @@ public class SetupcfgParser implements DependenciesParser {
             });
             return deps;
         } else {
-            String[] segments = Strings.split(str, ",");
+            String[] segments = Strings.split(str, separator);
             return Pipeline.of(segments)
                     .filter(Functions.notEmptyPredicate())
                     .collect(Collects.toList());
         }
     }
 
-    private List<String> parseDanglingListOrSemicolon(String str) {
-        if(Strings.isBlank(str)){
-            return Collects.immutableList();
-        }
-        if (str.contains("\n") || str.contains("#")) {
-            final List<String> deps = Collects.emptyArrayList();
-            Resources.readLines(new ByteArrayResource(str.getBytes(Charsets.UTF_8)), Charsets.UTF_8, new Consumer<String>() {
-                @Override
-                public void accept(String line) {
-                    if(Strings.isBlank(line)){
-                        return;
-                    }
-                    // 截取 # 之前的内容
-                    int index = line.indexOf("#");
-                    if (index != -1) {
-                        line = line.substring(0, index);
-                    }
-                    // 截取 ; 之前
-                    index = line.indexOf(";");
-                    if (index != -1) {
-                        line = line.substring(0, index);
-                    }
-                    if (Strings.isNotBlank(line)) {
-                        deps.add(line);
-                    }
-                }
-            });
-            return deps;
-        } else {
-            String[] segments = Strings.split(str, ";");
-            return Pipeline.of(segments)
-                    .filter(Functions.notEmptyPredicate())
-                    .collect(Collects.toList());
-        }
-    }
+
 }

@@ -2,6 +2,7 @@ package com.jn.shelltools.core.pypi.dependency.parser;
 
 import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
+import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.io.Charsets;
@@ -35,9 +36,11 @@ public class PkginfoParser implements DependenciesParser {
                     if (index != -1) {
                         line = line.substring(0, index);
                     }
-                    line = line.trim();
                     line = line.replace("(", "").replace(")", "");
-                    dependencies.add(line);
+                    line =line.trim();
+                    if(Strings.isNotBlank(line)) {
+                        dependencies.add(line);
+                    }
                 }
             }
         });

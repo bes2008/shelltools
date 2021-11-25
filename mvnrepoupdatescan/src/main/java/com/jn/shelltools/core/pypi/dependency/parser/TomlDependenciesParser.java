@@ -46,7 +46,7 @@ class TomlDependenciesParser implements DependenciesParser {
                             .forEach(new Consumer<String>() {
                                 @Override
                                 public void accept(String dep) {
-                                    dependencies.add(dep);
+                                    dependencies.add(dep.trim());
                                 }
                             });
 

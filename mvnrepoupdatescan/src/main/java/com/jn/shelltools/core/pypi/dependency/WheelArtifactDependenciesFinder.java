@@ -3,12 +3,9 @@ package com.jn.shelltools.core.pypi.dependency;
 import com.jn.agileway.zip.archive.AutowiredArchiveSuiteFactory;
 import com.jn.agileway.zip.archive.Expander;
 import com.jn.langx.io.resource.FileResource;
-import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
 import com.jn.langx.util.collection.Collects;
-import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Predicate2;
-import com.jn.langx.util.io.Charsets;
 import com.jn.langx.util.io.file.FileFilter;
 import com.jn.langx.util.io.file.FileFilters;
 import com.jn.langx.util.io.file.Filenames;
@@ -16,19 +13,19 @@ import com.jn.langx.util.io.file.Files;
 import com.jn.langx.util.io.file.filter.*;
 import com.jn.shelltools.core.pypi.PypiArtifact;
 import com.jn.shelltools.core.pypi.Pypis;
+import com.jn.shelltools.core.pypi.dependency.parser.PkginfoParser;
 import org.apache.commons.vfs2.FileObject;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WheelArtifactDependenciesFinder extends AbstractArtifactDependenciesFinder {
 
     @Override
     protected boolean isArchive(PypiArtifact pypiArtifact) {
-        return "whl".equalsIgnoreCase(pypiArtifact.getExtension());
+        return Pypis.ARCHIVE_EXTENSION_WHEEL.equalsIgnoreCase(pypiArtifact.getExtension());
     }
 
     @Override
@@ -54,7 +51,7 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
 
     @Override
     public List<String> supportedExtensions() {
-        return Collects.asList(Pypis.getFileExtensions("bdist_wheel"));
+        return Collects.asList(Pypis.getFileExtensions(Pypis.PACKAGE_TYPE_BINARY_WHEEL));
     }
 
     @Override
@@ -84,24 +81,6 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
                 });
 
         File metadataFile = files.isEmpty() ? null : files.get(0);
-        Resource resource = Resources.loadFileResource(metadataFile);
-        List<String> dependencies = Collects.emptyArrayList();
-        Resources.readLines(resource, Charsets.UTF_8, new Consumer<String>() {
-            @Override
-            public void accept(String line) {
-                if (line.startsWith("Requires-Dist: ")) {
-                    line = line.substring("Requires-Dist: ".length());
-                    int index = line.indexOf(";");
-                    if (index != -1) {
-                        line = line.substring(0, index);
-                    }
-                    line = line.trim();
-                    line = line.replace("(", "").replace(")", "");
-                    dependencies.add(line);
-                }
-            }
-        });
-
-        return dependencies;
+        return new PkginfoParser().parse(metadataFile);
     }
 }

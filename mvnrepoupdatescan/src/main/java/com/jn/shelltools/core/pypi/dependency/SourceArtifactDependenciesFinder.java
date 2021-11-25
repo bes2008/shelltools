@@ -4,6 +4,7 @@ import com.jn.agileway.zip.archive.AutowiredArchiveSuiteFactory;
 import com.jn.agileway.zip.archive.Expander;
 import com.jn.langx.io.resource.FileResource;
 import com.jn.langx.io.resource.Resources;
+import com.jn.langx.util.Objs;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Predicate2;
 import com.jn.langx.util.io.file.FileFilter;
@@ -14,6 +15,7 @@ import com.jn.langx.util.logging.Loggers;
 import com.jn.shelltools.core.pypi.PypiArtifact;
 import com.jn.shelltools.core.pypi.Pypis;
 import com.jn.shelltools.core.pypi.dependency.parser.PyprojectParser;
+import com.jn.shelltools.core.pypi.dependency.parser.SetupcfgParser;
 import org.apache.commons.vfs2.FileObject;
 
 import java.io.File;
@@ -56,10 +58,13 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
         Collects.addAll(dependencies, deps1);
 
         // 从 setup.cfg 中找
+        List<String> deps2 = parseSetupcfg(pypiArtifact,tmpExpandDir);
+        Collects.addAll(dependencies, deps2);
 
         // 从 setup.py 中找
-
-
+        if(Objs.isEmpty(deps2)) {
+            List<String> deps = null;
+        }
         return dependencies;
     }
 
@@ -82,5 +87,26 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
 
         File pyprojectFile = files.isEmpty() ? null : files.get(0);
         return new PyprojectParser().parse(pyprojectFile);
+    }
+
+    private List<String> parseSetupcfg(PypiArtifact pypiArtifact, String tmpExpandDir){
+        // 找到 setup.cfg 文件并进行解析
+
+        FileFilter setupcfgFilter = FileFilters.allFileFilter(
+                new IsFileFilter(),
+                new FilenameEqualsFilter("setup.cfg"),
+                new ReadableFileFilter()
+        );
+
+        List<File> files = Files.find(new File(tmpExpandDir), 2, null,
+                setupcfgFilter, new Predicate2<List<File>, File>() {
+                    @Override
+                    public boolean test(List<File> files, File file) {
+                        return !files.isEmpty();
+                    }
+                });
+
+        File setupcfgFile = files.isEmpty() ? null : files.get(0);
+        return new SetupcfgParser().parse(setupcfgFile);
     }
 }

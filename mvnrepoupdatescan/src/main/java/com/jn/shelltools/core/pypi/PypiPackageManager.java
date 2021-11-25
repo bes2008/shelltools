@@ -23,6 +23,7 @@ import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
 import com.jn.shelltools.core.pypi.dependency.ArtifactsDependenciesFinder;
 import com.jn.shelltools.core.pypi.dependency.DefaultArtifactsDependenciesFinder;
+import com.jn.shelltools.core.pypi.dependency.RequirementsArtifact;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageRelease;
 import com.jn.shelltools.core.pypi.versionspecifier.VersionSpecifierParser;
@@ -143,9 +144,11 @@ public class PypiPackageManager {
                         // 在 该版本的所有的artifact下载完毕后，进行依赖分析 & 下载
                         if (withDependencies) {
                             // 先从仓库中的元数据文件中查找
-
+                            RequirementsArtifact requirementsArtifact = new RequirementsArtifact(versionArtifactPair.getValue().get(0).getArtifactId(), versionArtifactPair.getKey());
+                            artifactManager.getArtifactFile(requirementsArtifact);
                             ArtifactsDependenciesFinder finder = new DefaultArtifactsDependenciesFinder();
                             finder.setArtifactManager(artifactManager);
+                            // 从 所有的 .tar.gz, .zip, .whl, .egg 介质中找依赖
                             List<String> dependencies = finder.get(versionArtifactPair);
                             Collects.forEach(dependencies, new Consumer<String>() {
                                 @Override

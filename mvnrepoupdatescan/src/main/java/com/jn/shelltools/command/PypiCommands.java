@@ -11,6 +11,7 @@ import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.io.Charsets;
 import com.jn.shelltools.core.pypi.PypiPackageManager;
 import com.jn.shelltools.core.pypi.PypiPackageMetadataManager;
+import com.jn.shelltools.core.pypi.dependency.RequirementsManager;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,13 +56,7 @@ public class PypiCommands {
             pypiPackageManager.downloadPackage(packageName, withDeps, out);
         } else {
             Resource resource = Resources.loadFileResource(file);
-            List<String> lines = Collects.emptyArrayList();
-            Resources.readUsingDelimiter(resource, "\n", Charsets.UTF_8, new Consumer<String>() {
-                @Override
-                public void accept(String line) {
-                    lines.add(line);
-                }
-            });
+            List<String> lines = RequirementsManager.readRequirements(resource);
             Collects.forEach(lines, new Consumer<String>() {
                 @Override
                 public void accept(String line) {

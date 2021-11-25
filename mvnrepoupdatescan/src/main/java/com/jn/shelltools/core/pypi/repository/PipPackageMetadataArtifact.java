@@ -6,20 +6,12 @@ public class PipPackageMetadataArtifact extends AbstractArtifact {
 
     public PipPackageMetadataArtifact(String artifactId){
         setArtifactId(artifactId);
+        setClassifier("metadata");
+        setExtension("json");
     }
 
     @Override
     public String getVersion() {
         return null;
-    }
-
-    @Override
-    public String getClassifier() {
-        return "metadata";
-    }
-
-    @Override
-    public String getExtension() {
-        return "json";
     }
 }

@@ -8,7 +8,6 @@ import com.jn.langx.util.logging.Loggers;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
 import com.jn.shelltools.core.pypi.repository.PipPackageMetadataArtifact;
 import org.apache.commons.vfs2.FileObject;
-import org.apache.commons.vfs2.provider.AbstractFileObject;
 import org.slf4j.Logger;
 
 import java.io.InputStream;
@@ -41,9 +40,10 @@ public class PypiPackageMetadataManager {
                 long lastModified = fileObject.getContent().getLastModifiedTime();
                 if (lastModified + TimeUnit.MINUTES.toMillis(10) >= System.currentTimeMillis()) {
                     // 有效
-                    InputStream inputStream = ((AbstractFileObject) fileObject).getInputStream();
+                    InputStream inputStream = fileObject.getContent().getInputStream();
                     InputStreamReader reader = new InputStreamReader(inputStream);
                     metadata = JSONBuilderProvider.simplest().fromJson(reader, PipPackageMetadata.class);
+                    IOs.close(reader);
                 }
             }
             if (metadata == null) {
@@ -55,7 +55,7 @@ public class PypiPackageMetadataManager {
                         fileObject.getParent().createFolder();
                         fileObject.createFile();
                     }
-                    OutputStream out = ((AbstractFileObject) fileObject).getOutputStream(false);
+                    OutputStream out = fileObject.getContent().getOutputStream(false);
                     out.write(str.getBytes(Charsets.UTF_8));
                     out.flush();
                     IOs.close(out);

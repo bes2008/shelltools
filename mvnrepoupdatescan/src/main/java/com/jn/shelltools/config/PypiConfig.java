@@ -70,13 +70,24 @@ public class PypiConfig {
     }
 
     @Bean
+    public PypiPackageMetadataManager pypiPackageMetadataManager(PypiService pipService,@Qualifier("pipArtifactManager")
+                                                                         SynchronizedArtifactManager pipArtifactManager){
+        PypiPackageMetadataManager metadataManager = new PypiPackageMetadataManager();
+        metadataManager.setArtifactManager(pipArtifactManager);
+        metadataManager.setService(pipService);
+        return metadataManager;
+
+    }
+
+    @Bean
     public PypiPackageManager pipPackageManager(
-            PypiService pipService,
+            PypiPackageMetadataManager pypiPackageMetadataManager,
             @Qualifier("pipArtifactManager")
-                    SynchronizedArtifactManager pipArtifactManager) {
+            SynchronizedArtifactManager pipArtifactManager
+            ) {
         PypiPackageManager manager = new PypiPackageManager();
-        manager.setService(pipService);
         manager.setArtifactManager(pipArtifactManager);
+        manager.setMetadataManager(pypiPackageMetadataManager);
         return manager;
     }
 }

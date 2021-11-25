@@ -8,7 +8,7 @@ agileway:
         url: https://www.python.org:80
         layout: pypi
         supportedDigits: [md5, sha256]
-      - name: local
+      - name: python_local
         url: file:///d:/pip_repo
         layout: pypi_local
 
@@ -17,4 +17,4 @@ pypi:
     protocol: https
     nodes: www.python.org:443
   sources: [pipserver]
-  destination: local
+  destination: python_local

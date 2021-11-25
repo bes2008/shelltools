@@ -9,8 +9,8 @@ import com.jn.langx.util.SystemPropertys;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.io.Charsets;
-import com.jn.langx.util.io.IOs;
 import com.jn.shelltools.core.pypi.PypiPackageManager;
+import com.jn.shelltools.core.pypi.PypiPackageMetadataManager;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +21,6 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import java.io.File;
-import java.nio.channels.Channels;
-import java.nio.charset.Charset;
 import java.util.List;
 
 @ShellComponent
@@ -31,12 +29,13 @@ public class PypiCommands {
     private static final Logger logger = LoggerFactory.getLogger(PypiCommands.class);
     @Autowired
     private PypiPackageManager pypiPackageManager;
+    private PypiPackageMetadataManager pypiPackageMetadataManager;
 
     @ShellMethod(key = "pip show", value = "show the metadata for a python package")
     public void showMetadata(
             @ShellOption(value = "--package") String packageName) {
 
-        PipPackageMetadata metadata = pypiPackageManager.getPackageMetadata(packageName);
+        PipPackageMetadata metadata = pypiPackageMetadataManager.getOfficialMetadata(packageName);
         JSON json = JSONBuilderProvider.create().prettyFormat(true).serializeNulls(true).build();
         System.out.println(json.toJson(metadata));
     }

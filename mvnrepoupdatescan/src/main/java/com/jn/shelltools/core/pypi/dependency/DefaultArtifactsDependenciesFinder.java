@@ -34,7 +34,7 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
 
     public DefaultArtifactsDependenciesFinder(){
         addArtifactDependenciesFinder(new SourceArtifactDependenciesFinder());
-    //    addArtifactDependenciesFinder(new WheelArtifactDependenciesFinder());
+        addArtifactDependenciesFinder(new WheelArtifactDependenciesFinder());
     }
 
     @Override

@@ -9,6 +9,9 @@ import com.jn.langx.util.Strings;
 import com.jn.shelltools.core.pypi.PypiArtifact;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageRelease;
 
+/**
+ * Pypi 官方介质下载地址的 布局方式
+ */
 public class PypiPackageLayout implements ArtifactRepositoryLayout {
 
     public String getPath(ArtifactRepository repository, Artifact art) {

@@ -37,17 +37,14 @@ import java.util.Map;
 
 public class PypiPackageManager {
     private static final Logger logger = LoggerFactory.getLogger(PypiPackageManager.class);
-    private PypiService service;
 
     private SynchronizedArtifactManager artifactManager;
+    private PypiPackageMetadataManager metadataManager;
 
-    public void setService(PypiService service) {
-        this.service = service;
+    public void setMetadataManager(PypiPackageMetadataManager metadataManager) {
+        this.metadataManager = metadataManager;
     }
 
-    public PipPackageMetadata getPackageMetadata(String packageName) {
-        return this.service.packageMetadata(packageName);
-    }
 
     public void setArtifactManager(SynchronizedArtifactManager artifactManager) {
         this.artifactManager = artifactManager;
@@ -59,7 +56,7 @@ public class PypiPackageManager {
         String packageName = parsedResult.getName();
         PipPackageMetadata packageMetadata = null;
         try {
-            packageMetadata = getPackageMetadata(packageName);
+            packageMetadata = metadataManager.getOfficialMetadata(packageName);
         } catch (Throwable ex) {
             throw Throwables.wrapAsRuntimeException(ex);
         }
@@ -72,6 +69,8 @@ public class PypiPackageManager {
         logger.info("selected {} versions: {}", packageName, Strings.join(",", versions));
 
         PipPackageMetadata _packageMetadata = packageMetadata;
+        // 将 pypi 仓库官方提供的 metadata 写到本地仓库中，文件名格式: <dist>_<version>_metadata.json
+
         // key: version, values: artifacts
         List<Pair<String, List<PypiArtifact>>> versionArtifacts = Pipeline.of(versions)
                 .map(new Function<String, Pair<String, List<PypiArtifact>>>() {
@@ -84,6 +83,7 @@ public class PypiPackageManager {
                                     public PypiArtifact apply(PipPackageRelease pipPackageRelease) {
                                         PypiArtifact artifact = Pypis.gaussFileArtifact(pipPackageRelease.getFilename(), packageName, version, pipPackageRelease.getPackagetype());
                                         artifact.setRelease(pipPackageRelease);
+                                        artifact.setSupportSynchronized(true);
                                         return artifact;
                                     }
                                 })
@@ -93,16 +93,20 @@ public class PypiPackageManager {
                     }
                 }).asList();
 
+        // 构建该 package的 自定义metadata
+
         // 下载 并 copy到 target 目录
         versionArtifacts.parallelStream()
                 .forEach(new java.util.function.Consumer<Pair<String, List<PypiArtifact>>>() {
                     @Override
                     public void accept(Pair<String, List<PypiArtifact>> versionArtifactPair) {
                         List<PypiArtifact> artifacts = versionArtifactPair.getValue();
+
+                        // 逐个下载 该版本的所有
                         Collects.forEach(artifacts, new Consumer<PypiArtifact>() {
                             @Override
                             public void accept(PypiArtifact pypiArtifact) {
-                                // 下载
+                                // 获取或者下载
                                 FileObject fileObject = artifactManager.getArtifactFile(pypiArtifact);
                                 // 如果已下载成功
                                 if (FileObjects.isExists(fileObject)) {
@@ -138,6 +142,8 @@ public class PypiPackageManager {
 
                         // 在 该版本的所有的artifact下载完毕后，进行依赖分析 & 下载
                         if (withDependencies) {
+                            // 先从仓库中的元数据文件中查找
+
                             ArtifactsDependenciesFinder finder = new DefaultArtifactsDependenciesFinder();
                             finder.setArtifactManager(artifactManager);
                             List<String> dependencies = finder.get(versionArtifactPair);

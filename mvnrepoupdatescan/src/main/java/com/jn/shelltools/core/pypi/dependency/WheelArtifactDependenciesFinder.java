@@ -3,10 +3,17 @@ package com.jn.shelltools.core.pypi.dependency;
 import com.jn.agileway.zip.archive.AutowiredArchiveSuiteFactory;
 import com.jn.agileway.zip.archive.Expander;
 import com.jn.langx.io.resource.FileResource;
+import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
 import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.function.Predicate2;
+import com.jn.langx.util.io.Charsets;
+import com.jn.langx.util.io.file.FileFilter;
+import com.jn.langx.util.io.file.FileFilters;
 import com.jn.langx.util.io.file.Filenames;
 import com.jn.langx.util.io.file.Files;
+import com.jn.langx.util.io.file.filter.*;
 import com.jn.shelltools.core.pypi.PypiArtifact;
 import com.jn.shelltools.core.pypi.Pypis;
 import org.apache.commons.vfs2.FileObject;
@@ -14,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WheelArtifactDependenciesFinder extends AbstractArtifactDependenciesFinder {
@@ -51,7 +59,49 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
 
     @Override
     protected List<String> parseDependencies(PypiArtifact pypiArtifact, String tmpExpandDir) {
+        // 在 <packageName>-<version>.dist-info 目录下找到 METADATA 文件
+        FileFilter metadataFileFilter = FileFilters.allFileFilter(
+                new IsFileFilter(),
+                new FilenameEqualsFilter("METADATA"),
+                new ParentFilenameSuffixFilter(Collects.newArrayList("dist-info"), false),
+                new ReadableFileFilter()
 
-        return null;
+        );
+
+        List<File> files = Files.find(new File(tmpExpandDir), 2,
+                FileFilters.anyFileFilter(
+                        metadataFileFilter,
+                        FileFilters.allFileFilter(
+                                new IsDirectoryFileFilter(),
+                                new FilenameSuffixFilter("dist-info")
+                        )
+                ),
+                metadataFileFilter, new Predicate2<List<File>, File>() {
+                    @Override
+                    public boolean test(List<File> files, File file) {
+                        return !files.isEmpty();
+                    }
+                });
+
+        File metadataFile = files.isEmpty() ? null : files.get(0);
+        Resource resource = Resources.loadFileResource(metadataFile);
+        List<String> dependencies = Collects.emptyArrayList();
+        Resources.readLines(resource, Charsets.UTF_8, new Consumer<String>() {
+            @Override
+            public void accept(String line) {
+                if (line.startsWith("Requires-Dist: ")) {
+                    line = line.substring("Requires-Dist: ".length());
+                    int index = line.indexOf(";");
+                    if (index != -1) {
+                        line = line.substring(0, index);
+                    }
+                    line = line.trim();
+                    line = line.replace("(", "").replace(")", "");
+                    dependencies.add(line);
+                }
+            }
+        });
+
+        return dependencies;
     }
 }

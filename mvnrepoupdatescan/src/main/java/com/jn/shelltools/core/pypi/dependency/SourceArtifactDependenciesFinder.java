@@ -32,4 +32,9 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
     public List<String> supportedExtensions() {
         return Collects.asList(Pypis.getFileExtensions("sdist"));
     }
+
+    @Override
+    protected List<String> parseDependencies(PypiArtifact pypiArtifact, String tmpExpandDir) {
+        return null;
+    }
 }

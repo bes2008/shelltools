@@ -1,6 +1,6 @@
 package com.jn.shelltools.tests.pypi;
 
-import com.jn.shelltools.core.pypi.versionspecifier.VersionSpecifiers;
+import com.jn.shelltools.supports.pypi.versionspecifier.VersionSpecifiers;
 import org.junit.Test;
 
 import java.util.regex.Matcher;

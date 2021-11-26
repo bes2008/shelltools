@@ -7,9 +7,12 @@ import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
 import com.jn.easyjson.core.factory.JsonFactorys;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
-import com.jn.shelltools.core.pypi.*;
-import com.jn.shelltools.core.pypi.repository.PypiLocalRepositoryLayout;
-import com.jn.shelltools.core.pypi.repository.PypiPackageLayout;
+import com.jn.shelltools.supports.pypi.PypiPackageManager;
+import com.jn.shelltools.supports.pypi.PypiPackageManagerProperties;
+import com.jn.shelltools.supports.pypi.PypiPackageMetadataManager;
+import com.jn.shelltools.supports.pypi.PypiService;
+import com.jn.shelltools.supports.pypi.repository.PypiLocalRepositoryLayout;
+import com.jn.shelltools.supports.pypi.repository.PypiPackageLayout;
 import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -70,7 +73,7 @@ public class PypiConfig {
     }
 
     @Bean
-    public PypiPackageMetadataManager pypiPackageMetadataManager(PypiService pipService,@Qualifier("pipArtifactManager")
+    public PypiPackageMetadataManager pypiPackageMetadataManager(PypiService pipService, @Qualifier("pipArtifactManager")
                                                                          SynchronizedArtifactManager pipArtifactManager){
         PypiPackageMetadataManager metadataManager = new PypiPackageMetadataManager();
         metadataManager.setArtifactManager(pipArtifactManager);

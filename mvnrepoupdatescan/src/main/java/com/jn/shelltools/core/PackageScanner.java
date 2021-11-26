@@ -8,7 +8,7 @@ public interface PackageScanner{
     /**
      * 从指定的path下扫描artifacts
      *
-     * @param path 扫描路径
+     * @param path 扫描路径，仓库的相对路径
      * @param filter 扫描时过滤器
      * @return 返回搜索到的包
      */

@@ -1,7 +1,7 @@
 package com.jn.shelltools.core.pypi;
 
-import com.jn.agileway.vfs.FileObjects;
-import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
+import com.jn.agileway.vfs.artifact.ArtifactManager;
+import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.annotation.NotEmpty;
 import com.jn.langx.annotation.Nullable;
@@ -21,6 +21,7 @@ import com.jn.langx.util.function.Predicate2;
 import com.jn.langx.util.net.URLs;
 import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
+import com.jn.shelltools.core.LocalRepositoryPackageScanner;
 import com.jn.shelltools.core.pypi.dependency.ArtifactsDependenciesFinder;
 import com.jn.shelltools.core.pypi.dependency.DefaultArtifactsDependenciesFinder;
 import com.jn.shelltools.core.pypi.dependency.RequirementsArtifact;
@@ -36,10 +37,17 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 
-public class PypiPackageManager {
+/**
+ * 支持特性：
+ * <pre>
+ *  1.  从Pypi下载包到本地仓库
+ *  2.  在本地仓库进行包扫描
+ * </pre>
+ */
+public class PypiPackageManager implements LocalRepositoryPackageScanner {
     private static final Logger logger = LoggerFactory.getLogger(PypiPackageManager.class);
 
-    private SynchronizedArtifactManager artifactManager;
+    private ArtifactManager artifactManager;
     private PypiPackageMetadataManager metadataManager;
 
     public void setMetadataManager(PypiPackageMetadataManager metadataManager) {
@@ -47,12 +55,13 @@ public class PypiPackageManager {
     }
 
 
-    public void setArtifactManager(SynchronizedArtifactManager artifactManager) {
+    public void setArtifactManager(ArtifactManager artifactManager) {
         this.artifactManager = artifactManager;
     }
 
     /**
      * 下载至本地仓库
+     *
      * @param versionedPackageName
      * @param withDependencies
      * @param targetDirectory
@@ -114,7 +123,12 @@ public class PypiPackageManager {
                             @Override
                             public void accept(PypiArtifact pypiArtifact) {
                                 // 获取或者下载
-                                FileObject fileObject = artifactManager.getArtifactFile(pypiArtifact);
+                                FileObject fileObject = null;
+                                try {
+                                    fileObject = artifactManager.getArtifactFile(pypiArtifact);
+                                } catch (FileSystemException e) {
+                                    logger.error(e.getMessage(), e);
+                                }
                                 // 如果已下载成功
                                 if (FileObjects.isExists(fileObject)) {
                                     // copy 到target 目录
@@ -219,7 +233,10 @@ public class PypiPackageManager {
         }
     }
 
-    public List<String> scan(){
-        return null;
+    @Override
+    public ArtifactManager getArtifactManager() {
+        return artifactManager;
     }
+
+
 }

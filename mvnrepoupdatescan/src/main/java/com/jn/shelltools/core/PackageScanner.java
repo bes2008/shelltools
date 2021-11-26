@@ -1,8 +1,8 @@
 package com.jn.shelltools.core;
 
 import com.jn.agileway.vfs.artifact.Artifact;
+import com.jn.agileway.vfs.artifact.IGAV;
 import com.jn.langx.Filter;
-import com.jn.shelltools.core.maven.model.MavenGAV;
 
 import java.util.Map;
 
@@ -13,5 +13,5 @@ public interface PackageScanner{
      * @param filter
      * @return
      */
-    Map<MavenGAV, Artifact> scan(String path, Filter<Artifact> filter);
+    Map<IGAV, PackageArtifact> scan(String path, Filter<Artifact> filter);
 }

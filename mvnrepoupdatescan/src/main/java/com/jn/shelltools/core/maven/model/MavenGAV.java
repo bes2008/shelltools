@@ -4,11 +4,9 @@ import com.jn.agileway.vfs.artifact.IGAV;
 import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Objects;
 import com.jn.langx.util.hash.HashCodeBuilder;
+import com.jn.shelltools.core.PackageGAV;
 
-public class MavenGAV implements Comparable<MavenGAV>, IGAV {
-    private String groupId;
-    private String artifactId;
-    private String version;
+public class MavenGAV extends PackageGAV implements Comparable<MavenGAV>, IGAV {
 
     public MavenGAV(){}
 
@@ -18,40 +16,17 @@ public class MavenGAV implements Comparable<MavenGAV>, IGAV {
         setVersion(version);
     }
 
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
-    }
-
-    public String getArtifactId() {
-        return artifactId;
-    }
-
-    public void setArtifactId(String artifactId) {
-        this.artifactId = artifactId;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
 
     @Override
     public String toString() {
-        return StringTemplates.formatWithPlaceholder("{}:{}:{}", groupId, artifactId, version);
+        return StringTemplates.formatWithPlaceholder("{}:{}:{}", getGroupId(), getArtifactId(), getVersion());
     }
 
     /**
      * @return pom文件所在的本地仓库的相对路径
      */
     public String getLocation(){
-       return StringTemplates.format("{0}/{1}/{2}", groupId.replace(".","/"), artifactId, version);
+       return StringTemplates.format("{0}/{1}/{2}", getGroupId().replace(".","/"), getArtifactId(), getVersion());
     }
 
     /**
@@ -90,34 +65,10 @@ public class MavenGAV implements Comparable<MavenGAV>, IGAV {
     }
 
     private String getLikeUnixPath(){
-        return StringTemplates.format("{0}/{1}/{2}/{1}-{2}", groupId.replace(".","/"), artifactId, version);
+        return StringTemplates.format("{0}/{1}/{2}/{1}-{2}", getGroupId().replace(".","/"), getArtifactId(), getVersion());
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MavenGAV)) return false;
 
-        MavenGAV gav = (MavenGAV) o;
-
-        if (!Objects.equals(groupId, gav.groupId)) {
-            return false;
-        }
-
-        if (!Objects.equals(artifactId, gav.artifactId)) {
-            return false;
-        }
-
-        if (!Objects.equals(version, gav.version)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().with(groupId).with(artifactId).with(version).build();
-    }
 
     @Override
     public int compareTo(MavenGAV o) {

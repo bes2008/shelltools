@@ -5,5 +5,6 @@ public enum DependencyScope {
     RUNTIME,
     TEST,
     IMPORT,
-    PROVIDER
+    PROVIDER,
+    System
 }

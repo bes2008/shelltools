@@ -1,17 +1,20 @@
 package com.jn.shelltools.core.maven.model;
 
-import com.jn.agileway.vfs.artifact.AbstractArtifact;
+import com.jn.shelltools.core.PackageArtifact;
 
 import java.util.List;
 
-public class MavenArtifact extends AbstractArtifact {
+/**
+ * maven java 包的一个发布情况
+ */
+public class MavenPackageArtifact extends PackageArtifact {
     private MavenGAV parent;
     private String description;
     private String name;
     private Packaging packaging;
     private DependencyScope scope;
     private long lastModifiedTime;
-    private List<MavenArtifact> dependencies;
+    private List<MavenPackageArtifact> dependencies;
     private List<License> licenses;
     /**
      * pom 文件所在的本地仓库的目录
@@ -84,11 +87,11 @@ public class MavenArtifact extends AbstractArtifact {
         this.localPath = localPath;
     }
 
-    public List<MavenArtifact> getDependencies() {
+    public List<MavenPackageArtifact> getDependencies() {
         return dependencies;
     }
 
-    public void setDependencies(List<MavenArtifact> dependencies) {
+    public void setDependencies(List<MavenPackageArtifact> dependencies) {
         this.dependencies = dependencies;
     }
 

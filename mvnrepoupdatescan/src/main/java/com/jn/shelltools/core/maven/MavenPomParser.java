@@ -15,7 +15,7 @@ import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Supplier;
 import com.jn.shelltools.core.maven.model.MavenGAV;
 import com.jn.shelltools.core.maven.model.License;
-import com.jn.shelltools.core.maven.model.MavenArtifact;
+import com.jn.shelltools.core.maven.model.MavenPackageArtifact;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MavenPomParser implements Parser<Document, MavenArtifact> {
+public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
     private static final Map<String, String> gavXPathMap = new HashMap<>();
 
     static {
@@ -65,8 +65,8 @@ public class MavenPomParser implements Parser<Document, MavenArtifact> {
     }
 
     @Override
-    public MavenArtifact parse(Document pom) {
-        MavenArtifact mavenArtifact = new MavenArtifact();
+    public MavenPackageArtifact parse(Document pom) {
+        MavenPackageArtifact mavenArtifact = new MavenPackageArtifact();
         MavenGAV gav = parseGav(pom);
         mavenArtifact.setGav(gav);
         List<License> licenses = parseLicenses(pom);

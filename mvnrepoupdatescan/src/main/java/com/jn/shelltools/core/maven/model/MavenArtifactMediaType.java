@@ -1,6 +1,6 @@
 package com.jn.shelltools.core.maven.model;
 
-public enum ArtifactMediaType {
+public enum MavenArtifactMediaType {
     POM,
     JAR,
     JAVADOC,

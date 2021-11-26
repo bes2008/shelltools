@@ -1,10 +1,10 @@
 package com.jn.shelltools.core.pypi;
 
-import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
 import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.util.io.Charsets;
 import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.logging.Loggers;
+import com.jn.shelltools.core.pypi.dependency.RequirementsManager;
 import com.jn.shelltools.core.pypi.packagemetadata.PipPackageMetadata;
 import com.jn.shelltools.core.pypi.repository.PipPackageMetadataArtifact;
 import org.apache.commons.vfs2.FileObject;
@@ -15,14 +15,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 
-public class PypiPackageMetadataManager {
+public class PypiPackageMetadataManager extends RequirementsManager {
     private static final Logger logger = Loggers.getLogger(PypiPackageMetadataManager.class);
     private PypiService service;
-    private SynchronizedArtifactManager artifactManager;
 
-    public void setArtifactManager(SynchronizedArtifactManager artifactManager) {
-        this.artifactManager = artifactManager;
-    }
 
     public void setService(PypiService service) {
         this.service = service;
@@ -33,8 +29,9 @@ public class PypiPackageMetadataManager {
         PipPackageMetadataArtifact artifact = new PipPackageMetadataArtifact(packageName);
 
         PipPackageMetadata metadata = null;
-        FileObject fileObject = artifactManager.getArtifactFile(artifact);
+        FileObject fileObject = null;
         try {
+            fileObject = artifactManager.getArtifactFile(artifact);
             if (fileObject.exists()) {
                 // 查看 last modified 时间，若在10分钟之内， 则认为是有效的
                 long lastModified = fileObject.getContent().getLastModifiedTime();

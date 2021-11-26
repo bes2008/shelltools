@@ -7,7 +7,7 @@ import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer2;
 import com.jn.langx.util.io.file.Files;
 import com.jn.shelltools.core.maven.MavenLocalRepositoryUpdatedScanner;
-import com.jn.shelltools.core.maven.model.GAV;
+import com.jn.shelltools.core.maven.model.MavenGAV;
 import com.jn.shelltools.core.maven.model.MavenArtifact;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
@@ -34,16 +34,16 @@ public class MavenLocalRepositoryCommands {
     @ShellMethod(key = "maven_local_repo_updated_scan", value = "scan all dependencies after the specified time")
     public void scanUpdated(@ShellOption(defaultValue = ".") String repositoryLocation,
                             @ShellOption(value = "--date", defaultValue = ".", help = "format: yyyy-MM-dd_HH:mm, the default is the day of you execute it") String date) {
-        Map<GAV, MavenArtifact> map = scanUpdated0(repositoryLocation, date);
-        Collects.forEach(map, new Consumer2<GAV, MavenArtifact>() {
+        Map<MavenGAV, MavenArtifact> map = scanUpdated0(repositoryLocation, date);
+        Collects.forEach(map, new Consumer2<MavenGAV, MavenArtifact>() {
             @Override
-            public void accept(GAV key, MavenArtifact value) {
+            public void accept(MavenGAV key, MavenArtifact value) {
                 System.out.println(key);
             }
         });
     }
 
-    private Map<GAV,MavenArtifact> scanUpdated0(String repositoryLocation, String date){
+    private Map<MavenGAV,MavenArtifact> scanUpdated0(String repositoryLocation, String date){
         Date d = null;
         if (ShellOption.NONE.equals(date) || ShellOption.NULL.equals(date) || ".".equals(date)) {
             date = null;
@@ -59,7 +59,7 @@ public class MavenLocalRepositoryCommands {
         }
         final long baselineTime = d.getTime();
         MavenLocalRepositoryUpdatedScanner scanner = new MavenLocalRepositoryUpdatedScanner();
-        Map<GAV, MavenArtifact> map = scanner.scan(new File(repositoryLocation), new Filter<MavenArtifact>() {
+        Map<MavenGAV, MavenArtifact> map = scanner.scan(new File(repositoryLocation), new Filter<MavenArtifact>() {
             @Override
             public boolean accept(MavenArtifact mavenArtifact) {
                 return mavenArtifact.getLastModifiedTime() >= baselineTime;
@@ -79,10 +79,10 @@ public class MavenLocalRepositoryCommands {
         }
         Preconditions.checkTrue(destRootDirectory.exists());
         Preconditions.checkTrue(destRootDirectory.isDirectory());
-        Map<GAV, MavenArtifact> map = scanUpdated0(repositoryLocation, date);
-        Collects.forEach(map, new Consumer2<GAV, MavenArtifact>() {
+        Map<MavenGAV, MavenArtifact> map = scanUpdated0(repositoryLocation, date);
+        Collects.forEach(map, new Consumer2<MavenGAV, MavenArtifact>() {
             @Override
-            public void accept(GAV gav, MavenArtifact mavenArtifact) {
+            public void accept(MavenGAV gav, MavenArtifact mavenArtifact) {
                 System.out.println(gav);
                 File srcDirectory = new File(mavenArtifact.getLocalPath());
                 File destDirectory = new File(destRootDirectory, gav.getLocation());

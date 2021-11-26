@@ -5,14 +5,14 @@ import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Objects;
 import com.jn.langx.util.hash.HashCodeBuilder;
 
-public class GAV implements Comparable<GAV>, IGAV {
+public class MavenGAV implements Comparable<MavenGAV>, IGAV {
     private String groupId;
     private String artifactId;
     private String version;
 
-    public GAV(){}
+    public MavenGAV(){}
 
-    public GAV(String groupId, String artifactId, String version){
+    public MavenGAV(String groupId, String artifactId, String version){
         setGroupId(groupId);
         setArtifactId(artifactId);
         setVersion(version);
@@ -96,9 +96,9 @@ public class GAV implements Comparable<GAV>, IGAV {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GAV)) return false;
+        if (!(o instanceof MavenGAV)) return false;
 
-        GAV gav = (GAV) o;
+        MavenGAV gav = (MavenGAV) o;
 
         if (!Objects.equals(groupId, gav.groupId)) {
             return false;
@@ -120,7 +120,7 @@ public class GAV implements Comparable<GAV>, IGAV {
     }
 
     @Override
-    public int compareTo(GAV o) {
+    public int compareTo(MavenGAV o) {
         return toString().compareTo(o.toString());
     }
 }

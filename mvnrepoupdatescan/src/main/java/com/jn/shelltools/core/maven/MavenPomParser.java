@@ -13,7 +13,7 @@ import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Supplier;
-import com.jn.shelltools.core.maven.model.GAV;
+import com.jn.shelltools.core.maven.model.MavenGAV;
 import com.jn.shelltools.core.maven.model.License;
 import com.jn.shelltools.core.maven.model.MavenArtifact;
 import org.w3c.dom.Document;
@@ -67,14 +67,14 @@ public class MavenPomParser implements Parser<Document, MavenArtifact> {
     @Override
     public MavenArtifact parse(Document pom) {
         MavenArtifact mavenArtifact = new MavenArtifact();
-        GAV gav = parseGav(pom);
+        MavenGAV gav = parseGav(pom);
         mavenArtifact.setGav(gav);
         List<License> licenses = parseLicenses(pom);
         mavenArtifact.setLicenses(licenses);
         return mavenArtifact;
     }
 
-    private GAV parseGav(Document doc) {
+    private MavenGAV parseGav(Document doc) {
         boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc);
         String namespacePrefix = "x";
         String groupIdXPath = getGavXpath("groupIdXPath", usingCustomNamespace, namespacePrefix);
@@ -128,7 +128,7 @@ public class MavenPomParser implements Parser<Document, MavenArtifact> {
                 }
             }, this.pomPath);
             String artifactId = artifactElement.getTextContent().trim();
-            return new GAV(groupId, artifactId, version);
+            return new MavenGAV(groupId, artifactId, version);
         } catch (Throwable ex) {
             throw new PomParseException(ex);
         }

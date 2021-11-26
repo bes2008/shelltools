@@ -1,10 +1,11 @@
 package com.jn.shelltools.core.maven.model;
 
+import com.jn.agileway.vfs.artifact.AbstractArtifact;
+
 import java.util.List;
 
-public class MavenArtifact {
-    private GAV gav;
-    private GAV parent;
+public class MavenArtifact extends AbstractArtifact {
+    private MavenGAV parent;
     private String description;
     private String name;
     private Packaging packaging;
@@ -17,12 +18,14 @@ public class MavenArtifact {
      */
     private String localPath;
 
-    public GAV getGav() {
-        return gav;
+    public MavenGAV getGav() {
+        return new MavenGAV(getGroupId(), getArtifactId(), getVersion());
     }
 
-    public void setGav(GAV gav) {
-        this.gav = gav;
+    public void setGav(MavenGAV gav) {
+        setGroupId(gav.getGroupId());
+        setArtifactId(gav.getArtifactId());
+        setVersion(gav.getVersion());
     }
 
     public Packaging getPackaging() {
@@ -41,11 +44,11 @@ public class MavenArtifact {
         this.scope = scope;
     }
 
-    public GAV getParent() {
+    public MavenGAV getParent() {
         return parent;
     }
 
-    public void setParent(GAV parent) {
+    public void setParent(MavenGAV parent) {
         this.parent = parent;
     }
 
@@ -96,4 +99,5 @@ public class MavenArtifact {
     public void setLicenses(List<License> licenses) {
         this.licenses = licenses;
     }
+
 }

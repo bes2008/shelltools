@@ -14,7 +14,7 @@ import com.jn.langx.util.io.file.filter.FilenameSuffixFilter;
 import com.jn.langx.util.io.file.filter.IsDirectoryFileFilter;
 import com.jn.langx.util.io.file.filter.IsFileFilter;
 import com.jn.langx.util.struct.Holder;
-import com.jn.shelltools.core.maven.model.GAV;
+import com.jn.shelltools.core.maven.model.MavenGAV;
 import com.jn.shelltools.core.maven.model.MavenArtifact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +37,8 @@ import java.util.TreeMap;
 public class MavenLocalRepositoryUpdatedScanner {
     private static final Logger logger = LoggerFactory.getLogger(MavenLocalRepositoryUpdatedScanner.class);
 
-    public Map<GAV, MavenArtifact> scan(File directory, Filter<MavenArtifact> filter) {
-        Map<GAV, MavenArtifact> artifactMap = scan(new HashMap<>(), new HashMap<>(), new Holder<File>(), directory, filter);
+    public Map<MavenGAV, MavenArtifact> scan(File directory, Filter<MavenArtifact> filter) {
+        Map<MavenGAV, MavenArtifact> artifactMap = scan(new HashMap<>(), new HashMap<>(), new Holder<File>(), directory, filter);
         return artifactMap;
     }
 
@@ -52,8 +52,8 @@ public class MavenLocalRepositoryUpdatedScanner {
      * @param filter               进行匹配
      * @return 匹配的artifacts
      */
-    private Map<GAV, MavenArtifact> scan(Map<String, GAV> readPoms, Map<GAV, MavenArtifact> readMavenArtifactMap, @NonNull Holder<File> rootDirectory, File directory, Filter<MavenArtifact> filter) {
-        Map<GAV, MavenArtifact> map = new TreeMap<GAV, MavenArtifact>();
+    private Map<MavenGAV, MavenArtifact> scan(Map<String, MavenGAV> readPoms, Map<MavenGAV, MavenArtifact> readMavenArtifactMap, @NonNull Holder<File> rootDirectory, File directory, Filter<MavenArtifact> filter) {
+        Map<MavenGAV, MavenArtifact> map = new TreeMap<MavenGAV, MavenArtifact>();
         DirectoryBasedFileResourceLoader resourceLoader = new DirectoryBasedFileResourceLoader(directory.getAbsolutePath());
         List<File> files = resourceLoader.listFiles(new AnyFileFilter(Collects.asList(
                 new IsFileFilter(),
@@ -107,7 +107,7 @@ public class MavenLocalRepositoryUpdatedScanner {
                                 IOs.close(inputStream);
                             }
                         } else {
-                            GAV gav = readPoms.get(absolutePath);
+                            MavenGAV gav = readPoms.get(absolutePath);
                             mavenArtifact = readMavenArtifactMap.get(gav);
                         }
 

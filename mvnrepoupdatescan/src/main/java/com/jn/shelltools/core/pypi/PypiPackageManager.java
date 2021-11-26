@@ -51,6 +51,12 @@ public class PypiPackageManager {
         this.artifactManager = artifactManager;
     }
 
+    /**
+     * 下载至本地仓库
+     * @param versionedPackageName
+     * @param withDependencies
+     * @param targetDirectory
+     */
     public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory) {
         VersionSpecifierParser parser = new VersionSpecifierParser();
         NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
@@ -145,12 +151,18 @@ public class PypiPackageManager {
                         if (withDependencies) {
                             // 先从仓库中的元数据文件中查找
                             RequirementsArtifact requirementsArtifact = new RequirementsArtifact(versionArtifactPair.getValue().get(0).getArtifactId(), versionArtifactPair.getKey());
-                            artifactManager.getArtifactFile(requirementsArtifact);
-                            ArtifactsDependenciesFinder finder = new DefaultArtifactsDependenciesFinder();
-                            finder.setArtifactManager(artifactManager);
-                            // 从 所有的 .tar.gz, .zip, .whl, .egg 介质中找依赖
-                            List<String> dependencies = finder.get(versionArtifactPair);
-                            Collects.forEach(dependencies, new Consumer<String>() {
+                            List<String> requirements = metadataManager.get(requirementsArtifact);
+                            if (requirements == null) {
+                                // 扫描 介质包进行查找
+                                ArtifactsDependenciesFinder finder = new DefaultArtifactsDependenciesFinder();
+                                finder.setArtifactManager(artifactManager);
+                                // 从 所有的 .tar.gz, .zip, .whl, .egg 介质中找依赖
+                                requirements = finder.get(versionArtifactPair);
+                            }
+                            if (Objs.isNotEmpty(requirements)) {
+                                metadataManager.save(requirementsArtifact, requirements);
+                            }
+                            Collects.forEach(requirements, new Consumer<String>() {
                                 @Override
                                 public void accept(String dependency) {
                                     downloadPackage(dependency, withDependencies, targetDirectory);
@@ -205,5 +217,9 @@ public class PypiPackageManager {
                     }).asList();
 
         }
+    }
+
+    public List<String> scan(){
+        return null;
     }
 }

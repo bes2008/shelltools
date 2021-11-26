@@ -8,6 +8,8 @@ import com.jn.agileway.vfs.artifact.AbstractArtifact;
  * 就是一个 软件包的一个版本的情况。
  */
 public class PackageArtifact extends AbstractArtifact {
+    private long lastModified;
+
     @Override
     public String getClassifier() {
         return null;
@@ -16,5 +18,13 @@ public class PackageArtifact extends AbstractArtifact {
     @Override
     public String getExtension() {
         return null;
+    }
+
+    public long getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(long lastModified) {
+        this.lastModified = lastModified;
     }
 }

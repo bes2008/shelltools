@@ -1,4 +1,4 @@
-package com.jn.shelltools.core.maven;
+package com.jn.shelltools.supports.maven;
 
 import com.jn.langx.Filter;
 import com.jn.langx.annotation.NonNull;
@@ -14,8 +14,8 @@ import com.jn.langx.util.io.file.filter.FilenameSuffixFilter;
 import com.jn.langx.util.io.file.filter.IsDirectoryFileFilter;
 import com.jn.langx.util.io.file.filter.IsFileFilter;
 import com.jn.langx.util.struct.Holder;
-import com.jn.shelltools.core.maven.model.MavenGAV;
-import com.jn.shelltools.core.maven.model.MavenPackageArtifact;
+import com.jn.shelltools.supports.maven.model.MavenGAV;
+import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;

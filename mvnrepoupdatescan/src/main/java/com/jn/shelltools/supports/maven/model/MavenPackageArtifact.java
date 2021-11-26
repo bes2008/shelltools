@@ -1,4 +1,4 @@
-package com.jn.shelltools.core.maven.model;
+package com.jn.shelltools.supports.maven.model;
 
 import com.jn.shelltools.core.PackageArtifact;
 

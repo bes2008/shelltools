@@ -1,9 +1,7 @@
-package com.jn.shelltools.core.maven.model;
+package com.jn.shelltools.supports.maven.model;
 
 import com.jn.agileway.vfs.artifact.IGAV;
 import com.jn.langx.text.StringTemplates;
-import com.jn.langx.util.Objects;
-import com.jn.langx.util.hash.HashCodeBuilder;
 import com.jn.shelltools.core.PackageGAV;
 
 public class MavenGAV extends PackageGAV implements Comparable<MavenGAV>, IGAV {

@@ -1,6 +1,6 @@
 package com.jn.shelltools.core.pypi.dependency;
 
-import com.jn.agileway.vfs.FileObjects;
+import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.agileway.vfs.artifact.ArtifactManager;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.SystemPropertys;

@@ -3,6 +3,7 @@ package com.jn.shelltools.core.pypi;
 import com.jn.agileway.vfs.artifact.ArtifactManager;
 import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.easyjson.core.JSONBuilderProvider;
+import com.jn.langx.Filter;
 import com.jn.langx.annotation.NotEmpty;
 import com.jn.langx.annotation.Nullable;
 import com.jn.langx.exception.IllegalParameterException;
@@ -22,6 +23,8 @@ import com.jn.langx.util.net.URLs;
 import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
 import com.jn.shelltools.core.LocalRepositoryPackageScanner;
+import com.jn.shelltools.core.PackageArtifact;
+import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.core.pypi.dependency.ArtifactsDependenciesFinder;
 import com.jn.shelltools.core.pypi.dependency.DefaultArtifactsDependenciesFinder;
 import com.jn.shelltools.core.pypi.dependency.RequirementsArtifact;
@@ -238,5 +241,8 @@ public class PypiPackageManager implements LocalRepositoryPackageScanner {
         return artifactManager;
     }
 
-
+    @Override
+    public Map<PackageGAV, PackageArtifact> scan(String path, Filter<PackageArtifact> filter) {
+        return null;
+    }
 }

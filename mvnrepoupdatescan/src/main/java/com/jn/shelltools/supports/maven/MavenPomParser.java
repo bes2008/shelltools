@@ -1,4 +1,4 @@
-package com.jn.shelltools.core.maven;
+package com.jn.shelltools.supports.maven;
 
 import com.jn.langx.Parser;
 import com.jn.langx.text.StringTemplates;
@@ -13,9 +13,9 @@ import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Supplier;
-import com.jn.shelltools.core.maven.model.MavenGAV;
-import com.jn.shelltools.core.maven.model.License;
-import com.jn.shelltools.core.maven.model.MavenPackageArtifact;
+import com.jn.shelltools.supports.maven.model.MavenGAV;
+import com.jn.shelltools.supports.maven.model.License;
+import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

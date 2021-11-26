@@ -17,11 +17,11 @@ import java.util.concurrent.TimeUnit;
 
 public class PypiPackageMetadataManager extends RequirementsManager {
     private static final Logger logger = Loggers.getLogger(PypiPackageMetadataManager.class);
-    private PypiService service;
+    private PypiRestApi restApi;
 
 
-    public void setService(PypiService service) {
-        this.service = service;
+    public void setRestApi(PypiRestApi restApi) {
+        this.restApi = restApi;
     }
 
     public PipPackageMetadata getOfficialMetadata(String packageName) {
@@ -44,7 +44,7 @@ public class PypiPackageMetadataManager extends RequirementsManager {
                 }
             }
             if (metadata == null) {
-                metadata = this.service.packageMetadata(packageName);
+                metadata = this.restApi.packageMetadata(packageName);
                 if (metadata != null) {
                     // 写到本地仓库
                     String str = JSONBuilderProvider.create().prettyFormat(true).build().toJson(metadata);

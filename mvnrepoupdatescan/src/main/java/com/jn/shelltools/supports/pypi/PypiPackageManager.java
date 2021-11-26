@@ -22,7 +22,7 @@ import com.jn.langx.util.function.Predicate2;
 import com.jn.langx.util.net.URLs;
 import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
-import com.jn.shelltools.core.LocalRepositoryPackageScanner;
+import com.jn.shelltools.core.LocalPackageScanner;
 import com.jn.shelltools.core.PackageArtifact;
 import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.supports.pypi.dependency.ArtifactsDependenciesFinder;
@@ -47,7 +47,7 @@ import java.util.Map;
  *  2.  在本地仓库进行包扫描
  * </pre>
  */
-public class PypiPackageManager implements LocalRepositoryPackageScanner {
+public class PypiPackageManager implements LocalPackageScanner {
     private static final Logger logger = LoggerFactory.getLogger(PypiPackageManager.class);
 
     private ArtifactManager artifactManager;

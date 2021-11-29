@@ -20,6 +20,7 @@ import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Predicate;
 import com.jn.langx.util.function.Predicate2;
 import com.jn.langx.util.net.URLs;
+import com.jn.langx.util.struct.Holder;
 import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
 import com.jn.shelltools.core.LocalPackageScanner;
@@ -38,8 +39,10 @@ import org.apache.commons.vfs2.Selectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 支持特性：
@@ -63,6 +66,10 @@ public class PypiPackageManager implements LocalPackageScanner {
         this.artifactManager = artifactManager;
     }
 
+    public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory) {
+        downloadPackage(versionedPackageName, withDependencies, targetDirectory, new ConcurrentHashMap<>());
+    }
+
     /**
      * 下载至本地仓库
      *
@@ -70,12 +77,12 @@ public class PypiPackageManager implements LocalPackageScanner {
      * @param withDependencies
      * @param targetDirectory
      */
-    public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory) {
+    public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory, Map<String, Holder<List<PypiArtifact>>> finished) {
         String packageName = null;
         CommonExpressionBoundary versionBoundary = null;
-        if(VersionSpecifiers.versionAbsent(versionedPackageName)){
+        if (VersionSpecifiers.versionAbsent(versionedPackageName)) {
             packageName = versionedPackageName;
-        }else {
+        } else {
             VersionSpecifierParser parser = new VersionSpecifierParser();
             NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
             packageName = parsedResult.getName();
@@ -110,19 +117,22 @@ public class PypiPackageManager implements LocalPackageScanner {
                                 .map(new Function<PipPackageRelease, PypiArtifact>() {
                                     @Override
                                     public PypiArtifact apply(PipPackageRelease pipPackageRelease) {
-                                        PypiArtifact artifact = Pypis.gaussFileArtifact(pipPackageRelease.getFilename(), _packageName, version, pipPackageRelease.getPackagetype());
-                                        artifact.setRelease(pipPackageRelease);
-                                        artifact.setSupportSynchronized(true);
-                                        return artifact;
+                                        if (!finished.containsKey(version)) {
+                                            // 说明 该版本还没有处理过
+                                            PypiArtifact artifact = Pypis.gaussFileArtifact(pipPackageRelease.getFilename(), _packageName, version, pipPackageRelease.getPackagetype());
+                                            artifact.setRelease(pipPackageRelease);
+                                            artifact.setSupportSynchronized(true);
+                                            return artifact;
+                                        }
+                                        return null;
                                     }
                                 })
+                                .clearNulls()
                                 .asList();
 
                         return new NameValuePair<List<PypiArtifact>>(version, artifacts);
                     }
                 }).asList();
-
-        // 构建该 package的 自定义metadata
 
         // 下载 并 copy到 target 目录
         versionArtifacts.parallelStream()
@@ -130,46 +140,49 @@ public class PypiPackageManager implements LocalPackageScanner {
                     @Override
                     public void accept(Pair<String, List<PypiArtifact>> versionArtifactPair) {
                         List<PypiArtifact> artifacts = versionArtifactPair.getValue();
-
+                        finished.putIfAbsent(versionArtifactPair.getKey(), new Holder<>(Collects.emptyArrayList()));
                         // 逐个下载 该版本的所有
                         Collects.forEach(artifacts, new Consumer<PypiArtifact>() {
                             @Override
                             public void accept(PypiArtifact pypiArtifact) {
-                                // 获取或者下载
-                                FileObject fileObject = null;
-                                try {
-                                    fileObject = artifactManager.getArtifactFile(pypiArtifact);
-                                } catch (FileSystemException e) {
-                                    logger.error(e.getMessage(), e);
-                                }
-                                // 如果已下载成功
-                                if (FileObjects.isExists(fileObject)) {
-                                    // copy 到target 目录
-                                    if (Objs.isNotEmpty(targetDirectory)) {
-                                        String targetUrl = targetDirectory;
-                                        if (!Strings.startsWith(targetDirectory, URLs.URL_PREFIX_FILE)) {
-                                            if (Strings.startsWith(targetDirectory, "/")) {
-                                                targetUrl = URLs.URL_PREFIX_FILE + targetDirectory;
-                                            } else {
-                                                targetUrl = URLs.URL_PREFIX_FILE + "/" + targetDirectory;
-                                            }
-                                            if (Strings.endsWith(targetUrl, "/")) {
-                                                targetUrl = targetUrl + FileObjects.getFileName(fileObject);
-                                            } else {
-                                                targetUrl = targetUrl + "/" + FileObjects.getFileName(fileObject);
-                                            }
-                                        }
-
-                                        try {
-                                            FileObject targetFile = artifactManager.getFileSystemManager().resolveFile(targetUrl);
-                                            targetFile.copyFrom(fileObject, Selectors.SELECT_SELF);
-                                        } catch (FileSystemException ex) {
-                                            logger.error(ex.getMessage(), ex);
-                                        }
+                                List<PypiArtifact> finishedArtifacts = finished.get(versionArtifactPair.getKey()).get();
+                                if (!finishedArtifacts.contains(pypiArtifact)) {
+                                    // 获取或者下载
+                                    FileObject fileObject = null;
+                                    try {
+                                        fileObject = artifactManager.getArtifactFile(pypiArtifact);
+                                    } catch (FileSystemException e) {
+                                        logger.error(e.getMessage(), e);
                                     }
+                                    // 如果已下载成功
+                                    if (FileObjects.isExists(fileObject)) {
+                                        // copy 到target 目录
+                                        if (Objs.isNotEmpty(targetDirectory)) {
+                                            String targetUrl = targetDirectory;
+                                            if (!Strings.startsWith(targetDirectory, URLs.URL_PREFIX_FILE)) {
+                                                if (Strings.startsWith(targetDirectory, "/")) {
+                                                    targetUrl = URLs.URL_PREFIX_FILE + targetDirectory;
+                                                } else {
+                                                    targetUrl = URLs.URL_PREFIX_FILE + "/" + targetDirectory;
+                                                }
+                                                if (Strings.endsWith(targetUrl, "/")) {
+                                                    targetUrl = targetUrl + FileObjects.getFileName(fileObject);
+                                                } else {
+                                                    targetUrl = targetUrl + "/" + FileObjects.getFileName(fileObject);
+                                                }
+                                            }
 
-                                } else {
-                                    logger.info("Can't find the artifact: {}", JSONBuilderProvider.simplest().toJson(pypiArtifact));
+                                            try {
+                                                FileObject targetFile = artifactManager.getFileSystemManager().resolveFile(targetUrl);
+                                                targetFile.copyFrom(fileObject, Selectors.SELECT_SELF);
+                                            } catch (FileSystemException ex) {
+                                                logger.error(ex.getMessage(), ex);
+                                            }
+                                        }
+
+                                    } else {
+                                        logger.info("Can't find the artifact: {}", JSONBuilderProvider.simplest().toJson(pypiArtifact));
+                                    }
                                 }
                             }
                         });
@@ -193,7 +206,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                                 @Override
                                 public void accept(String dependency) {
                                     logger.info("prepare dependency {} for {}", dependency, _packageName);
-                                    downloadPackage(dependency, withDependencies, targetDirectory);
+                                    downloadPackage(dependency, withDependencies, targetDirectory, finished);
                                 }
                             });
                         }

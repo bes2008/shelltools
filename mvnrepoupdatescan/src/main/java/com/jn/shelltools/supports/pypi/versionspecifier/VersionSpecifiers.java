@@ -31,7 +31,7 @@ public class VersionSpecifiers {
     public static final String VERSION_EXP_ARBITRARY_EQUALITY = "===";
     public static final String VERSION_EXP_VERSION_MATCHING = "==";
 
-    public static final List<String> VERSION_EXP_SPECIFIERS = Collects.newArrayList(
+    public static final List<String> VERSION_EXP_SPECIFIERS = Collects.immutableArrayList(
             VERSION_EXP_COMPATIBLE_RELEASE,
             VERSION_EXP_VERSION_EXCLUSION,
             VERSION_EXP_INCLUSIVE_COMPARISON_LESS_THAN,
@@ -47,6 +47,15 @@ public class VersionSpecifiers {
             @Override
             public boolean test(String specifier) {
                 return !expression.startsWith(specifier);
+            }
+        });
+    }
+
+    public static final boolean versionAbsent(String packageName){
+        return Pipeline.of(VERSION_EXP_SPECIFIERS).allMatch(new Predicate<String>() {
+            @Override
+            public boolean test(String s) {
+                return !packageName.contains(s);
             }
         });
     }

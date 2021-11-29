@@ -35,6 +35,7 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
                     // 查找 setup.cfg, setup.py, metadata 等文件，然后解析
                     List<String> dependencies= parseDependencies(pypiArtifact, tmpExpandDir);
                     Files.deleteDirectory(new File(tmpExpandDir));
+                    return dependencies;
                 }
             }catch (Throwable ex){
                 LoggerFactory.getLogger(getClass()).error(ex.getMessage(),ex);

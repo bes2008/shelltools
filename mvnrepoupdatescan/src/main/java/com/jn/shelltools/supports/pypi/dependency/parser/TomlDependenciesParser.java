@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import com.jayway.jsonpath.JsonPath;
 import com.jn.easyjson.core.JSONBuilderProvider;
+import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
@@ -30,6 +31,7 @@ class TomlDependenciesParser implements DependenciesParser {
 
     @Override
     public List<String> parse(File file) {
+        Preconditions.checkNotNull(file,"required argument: file");
         try {
             JsonNode jsonNode = new TomlMapper().readTree(file);
             String json = JSONBuilderProvider.create().prettyFormat(true).build().toJson(jsonNode);

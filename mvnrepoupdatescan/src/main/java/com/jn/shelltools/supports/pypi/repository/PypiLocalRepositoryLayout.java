@@ -20,10 +20,11 @@ public class PypiLocalRepositoryLayout implements ArtifactRepositoryLayout {
         path = this.addSegment(path, artifact.getArtifactId());
         // 文件：
         if (Strings.isNotEmpty(artifact.getVersion())) {
-            path = this.addSegment(path, artifact.getArtifactId() + "-" + artifact.getVersion() + (Objs.isEmpty(artifact.getClassifier()) ? "" : "." + artifact.getClassifier()) + "." + artifact.getExtension());
+            path = this.addSegment(path, artifact.getVersion());
+            path = this.addSegment(path, artifact.getArtifactId() + "-" + artifact.getVersion() + (Objs.isEmpty(artifact.getClassifier()) ? "" : "-" + artifact.getClassifier()) + "." + artifact.getExtension());
         }
         else{
-            path = this.addSegment(path, artifact.getArtifactId() + (Objs.isEmpty(artifact.getClassifier()) ? "" : "." + artifact.getClassifier()) + "." + artifact.getExtension());
+            path = this.addSegment(path, artifact.getArtifactId() + (Objs.isEmpty(artifact.getClassifier()) ? "" : "-" + artifact.getClassifier()) + "." + artifact.getExtension());
         }
         return path;
     }

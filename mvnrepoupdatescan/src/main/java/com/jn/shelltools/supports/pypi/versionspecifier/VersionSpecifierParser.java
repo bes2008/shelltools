@@ -1,14 +1,19 @@
 package com.jn.shelltools.supports.pypi.versionspecifier;
 
 import com.jn.langx.Parser;
+import com.jn.langx.util.Objs;
 import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.boundary.CommonExpressionBoundary;
+import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.comparator.IntegerComparator;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Predicate;
 import com.jn.langx.util.struct.pair.NameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 参考官方规范：
@@ -42,11 +47,11 @@ public class VersionSpecifierParser implements Parser<String, NameValuePair<Comm
             versionedPackageName = Strings.trim(versionedPackageName.substring(0, rightBracketIndex));
         }
 
-
+        // 替换掉(
+        versionedPackageName = Strings.replace(versionedPackageName, "(", "");
         // 找到开始位置
         final String _packageName = versionedPackageName;
-        int index = Pipeline.of(VersionSpecifiers.VERSION_EXP_SPECIFIERS)
-                .add("(")
+        List<Integer> indexes = Pipeline.of(VersionSpecifiers.VERSION_EXP_SPECIFIERS)
                 .map(new Function<String, Integer>() {
                     @Override
                     public Integer apply(String specifier) {
@@ -58,7 +63,9 @@ public class VersionSpecifierParser implements Parser<String, NameValuePair<Comm
                     public boolean test(Integer index) {
                         return index > 0;
                     }
-                }).min(new IntegerComparator());
+                }).asList();
+        Preconditions.checkNotEmpty(indexes);
+        int index = Pipeline.of(indexes).min(new IntegerComparator());
 
         String packageName = Strings.trim(versionedPackageName.substring(0, index));
         // 去掉 (

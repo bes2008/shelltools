@@ -55,13 +55,15 @@ public class SetupcfgParser implements DependenciesParser {
             }
 
             Map<String, String> extras_require = ini.getSections().get("options.extras_require");
-            Collects.forEach(extras_require.values(), new Consumer<String>() {
-                @Override
-                public void accept(String requireString) {
-                    List<String> extra_requires = parseDanglingListOrSemicolon(requireString);
-                    dependencies.addAll(extra_requires);
-                }
-            });
+            if(extras_require!=null) {
+                Collects.forEach(extras_require.values(), new Consumer<String>() {
+                    @Override
+                    public void accept(String requireString) {
+                        List<String> extra_requires = parseDanglingListOrSemicolon(requireString);
+                        dependencies.addAll(extra_requires);
+                    }
+                });
+            }
         } catch (Throwable ex) {
             logger.error(ex.getMessage(), ex);
         }

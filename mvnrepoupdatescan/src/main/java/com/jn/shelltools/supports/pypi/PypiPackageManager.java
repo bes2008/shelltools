@@ -31,6 +31,7 @@ import com.jn.shelltools.supports.pypi.dependency.RequirementsArtifact;
 import com.jn.shelltools.supports.pypi.packagemetadata.PipPackageMetadata;
 import com.jn.shelltools.supports.pypi.packagemetadata.PipPackageRelease;
 import com.jn.shelltools.supports.pypi.versionspecifier.VersionSpecifierParser;
+import com.jn.shelltools.supports.pypi.versionspecifier.VersionSpecifiers;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.Selectors;
@@ -70,9 +71,16 @@ public class PypiPackageManager implements LocalPackageScanner {
      * @param targetDirectory
      */
     public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory) {
-        VersionSpecifierParser parser = new VersionSpecifierParser();
-        NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
-        String packageName = parsedResult.getName();
+        String packageName = null;
+        CommonExpressionBoundary versionBoundary = null;
+        if(VersionSpecifiers.versionAbsent(versionedPackageName)){
+            packageName = versionedPackageName;
+        }else {
+            VersionSpecifierParser parser = new VersionSpecifierParser();
+            NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
+            packageName = parsedResult.getName();
+            versionBoundary = parsedResult.getValue();
+        }
         PipPackageMetadata packageMetadata = null;
         try {
             packageMetadata = metadataManager.getOfficialMetadata(packageName);
@@ -80,10 +88,11 @@ public class PypiPackageManager implements LocalPackageScanner {
             throw Throwables.wrapAsRuntimeException(ex);
         }
         if (packageMetadata == null) {
-            throw new IllegalParameterException(StringTemplates.formatWithPlaceholder("package ({}) is not exists", packageName));
+            logger.error(StringTemplates.formatWithPlaceholder("package ({}) is not exists", packageName));
+            return;
         }
 
-        CommonExpressionBoundary versionBoundary = parsedResult.getValue();
+
         List<String> versions = selectVersions(packageMetadata, versionBoundary);
         logger.info("selected {} versions: {}", packageName, Strings.join(",", versions));
 
@@ -91,6 +100,7 @@ public class PypiPackageManager implements LocalPackageScanner {
         // 将 pypi 仓库官方提供的 metadata 写到本地仓库中，文件名格式: <dist>_<version>_metadata.json
 
         // key: version, values: artifacts
+        String _packageName = packageName;
         List<Pair<String, List<PypiArtifact>>> versionArtifacts = Pipeline.of(versions)
                 .map(new Function<String, Pair<String, List<PypiArtifact>>>() {
                     @Override
@@ -100,7 +110,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                                 .map(new Function<PipPackageRelease, PypiArtifact>() {
                                     @Override
                                     public PypiArtifact apply(PipPackageRelease pipPackageRelease) {
-                                        PypiArtifact artifact = Pypis.gaussFileArtifact(pipPackageRelease.getFilename(), packageName, version, pipPackageRelease.getPackagetype());
+                                        PypiArtifact artifact = Pypis.gaussFileArtifact(pipPackageRelease.getFilename(), _packageName, version, pipPackageRelease.getPackagetype());
                                         artifact.setRelease(pipPackageRelease);
                                         artifact.setSupportSynchronized(true);
                                         return artifact;
@@ -182,6 +192,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                             Collects.forEach(requirements, new Consumer<String>() {
                                 @Override
                                 public void accept(String dependency) {
+                                    logger.info("prepare dependency {} for {}", dependency, _packageName);
                                     downloadPackage(dependency, withDependencies, targetDirectory);
                                 }
                             });

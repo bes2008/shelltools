@@ -36,8 +36,12 @@ public class PypiCommands {
             @ShellOption(value = "--package") String packageName) {
 
         PipPackageMetadata metadata = pypiPackageMetadataManager.getOfficialMetadata(packageName);
-        JSON json = JSONBuilderProvider.create().prettyFormat(true).serializeNulls(true).build();
-        System.out.println(json.toJson(metadata));
+        if(metadata!=null) {
+            JSON json = JSONBuilderProvider.create().prettyFormat(true).serializeNulls(true).build();
+            System.out.println(json.toJson(metadata));
+        }else{
+            System.out.printf("package not exist");
+        }
     }
 
     @ShellMethod(key = "pip download", value = "download a package (and its dependencies) to the out directory")

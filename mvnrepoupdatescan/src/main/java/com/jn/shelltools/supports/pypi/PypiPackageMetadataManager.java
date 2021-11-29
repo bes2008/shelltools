@@ -60,7 +60,7 @@ public class PypiPackageMetadataManager extends RequirementsManager {
             }
 
         } catch (Throwable ex) {
-            logger.error(ex.getMessage(), ex);
+            logger.error("error get metadata for {} from official, {},", packageName, ex.getMessage(), ex);
         }
 
         return metadata;

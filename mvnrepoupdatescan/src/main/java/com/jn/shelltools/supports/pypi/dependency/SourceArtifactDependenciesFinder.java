@@ -86,7 +86,10 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
                 });
 
         File pyprojectFile = files.isEmpty() ? null : files.get(0);
-        return new PyprojectParser().parse(pyprojectFile);
+        if(pyprojectFile!=null) {
+            return new PyprojectParser().parse(pyprojectFile);
+        }
+        return null;
     }
 
     private List<String> parseSetupcfg(PypiArtifact pypiArtifact, String tmpExpandDir){

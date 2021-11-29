@@ -6,6 +6,7 @@ import com.jn.langx.io.resource.FileResource;
 import com.jn.langx.io.resource.Resources;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Predicate2;
+import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.io.file.FileFilter;
 import com.jn.langx.util.io.file.FileFilters;
 import com.jn.langx.util.io.file.Filenames;
@@ -30,11 +31,12 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
 
     @Override
     protected String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject) {
+        Expander expander = null;
         try {
             File localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
             FileResource resource = Resources.loadFileResource(localTempFile);
 
-            Expander expander = AutowiredArchiveSuiteFactory.getInstance().get("zip", resource.getInputStream());
+            expander = AutowiredArchiveSuiteFactory.getInstance().get("zip", resource.getInputStream());
             expander.setOverwriteExistsFiles(true);
 
             String dirname = Filenames.extractFilename(localTempFile.getAbsolutePath(), false);
@@ -44,6 +46,8 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
             return tmpExpandDir.getAbsolutePath();
         } catch (Throwable ex) {
             LoggerFactory.getLogger(WheelArtifactDependenciesFinder.class).error(ex.getMessage(), ex);
+        }finally {
+            IOs.close(expander);
         }
         return null;
     }

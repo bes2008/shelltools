@@ -16,7 +16,7 @@ public class PypiLocalRepositoryLayout implements ArtifactRepositoryLayout {
         if (Strings.isNotEmpty(repository.getBasedir())) {
             path = this.addSegment(path, repository.getBasedir());
         }
-        // 把 aritfactId 作为目录
+        // 把 artifactId 作为目录
         path = this.addSegment(path, artifact.getArtifactId());
         // 文件：
         if (Strings.isNotEmpty(artifact.getVersion())) {

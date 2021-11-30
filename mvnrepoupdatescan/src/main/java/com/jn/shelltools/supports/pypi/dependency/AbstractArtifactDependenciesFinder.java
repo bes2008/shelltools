@@ -62,9 +62,11 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
             String destFilepath = tmpdir + "/" + filename;
             FileObject destFile = getArtifactManager().getFileSystemManager().resolveFile(destFilepath);
             destFile.copyFrom(fileObject, Selectors.SELECT_SELF);
-
-            // 解压依赖，返回解压后的目录
-            String tmpArtifactDir = expandArtifact(pypiArtifact, destFile);
+            String tmpArtifactDir = null;
+            if (destFile.getContent().getSize() > 0) {
+                // 解压依赖，返回解压后的目录
+                tmpArtifactDir = expandArtifact(pypiArtifact, destFile);
+            }
             // 删除临时文件
             destFile.delete(Selectors.SELECT_SELF);
             return tmpArtifactDir;

@@ -5,6 +5,7 @@ import com.jn.langx.util.Objs;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.function.Predicate;
 import com.jn.langx.util.struct.Pair;
 import com.jn.shelltools.supports.pypi.PypiArtifact;
 
@@ -32,7 +33,7 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
                 });
     }
 
-    public DefaultArtifactsDependenciesFinder(){
+    public DefaultArtifactsDependenciesFinder() {
         addArtifactDependenciesFinder(new SourceArtifactDependenciesFinder());
         addArtifactDependenciesFinder(new WheelArtifactDependenciesFinder());
     }
@@ -41,6 +42,8 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
     public ArtifactManager getArtifactManager() {
         return artifactManager;
     }
+
+    private List<String> invalid_chars = Collects.newArrayList("[", "]");
 
     @Override
     public List<String> get(Pair<String, List<PypiArtifact>> versionArtifactsPair) {
@@ -53,9 +56,21 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
                 ArtifactDependenciesFinder delegate = delegates.get(extension);
                 if (delegate != null) {
                     List<String> deps = delegate.get(artifact);
-                    if (!Objs.isEmpty(deps)) {
-                        dependencies.addAll(deps);
-                    }
+                    Collects.forEach(deps, new Consumer<String>() {
+                        @Override
+                        public void accept(String dep) {
+                            if (Collects.noneMatch(invalid_chars, new Predicate<String>() {
+                                @Override
+                                public boolean test(String invalid) {
+                                    return dep.contains(invalid);
+                                }
+                            })) {
+                                dependencies.add(dep);
+                            } else {
+                                System.out.printf("invalid dep: " + dep);
+                            }
+                        }
+                    });
                 }
             }
         });

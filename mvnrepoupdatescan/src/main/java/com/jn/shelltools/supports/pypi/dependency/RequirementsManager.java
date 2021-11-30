@@ -2,6 +2,7 @@ package com.jn.shelltools.supports.pypi.dependency;
 
 import com.jn.agileway.vfs.artifact.Artifact;
 import com.jn.agileway.vfs.artifact.ArtifactManager;
+import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.langx.io.resource.InputStreamResource;
 import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
@@ -31,7 +32,7 @@ public class RequirementsManager implements DependenciesFinder<Artifact> {
         InputStream inputStream = null;
         try {
             FileObject fileObject = artifactManager.getArtifactFile(artifact);
-            if (!fileObject.exists()) {
+            if (!FileObjects.isExists(fileObject)) {
                 return null;
             }
 
@@ -49,7 +50,7 @@ public class RequirementsManager implements DependenciesFinder<Artifact> {
         OutputStream out = null;
         try {
             FileObject fileObject = artifactManager.getArtifactFile(artifact);
-            if (!fileObject.exists()) {
+            if (!FileObjects.isExists(fileObject)) {
                 fileObject.getParent().createFolder();
                 fileObject.createFile();
             }

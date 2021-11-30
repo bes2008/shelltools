@@ -10,6 +10,16 @@ public class PackageGAV implements IGAV {
     private String artifactId;
     private String version;
 
+    public PackageGAV(){
+
+    }
+
+    public PackageGAV(String groupId, String artifactId, String version){
+        setGroupId(groupId);
+        setArtifactId(artifactId);
+        setVersion(version);
+    }
+
     @Override
     public String getGroupId() {
         return groupId;

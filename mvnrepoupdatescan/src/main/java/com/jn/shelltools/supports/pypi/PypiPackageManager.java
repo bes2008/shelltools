@@ -77,7 +77,7 @@ public class PypiPackageManager implements LocalPackageScanner {
      * @param withDependencies
      * @param targetDirectory
      */
-    public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory, Map<String, Holder<List<PypiArtifact>>> finished) {
+    public boolean downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory, Map<String, Holder<List<PypiArtifact>>> finished) {
         String packageName = null;
         CommonExpressionBoundary versionBoundary = null;
         if (VersionSpecifiers.versionAbsent(versionedPackageName)) {
@@ -96,7 +96,7 @@ public class PypiPackageManager implements LocalPackageScanner {
         }
         if (packageMetadata == null) {
             logger.error(StringTemplates.formatWithPlaceholder("package ({}) is not exists", packageName));
-            return;
+            return false;
         }
 
 
@@ -104,7 +104,6 @@ public class PypiPackageManager implements LocalPackageScanner {
         logger.info("selected {} versions: {}", packageName, Strings.join(",", versions));
 
         PipPackageMetadata _packageMetadata = packageMetadata;
-        // 将 pypi 仓库官方提供的 metadata 写到本地仓库中，文件名格式: <dist>_<version>_metadata.json
 
         // key: version, values: artifacts
         String _packageName = packageName;
@@ -147,6 +146,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                             public void accept(PypiArtifact pypiArtifact) {
                                 List<PypiArtifact> finishedArtifacts = finished.get(versionArtifactPair.getKey()).get();
                                 if (!finishedArtifacts.contains(pypiArtifact)) {
+                                    finishedArtifacts.add(pypiArtifact);
                                     // 获取或者下载
                                     FileObject fileObject = null;
                                     try {
@@ -212,6 +212,8 @@ public class PypiPackageManager implements LocalPackageScanner {
                         }
                     }
                 });
+
+        return true;
     }
 
     private List<String> selectVersions(PipPackageMetadata packageMetadata, CommonExpressionBoundary versionBoundary) {

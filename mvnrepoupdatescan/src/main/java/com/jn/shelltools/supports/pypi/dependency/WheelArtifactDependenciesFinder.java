@@ -4,6 +4,7 @@ import com.jn.agileway.zip.archive.AutowiredArchiveSuiteFactory;
 import com.jn.agileway.zip.archive.Expander;
 import com.jn.langx.io.resource.FileResource;
 import com.jn.langx.io.resource.Resources;
+import com.jn.langx.util.Objs;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Predicate2;
 import com.jn.langx.util.io.IOs;
@@ -12,6 +13,7 @@ import com.jn.langx.util.io.file.FileFilters;
 import com.jn.langx.util.io.file.Filenames;
 import com.jn.langx.util.io.file.Files;
 import com.jn.langx.util.io.file.filter.*;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.shelltools.supports.pypi.PypiArtifact;
 import com.jn.shelltools.supports.pypi.Pypis;
 import com.jn.shelltools.supports.pypi.dependency.parser.PkginfoParser;
@@ -35,7 +37,7 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
         try {
             File localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
             FileResource resource = Resources.loadFileResource(localTempFile);
-
+            Loggers.getLogger(WheelArtifactDependenciesFinder.class).info("expand {}", localTempFile.getName());
             expander = AutowiredArchiveSuiteFactory.getInstance().get("zip", resource.getInputStream());
             expander.setOverwriteExistsFiles(true);
 
@@ -84,7 +86,10 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
                     }
                 });
 
-        File metadataFile = files.isEmpty() ? null : files.get(0);
+        if(Objs.isEmpty(files)){
+            return null;
+        }
+        File metadataFile = files.get(0);
         return new PkginfoParser().parse(metadataFile);
     }
 }

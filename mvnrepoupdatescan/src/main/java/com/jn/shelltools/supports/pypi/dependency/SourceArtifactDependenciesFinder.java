@@ -32,7 +32,7 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
         try {
             File localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
             FileResource resource = Resources.loadFileResource(localTempFile);
-
+            Loggers.getLogger(SourceArtifactDependenciesFinder.class).info("expand {}", localTempFile.getName());
             expander = AutowiredArchiveSuiteFactory.getInstance().get(pypiArtifact.getExtension(), resource.getInputStream());
             expander.setOverwriteExistsFiles(true);
 
@@ -113,7 +113,10 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
                     }
                 });
 
-        File setupcfgFile = files.isEmpty() ? null : files.get(0);
+        if(Objs.isEmpty(files)){
+            return null;
+        }
+        File setupcfgFile = files.get(0);
         return new SetupcfgParser().parse(setupcfgFile);
     }
 }

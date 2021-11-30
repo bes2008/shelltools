@@ -33,24 +33,27 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
                 String tmpExpandDir = expandArtifact(pypiArtifact);
                 if (Strings.isNotEmpty(tmpExpandDir)) {
                     // 查找 setup.cfg, setup.py, metadata 等文件，然后解析
-                    List<String> dependencies= parseDependencies(pypiArtifact, tmpExpandDir);
+                    List<String> dependencies = parseDependencies(pypiArtifact, tmpExpandDir);
                     Files.deleteDirectory(new File(tmpExpandDir));
                     return dependencies;
                 }
-            }catch (Throwable ex){
-                LoggerFactory.getLogger(getClass()).error(ex.getMessage(),ex);
+            } catch (Throwable ex) {
+                LoggerFactory.getLogger(getClass()).error(ex.getMessage(), ex);
             }
         }
         return null;
     }
 
-    protected boolean isArchive(PypiArtifact pypiArtifact){
+    protected boolean isArchive(PypiArtifact pypiArtifact) {
         return true;
     }
 
     protected String expandArtifact(PypiArtifact pypiArtifact) throws Throwable {
         FileObject fileObject = null;
         fileObject = getArtifactManager().getArtifactFile(pypiArtifact);
+        if (fileObject == null) {
+            return null;
+        }
         if (fileObject.exists()) {
 
             // 将 依赖包copy到 tmp 目录下

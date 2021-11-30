@@ -11,6 +11,7 @@ import com.jn.shelltools.supports.pypi.PypiArtifact;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class DefaultArtifactsDependenciesFinder implements ArtifactsDependenciesFinder {
 
@@ -43,11 +44,10 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
         return artifactManager;
     }
 
-    private List<String> invalid_chars = Collects.newArrayList("[", "]");
 
     @Override
-    public List<String> get(Pair<String, List<PypiArtifact>> versionArtifactsPair) {
-        List<PypiArtifact> artifacts = versionArtifactsPair.getValue();
+    public List<String> get(Pair<String, Set<PypiArtifact>> versionArtifactsPair) {
+        Set<PypiArtifact> artifacts = versionArtifactsPair.getValue();
         final List<String> dependencies = Collects.emptyArrayList();
         Collects.forEach(artifacts, new Consumer<PypiArtifact>() {
             @Override
@@ -59,16 +59,12 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
                     Collects.forEach(deps, new Consumer<String>() {
                         @Override
                         public void accept(String dep) {
-                            if (Collects.noneMatch(invalid_chars, new Predicate<String>() {
-                                @Override
-                                public boolean test(String invalid) {
-                                    return dep.contains(invalid);
-                                }
-                            })) {
-                                dependencies.add(dep);
-                            } else {
-                                System.out.printf("invalid dep: " + dep);
+                            dep = dep.replaceAll("(.*)(\\[.*]?)(.*)", "$1$3");
+                            if(dep.contains("[")){
+                                System.out.printf("1");
                             }
+
+                            dependencies.add(dep);
                         }
                     });
                 }

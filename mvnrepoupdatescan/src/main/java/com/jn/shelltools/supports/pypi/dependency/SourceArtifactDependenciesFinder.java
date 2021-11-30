@@ -10,6 +10,7 @@ import com.jn.langx.util.function.Predicate2;
 import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.io.file.FileFilter;
 import com.jn.langx.util.io.file.FileFilters;
+import com.jn.langx.util.io.file.Filenames;
 import com.jn.langx.util.io.file.Files;
 import com.jn.langx.util.io.file.filter.*;
 import com.jn.langx.util.logging.Loggers;
@@ -36,7 +37,8 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
             expander = AutowiredArchiveSuiteFactory.getInstance().get(pypiArtifact.getExtension(), resource.getInputStream());
             expander.setOverwriteExistsFiles(true);
 
-            File tmpExpandDir = new File(localTempFile.getParentFile(), pypiArtifact.getArtifactId());
+            String dirname = localTempFile.getName().replace('.','_');
+            File tmpExpandDir = new File(localTempFile.getParentFile(), dirname);
             expander.expandTo(tmpExpandDir);
 
             return tmpExpandDir.getAbsolutePath();

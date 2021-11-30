@@ -41,7 +41,7 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
             expander = AutowiredArchiveSuiteFactory.getInstance().get("zip", resource.getInputStream());
             expander.setOverwriteExistsFiles(true);
 
-            String dirname = Filenames.extractFilename(localTempFile.getAbsolutePath(), false);
+            String dirname = localTempFile.getName().replace('.','_');
             File tmpExpandDir = new File(localTempFile.getParentFile(), dirname);
             expander.expandTo(tmpExpandDir);
             expander.close();

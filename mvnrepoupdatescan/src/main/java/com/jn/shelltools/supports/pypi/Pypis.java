@@ -100,6 +100,9 @@ public class Pypis {
                 return Strings.endsWith(_str, extension, true);
             }
         });
+        if(Strings.isBlank(str) || Strings.isBlank(extension)){
+            System.out.printf("1");
+        }
         str = str.substring(0, str.length() - extension.length());
         if (Strings.endsWith(str, ".")) {
             str = str.substring(0, str.length() - 1);

@@ -3,6 +3,7 @@ package com.jn.shelltools.supports.pypi.versionspecifier;
 import com.jn.langx.exception.IllegalParameterException;
 import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Preconditions;
+import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.LinkedCaseInsensitiveMap;
 import com.jn.langx.util.collection.MapAccessor;
@@ -56,6 +57,19 @@ public class VersionSpecifiers {
             @Override
             public boolean test(String s) {
                 return !packageName.contains(s);
+            }
+        });
+    }
+
+    public static final boolean versionedPackageName(String packageName){
+        if(Strings.isBlank(packageName)){
+            return false;
+        }
+        return Pipeline.of(VERSION_EXP_SPECIFIERS).anyMatch(new Predicate<String>() {
+            @Override
+            public boolean test(String s) {
+                String reg = ".+(\\s*"+s+").*";
+                return packageName.matches(reg);
             }
         });
     }

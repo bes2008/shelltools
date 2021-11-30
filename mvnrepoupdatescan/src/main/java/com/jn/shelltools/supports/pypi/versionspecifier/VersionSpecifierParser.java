@@ -64,7 +64,9 @@ public class VersionSpecifierParser implements Parser<String, NameValuePair<Comm
                         return index > 0;
                     }
                 }).asList();
-        Preconditions.checkNotEmpty(indexes);
+        if(Objs.isEmpty(indexes)){
+            System.out.printf("1");
+        }
         int index = Pipeline.of(indexes).min(new IntegerComparator());
 
         String packageName = Strings.trim(versionedPackageName.substring(0, index));

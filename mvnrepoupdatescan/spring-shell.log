@@ -17,3 +17,5 @@
 1638171855026:pip download --package build>=0.7.0
 1638171859619:stacktrace
 1638171898106:pip download --package build>=0.7.0
+1638243318827:pip download --package C:\\Users\\Administrator\\IdeaProjects\\shelltools\\mvnrepoupdatescan\\src\\test\\resources\\pypi\\tests\\requirements-1.txt
+1638243354118:pip download --package C:/Users/Administrator/IdeaProjects/shelltools/mvnrepoupdatescan/src/test/resources/pypi/tests/requirements-1.txt

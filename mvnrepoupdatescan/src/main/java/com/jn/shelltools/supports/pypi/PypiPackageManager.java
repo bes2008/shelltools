@@ -226,9 +226,9 @@ public class PypiPackageManager implements LocalPackageScanner {
                                         finder.setArtifactManager(artifactManager);
                                         // 从 所有的 .tar.gz, .zip, .whl, .egg 介质中找依赖
                                         requirements = finder.get(versionArtifactPair);
-                                    }
-                                    if (Objs.isNotEmpty(requirements)) {
-                                        metadataManager.save(requirementsArtifact, requirements);
+                                        if (Objs.isNotNull(requirements)) {
+                                            metadataManager.save(requirementsArtifact, requirements);
+                                        }
                                     }
                                     Collects.forEach(requirements, new Consumer<String>() {
                                         @Override

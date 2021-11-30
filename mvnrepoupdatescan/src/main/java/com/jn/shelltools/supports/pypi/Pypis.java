@@ -28,12 +28,20 @@ public class Pypis {
     public static final String PACKAGE_TYPE_BINARY_WHEEL = "bdist_wheel";
     public static final String PACKAGE_TYPE_BINARY_EGG = "bdist_egg";
     public static final String PACKAGE_TYPE_BINARY_MSI = "bdist_msi";
+    public static final String PACKAGE_TYPE_BINARY_EXE = "bdist_wininst";
+    public static final String PACKAGE_TYPE_BINARY_RPM = "bdist_rpm";
+    public static final String PACKAGE_TYPE_BINARY_HPUX_RPM = "bdist_sdux";
+    public static final String PACKAGE_TYPE_BINARY_SOLARIS_RPM = "bdist_pkgtool";
 
     public static final String ARCHIVE_EXTENSION_ZIP = "zip";
     public static final String ARCHIVE_EXTENSION_TAR_GZ = "tar.gz";
+    public static final String ARCHIVE_EXTENSION_TAR_BZ2 = "tar.bz2";
+    public static final String ARCHIVE_EXTENSION_TAR_XZ = "tar.xz";
     public static final String ARCHIVE_EXTENSION_WHEEL = "whl";
+    public static final String ARCHIVE_EXTENSION_EXE = "exe";
     public static final String ARCHIVE_EXTENSION_EGG = "egg";
     public static final String ARCHIVE_EXTENSION_MSI = "msi";
+    public static final String ARCHIVE_EXTENSION_RPM = "rpm";
 
     static {
         /**
@@ -41,21 +49,32 @@ public class Pypis {
          */
         packageTypeToFileExtensions.add(PACKAGE_TYPE_SOURCE, ARCHIVE_EXTENSION_ZIP);
         packageTypeToFileExtensions.add(PACKAGE_TYPE_SOURCE, ARCHIVE_EXTENSION_TAR_GZ);
-
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_SOURCE, ARCHIVE_EXTENSION_TAR_BZ2);
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_SOURCE, ARCHIVE_EXTENSION_TAR_XZ);
         /**
          * wheel 二进制包
          */
-        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_WHEEL, "whl");
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_WHEEL, ARCHIVE_EXTENSION_WHEEL);
 
         /**
          * egg 二进制包
          */
-        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_EGG, "egg");
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_EGG, ARCHIVE_EXTENSION_EGG);
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_EGG, ARCHIVE_EXTENSION_RPM);
 
         /**
          * windows 专用 二进制包
          */
-        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_MSI, "msi");
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_MSI, ARCHIVE_EXTENSION_MSI);
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_EXE, ARCHIVE_EXTENSION_EXE);
+
+        /**
+         * rpm包
+         */
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_RPM, ARCHIVE_EXTENSION_RPM);
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_HPUX_RPM, ARCHIVE_EXTENSION_RPM);
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_SOLARIS_RPM, ARCHIVE_EXTENSION_RPM);
+
     }
 
     public static Collection<String> getFileExtensions(String packageType) {
@@ -100,8 +119,8 @@ public class Pypis {
                 return Strings.endsWith(_str, extension, true);
             }
         });
-        if(Strings.isBlank(str) || Strings.isBlank(extension)){
-            System.out.printf("1");
+        if (Strings.isBlank(str) || Strings.isBlank(extension)) {
+            System.out.println("不能识别的扩展名：" + extension);
         }
         str = str.substring(0, str.length() - extension.length());
         if (Strings.endsWith(str, ".")) {

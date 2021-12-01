@@ -63,7 +63,11 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
                             if(dep.contains("[")){
                                 System.out.printf("1");
                             }
-
+                            // 移除 #
+                            int index = dep.indexOf("#");
+                            if(index>-1){
+                                dep = dep.substring(0, index);
+                            }
                             dependencies.add(dep);
                         }
                     });

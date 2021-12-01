@@ -163,16 +163,17 @@ public class PypiPackageManager implements LocalPackageScanner {
                     .forEach(new java.util.function.Consumer<Pair<String, Set<PypiArtifact>>>() {
                         @Override
                         public void accept(Pair<String, Set<PypiArtifact>> versionArtifactPair) {
-                            PackageGAV pypiPackageGAV = new PackageGAV(_packageName, _packageName, versionArtifacts.get(0).getKey());
+                            String packageVersion = versionArtifactPair.getKey();
+                            PackageGAV pypiPackageGAV = new PackageGAV(_packageName, _packageName, packageVersion);
                             if (!downloading.containsKey(pypiPackageGAV)) {
                                 downloading.put(pypiPackageGAV, 1);
                                 Set<PypiArtifact> artifacts = versionArtifactPair.getValue();
-                                finished.putIfAbsent(versionArtifactPair.getKey(), new Holder<>(Collects.emptyArrayList()));
+                                finished.putIfAbsent(packageVersion, new Holder<>(Collects.emptyArrayList()));
                                 // 逐个下载 该版本的所有
                                 Collects.forEach(artifacts, new Consumer<PypiArtifact>() {
                                     @Override
                                     public void accept(PypiArtifact pypiArtifact) {
-                                        List<PypiArtifact> finishedArtifacts = finished.get(versionArtifactPair.getKey()).get();
+                                        List<PypiArtifact> finishedArtifacts = finished.get(packageVersion).get();
                                         if (!finishedArtifacts.contains(pypiArtifact)) {
                                             finishedArtifacts.add(pypiArtifact);
                                             // 获取或者下载
@@ -233,7 +234,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                                     Collects.forEach(requirements, new Consumer<String>() {
                                         @Override
                                         public void accept(String dependency) {
-                                            logger.info("prepare dependency {} for {}", dependency, _packageName);
+                                            logger.info("prepare dependency {} for {} {}", dependency, _packageName, packageVersion);
                                             downloadPackage(dependency, withDependencies, targetDirectory, finished);
                                         }
                                     });

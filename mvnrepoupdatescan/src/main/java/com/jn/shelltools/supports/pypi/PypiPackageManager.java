@@ -89,7 +89,8 @@ public class PypiPackageManager implements LocalPackageScanner {
         } else {
             versionedPackageName = VersionSpecifiers.extractPackageName(versionedPackageName);
         }
-        if (Strings.isBlank(versionedPackageName)) { finished.put(versionedPackageName, new Holder<>());
+        if (Strings.isBlank(versionedPackageName)) {
+            finished.put(versionedPackageName, new Holder<>());
             logger.error("invalid package name {}", versionedPackageName);
             return false;
         }
@@ -99,15 +100,18 @@ public class PypiPackageManager implements LocalPackageScanner {
             if (VersionSpecifiers.versionedPackageName(versionedPackageName)) {
                 VersionSpecifierParser parser = new VersionSpecifierParser();
                 NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
-                packageName = parsedResult.getName();
-                versionBoundary = parsedResult.getValue();
-            } else { finished.put(versionedPackageName, new Holder<>());
+                if(parsedResult!=null) {
+                    packageName = parsedResult.getName();
+                    versionBoundary = parsedResult.getValue();
+                }
+            } else {
+                finished.put(versionedPackageName, new Holder<>());
                 logger.error("invalid package name {}", versionedPackageName);
                 return false;
             }
         }
         PipPackageMetadata packageMetadata = null;
-        if (Strings.isBlank(packageName)) {
+        if (Strings.isBlank(packageName) || versionBoundary==null) {
             logger.error("invalid package name {}", versionedPackageName);
             return false;
         }
@@ -119,7 +123,7 @@ public class PypiPackageManager implements LocalPackageScanner {
         }
         if (packageMetadata == null) {
             logger.error(StringTemplates.formatWithPlaceholder("package ({}) is not exists", packageName));
-            finished.put(versionedPackageName,new Holder<>());
+            finished.put(versionedPackageName, new Holder<>());
             finished.put(packageName, new Holder<>());
             return false;
         }
@@ -258,7 +262,7 @@ public class PypiPackageManager implements LocalPackageScanner {
 
         }
         finished.put(_packageName, new Holder<>());
-        finished.put(versionedPackageName,new Holder<>());
+        finished.put(versionedPackageName, new Holder<>());
         return true;
     }
 

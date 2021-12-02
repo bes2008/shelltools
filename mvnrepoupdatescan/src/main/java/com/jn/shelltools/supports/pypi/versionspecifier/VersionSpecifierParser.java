@@ -66,6 +66,7 @@ public class VersionSpecifierParser implements Parser<String, NameValuePair<Comm
                 }).asList();
         if(Objs.isEmpty(indexes)){
             System.out.printf("1");
+            return null;
         }
         int index = Pipeline.of(indexes).min(new IntegerComparator());
 

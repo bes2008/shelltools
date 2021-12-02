@@ -80,12 +80,16 @@ public class PypiPackageManager implements LocalPackageScanner {
     public boolean downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory, Map<String, Holder<List<PypiArtifact>>> finished) {
         String packageName = null;
         CommonExpressionBoundary versionBoundary = null;
-        if (Strings.isBlank(versionedPackageName)) {
+        if (Strings.isBlank(versionedPackageName) || Strings.isBlank(VersionSpecifiers.extractPackageName(versionedPackageName))) {
             logger.error("invalid package name {}", versionedPackageName);
+            if (Strings.isNotBlank(versionedPackageName)) {
+                finished.put(versionedPackageName, new Holder<>());
+            }
             return false;
+        } else {
+            versionedPackageName = VersionSpecifiers.extractPackageName(versionedPackageName);
         }
-        versionedPackageName = versionedPackageName.replaceAll("(.*)(;.*)", "$1");
-        if (Strings.isBlank(versionedPackageName)) {
+        if (Strings.isBlank(versionedPackageName)) { finished.put(versionedPackageName, new Holder<>());
             logger.error("invalid package name {}", versionedPackageName);
             return false;
         }
@@ -97,7 +101,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                 NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
                 packageName = parsedResult.getName();
                 versionBoundary = parsedResult.getValue();
-            } else {
+            } else { finished.put(versionedPackageName, new Holder<>());
                 logger.error("invalid package name {}", versionedPackageName);
                 return false;
             }
@@ -107,6 +111,7 @@ public class PypiPackageManager implements LocalPackageScanner {
             logger.error("invalid package name {}", versionedPackageName);
             return false;
         }
+
         try {
             packageMetadata = metadataManager.getOfficialMetadata(packageName);
         } catch (Throwable ex) {
@@ -114,6 +119,8 @@ public class PypiPackageManager implements LocalPackageScanner {
         }
         if (packageMetadata == null) {
             logger.error(StringTemplates.formatWithPlaceholder("package ({}) is not exists", packageName));
+            finished.put(versionedPackageName,new Holder<>());
+            finished.put(packageName, new Holder<>());
             return false;
         }
 
@@ -168,12 +175,12 @@ public class PypiPackageManager implements LocalPackageScanner {
                             if (!downloading.containsKey(pypiPackageGAV)) {
                                 downloading.put(pypiPackageGAV, 1);
                                 Set<PypiArtifact> artifacts = versionArtifactPair.getValue();
-                                finished.putIfAbsent(packageVersion, new Holder<>(Collects.emptyArrayList()));
+                                finished.putIfAbsent(pypiPackageGAV.toString(), new Holder<>(Collects.emptyArrayList()));
                                 // 逐个下载 该版本的所有
                                 Collects.forEach(artifacts, new Consumer<PypiArtifact>() {
                                     @Override
                                     public void accept(PypiArtifact pypiArtifact) {
-                                        List<PypiArtifact> finishedArtifacts = finished.get(packageVersion).get();
+                                        List<PypiArtifact> finishedArtifacts = finished.get(pypiPackageGAV.toString()).get();
                                         if (!finishedArtifacts.contains(pypiArtifact)) {
                                             finishedArtifacts.add(pypiArtifact);
                                             // 获取或者下载
@@ -234,8 +241,13 @@ public class PypiPackageManager implements LocalPackageScanner {
                                     Collects.forEach(requirements, new Consumer<String>() {
                                         @Override
                                         public void accept(String dependency) {
-                                            logger.info("prepare dependency {} for {} {}", dependency, _packageName, packageVersion);
-                                            downloadPackage(dependency, withDependencies, targetDirectory, finished);
+                                            // 说明 这个依赖 不带有版本号，并且是已经处理过的
+                                            if (!finished.containsKey(dependency)) {
+                                                logger.info("prepare dependency {} for {} {}", dependency, _packageName, packageVersion);
+                                                downloadPackage(dependency, withDependencies, targetDirectory, finished);
+                                            } else {
+                                                System.out.println(dependency);
+                                            }
                                         }
                                     });
                                 }
@@ -245,6 +257,8 @@ public class PypiPackageManager implements LocalPackageScanner {
                     });
 
         }
+        finished.put(_packageName, new Holder<>());
+        finished.put(versionedPackageName,new Holder<>());
         return true;
     }
 

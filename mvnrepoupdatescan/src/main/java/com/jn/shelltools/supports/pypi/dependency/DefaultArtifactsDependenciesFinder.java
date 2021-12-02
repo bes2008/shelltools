@@ -1,13 +1,13 @@
 package com.jn.shelltools.supports.pypi.dependency;
 
 import com.jn.agileway.vfs.artifact.ArtifactManager;
-import com.jn.langx.util.Objs;
+import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
-import com.jn.langx.util.function.Predicate;
 import com.jn.langx.util.struct.Pair;
 import com.jn.shelltools.supports.pypi.PypiArtifact;
+import com.jn.shelltools.supports.pypi.versionspecifier.VersionSpecifiers;
 
 import java.util.List;
 import java.util.Map;
@@ -60,15 +60,10 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
                         @Override
                         public void accept(String dep) {
                             dep = dep.replaceAll("(.*)(\\[.*]?)(.*)", "$1$3");
-                            if(dep.contains("[")){
-                                System.out.printf("1");
+                            dep = VersionSpecifiers.extractPackageName(dep);
+                            if(Strings.isNotBlank(dep)){
+                                dependencies.add(dep);
                             }
-                            // 移除 #
-                            int index = dep.indexOf("#");
-                            if(index>-1){
-                                dep = dep.substring(0, index);
-                            }
-                            dependencies.add(dep);
                         }
                     });
                 }

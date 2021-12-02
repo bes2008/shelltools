@@ -43,6 +43,30 @@ public class VersionSpecifiers {
             VERSION_EXP_VERSION_MATCHING
     );
 
+    public static final String extractPackageName(String packageName){
+        if(Strings.isBlank(packageName)){
+            return null;
+        }
+
+        // 移除 #
+        int index = packageName.indexOf("#");
+        if(index>-1){
+            packageName = packageName.substring(0, index);
+        }
+        index = packageName.indexOf(":");
+        if(index>-1){
+            packageName = packageName.substring(0, index);
+        }
+        index = packageName.indexOf(";");
+        if(index>-1){
+            packageName = packageName.substring(0, index);
+        }
+        if(packageName.startsWith("<") || packageName.startsWith(">") || packageName.startsWith("!") || packageName.startsWith("=")){
+            return null;
+        }
+        return packageName.trim();
+    }
+
     public static final boolean isOmitSpecifier(String expression) {
         return Collects.allMatch(VERSION_EXP_SPECIFIERS, new Predicate<String>() {
             @Override

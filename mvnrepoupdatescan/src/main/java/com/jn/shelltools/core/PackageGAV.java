@@ -1,6 +1,7 @@
 package com.jn.shelltools.core;
 
 import com.jn.agileway.vfs.artifact.IGAV;
+import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Objects;
 import com.jn.langx.util.hash.HashCodeBuilder;
 import com.jn.shelltools.supports.maven.model.MavenGAV;
@@ -69,6 +70,11 @@ public class PackageGAV implements IGAV {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return StringTemplates.formatWithPlaceholder( "{}:{}:{}", groupId, artifactId, version);
     }
 
     @Override

@@ -5,12 +5,16 @@ import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
 import com.jn.langx.util.Strings;
-import com.jn.langx.util.SystemPropertys;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.function.Functions;
+import com.jn.langx.util.function.Predicate;
+import com.jn.shelltools.supports.pypi.PypiArtifact;
 import com.jn.shelltools.supports.pypi.PypiPackageManager;
 import com.jn.shelltools.supports.pypi.PypiPackageMetadataManager;
 import com.jn.shelltools.supports.pypi.dependency.RequirementsManager;
+import com.jn.shelltools.supports.pypi.filter.SourceArtifactPredicate;
+import com.jn.shelltools.supports.pypi.filter.TagsExclusionPredicate;
 import com.jn.shelltools.supports.pypi.packagemetadata.PipPackageMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +25,7 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @ShellComponent
@@ -48,15 +53,25 @@ public class PypiCommands {
     public void downloadPackage(
             @ShellOption(value = "--package", help = "the package name or the requirements file path") String packageName,
             @ShellOption(value = "--with-deps", defaultValue = "true", help = "with its dependencies ?") boolean withDeps,
-            @ShellOption(value = "--out", defaultValue = "__NULL__", help = "the out directory") String outDirectory) {
+            @ShellOption(value = "--source", defaultValue = "true", help = "whether download the source package or not") boolean downloadSource,
+            @ShellOption(value="--exclusion-tags", defaultValue = "macosx,i686,", help="exclusion packages, use comma") String exclusionTags) {
 
-        if (Strings.isBlank(outDirectory)) {
-            outDirectory = SystemPropertys.getUserWorkDir()+"/_tmp_";
+        List<Predicate<PypiArtifact>> predicates = new ArrayList<>();
+
+        if(downloadSource){
+            predicates.add(new SourceArtifactPredicate());
         }
-        final String out = outDirectory;
+        if(Strings.isNotBlank(exclusionTags)){
+            TagsExclusionPredicate predicate= new TagsExclusionPredicate();
+            predicate.setTags(Collects.asList(Strings.split(exclusionTags,",")));
+            predicates.add(predicate);
+        }
+
+        Predicate<PypiArtifact> artifactPredicate = Functions.allPredicate(predicates);
+
         File file = new File(packageName);
         if (!file.exists()) {
-            pypiPackageManager.downloadPackage(packageName, withDeps, out);
+            pypiPackageManager.downloadPackage(packageName, withDeps, artifactPredicate);
         } else {
             Resource resource = Resources.loadFileResource(file);
             List<String> lines = RequirementsManager.readRequirements(resource);
@@ -64,7 +79,7 @@ public class PypiCommands {
                 @Override
                 public void accept(String line) {
                     try {
-                        pypiPackageManager.downloadPackage(line, withDeps, out);
+                        pypiPackageManager.downloadPackage(line, withDeps, artifactPredicate);
                     } catch (Throwable ex) {
                         logger.error(ex.getMessage(), ex);
                     }

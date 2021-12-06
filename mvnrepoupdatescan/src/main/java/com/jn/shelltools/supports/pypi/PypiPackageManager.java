@@ -14,10 +14,7 @@ import com.jn.langx.util.Throwables;
 import com.jn.langx.util.boundary.CommonExpressionBoundary;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
-import com.jn.langx.util.function.Consumer;
-import com.jn.langx.util.function.Function;
-import com.jn.langx.util.function.Predicate;
-import com.jn.langx.util.function.Predicate2;
+import com.jn.langx.util.function.*;
 import com.jn.langx.util.net.URLs;
 import com.jn.langx.util.struct.Holder;
 import com.jn.langx.util.struct.Pair;
@@ -66,8 +63,8 @@ public class PypiPackageManager implements LocalPackageScanner {
         this.artifactManager = artifactManager;
     }
 
-    public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory) {
-        downloadPackage(versionedPackageName, withDependencies, targetDirectory, new ConcurrentHashMap<>());
+    public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, Predicate<PypiArtifact> artifactPredicate) {
+        downloadPackage(versionedPackageName, withDependencies, artifactPredicate, new ConcurrentHashMap<>());
     }
 
     /**
@@ -75,9 +72,10 @@ public class PypiPackageManager implements LocalPackageScanner {
      *
      * @param versionedPackageName
      * @param withDependencies
-     * @param targetDirectory
+     * @param artifactPredicate
      */
-    public boolean downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory, Map<String, Holder<List<PypiArtifact>>> finished) {
+    public boolean downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable final Predicate<PypiArtifact> artifactPredicate, Map<String, Holder<List<PypiArtifact>>> finished) {
+        final Predicate<PypiArtifact> _artifactPredicate = artifactPredicate == null ? Functions.truePredicate():artifactPredicate;
         String packageName = null;
         @Nullable
         CommonExpressionBoundary versionBoundary = null;
@@ -157,6 +155,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                                     }
                                 })
                                 .clearNulls()
+                                .filter(_artifactPredicate)
                                 .asSet(true);
 
                         return new NameValuePair<Set<PypiArtifact>>(version, artifacts);
@@ -198,6 +197,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                                             // 如果已下载成功
                                             if (FileObjects.isExists(fileObject)) {
                                                 // copy 到target 目录
+                                                String targetDirectory=null;
                                                 if (Objs.isNotEmpty(targetDirectory) && false) {
                                                     String targetUrl = targetDirectory;
                                                     if (!Strings.startsWith(targetDirectory, URLs.URL_PREFIX_FILE)) {
@@ -249,7 +249,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                                             // 说明 这个依赖 不带有版本号，并且是已经处理过的
                                             if (!finished.containsKey(dependency)) {
                                                 logger.info("prepare dependency {} for {} {}", dependency, _packageName, packageVersion);
-                                                downloadPackage(dependency, withDependencies, targetDirectory, finished);
+                                                downloadPackage(dependency, withDependencies, _artifactPredicate, finished);
                                             } else {
                                                 System.out.println(dependency);
                                             }
@@ -322,4 +322,7 @@ public class PypiPackageManager implements LocalPackageScanner {
     public Map<PackageGAV, PackageArtifact> scan(String path, Filter<PackageArtifact> filter) {
         return null;
     }
+
+
+
 }

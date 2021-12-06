@@ -79,6 +79,7 @@ public class PypiPackageManager implements LocalPackageScanner {
      */
     public boolean downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable String targetDirectory, Map<String, Holder<List<PypiArtifact>>> finished) {
         String packageName = null;
+        @Nullable
         CommonExpressionBoundary versionBoundary = null;
         if (Strings.isBlank(versionedPackageName) || Strings.isBlank(VersionSpecifiers.extractPackageName(versionedPackageName))) {
             logger.error("invalid package name {}", versionedPackageName);
@@ -111,7 +112,7 @@ public class PypiPackageManager implements LocalPackageScanner {
             }
         }
         PipPackageMetadata packageMetadata = null;
-        if (Strings.isBlank(packageName) || versionBoundary==null) {
+        if (Strings.isBlank(packageName)) {
             logger.error("invalid package name {}", versionedPackageName);
             return false;
         }

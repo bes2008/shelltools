@@ -11,7 +11,7 @@ import java.util.List;
 public class TagsExclusionPredicate implements Predicate<PypiArtifact> {
     private List<String> tags;
 
-    public TagsExclusionPredicate(){
+    public TagsExclusionPredicate() {
 
     }
 
@@ -25,18 +25,18 @@ public class TagsExclusionPredicate implements Predicate<PypiArtifact> {
 
     @Override
     public boolean test(PypiArtifact artifact) {
-        if(Objs.isEmpty(tags)){
+        if (Objs.isEmpty(tags)) {
             return true;
         }
-        String classifier=artifact.getClassifier();
-        if(Strings.isNotBlank(classifier)) {
-            return Pipeline.of(tags).anyMatch(new Predicate<String>() {
+        String classifier = artifact.getClassifier();
+        if (Strings.isNotBlank(classifier)) {
+            return Pipeline.of(tags).allMatch(new Predicate<String>() {
                 @Override
                 public boolean test(String tag) {
-                    return classifier.contains(tag);
+                    return !classifier.contains(tag);
                 }
             });
-        }else {
+        } else {
             return true;
         }
     }

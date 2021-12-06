@@ -1,6 +1,5 @@
 package com.jn.shelltools.supports.pypi.filter;
 
-import com.jn.langx.Filter;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Predicate;

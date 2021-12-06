@@ -67,7 +67,7 @@ public class PypiCommands {
             predicates.add(predicate);
         }
 
-        Predicate<PypiArtifact> artifactPredicate = Functions.allPredicate(predicates);
+        Predicate<PypiArtifact> artifactPredicate = Functions.anyPredicate(predicates);
 
         File file = new File(packageName);
         if (!file.exists()) {

@@ -6,16 +6,19 @@ import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.Filter;
 import com.jn.langx.annotation.NotEmpty;
 import com.jn.langx.annotation.Nullable;
+import com.jn.langx.el.boundary.CommonExpressionBoundary;
 import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Emptys;
 import com.jn.langx.util.Objs;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.Throwables;
-import com.jn.langx.util.boundary.CommonExpressionBoundary;
 import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.collection.ConcurrentHashSet;
+import com.jn.langx.util.collection.DistinctLinkedBlockingQueue;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.*;
 import com.jn.langx.util.net.URLs;
+import com.jn.langx.util.os.Platform;
 import com.jn.langx.util.struct.Holder;
 import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
@@ -38,7 +41,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.TreeSet;
+import java.util.concurrent.*;
 
 /**
  * 支持特性：
@@ -52,7 +56,12 @@ public class PypiPackageManager implements LocalPackageScanner {
 
     private ArtifactManager artifactManager;
     private PypiPackageMetadataManager metadataManager;
-    private ConcurrentHashMap<PackageGAV, Integer> downloading = new ConcurrentHashMap<>();
+    private ConcurrentHashSet<PackageGAV> downloading = new ConcurrentHashSet<PackageGAV>();
+    private ThreadPoolExecutor executor;
+
+    public PypiPackageManager() {
+        executor = new ThreadPoolExecutor(Platform.cpuCore(), Platform.cpuCore() * 2, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
+    }
 
     public void setMetadataManager(PypiPackageMetadataManager metadataManager) {
         this.metadataManager = metadataManager;
@@ -63,19 +72,59 @@ public class PypiPackageManager implements LocalPackageScanner {
         this.artifactManager = artifactManager;
     }
 
+    public void downloadPackages(DistinctLinkedBlockingQueue<String> packages, final boolean withDependencies, Predicate<PypiArtifact> artifactPredicate) {
+        Map<String, Holder<List<PypiArtifact>>> finished = new ConcurrentHashMap<>();
+        //  downloadPackage(versionedPackageName, withDependencies, artifactPredicate, packages, finished);
+        String packageName = null;
+
+        while (true) {
+            try {
+                packageName = packages.poll(30, TimeUnit.SECONDS);
+            } catch (InterruptedException ex) {
+                logger.error("downloading is interrupted");
+            }
+            if (Strings.isBlank(packageName)) {
+                return;
+            } else {
+                final String _packageName = packageName;
+                packageName = null;
+                executor.submit(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            downloadPackage(_packageName, withDependencies, artifactPredicate, packages, finished);
+                        } catch (Throwable ex) {
+                            logger.error(ex.getMessage(), ex);
+                        }
+                    }
+                });
+
+            }
+        }
+    }
+
+
     public void downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, Predicate<PypiArtifact> artifactPredicate) {
-        downloadPackage(versionedPackageName, withDependencies, artifactPredicate, new ConcurrentHashMap<>());
+        DistinctLinkedBlockingQueue<String> dependencyPackageNames = new DistinctLinkedBlockingQueue<String>();
+        dependencyPackageNames.add(versionedPackageName);
+        downloadPackages(dependencyPackageNames, withDependencies, artifactPredicate);
     }
 
     /**
-     * 下载至本地仓库
+     * 下载至本地仓库,一次只下载一个包
      *
      * @param versionedPackageName
      * @param withDependencies
      * @param artifactPredicate
      */
-    public boolean downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable final Predicate<PypiArtifact> artifactPredicate, Map<String, Holder<List<PypiArtifact>>> finished) {
-        final Predicate<PypiArtifact> _artifactPredicate = artifactPredicate == null ? Functions.truePredicate():artifactPredicate;
+    private boolean downloadPackage(@NotEmpty String versionedPackageName, final boolean withDependencies, @Nullable final Predicate<PypiArtifact> artifactPredicate, DistinctLinkedBlockingQueue<String> dependencyPackageNames, Map<String, Holder<List<PypiArtifact>>> finished) {
+        if (Strings.isBlank(versionedPackageName)) {
+            return false;
+        }
+        if (finished.containsKey(versionedPackageName)) {
+            return false;
+        }
+        final Predicate<PypiArtifact> _artifactPredicate = artifactPredicate == null ? Functions.truePredicate() : artifactPredicate;
         String packageName = null;
         @Nullable
         CommonExpressionBoundary versionBoundary = null;
@@ -99,7 +148,7 @@ public class PypiPackageManager implements LocalPackageScanner {
             if (VersionSpecifiers.versionedPackageName(versionedPackageName)) {
                 VersionSpecifierParser parser = new VersionSpecifierParser();
                 NameValuePair<CommonExpressionBoundary> parsedResult = parser.parse(versionedPackageName);
-                if(parsedResult!=null) {
+                if (parsedResult != null) {
                     packageName = parsedResult.getName();
                     versionBoundary = parsedResult.getValue();
                 }
@@ -129,7 +178,7 @@ public class PypiPackageManager implements LocalPackageScanner {
 
 
         List<String> versions = selectVersions(packageMetadata, versionBoundary);
-        logger.info("selected {} versions: {}", packageName, Strings.join(",", versions));
+        logger.debug("selected {} versions: {}", packageName, Strings.join(",", versions));
 
         PipPackageMetadata _packageMetadata = packageMetadata;
 
@@ -144,7 +193,8 @@ public class PypiPackageManager implements LocalPackageScanner {
                                 .map(new Function<PipPackageRelease, PypiArtifact>() {
                                     @Override
                                     public PypiArtifact apply(PipPackageRelease pipPackageRelease) {
-                                        if (!finished.containsKey(version)) {
+                                        String _versionedPackageName = _packageName + "=" + version;
+                                        if (!finished.containsKey(_versionedPackageName)) {
                                             // 说明 该版本还没有处理过
                                             PypiArtifact artifact = Pypis.gaussFileArtifact(pipPackageRelease.getFilename(), _packageName, version, pipPackageRelease.getPackagetype());
                                             artifact.setRelease(pipPackageRelease);
@@ -176,16 +226,17 @@ public class PypiPackageManager implements LocalPackageScanner {
                         public void accept(Pair<String, Set<PypiArtifact>> versionArtifactPair) {
                             String packageVersion = versionArtifactPair.getKey();
                             PackageGAV pypiPackageGAV = new PackageGAV(_packageName, _packageName, packageVersion);
-                            if (!downloading.containsKey(pypiPackageGAV)) {
-                                downloading.put(pypiPackageGAV, 1);
+                            if (!downloading.contains(pypiPackageGAV)) {
+                                downloading.add(pypiPackageGAV);
                                 Set<PypiArtifact> artifacts = versionArtifactPair.getValue();
-                                finished.putIfAbsent(pypiPackageGAV.toString(), new Holder<>(Collects.emptyArrayList()));
+                                finished.putIfAbsent(pypiPackageGAV.toString(), new Holder<>(new CopyOnWriteArrayList<>()));
                                 // 逐个下载 该版本的所有
                                 Collects.forEach(artifacts, new Consumer<PypiArtifact>() {
                                     @Override
                                     public void accept(PypiArtifact pypiArtifact) {
                                         List<PypiArtifact> finishedArtifacts = finished.get(pypiPackageGAV.toString()).get();
                                         if (!finishedArtifacts.contains(pypiArtifact)) {
+                                            logger.info("sync: {}", pypiArtifact);
                                             finishedArtifacts.add(pypiArtifact);
                                             // 获取或者下载
                                             FileObject fileObject = null;
@@ -194,11 +245,10 @@ public class PypiPackageManager implements LocalPackageScanner {
                                             } catch (FileSystemException e) {
                                                 logger.error(e.getMessage(), e);
                                             }
-                                            // 如果已下载成功
-                                            if (FileObjects.isExists(fileObject)) {
-                                                // copy 到target 目录
-                                                String targetDirectory=null;
-                                                if (Objs.isNotEmpty(targetDirectory) && false) {
+                                            // copy 到target 目录
+                                            String targetDirectory = null;
+                                            if (Objs.isNotEmpty(targetDirectory) && false) {
+                                                if (FileObjects.isExists(fileObject)) {
                                                     String targetUrl = targetDirectory;
                                                     if (!Strings.startsWith(targetDirectory, URLs.URL_PREFIX_FILE)) {
                                                         if (Strings.startsWith(targetDirectory, "/")) {
@@ -219,14 +269,16 @@ public class PypiPackageManager implements LocalPackageScanner {
                                                     } catch (FileSystemException ex) {
                                                         logger.error(ex.getMessage(), ex);
                                                     }
-                                                }
 
-                                            } else {
-                                                logger.info("Can't find the artifact: {}", JSONBuilderProvider.simplest().toJson(pypiArtifact));
+                                                } else {
+                                                    logger.info("Can't find the artifact: {}", JSONBuilderProvider.simplest().toJson(pypiArtifact));
+                                                }
                                             }
                                         }
                                     }
                                 });
+
+                                downloading.remove(pypiPackageGAV);
 
                                 // 在 该版本的所有的artifact下载完毕后，进行依赖分析 & 下载
                                 if (withDependencies) {
@@ -246,24 +298,19 @@ public class PypiPackageManager implements LocalPackageScanner {
                                     Collects.forEach(requirements, new Consumer<String>() {
                                         @Override
                                         public void accept(String dependency) {
-                                            // 说明 这个依赖 不带有版本号，并且是已经处理过的
-                                            if (!finished.containsKey(dependency)) {
-                                                logger.info("prepare dependency {} for {} {}", dependency, _packageName, packageVersion);
-                                                downloadPackage(dependency, withDependencies, _artifactPredicate, finished);
-                                            } else {
-                                                System.out.println(dependency);
-                                            }
+                                            dependency = Strings.join("", Strings.split(dependency, " "));
+                                            dependencyPackageNames.add(dependency);
                                         }
                                     });
                                 }
-                                downloading.remove(pypiPackageGAV);
                             }
                         }
                     });
-
+        } else {
+            finished.put(_packageName, new Holder<>());
+            finished.put(versionedPackageName, new Holder<>());
+            return false;
         }
-        finished.put(_packageName, new Holder<>());
-        finished.put(versionedPackageName, new Holder<>());
         return true;
     }
 
@@ -322,7 +369,6 @@ public class PypiPackageManager implements LocalPackageScanner {
     public Map<PackageGAV, PackageArtifact> scan(String path, Filter<PackageArtifact> filter) {
         return null;
     }
-
 
 
 }

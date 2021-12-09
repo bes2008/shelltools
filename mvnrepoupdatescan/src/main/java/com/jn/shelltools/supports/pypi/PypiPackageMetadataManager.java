@@ -59,7 +59,7 @@ public class PypiPackageMetadataManager extends RequirementsManager {
                 synchronized (this) {
                     // 查看 last modified 时间，若在10分钟之内， 则认为是有效的
                     long lastModified = fileObject.getContent().getLastModifiedTime();
-                    if (lastModified + TimeUnit.MINUTES.toMillis(10) >= System.currentTimeMillis()) {
+                    if (lastModified + TimeUnit.HOURS.toMillis(48) >= System.currentTimeMillis()) {
                         // 有效
                         InputStream inputStream = fileObject.getContent().getInputStream();
                         InputStreamReader reader = new InputStreamReader(inputStream);

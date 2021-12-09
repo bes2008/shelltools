@@ -6,6 +6,7 @@ import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.collection.DistinctLinkedBlockingQueue;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Functions;
 import com.jn.langx.util.function.Predicate;
@@ -41,10 +42,10 @@ public class PypiCommands {
             @ShellOption(value = "--package") String packageName) {
 
         PipPackageMetadata metadata = pypiPackageMetadataManager.getOfficialMetadata(packageName);
-        if(metadata!=null) {
+        if (metadata != null) {
             JSON json = JSONBuilderProvider.create().prettyFormat(true).serializeNulls(true).build();
             System.out.println(json.toJson(metadata));
-        }else{
+        } else {
             System.out.printf("package not exist");
         }
     }
@@ -54,16 +55,16 @@ public class PypiCommands {
             @ShellOption(value = "--package", help = "the package name or the requirements file path") String packageName,
             @ShellOption(value = "--with-deps", defaultValue = "true", help = "with its dependencies ?") boolean withDeps,
             @ShellOption(value = "--source", defaultValue = "true", help = "whether download the source package or not") boolean downloadSource,
-            @ShellOption(value="--exclusion-tags", defaultValue = "macosx,i686,", help="exclusion packages, use comma") String exclusionTags) {
+            @ShellOption(value = "--exclusion-tags", defaultValue = "macosx,i686,", help = "exclusion packages, use comma") String exclusionTags) {
 
         List<Predicate<PypiArtifact>> predicates = new ArrayList<>();
 
-        if(downloadSource){
+        if (downloadSource) {
             predicates.add(new SourceArtifactPredicate());
         }
-        if(Strings.isNotBlank(exclusionTags)){
-            TagsExclusionPredicate predicate= new TagsExclusionPredicate();
-            predicate.setTags(Collects.asList(Strings.split(exclusionTags,",")));
+        if (Strings.isNotBlank(exclusionTags)) {
+            TagsExclusionPredicate predicate = new TagsExclusionPredicate();
+            predicate.setTags(Collects.asList(Strings.split(exclusionTags, ",")));
             predicates.add(predicate);
         }
 
@@ -75,16 +76,9 @@ public class PypiCommands {
         } else {
             Resource resource = Resources.loadFileResource(file);
             List<String> lines = RequirementsManager.readRequirements(resource);
-            Collects.forEach(lines, new Consumer<String>() {
-                @Override
-                public void accept(String line) {
-                    try {
-                        pypiPackageManager.downloadPackage(line, withDeps, artifactPredicate);
-                    } catch (Throwable ex) {
-                        logger.error(ex.getMessage(), ex);
-                    }
-                }
-            });
+            DistinctLinkedBlockingQueue<String> queue = new DistinctLinkedBlockingQueue<>();
+            queue.addAll(lines);
+            pypiPackageManager.downloadPackages(queue, withDeps, artifactPredicate);
         }
     }
 }

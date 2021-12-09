@@ -19,3 +19,12 @@
 1638171898106:pip download --package build>=0.7.0
 1638243318827:pip download --package C:\\Users\\Administrator\\IdeaProjects\\shelltools\\mvnrepoupdatescan\\src\\test\\resources\\pypi\\tests\\requirements-1.txt
 1638243354118:pip download --package C:/Users/Administrator/IdeaProjects/shelltools/mvnrepoupdatescan/src/test/resources/pypi/tests/requirements-1.txt
+1639022908828:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20211201 --date 2021-12-01
+1639022922807:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20211201 --date 2021-12-01_00:00
+1639031669801:pip download --package C:/Users/Administrator/IdeaProjects/shelltools/mvnrepoupdatescan/src/test/resources/pypi/tests/requirements-1.txt
+1639048874584:stacktrace
+1639048937224:pip download --package C:/Users/Administrator/IdeaProjects/shelltools/mvnrepoupdatescan/src/test/resources/pypi/tests/requirements-1.txt
+1639049962838:stacktrace
+1639050596365:pip download --package C:/Users/Administrator/IdeaProjects/shelltools/mvnrepoupdatescan/src/test/resources/pypi/tests/requirements-1.txt
+1639053562485:stacktrace
+1639053656859:pip download --package C:/Users/Administrator/IdeaProjects/shelltools/mvnrepoupdatescan/src/test/resources/pypi/tests/requirements-1.txt

@@ -1,8 +1,8 @@
 package com.jn.shelltools.supports.pypi.versionspecifier;
 
+import com.jn.langx.el.boundary.CommonExpressionBoundary;
+import com.jn.langx.el.boundary.ExpressionParser;
 import com.jn.langx.util.Strings;
-import com.jn.langx.util.boundary.CommonExpressionBoundary;
-import com.jn.langx.util.boundary.ExpressionParser;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.MapAccessor;
 import com.jn.langx.util.collection.Pipeline;
@@ -58,7 +58,7 @@ public class VersionExpressionParser implements ExpressionParser {
                         if (expression.startsWith(VersionSpecifiers.VERSION_EXP_COMPATIBLE_RELEASE)) {
                             // 移除 ~=
                             expression = expression.substring(VersionSpecifiers.VERSION_EXP_COMPATIBLE_RELEASE.length());
-
+                            expression = VersionSpecifiers.trimSpecifiers(expression);
 
                             MapAccessor versionSegments = VersionSpecifiers.extractVersionSegments(expression);
                             // 拼接 == version.*

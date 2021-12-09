@@ -10,6 +10,7 @@ import com.jn.langx.util.collection.MapAccessor;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Predicate;
+import com.jn.langx.util.struct.Holder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,25 +44,25 @@ public class VersionSpecifiers {
             VERSION_EXP_VERSION_MATCHING
     );
 
-    public static final String extractPackageName(String packageName){
-        if(Strings.isBlank(packageName)){
+    public static final String extractPackageName(String packageName) {
+        if (Strings.isBlank(packageName)) {
             return null;
         }
 
         // 移除 #
         int index = packageName.indexOf("#");
-        if(index>-1){
+        if (index > -1) {
             packageName = packageName.substring(0, index);
         }
         index = packageName.indexOf(":");
-        if(index>-1){
+        if (index > -1) {
             packageName = packageName.substring(0, index);
         }
         index = packageName.indexOf(";");
-        if(index>-1){
+        if (index > -1) {
             packageName = packageName.substring(0, index);
         }
-        if(packageName.startsWith("<") || packageName.startsWith(">") || packageName.startsWith("!") || packageName.startsWith("=")){
+        if (packageName.startsWith("<") || packageName.startsWith(">") || packageName.startsWith("!") || packageName.startsWith("=")) {
             return null;
         }
         return packageName.trim();
@@ -76,7 +77,7 @@ public class VersionSpecifiers {
         });
     }
 
-    public static final boolean versionAbsent(String packageName){
+    public static final boolean versionAbsent(String packageName) {
         return Pipeline.of(VERSION_EXP_SPECIFIERS).allMatch(new Predicate<String>() {
             @Override
             public boolean test(String s) {
@@ -85,14 +86,14 @@ public class VersionSpecifiers {
         });
     }
 
-    public static final boolean versionedPackageName(String packageName){
-        if(Strings.isBlank(packageName)){
+    public static final boolean versionedPackageName(String packageName) {
+        if (Strings.isBlank(packageName)) {
             return false;
         }
         return Pipeline.of(VERSION_EXP_SPECIFIERS).anyMatch(new Predicate<String>() {
             @Override
             public boolean test(String s) {
-                String reg = ".+(\\s*"+s+").*";
+                String reg = "[\\w-]+(\\s*" + s + ").*";
                 return packageName.matches(reg);
             }
         });
@@ -115,27 +116,49 @@ public class VersionSpecifiers {
     public static final Pattern VERSION_PATTERN = Pattern.compile(VERSION_PATTERN_STR);
 
 
-    private static Map<String, Integer> preLabelMap =new LinkedCaseInsensitiveMap<Integer>();
+    private static Map<String, Integer> preLabelMap = new LinkedCaseInsensitiveMap<Integer>();
+
     static {
-        preLabelMap.put("alpha",1);
-        preLabelMap.put("a",1);
-        preLabelMap.put("beta",2);
-        preLabelMap.put("b",2);
-        preLabelMap.put("rc",3);
-        preLabelMap.put("c",3);
-        preLabelMap.put("pre",4);
-        preLabelMap.put("preview",4);
+        preLabelMap.put("alpha", 1);
+        preLabelMap.put("a", 1);
+        preLabelMap.put("beta", 2);
+        preLabelMap.put("b", 2);
+        preLabelMap.put("rc", 3);
+        preLabelMap.put("c", 3);
+        preLabelMap.put("pre", 4);
+        preLabelMap.put("preview", 4);
     }
 
-    public static final int comparePreLabel(String label_1, String label_2){
+    public static final int comparePreLabel(String label_1, String label_2) {
         Preconditions.checkTrue(preLabelMap.containsKey(label_1));
         Preconditions.checkTrue(preLabelMap.containsKey(label_2));
-        return preLabelMap.get(label_2)-preLabelMap.get(label_1);
+        return preLabelMap.get(label_2) - preLabelMap.get(label_1);
     }
 
-    public static final boolean validVersionExpression(String version){
+    public static final boolean validVersionExpression(String version) {
         Matcher matcher = VersionSpecifiers.VERSION_PATTERN.matcher(version);
         return matcher.matches();
+    }
+
+    public static String trimSpecifiers(String version) {
+        Preconditions.checkNotNull(version);
+        final Holder<String> tmp = new Holder<>(version);
+
+        boolean continueFind = true;
+        while (continueFind) {
+            String spec = Collects.findFirst(VERSION_EXP_SPECIFIERS, new Predicate<String>() {
+                @Override
+                public boolean test(String spec) {
+                    return tmp.get().startsWith(spec);
+                }
+            });
+            if (spec == null) {
+                continueFind = false;
+            } else {
+                tmp.set(tmp.get().substring(spec.length()));
+            }
+        }
+        return tmp.get();
     }
 
     public static final MapAccessor extractVersionSegments(String version) {

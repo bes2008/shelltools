@@ -37,7 +37,7 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
         try {
             File localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
             FileResource resource = Resources.loadFileResource(localTempFile);
-            Loggers.getLogger(WheelArtifactDependenciesFinder.class).info("expand {}", localTempFile.getName());
+            Loggers.getLogger(WheelArtifactDependenciesFinder.class).info("expd: {}", localTempFile.getName());
             expander = AutowiredArchiveSuiteFactory.getInstance().get("zip", resource.getInputStream());
             expander.setOverwriteExistsFiles(true);
 

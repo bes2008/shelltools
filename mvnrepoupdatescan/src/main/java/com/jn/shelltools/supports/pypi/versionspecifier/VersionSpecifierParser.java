@@ -1,18 +1,16 @@
 package com.jn.shelltools.supports.pypi.versionspecifier;
 
 import com.jn.langx.Parser;
+import com.jn.langx.el.boundary.CommonExpressionBoundary;
 import com.jn.langx.util.Objs;
 import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
-import com.jn.langx.util.boundary.CommonExpressionBoundary;
-import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.comparator.IntegerComparator;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Predicate;
 import com.jn.langx.util.struct.pair.NameValuePair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,7 +63,6 @@ public class VersionSpecifierParser implements Parser<String, NameValuePair<Comm
                     }
                 }).asList();
         if(Objs.isEmpty(indexes)){
-            System.out.printf("1");
             return null;
         }
         int index = Pipeline.of(indexes).min(new IntegerComparator());

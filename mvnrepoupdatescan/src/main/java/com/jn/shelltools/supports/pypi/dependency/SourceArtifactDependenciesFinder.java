@@ -33,7 +33,7 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
         try {
             File localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
             FileResource resource = Resources.loadFileResource(localTempFile);
-            Loggers.getLogger(SourceArtifactDependenciesFinder.class).info("expand {}", localTempFile.getName());
+            Loggers.getLogger(SourceArtifactDependenciesFinder.class).info("expd: {}", localTempFile.getName());
             expander = AutowiredArchiveSuiteFactory.getInstance().get(pypiArtifact.getExtension(), resource.getInputStream());
             expander.setOverwriteExistsFiles(true);
 

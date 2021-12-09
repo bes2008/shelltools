@@ -60,7 +60,7 @@ public class PypiPackageManager implements LocalPackageScanner {
     private ThreadPoolExecutor executor;
 
     public PypiPackageManager() {
-        executor = new ThreadPoolExecutor(Platform.cpuCore(), Platform.cpuCore() * 2, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
+        executor = new ThreadPoolExecutor(Platform.cpuCore() * 2, Platform.cpuCore() * 2, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
     }
 
     public void setMetadataManager(PypiPackageMetadataManager metadataManager) {
@@ -163,11 +163,14 @@ public class PypiPackageManager implements LocalPackageScanner {
             logger.error("invalid package name {}", versionedPackageName);
             return false;
         }
-
-        try {
-            packageMetadata = metadataManager.getOfficialMetadata(packageName);
-        } catch (Throwable ex) {
-            throw Throwables.wrapAsRuntimeException(ex);
+        if(!finished.containsKey(packageName)) {
+            try {
+                packageMetadata = metadataManager.getOfficialMetadata(packageName);
+            } catch (Throwable ex) {
+                throw Throwables.wrapAsRuntimeException(ex);
+            }
+        }else {
+            return false;
         }
         if (packageMetadata == null) {
             logger.error(StringTemplates.formatWithPlaceholder("package ({}) is not exists", packageName));

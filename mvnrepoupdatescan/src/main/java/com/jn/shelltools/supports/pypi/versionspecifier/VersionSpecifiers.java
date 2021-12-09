@@ -93,7 +93,7 @@ public class VersionSpecifiers {
         return Pipeline.of(VERSION_EXP_SPECIFIERS).anyMatch(new Predicate<String>() {
             @Override
             public boolean test(String s) {
-                String reg = "[\\w-]+(\\s*" + s + ").*";
+                String reg = "[\\w-._]+(\\s*" + s + ").*";
                 return packageName.matches(reg);
             }
         });

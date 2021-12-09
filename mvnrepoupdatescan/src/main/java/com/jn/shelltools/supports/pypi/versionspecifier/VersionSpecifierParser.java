@@ -9,7 +9,9 @@ import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.comparator.IntegerComparator;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Predicate;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.langx.util.struct.pair.NameValuePair;
+import org.slf4j.Logger;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ import java.util.List;
  * https://www.python.org/dev/peps/pep-0440/
  */
 public class VersionSpecifierParser implements Parser<String, NameValuePair<CommonExpressionBoundary>> {
+    private static final Logger logger = Loggers.getLogger(VersionSpecifierParser.class);
     @Override
     public NameValuePair<CommonExpressionBoundary> parse(String versionedPackageName) {
         Preconditions.checkNotEmpty(versionedPackageName);
@@ -72,7 +75,12 @@ public class VersionSpecifierParser implements Parser<String, NameValuePair<Comm
         String versionExpression = Strings.trim(versionedPackageName.substring(index).replace("(", ""));
         CommonExpressionBoundary boundary = null;
         if (Strings.isNotEmpty(versionExpression)) {
-            boundary = new VersionExpressionParser().parse(versionExpression);
+            try {
+                boundary = new VersionExpressionParser().parse(versionExpression);
+            }catch (Throwable ex){
+                logger.debug(ex.getMessage(),ex);
+                return null;
+            }
         }
         return new NameValuePair<CommonExpressionBoundary>(packageName, boundary);
 

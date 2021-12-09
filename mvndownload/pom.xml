@@ -26,7 +26,7 @@
 		<fst.version>2.57</fst.version>
 		<fse.version>aegean-2.1</fse.version>
 		<xson.version>1.0.2</xson.version>
-		<jackson.version>2.11.2</jackson.version>
+		<jackson.version>2.11.4</jackson.version>
 		<msgpack.version>0.8.22</msgpack.version>
 	</properties>
 <dependencies>	

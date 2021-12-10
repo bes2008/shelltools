@@ -1,10 +1,15 @@
 package com.jn.shelltools.supports.pypi;
 
 import com.jn.easyjson.core.JSONBuilderProvider;
+import com.jn.langx.cache.Cache;
+import com.jn.langx.cache.CacheBuilder;
 import com.jn.langx.util.Strings;
+import com.jn.langx.util.collection.ConcurrentHashSet;
 import com.jn.langx.util.io.Charsets;
 import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.logging.Loggers;
+import com.jn.langx.util.struct.Holder;
+import com.jn.langx.util.timing.timer.WheelTimers;
 import com.jn.shelltools.supports.pypi.dependency.RequirementsManager;
 import com.jn.shelltools.supports.pypi.packagemetadata.PipPackageMetadata;
 import com.jn.shelltools.supports.pypi.repository.PipPackageMetadataArtifact;
@@ -14,7 +19,6 @@ import org.slf4j.Logger;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 public class PypiPackageMetadataManager extends RequirementsManager {
@@ -26,31 +30,47 @@ public class PypiPackageMetadataManager extends RequirementsManager {
         this.restApi = restApi;
     }
 
+    private Cache<String, Holder<PipPackageMetadata>> cache;
+
+    public PypiPackageMetadataManager() {
+        cache = CacheBuilder.<String, Holder<PipPackageMetadata>>newBuilder()
+                .expireAfterRead(10 * 60)
+                .evictExpiredInterval(20 * 1000)
+                .timer(WheelTimers.newHashedWheelTimer())
+                .build();
+    }
+
     /**
      * 正在获取的package的集合
      */
-    private ConcurrentHashMap<String, Integer> packaging = new ConcurrentHashMap<>();
+    private ConcurrentHashSet packaging = new ConcurrentHashSet<>();
 
     public PipPackageMetadata getOfficialMetadata(String packageName) {
         if (Strings.isBlank(packageName)) {
             return null;
         }
+        PipPackageMetadata metadata = null;
+        Holder<PipPackageMetadata> metadataHolder = cache.get(packageName);
+        if (metadataHolder != null) {
+            metadata = metadataHolder.get();
+            return metadata;
+        }
         try {
-            if (packaging.containsKey(packageName)) {
+            if (packaging.contains(packageName)) {
                 synchronized (this) {
-                    while (packaging.containsKey(packageName)) {
+                    while (packaging.contains(packageName)) {
                         this.wait(10);
                     }
                 }
             }
-        }catch (Throwable ex){
+        } catch (Throwable ex) {
             // ignore it
         }
-        packaging.put(packageName, 1);
+        packaging.add(packageName);
         // 先从本地仓库获取
         PipPackageMetadataArtifact artifact = new PipPackageMetadataArtifact(packageName);
 
-        PipPackageMetadata metadata = null;
+
         FileObject fileObject = null;
         try {
 
@@ -94,7 +114,7 @@ public class PypiPackageMetadataManager extends RequirementsManager {
                 this.notify();
             }
         }
-
+        cache.set(packageName, new Holder<PipPackageMetadata>(metadata));
         return metadata;
     }
 }

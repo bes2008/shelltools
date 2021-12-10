@@ -76,7 +76,7 @@ public class PypiPackageManager implements LocalPackageScanner {
         Map<String, Holder<List<PypiArtifact>>> finished = new ConcurrentHashMap<>();
         //  downloadPackage(versionedPackageName, withDependencies, artifactPredicate, packages, finished);
         String packageName = null;
-
+        // main thread
         while (true) {
             try {
                 packageName = packages.poll(30, TimeUnit.SECONDS);
@@ -84,6 +84,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                 logger.error("downloading is interrupted");
             }
             if (Strings.isBlank(packageName)) {
+                logger.info("finished");
                 return;
             } else {
                 final String _packageName = packageName;
@@ -160,6 +161,7 @@ public class PypiPackageManager implements LocalPackageScanner {
         }
         PipPackageMetadata packageMetadata = null;
         if (Strings.isBlank(packageName)) {
+            finished.put(versionedPackageName, new Holder<>());
             logger.error("invalid package name {}", versionedPackageName);
             return false;
         }
@@ -223,7 +225,7 @@ public class PypiPackageManager implements LocalPackageScanner {
 
         if (Objs.isNotEmpty(versionArtifacts)) {
             // 下载 并 copy到 target 目录
-            versionArtifacts.parallelStream()
+            versionArtifacts.stream()
                     .forEach(new java.util.function.Consumer<Pair<String, Set<PypiArtifact>>>() {
                         @Override
                         public void accept(Pair<String, Set<PypiArtifact>> versionArtifactPair) {
@@ -239,7 +241,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                                     public void accept(PypiArtifact pypiArtifact) {
                                         List<PypiArtifact> finishedArtifacts = finished.get(pypiPackageGAV.toString()).get();
                                         if (!finishedArtifacts.contains(pypiArtifact)) {
-                                            logger.info("sync: {}", pypiArtifact);
+                                            logger.debug("sync: {}", pypiArtifact);
                                             finishedArtifacts.add(pypiArtifact);
                                             // 获取或者下载
                                             FileObject fileObject = null;

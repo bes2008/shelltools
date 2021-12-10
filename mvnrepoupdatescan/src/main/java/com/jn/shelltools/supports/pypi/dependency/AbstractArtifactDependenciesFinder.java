@@ -2,15 +2,23 @@ package com.jn.shelltools.supports.pypi.dependency;
 
 import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.agileway.vfs.artifact.ArtifactManager;
+import com.jn.agileway.zip.archive.AutowiredArchiveSuiteFactory;
+import com.jn.agileway.zip.archive.Expander;
+import com.jn.langx.io.resource.FileResource;
+import com.jn.langx.io.resource.Resources;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.SystemPropertys;
+import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.io.file.Files;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.shelltools.supports.pypi.PypiArtifact;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.Selectors;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 public abstract class AbstractArtifactDependenciesFinder implements ArtifactDependenciesFinder {
@@ -81,7 +89,38 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
      * @param tmpFileObject
      * @return 返回解压后的目录
      */
-    protected abstract String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject);
+    protected String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject){
+        Expander expander = null;
+        File localTempFile = null;
+        InputStream inputStream = null;
+        try {
+            localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
+            FileResource resource = Resources.loadFileResource(localTempFile);
+            Loggers.getLogger(getClass()).info("expd: {}", localTempFile.getName());
+            inputStream = resource.getInputStream();
+            expander = AutowiredArchiveSuiteFactory.getInstance().get(getExpanderFormat(pypiArtifact), inputStream);
+            expander.setOverwriteExistsFiles(true);
+
+            String dirname = localTempFile.getName().replace('.', '_');
+            File tmpExpandDir = new File(localTempFile.getParentFile(), dirname);
+            expander.expandTo(tmpExpandDir);
+
+            return tmpExpandDir.getAbsolutePath();
+        } catch (Throwable ex) {
+            Loggers.getLogger(getClass()).error("expand file {} fail, {}", localTempFile, ex.getMessage());
+        } finally {
+            if(expander==null){
+                IOs.close(inputStream);
+            }else {
+                IOs.close(expander);
+            }
+        }
+        return null;
+    }
+
+    protected String getExpanderFormat(PypiArtifact artifact){
+        return artifact.getExtension();
+    }
 
 
     protected abstract List<String> parseDependencies(PypiArtifact pypiArtifact, String tmpExpandDir);

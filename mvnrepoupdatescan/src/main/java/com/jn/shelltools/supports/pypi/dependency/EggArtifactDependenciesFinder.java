@@ -14,13 +14,7 @@ import com.jn.shelltools.supports.pypi.dependency.parser.PkginfoParser;
 import java.io.File;
 import java.util.List;
 
-public class WheelArtifactDependenciesFinder extends AbstractArtifactDependenciesFinder {
-
-    @Override
-    protected boolean isArchive(PypiArtifact pypiArtifact) {
-        return Pypis.ARCHIVE_EXTENSION_WHEEL.equalsIgnoreCase(pypiArtifact.getExtension());
-    }
-
+public class EggArtifactDependenciesFinder extends AbstractArtifactDependenciesFinder {
     @Override
     protected String getExpanderFormat(PypiArtifact artifact) {
         return "zip";
@@ -28,18 +22,17 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
 
     @Override
     public List<String> supportedExtensions() {
-        return Collects.asList(Pypis.getFileExtensions(Pypis.PACKAGE_TYPE_BINARY_WHEEL));
+        return Collects.newArrayList(Pypis.ARCHIVE_EXTENSION_EGG);
     }
 
     @Override
     protected List<String> parseDependencies(PypiArtifact pypiArtifact, String tmpExpandDir) {
-        // 在 <packageName>-<version>.dist-info 目录下找到 METADATA 文件
+        // 在 <EGG-INFO> 目录下找到 PKG-INFO 文件
         FileFilter metadataFileFilter = FileFilters.allFileFilter(
                 new IsFileFilter(),
-                new FilenameEqualsFilter("METADATA"),
-                new ParentFilenameSuffixFilter(Collects.newArrayList("dist-info"), false),
+                new FilenameEqualsFilter("PKG-INFO"),
+                new ParentFilenameSuffixFilter(Collects.newArrayList("EGG-INFO"), false),
                 new ReadableFileFilter()
-
         );
 
         List<File> files = Files.find(new File(tmpExpandDir), 2,
@@ -47,7 +40,7 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
                         metadataFileFilter,
                         FileFilters.allFileFilter(
                                 new IsDirectoryFileFilter(),
-                                new FilenameSuffixFilter("dist-info")
+                                new FilenameEqualsFilter("EGG-INFO")
                         )
                 ),
                 metadataFileFilter, new Predicate2<List<File>, File>() {

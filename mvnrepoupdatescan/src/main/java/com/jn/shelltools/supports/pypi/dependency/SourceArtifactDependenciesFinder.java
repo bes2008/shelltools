@@ -1,61 +1,21 @@
 package com.jn.shelltools.supports.pypi.dependency;
 
-import com.jn.agileway.zip.archive.AutowiredArchiveSuiteFactory;
-import com.jn.agileway.zip.archive.Expander;
-import com.jn.langx.io.resource.FileResource;
-import com.jn.langx.io.resource.Resources;
 import com.jn.langx.util.Objs;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Predicate2;
-import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.io.file.FileFilter;
 import com.jn.langx.util.io.file.FileFilters;
 import com.jn.langx.util.io.file.Files;
 import com.jn.langx.util.io.file.filter.*;
-import com.jn.langx.util.logging.Loggers;
 import com.jn.shelltools.supports.pypi.PypiArtifact;
 import com.jn.shelltools.supports.pypi.Pypis;
 import com.jn.shelltools.supports.pypi.dependency.parser.PyprojectParser;
 import com.jn.shelltools.supports.pypi.dependency.parser.SetupcfgParser;
-import org.apache.commons.vfs2.FileObject;
 
 import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenciesFinder {
-
-
-    @Override
-    protected String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject) {
-        Expander expander = null;
-        File localTempFile = null;
-        InputStream inputStream = null;
-        try {
-            localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
-            FileResource resource = Resources.loadFileResource(localTempFile);
-            Loggers.getLogger(SourceArtifactDependenciesFinder.class).info("expd: {}", localTempFile.getName());
-            inputStream = resource.getInputStream();
-            expander = AutowiredArchiveSuiteFactory.getInstance().get(pypiArtifact.getExtension(), inputStream);
-            expander.setOverwriteExistsFiles(true);
-
-            String dirname = localTempFile.getName().replace('.', '_');
-            File tmpExpandDir = new File(localTempFile.getParentFile(), dirname);
-            expander.expandTo(tmpExpandDir);
-
-            return tmpExpandDir.getAbsolutePath();
-        } catch (Throwable ex) {
-            Loggers.getLogger(SourceArtifactDependenciesFinder.class).error("expand file {} fail, {}", localTempFile, ex.getMessage());
-        } finally {
-            if(expander==null){
-                IOs.close(inputStream);
-            }else {
-                IOs.close(expander);
-            }
-        }
-        return null;
-    }
 
     @Override
     public List<String> supportedExtensions() {

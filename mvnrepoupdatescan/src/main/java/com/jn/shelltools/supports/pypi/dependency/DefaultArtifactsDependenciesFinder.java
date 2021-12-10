@@ -70,7 +70,7 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
                         }
                     });
                 }else{
-                    logger.warn("unsupported package extension: {}", extension);
+                    logger.warn("unsupported package extension: {}, artifact: {}", extension, artifact);
                 }
             }
         });

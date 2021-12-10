@@ -79,13 +79,15 @@ public class PypiPackageManager implements LocalPackageScanner {
         // main thread
         while (true) {
             try {
-                packageName = packages.poll(30, TimeUnit.SECONDS);
+                packageName = packages.poll(5, TimeUnit.SECONDS);
             } catch (InterruptedException ex) {
                 logger.error("downloading is interrupted");
             }
-            if (Strings.isBlank(packageName)) {
-                logger.info("finished");
-                return;
+            if (Strings.isBlank(packageName) ) {
+                if(executor.getActiveCount()==0) {
+                    logger.info("finished");
+                    return;
+                }
             } else {
                 final String _packageName = packageName;
                 packageName = null;
@@ -234,7 +236,7 @@ public class PypiPackageManager implements LocalPackageScanner {
 
         if (Objs.isNotEmpty(versionArtifacts)) {
             // 下载 并 copy到 target 目录
-            versionArtifacts.stream()
+            versionArtifacts.parallelStream()
                     .forEach(new java.util.function.Consumer<Pair<String, Set<PypiArtifact>>>() {
                         @Override
                         public void accept(Pair<String, Set<PypiArtifact>> versionArtifactPair) {

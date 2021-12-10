@@ -32,6 +32,7 @@ public class Pypis {
     public static final String PACKAGE_TYPE_BINARY_RPM = "bdist_rpm";
     public static final String PACKAGE_TYPE_BINARY_HPUX_RPM = "bdist_sdux";
     public static final String PACKAGE_TYPE_BINARY_SOLARIS_RPM = "bdist_pkgtool";
+    public static final String PACKAGE_TYPE_BINARY_DMG="bdist_dmg";
 
     public static final String ARCHIVE_EXTENSION_ZIP = "zip";
     public static final String ARCHIVE_EXTENSION_TAR_GZ = "tar.gz";
@@ -42,6 +43,7 @@ public class Pypis {
     public static final String ARCHIVE_EXTENSION_EGG = "egg";
     public static final String ARCHIVE_EXTENSION_MSI = "msi";
     public static final String ARCHIVE_EXTENSION_RPM = "rpm";
+    public static final String ARCHIVE_EXTENSION_DMG="dmg";
 
     static {
         /**
@@ -74,6 +76,11 @@ public class Pypis {
         packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_RPM, ARCHIVE_EXTENSION_RPM);
         packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_HPUX_RPM, ARCHIVE_EXTENSION_RPM);
         packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_SOLARIS_RPM, ARCHIVE_EXTENSION_RPM);
+
+        /**
+         * dmg包
+         */
+        packageTypeToFileExtensions.add(PACKAGE_TYPE_BINARY_DMG, ARCHIVE_EXTENSION_DMG);
 
     }
 
@@ -121,7 +128,9 @@ public class Pypis {
             }
         });
         if (Strings.isBlank(str) || Strings.isBlank(extension)) {
-            System.out.println("不能识别的扩展名：" + extension);
+            logger.error(StringTemplates.formatWithPlaceholder("unsupported extension： {}" ,extension));
+            logger.error(StringTemplates.formatWithPlaceholder("illegal file name: {}, for package: {}, version: {}, packageType: {}", filename, packageName, version, packageType));
+            return null;
         }
         str = str.substring(0, str.length() - extension.length());
         if (Strings.endsWith(str, ".")) {

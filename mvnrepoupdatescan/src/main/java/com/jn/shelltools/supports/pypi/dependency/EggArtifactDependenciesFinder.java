@@ -15,10 +15,6 @@ import java.io.File;
 import java.util.List;
 
 public class EggArtifactDependenciesFinder extends AbstractArtifactDependenciesFinder {
-    @Override
-    protected String getExpanderFormat(PypiArtifact artifact) {
-        return "zip";
-    }
 
     @Override
     public List<String> supportedExtensions() {

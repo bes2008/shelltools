@@ -65,7 +65,7 @@ public class SetupcfgParser implements DependenciesParser {
                 });
             }
         } catch (Throwable ex) {
-            logger.error(ex.getMessage(), ex);
+            logger.error("illegal ini configuration (setup.cfg) at {}", file.getAbsolutePath());
         }
         return dependencies;
     }

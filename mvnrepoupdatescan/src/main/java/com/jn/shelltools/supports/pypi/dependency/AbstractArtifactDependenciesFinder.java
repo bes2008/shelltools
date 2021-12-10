@@ -76,7 +76,7 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
                 tmpArtifactDir = expandArtifact(pypiArtifact, destFile);
             }
             // 删除临时文件
-            destFile.delete(Selectors.SELECT_SELF);
+            FileObjects.delete(destFile);
             return tmpArtifactDir;
         }
         return null;
@@ -89,7 +89,7 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
      * @param tmpFileObject
      * @return 返回解压后的目录
      */
-    protected String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject){
+    protected String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject) {
         Expander expander = null;
         File localTempFile = null;
         InputStream inputStream = null;
@@ -99,6 +99,7 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
             Loggers.getLogger(getClass()).info("expd: {}", localTempFile.getName());
             inputStream = resource.getInputStream();
             expander = AutowiredArchiveSuiteFactory.getInstance().get(getExpanderFormat(pypiArtifact), inputStream);
+            expander.setFilepath(localTempFile.getAbsolutePath());
             expander.setOverwriteExistsFiles(true);
 
             String dirname = localTempFile.getName().replace('.', '_');
@@ -109,16 +110,13 @@ public abstract class AbstractArtifactDependenciesFinder implements ArtifactDepe
         } catch (Throwable ex) {
             Loggers.getLogger(getClass()).error("expand file {} fail, {}", localTempFile, ex.getMessage());
         } finally {
-            if(expander==null){
-                IOs.close(inputStream);
-            }else {
-                IOs.close(expander);
-            }
+            IOs.close(inputStream);
+            IOs.close(expander);
         }
         return null;
     }
 
-    protected String getExpanderFormat(PypiArtifact artifact){
+    protected String getExpanderFormat(PypiArtifact artifact) {
         return artifact.getExtension();
     }
 

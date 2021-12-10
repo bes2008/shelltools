@@ -22,11 +22,6 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
     }
 
     @Override
-    protected String getExpanderFormat(PypiArtifact artifact) {
-        return "zip";
-    }
-
-    @Override
     public List<String> supportedExtensions() {
         return Collects.asList(Pypis.getFileExtensions(Pypis.PACKAGE_TYPE_BINARY_WHEEL));
     }

@@ -11,7 +11,8 @@ public class NoopArtifactDependenciesFinder implements ArtifactDependenciesFinde
     private List<String> extensions = Collects.newArrayList(
             Pypis.ARCHIVE_EXTENSION_EXE,
             Pypis.ARCHIVE_EXTENSION_MSI,
-            Pypis.ARCHIVE_EXTENSION_RPM
+            Pypis.ARCHIVE_EXTENSION_RPM,
+            Pypis.ARCHIVE_EXTENSION_DMG
     );
     @Override
     public List<String> get(PypiArtifact artifact) {

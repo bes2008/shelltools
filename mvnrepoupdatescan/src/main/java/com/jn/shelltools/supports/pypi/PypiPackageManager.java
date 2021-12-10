@@ -83,8 +83,8 @@ public class PypiPackageManager implements LocalPackageScanner {
             } catch (InterruptedException ex) {
                 logger.error("downloading is interrupted");
             }
-            if (Strings.isBlank(packageName) ) {
-                if(executor.getActiveCount()==0) {
+            if (Strings.isBlank(packageName)) {
+                if (executor.getActiveCount() == 0) {
                     logger.info("finished");
                     return;
                 }
@@ -213,9 +213,11 @@ public class PypiPackageManager implements LocalPackageScanner {
                                         if (!finished.containsKey(_versionedPackageName)) {
                                             // 说明 该版本还没有处理过
                                             PypiArtifact artifact = Pypis.gaussFileArtifact(pipPackageRelease.getFilename(), _packageName, version, pipPackageRelease.getPackagetype());
-                                            artifact.setRelease(pipPackageRelease);
-                                            artifact.setSupportSynchronized(true);
-                                            return artifact;
+                                            if (artifact != null) {
+                                                artifact.setRelease(pipPackageRelease);
+                                                artifact.setSupportSynchronized(true);
+                                                return artifact;
+                                            }
                                         }
                                         return null;
                                     }

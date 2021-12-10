@@ -101,7 +101,8 @@ public class Pypis {
         if (Strings.startsWith(str, version, true)) {
             str = str.substring(version.length());
         } else {
-            throw new IllegalArgumentException(StringTemplates.formatWithPlaceholder("illegal file name: {}, for package: {}, version: {}, packageType: {}", filename, packageName, version, packageType));
+            logger.error(StringTemplates.formatWithPlaceholder("illegal file name: {}, for package: {}, version: {}, packageType: {}", filename, packageName, version, packageType));
+            return null;
         }
 
         // 移除 扩展名

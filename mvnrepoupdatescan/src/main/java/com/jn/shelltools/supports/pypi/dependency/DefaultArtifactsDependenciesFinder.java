@@ -5,16 +5,18 @@ import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.langx.util.struct.Pair;
 import com.jn.shelltools.supports.pypi.PypiArtifact;
 import com.jn.shelltools.supports.pypi.versionspecifier.VersionSpecifiers;
+import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class DefaultArtifactsDependenciesFinder implements ArtifactsDependenciesFinder {
-
+    private static final Logger logger = Loggers.getLogger(DefaultArtifactsDependenciesFinder.class);
     /**
      * key: file extension
      * value: finder
@@ -37,6 +39,7 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
     public DefaultArtifactsDependenciesFinder() {
         addArtifactDependenciesFinder(new SourceArtifactDependenciesFinder());
         addArtifactDependenciesFinder(new WheelArtifactDependenciesFinder());
+        addArtifactDependenciesFinder(new NoopArtifactDependenciesFinder());
     }
 
     @Override
@@ -66,6 +69,8 @@ public class DefaultArtifactsDependenciesFinder implements ArtifactsDependencies
                             }
                         }
                     });
+                }else{
+                    logger.warn("unsupported package extension: {}", extension);
                 }
             }
         });

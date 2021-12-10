@@ -1,5 +1,6 @@
 package com.jn.shelltools.supports.pypi;
 
+import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.cache.Cache;
 import com.jn.langx.cache.CacheBuilder;
@@ -75,7 +76,7 @@ public class PypiPackageMetadataManager extends RequirementsManager {
         try {
 
             fileObject = artifactManager.getArtifactFile(artifact);
-            if (fileObject.exists()) {
+            if (FileObjects.isExists(fileObject)) {
                 synchronized (this) {
                     // 查看 last modified 时间，若在10分钟之内， 则认为是有效的
                     long lastModified = fileObject.getContent().getLastModifiedTime();

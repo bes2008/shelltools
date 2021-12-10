@@ -10,7 +10,6 @@ import com.jn.langx.util.function.Predicate2;
 import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.io.file.FileFilter;
 import com.jn.langx.util.io.file.FileFilters;
-import com.jn.langx.util.io.file.Filenames;
 import com.jn.langx.util.io.file.Files;
 import com.jn.langx.util.io.file.filter.*;
 import com.jn.langx.util.logging.Loggers;
@@ -21,6 +20,7 @@ import org.apache.commons.vfs2.FileObject;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
@@ -34,22 +34,29 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
     @Override
     protected String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject) {
         Expander expander = null;
+        File localTempFile = null;
+        InputStream inputStream = null;
         try {
-            File localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
+            localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
             FileResource resource = Resources.loadFileResource(localTempFile);
             Loggers.getLogger(WheelArtifactDependenciesFinder.class).info("expd: {}", localTempFile.getName());
-            expander = AutowiredArchiveSuiteFactory.getInstance().get("zip", resource.getInputStream());
+            inputStream = resource.getInputStream();
+            expander = AutowiredArchiveSuiteFactory.getInstance().get("zip", inputStream);
             expander.setOverwriteExistsFiles(true);
 
-            String dirname = localTempFile.getName().replace('.','_');
+            String dirname = localTempFile.getName().replace('.', '_');
             File tmpExpandDir = new File(localTempFile.getParentFile(), dirname);
             expander.expandTo(tmpExpandDir);
             expander.close();
             return tmpExpandDir.getAbsolutePath();
         } catch (Throwable ex) {
-            LoggerFactory.getLogger(WheelArtifactDependenciesFinder.class).error(ex.getMessage(), ex);
-        }finally {
-            IOs.close(expander);
+            LoggerFactory.getLogger(WheelArtifactDependenciesFinder.class).error("expand file {} fail, {}", localTempFile, ex.getMessage());
+        } finally {
+            if(expander==null){
+                IOs.close(inputStream);
+            }else {
+                IOs.close(expander);
+            }
         }
         return null;
     }
@@ -86,7 +93,7 @@ public class WheelArtifactDependenciesFinder extends AbstractArtifactDependencie
                     }
                 });
 
-        if(Objs.isEmpty(files)){
+        if (Objs.isEmpty(files)) {
             return null;
         }
         File metadataFile = files.get(0);

@@ -58,9 +58,11 @@ public class VersionExpressionParser implements ExpressionParser {
                         if (expression.startsWith(VersionSpecifiers.VERSION_EXP_COMPATIBLE_RELEASE)) {
                             // 移除 ~=
                             expression = expression.substring(VersionSpecifiers.VERSION_EXP_COMPATIBLE_RELEASE.length());
-                            expression = VersionSpecifiers.trimSpecifiers(expression);
 
                             MapAccessor versionSegments = VersionSpecifiers.extractVersionSegments(expression);
+                            if(versionSegments==null){
+                                return null;
+                            }
                             // 拼接 == version.*
                             StringBuilder versionMatching = new StringBuilder("== ");
                             if (versionSegments.has("epoch")) {
@@ -83,7 +85,7 @@ public class VersionExpressionParser implements ExpressionParser {
                             return Collects.newArrayList(expression);
                         }
                     }
-                }).flatMap(new Function<String, VersionPredicate>() {
+                }).clearNulls().flatMap(new Function<String, VersionPredicate>() {
             @Override
             public VersionPredicate apply(String expression) {
                 if (expression.startsWith(VersionSpecifiers.VERSION_EXP_ARBITRARY_EQUALITY)) {

@@ -10,7 +10,6 @@ import com.jn.langx.util.function.Predicate2;
 import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.io.file.FileFilter;
 import com.jn.langx.util.io.file.FileFilters;
-import com.jn.langx.util.io.file.Filenames;
 import com.jn.langx.util.io.file.Files;
 import com.jn.langx.util.io.file.filter.*;
 import com.jn.langx.util.logging.Loggers;
@@ -21,6 +20,7 @@ import com.jn.shelltools.supports.pypi.dependency.parser.SetupcfgParser;
 import org.apache.commons.vfs2.FileObject;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
@@ -30,22 +30,29 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
     @Override
     protected String expandArtifact(PypiArtifact pypiArtifact, FileObject tmpFileObject) {
         Expander expander = null;
+        File localTempFile = null;
+        InputStream inputStream = null;
         try {
-            File localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
+            localTempFile = Files.toFile(new URL(tmpFileObject.getName().getURI()));
             FileResource resource = Resources.loadFileResource(localTempFile);
             Loggers.getLogger(SourceArtifactDependenciesFinder.class).info("expd: {}", localTempFile.getName());
-            expander = AutowiredArchiveSuiteFactory.getInstance().get(pypiArtifact.getExtension(), resource.getInputStream());
+            inputStream = resource.getInputStream();
+            expander = AutowiredArchiveSuiteFactory.getInstance().get(pypiArtifact.getExtension(), inputStream);
             expander.setOverwriteExistsFiles(true);
 
-            String dirname = localTempFile.getName().replace('.','_');
+            String dirname = localTempFile.getName().replace('.', '_');
             File tmpExpandDir = new File(localTempFile.getParentFile(), dirname);
             expander.expandTo(tmpExpandDir);
 
             return tmpExpandDir.getAbsolutePath();
         } catch (Throwable ex) {
-            Loggers.getLogger(WheelArtifactDependenciesFinder.class).error(ex.getMessage(), ex);
-        }finally {
-            IOs.close(expander);
+            Loggers.getLogger(SourceArtifactDependenciesFinder.class).error("expand file {} fail, {}", localTempFile, ex.getMessage());
+        } finally {
+            if(expander==null){
+                IOs.close(inputStream);
+            }else {
+                IOs.close(expander);
+            }
         }
         return null;
     }
@@ -64,11 +71,11 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
         Collects.addAll(dependencies, deps1);
 
         // 从 setup.cfg 中找
-        List<String> deps2 = parseSetupcfg(pypiArtifact,tmpExpandDir);
+        List<String> deps2 = parseSetupcfg(pypiArtifact, tmpExpandDir);
         Collects.addAll(dependencies, deps2);
 
         // 从 setup.py 中找
-        if(Objs.isEmpty(deps2)) {
+        if (Objs.isEmpty(deps2)) {
             List<String> deps = null;
         }
         return dependencies;
@@ -92,13 +99,13 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
                 });
 
         File pyprojectFile = files.isEmpty() ? null : files.get(0);
-        if(pyprojectFile!=null) {
+        if (pyprojectFile != null) {
             return new PyprojectParser().parse(pyprojectFile);
         }
         return null;
     }
 
-    private List<String> parseSetupcfg(PypiArtifact pypiArtifact, String tmpExpandDir){
+    private List<String> parseSetupcfg(PypiArtifact pypiArtifact, String tmpExpandDir) {
         // 找到 setup.cfg 文件并进行解析
 
         FileFilter setupcfgFilter = FileFilters.allFileFilter(
@@ -115,7 +122,7 @@ public class SourceArtifactDependenciesFinder extends AbstractArtifactDependenci
                     }
                 });
 
-        if(Objs.isEmpty(files)){
+        if (Objs.isEmpty(files)) {
             return null;
         }
         File setupcfgFile = files.get(0);

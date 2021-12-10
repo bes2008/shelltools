@@ -10,7 +10,9 @@ import com.jn.langx.util.collection.MapAccessor;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Predicate;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.langx.util.struct.Holder;
+import org.slf4j.Logger;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.regex.Pattern;
  * https://www.python.org/dev/peps/pep-0440/
  */
 public class VersionSpecifiers {
+    private static final Logger logger = Loggers.getLogger(VersionSpecifiers.class);
     public static final String VERSION_EXP_COMPATIBLE_RELEASE = "~=";
     public static final String VERSION_EXP_VERSION_EXCLUSION = "!=";
     public static final String VERSION_EXP_INCLUSIVE_COMPARISON_LESS_THAN = "<=";
@@ -174,6 +177,7 @@ public class VersionSpecifiers {
                     });
             return new MapAccessor(map);
         }
-        throw new IllegalParameterException(StringTemplates.formatWithPlaceholder("version : {} is illegal", version));
+        logger.warn(StringTemplates.formatWithPlaceholder("version : {} is illegal", version));
+        return null;
     }
 }

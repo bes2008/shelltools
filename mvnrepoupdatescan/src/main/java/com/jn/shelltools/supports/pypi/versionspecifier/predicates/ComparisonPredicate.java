@@ -4,11 +4,13 @@ import com.jn.langx.util.Maths;
 import com.jn.langx.util.Numbers;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.MapAccessor;
+import com.jn.langx.util.comparator.StringComparator;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.shelltools.supports.pypi.versionspecifier.VersionPredicate;
 import com.jn.shelltools.supports.pypi.versionspecifier.VersionSpecifiers;
+import org.slf4j.Logger;
 
 /**
- *
  * <pre>
  *     >=, >, <, <=
  * </pre>
@@ -19,8 +21,8 @@ import com.jn.shelltools.supports.pypi.versionspecifier.VersionSpecifiers;
  *      dev < pre < post < release
  *  </pre>
  */
-public class ComparisonPredicate extends VersionPredicate{
-
+public class ComparisonPredicate extends VersionPredicate {
+    private static final Logger logger = Loggers.getLogger(ComparisonPredicate.class);
     /**
      * 判定时是否判定 等于。
      */
@@ -42,21 +44,33 @@ public class ComparisonPredicate extends VersionPredicate{
 
     @Override
     public boolean test(String actual) {
-        MapAccessor actualResult = VersionSpecifiers.extractVersionSegments(actual);
+        try {
 
-        int result = compare(expectResult, actualResult);
-        if (!lessThan) {
-            if (inclusive) {
-                return result >= 0;
+            MapAccessor actualResult = VersionSpecifiers.extractVersionSegments(actual);
+
+            int result = -1;
+            if (expectResult == null || actualResult == null) {
+                // 版本表达式不正常情况
+                result = new StringComparator(true).compare(actual, excepted);
             } else {
-                return result > 0;
+                result = compare(expectResult, actualResult);
             }
-        } else {
-            if (inclusive) {
-                return result <= 0;
+            if (!lessThan) {
+                if (inclusive) {
+                    return result >= 0;
+                } else {
+                    return result > 0;
+                }
             } else {
-                return result < 0;
+                if (inclusive) {
+                    return result <= 0;
+                } else {
+                    return result < 0;
+                }
             }
+        } catch (Throwable ex) {
+            logger.warn(ex.getMessage(), ex);
+            return false;
         }
     }
 
@@ -86,8 +100,8 @@ public class ComparisonPredicate extends VersionPredicate{
 
     private int compareEpochSegment(MapAccessor expected, MapAccessor actual) {
         if (!expected.isNull("epoch") && !actual.isNull("epoch")) {
-            int epoch1 = expected.getInteger("epoch",0);
-            int epoch2 = expected.getInteger("epoch",0);
+            int epoch1 = expected.getInteger("epoch", 0);
+            int epoch2 = expected.getInteger("epoch", 0);
 
             return epoch2 - epoch1;
         } else {

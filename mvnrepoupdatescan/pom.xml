@@ -15,7 +15,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <langx.version>4.1.1</langx.version>
         <easyjson.version>3.1.4</easyjson.version>
-        <agileway.version>2.6.9</agileway.version>
+        <agileway.version>2.6.11</agileway.version>
         <jackson.version>2.13.0</jackson.version>
     </properties>
 

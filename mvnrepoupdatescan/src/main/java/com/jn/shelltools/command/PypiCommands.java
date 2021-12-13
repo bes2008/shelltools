@@ -55,7 +55,7 @@ public class PypiCommands {
             @ShellOption(value = "--package", help = "the package name or the requirements file path") String packageName,
             @ShellOption(value = "--with-deps", defaultValue = "true", help = "with its dependencies ?") boolean withDeps,
             @ShellOption(value = "--source", defaultValue = "true", help = "whether download the source package or not") boolean downloadSource,
-            @ShellOption(value = "--exclusion-tags", defaultValue = "armv7,armv71,armv7s,s390,s390x,ia64,win32,macosx,i686,cp26,cp27,cp30,cp31,cp32,cp33,cp34,cp35,cp36,cp37,cp38,cp39,cp26m,cp27m,cp30m,cp31m,cp32m,cp33m,cp34m,cp35m,cp36m,cp37m,cp38m,cp39m", help = "exclusion packages, use comma") String exclusionTags) {
+            @ShellOption(value = "--exclusion-tags", defaultValue = "armv7,armv71,armv7s,s390,s390x,ia64,win32,macosx,i686,cp26,cp27,cp30,cp31,cp32,cp33,cp34,cp35,cp36,cp37,cp38,cp39,cp26m,cp27m,cp30m,cp31m,cp32m,cp33m,cp34m,cp35m,cp36m,cp37m,cp38m,cp39m,py24,py2.4,py25,py2.5", help = "exclusion packages, use comma") String exclusionTags) {
 
         List<Predicate<PypiArtifact>> predicates = new ArrayList<>();
 

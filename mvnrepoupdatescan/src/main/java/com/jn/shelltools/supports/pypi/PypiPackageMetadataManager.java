@@ -4,8 +4,14 @@ import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.cache.Cache;
 import com.jn.langx.cache.CacheBuilder;
+import com.jn.langx.util.Objs;
 import com.jn.langx.util.Strings;
+import com.jn.langx.util.Throwables;
+import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.ConcurrentHashSet;
+import com.jn.langx.util.collection.Pipeline;
+import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.function.Function;
 import com.jn.langx.util.io.Charsets;
 import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.logging.Loggers;
@@ -20,6 +26,8 @@ import org.slf4j.Logger;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class PypiPackageMetadataManager extends RequirementsManager {
@@ -44,9 +52,23 @@ public class PypiPackageMetadataManager extends RequirementsManager {
     /**
      * 正在获取的package的集合
      */
-    private ConcurrentHashSet packaging = new ConcurrentHashSet<>();
+    private ConcurrentHashSet loading = new ConcurrentHashSet<>();
+
+    public boolean isPackageInRepository(String packageName) {
+        try {
+            PipPackageMetadataArtifact artifact = new PipPackageMetadataArtifact(packageName);
+            FileObject fileObject = artifactManager.getArtifactFile(artifact);
+            return FileObjects.isExists(fileObject);
+        } catch (Throwable ex) {
+            throw Throwables.wrapAsRuntimeException(ex);
+        }
+    }
 
     public PipPackageMetadata getOfficialMetadata(String packageName) {
+        return getOfficialMetadata(packageName, false);
+    }
+
+    public PipPackageMetadata getOfficialMetadata(String packageName, boolean storeIfAbsent) {
         if (Strings.isBlank(packageName)) {
             return null;
         }
@@ -57,9 +79,9 @@ public class PypiPackageMetadataManager extends RequirementsManager {
             return metadata;
         }
         try {
-            if (packaging.contains(packageName)) {
+            if (loading.contains(packageName)) {
                 synchronized (this) {
-                    while (packaging.contains(packageName)) {
+                    while (loading.contains(packageName)) {
                         this.wait(10);
                     }
                 }
@@ -67,14 +89,13 @@ public class PypiPackageMetadataManager extends RequirementsManager {
         } catch (Throwable ex) {
             // ignore it
         }
-        packaging.add(packageName);
+        loading.add(packageName);
         // 先从本地仓库获取
         PipPackageMetadataArtifact artifact = new PipPackageMetadataArtifact(packageName);
 
 
         FileObject fileObject = null;
         try {
-
             fileObject = artifactManager.getArtifactFile(artifact);
             if (FileObjects.isExists(fileObject)) {
                 synchronized (this) {
@@ -90,32 +111,65 @@ public class PypiPackageMetadataManager extends RequirementsManager {
                 }
             }
             if (metadata == null) {
-
                 metadata = this.restApi.packageMetadata(packageName);
-                if (metadata != null) {
-
+                if (metadata != null && storeIfAbsent) {
                     // 写到本地仓库
                     String str = JSONBuilderProvider.create().prettyFormat(true).build().toJson(metadata);
                     if (!fileObject.exists()) {
                         fileObject.getParent().createFolder();
                         fileObject.createFile();
                     }
-                    OutputStream out = fileObject.getContent().getOutputStream(false);
-                    out.write(str.getBytes(Charsets.UTF_8));
-                    out.flush();
-                    IOs.close(out);
+                    OutputStream out = null;
+                    try {
+                        out = fileObject.getContent().getOutputStream(false);
+                        out.write(str.getBytes(Charsets.UTF_8));
+                        out.flush();
+                    } finally {
+                        IOs.close(out);
+                    }
+
                 }
             }
 
         } catch (Throwable ex) {
             logger.error("error get metadata for {} from official, {},", packageName, ex.getMessage(), ex);
         } finally {
-            packaging.remove(packageName);
+            loading.remove(packageName);
             synchronized (this) {
                 this.notify();
             }
         }
         cache.set(packageName, new Holder<PipPackageMetadata>(metadata));
         return metadata;
+    }
+
+    public List<PipPackageMetadata> findMetadatas(List<String> packageNames) {
+        return Pipeline.of(packageNames).map(new Function<String, PipPackageMetadata>() {
+            @Override
+            public PipPackageMetadata apply(String packageName) {
+                return getOfficialMetadata(packageName);
+            }
+        }).clearNulls().asList();
+    }
+    public Map<String, String> getLicenses(List<String> packageNames){
+        return getLicenses(packageNames,false);
+    }
+    public Map<String, String> getLicenses(List<String> packageNames, boolean allLocalPackage) {
+        Map<String, String> map = Collects.emptyHashMap();
+        if (Objs.isEmpty(packageNames)) {
+            if (allLocalPackage) {
+
+            }
+        } else {
+            Pipeline.of(findMetadatas(packageNames))
+                    .forEach(new Consumer<PipPackageMetadata>() {
+                        @Override
+                        public void accept(PipPackageMetadata pipPackageMetadata) {
+                            map.put(pipPackageMetadata.getInfo().getName(), pipPackageMetadata.getInfo().getLicense());
+                        }
+                    });
+
+        }
+        return map;
     }
 }

@@ -38,6 +38,7 @@ import org.apache.commons.vfs2.Selectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -386,5 +387,8 @@ public class PypiPackageManager implements LocalPackageScanner {
         return null;
     }
 
+    public boolean packageHasManaged(String packageName) {
+        return metadataManager.isPackageInRepository(packageName);
+    }
 
 }

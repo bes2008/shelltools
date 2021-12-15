@@ -4,10 +4,12 @@ import com.jn.easyjson.core.JSON;
 import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
+import com.jn.langx.text.StringTemplates;
+import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.DistinctLinkedBlockingQueue;
-import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.function.Consumer2;
 import com.jn.langx.util.function.Functions;
 import com.jn.langx.util.function.Predicate;
 import com.jn.shelltools.supports.pypi.PypiArtifact;
@@ -28,6 +30,7 @@ import org.springframework.shell.standard.ShellOption;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @ShellComponent
 @ShellCommandGroup("pip")
@@ -35,6 +38,7 @@ public class PypiCommands {
     private static final Logger logger = LoggerFactory.getLogger(PypiCommands.class);
     @Autowired
     private PypiPackageManager pypiPackageManager;
+    @Autowired
     private PypiPackageMetadataManager pypiPackageMetadataManager;
 
     @ShellMethod(key = "pip show", value = "show the metadata for a python package")
@@ -46,7 +50,7 @@ public class PypiCommands {
             JSON json = JSONBuilderProvider.create().prettyFormat(true).serializeNulls(true).build();
             System.out.println(json.toJson(metadata));
         } else {
-            System.out.printf("package not exist");
+            System.out.println(StringTemplates.formatWithPlaceholder("package {} not exist", packageName));
         }
     }
 
@@ -81,4 +85,22 @@ public class PypiCommands {
             pypiPackageManager.downloadPackages(queue, withDeps, artifactPredicate);
         }
     }
+
+    @ShellMethod(key = "pip license", value = "show license of specified packages")
+    public List<String> showLicenses(
+            @ShellOption(value = "--package", help = "the package names, list of comma", defaultValue = "__IS_NULL__") String packageNameListString,
+            @ShellOption(value = "--all", help = "all package in local repository", defaultValue = "true") boolean all) {
+        String[] packageNames = packageNameListString.split(",");
+        Map<String, String> map = pypiPackageMetadataManager.getLicenses(Collects.asList(packageNames), all);
+        final List<String> ret = Collects.emptyArrayList();
+        Collects.forEach(map, new Consumer2<String, String>() {
+            @Override
+            public void accept(String key, String value) {
+                ret.add(StringTemplates.formatWithPlaceholder("{} = {}", key, value));
+            }
+        });
+        return ret;
+    }
+
+
 }

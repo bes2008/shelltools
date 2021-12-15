@@ -28,3 +28,7 @@
 1639050596365:pip download --package C:/Users/Administrator/IdeaProjects/shelltools/mvnrepoupdatescan/src/test/resources/pypi/tests/requirements-1.txt
 1639053562485:stacktrace
 1639053656859:pip download --package C:/Users/Administrator/IdeaProjects/shelltools/mvnrepoupdatescan/src/test/resources/pypi/tests/requirements-1.txt
+1639569517203:help
+1639569531397:pip license --package PyYAML
+1639569553506:stacktrace
+1639569591184:pip license --package PyYAML

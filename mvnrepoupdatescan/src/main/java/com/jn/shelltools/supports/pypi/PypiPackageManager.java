@@ -1,6 +1,7 @@
 package com.jn.shelltools.supports.pypi;
 
 import com.jn.agileway.vfs.artifact.ArtifactManager;
+import com.jn.agileway.vfs.filter.IsDirectoryFilter;
 import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.Filter;
@@ -17,6 +18,7 @@ import com.jn.langx.util.collection.ConcurrentHashSet;
 import com.jn.langx.util.collection.DistinctLinkedBlockingQueue;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.*;
+import com.jn.langx.util.io.file.filter.IsDirectoryFileFilter;
 import com.jn.langx.util.net.URLs;
 import com.jn.langx.util.os.Platform;
 import com.jn.langx.util.struct.Holder;
@@ -395,11 +397,25 @@ public class PypiPackageManager implements LocalPackageScanner {
                 if (FileObjects.isExists(metadataFile)) {
 
                 } else {
-                    return null;
+                    List<FileObject> children = FileObjects.findChildren(fileObject, new IsDirectoryFilter());
+                    children = Pipeline.of(children).filter(new Predicate<FileObject>() {
+                        @Override
+                        public boolean test(FileObject child) {
+                            try {
+                                FileObject metadataFile = child.getChild(child.getName().getBaseName() + "-metadata.json");
+                                if (FileObjects.isExists(metadataFile)) {
+                                    return true;
+                                }
+                            } catch (Throwable ex) {
+
+                            }
+                            return false;
+                        }
+                    }).asList();
                 }
             }
-        }catch (Throwable ex){
-            logger.error(ex.getMessage(),ex);
+        } catch (Throwable ex) {
+            logger.error(ex.getMessage(), ex);
         }
         return null;
     }

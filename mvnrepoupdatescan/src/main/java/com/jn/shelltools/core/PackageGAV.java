@@ -4,9 +4,6 @@ import com.jn.agileway.vfs.artifact.IGAV;
 import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Objs;
 import com.jn.langx.util.hash.HashCodeBuilder;
-import com.jn.shelltools.supports.maven.model.MavenGAV;
-
-import java.util.Objects;
 
 public class PackageGAV implements IGAV {
     private String groupId;

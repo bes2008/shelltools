@@ -38,7 +38,6 @@ import org.apache.commons.vfs2.Selectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -383,7 +382,25 @@ public class PypiPackageManager implements LocalPackageScanner {
     }
 
     @Override
-    public Map<PackageGAV, PackageArtifact> scan(String path, Filter<PackageArtifact> filter) {
+    public Map<PackageGAV, PackageArtifact> scan(String relativePath, Filter<PackageArtifact> filter) {
+        FileObject fileObject = artifactManager.getFile(relativePath);
+        try {
+            if (fileObject.isFolder()) {
+                // 找到目录下有 -metadata.json
+                String directoryName = fileObject.getName().getBaseName();
+                /**
+                 * @see com.jn.agileway.vfs.artifact.AbstractArtifact.PipPackageMetadataArtifact
+                 */
+                FileObject metadataFile = fileObject.getChild(directoryName + "-metadata.json");
+                if (FileObjects.isExists(metadataFile)) {
+
+                } else {
+                    return null;
+                }
+            }
+        }catch (Throwable ex){
+            logger.error(ex.getMessage(),ex);
+        }
         return null;
     }
 

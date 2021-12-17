@@ -1,8 +1,8 @@
 package com.jn.shelltools.supports.pypi.repository;
 
 import com.jn.agileway.vfs.artifact.Artifact;
+import com.jn.agileway.vfs.artifact.repository.AbstractArtifactRepositoryLayout;
 import com.jn.agileway.vfs.artifact.repository.ArtifactRepository;
-import com.jn.agileway.vfs.artifact.repository.ArtifactRepositoryLayout;
 import com.jn.langx.util.Objs;
 import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
@@ -12,7 +12,27 @@ import com.jn.shelltools.supports.pypi.packagemetadata.PipPackageRelease;
 /**
  * Pypi 官方介质下载地址的 布局方式
  */
-public class PypiPackageLayout implements ArtifactRepositoryLayout {
+public class PypiPackageLayout extends AbstractArtifactRepositoryLayout {
+
+    public PypiPackageLayout(){
+        setName("pypi");
+    }
+
+    @Override
+    public String getFilePath(ArtifactRepository artifactRepository, String relativePath) {
+        return null;
+    }
+
+    @Override
+    public String getFileDigestPath(ArtifactRepository artifactRepository, String s, String s1) {
+        return null;
+    }
+
+    @Override
+    public String toRelativePath(ArtifactRepository artifactRepository, Artifact artifact) {
+        return null;
+    }
+
 
     public String getPath(ArtifactRepository repository, Artifact art) {
         Preconditions.checkTrue(art instanceof PypiArtifact);
@@ -41,13 +61,4 @@ public class PypiPackageLayout implements ArtifactRepositoryLayout {
         return null;
     }
 
-    @Override
-    public void setName(String s) {
-
-    }
-
-    @Override
-    public String getName() {
-        return "pypi";
-    }
 }

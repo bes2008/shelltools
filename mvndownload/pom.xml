@@ -10,7 +10,7 @@
 
 
 	<properties>
-	       <slf4j.version>1.7.22</slf4j.version>
+	       <slf4j.version>1.7.32</slf4j.version>
 		<esmvc.version>1.3.1</esmvc.version>
 		<easyjson.version>3.2.3</easyjson.version>
 		<sqlhelper.version>3.6.0</sqlhelper.version>

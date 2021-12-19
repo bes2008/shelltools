@@ -16,7 +16,7 @@
 		<sqlhelper.version>3.6.0</sqlhelper.version>
 		<langx-java.version>3.6.6</langx-java.version>
 		<audit.version>2.3.8</audit.version>		
-		<agileway.version>2.6.2</agileway.version>
+		<agileway.version>2.6.3</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>
 		<kryo.version>5.0.0-RC9</kryo.version>

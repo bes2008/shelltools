@@ -13,9 +13,9 @@
         <spring.version>5.2.6.RELEASE</spring.version>
         <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
         <slf4j.version>1.7.25</slf4j.version>
-        <langx.version>4.2.1</langx.version>
-        <easyjson.version>3.1.4</easyjson.version>
-        <agileway.version>2.6.11</agileway.version>
+        <langx.version>4.2.2</langx.version>
+        <easyjson.version>3.2.12</easyjson.version>
+        <agileway.version>2.6.13</agileway.version>
         <jackson.version>2.13.0</jackson.version>
         <log4j2.version>2.17.0</log4j2.version>
     </properties>

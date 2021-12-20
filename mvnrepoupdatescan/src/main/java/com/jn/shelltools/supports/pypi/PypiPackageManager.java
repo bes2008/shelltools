@@ -422,7 +422,12 @@ public class PypiPackageManager implements LocalPackageScanner {
                             @Override
                             public void accept(FileObject fileObject) {
                                 List<LocalPackageArtifact> versions = scanPackageVersions(fileObject, filter);
+                                Collects.forEach(versions, new Consumer<LocalPackageArtifact>() {
+                                    @Override
+                                    public void accept(LocalPackageArtifact localPackageArtifact) {
 
+                                    }
+                                });
                             }
                         });
                     }

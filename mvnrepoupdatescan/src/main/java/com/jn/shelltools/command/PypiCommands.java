@@ -91,7 +91,7 @@ public class PypiCommands {
             @ShellOption(value = "--package", help = "the package names, list of comma", defaultValue = "__IS_NULL__") String packageNameListString,
             @ShellOption(value = "--all", help = "all package in local repository", defaultValue = "true") boolean all) {
         String[] packageNames = packageNameListString.split(",");
-        Map<String, String> map = pypiPackageMetadataManager.getLicenses(Collects.asList(packageNames), all);
+        Map<String, String> map = pypiPackageManager.getLicenses(Collects.asList(packageNames), all);
         final List<String> ret = Collects.emptyArrayList();
         Collects.forEach(map, new Consumer2<String, String>() {
             @Override

@@ -398,7 +398,17 @@ public class PypiPackageManager implements LocalPackageScanner {
                 FileObject metadataFile = fileObject.getChild(directoryName + "-metadata.json");
                 if (FileObjects.isExists(metadataFile)) {
                     List<LocalPackageArtifact> versions = scanPackageVersions(fileObject, filter);
+                    Collects.forEach(versions, new Consumer<LocalPackageArtifact>() {
+                        @Override
+                        public void accept(LocalPackageArtifact localPackageArtifact) {
+                            PackageGAV packageGAV = new PackageGAV();
+                            packageGAV.setGroupId(localPackageArtifact.getGroupId());
+                            packageGAV.setArtifactId(localPackageArtifact.getArtifactId());
+                            packageGAV.setVersion(localPackageArtifact.getVersion());
 
+                            result.put(packageGAV, localPackageArtifact);
+                        }
+                    });
                 } else {
                     // 找到 该目录下所有的 符合条件的子目录
                     List<FileObject> children = FileObjects.findChildren(fileObject, new IsDirectoryFilter());
@@ -425,7 +435,12 @@ public class PypiPackageManager implements LocalPackageScanner {
                                 Collects.forEach(versions, new Consumer<LocalPackageArtifact>() {
                                     @Override
                                     public void accept(LocalPackageArtifact localPackageArtifact) {
+                                        PackageGAV packageGAV = new PackageGAV();
+                                        packageGAV.setGroupId(localPackageArtifact.getGroupId());
+                                        packageGAV.setArtifactId(localPackageArtifact.getArtifactId());
+                                        packageGAV.setVersion(localPackageArtifact.getVersion());
 
+                                        result.put(packageGAV, localPackageArtifact);
                                     }
                                 });
                             }
@@ -436,7 +451,7 @@ public class PypiPackageManager implements LocalPackageScanner {
         } catch (Throwable ex) {
             logger.error(ex.getMessage(), ex);
         }
-        return null;
+        return result;
     }
 
     private List<LocalPackageArtifact> scanPackageVersions(FileObject currentPackageRootDir, Filter<LocalPackageArtifact> filter) {
@@ -485,4 +500,35 @@ public class PypiPackageManager implements LocalPackageScanner {
         return metadataManager.isPackageInRepository(packageName);
     }
 
+
+    public Map<String, String> getLicenses(List<String> packageNames) {
+        return getLicenses(packageNames, false);
+    }
+
+    public Map<String, String> getLicenses(List<String> packageNames, boolean allLocalPackage) {
+        Map<String, String> map = Collects.emptyHashMap();
+        if (Objs.isEmpty(packageNames)) {
+            if (allLocalPackage) {
+                Map<PackageGAV, LocalPackageArtifact> versionedPackageMap = scan(null, null);
+                Set<String> allPackageNames = Pipeline.of(versionedPackageMap.keySet())
+                        .map(new Function<PackageGAV, String>() {
+                            @Override
+                            public String apply(PackageGAV packageGAV) {
+                                return packageGAV.getArtifactId();
+                            }
+                        }).asSet(false);
+
+                packageNames = Collects.asList(allPackageNames);
+            }
+        }
+        Pipeline.of(metadataManager.findMetadatas(packageNames))
+                .forEach(new Consumer<PipPackageMetadata>() {
+                    @Override
+                    public void accept(PipPackageMetadata pipPackageMetadata) {
+                        map.put(pipPackageMetadata.getInfo().getName(), pipPackageMetadata.getInfo().getLicense());
+                    }
+                });
+
+        return map;
+    }
 }

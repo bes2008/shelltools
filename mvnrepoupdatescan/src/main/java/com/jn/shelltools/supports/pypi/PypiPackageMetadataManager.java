@@ -33,13 +33,11 @@ import java.util.concurrent.TimeUnit;
 public class PypiPackageMetadataManager extends RequirementsManager {
     private static final Logger logger = Loggers.getLogger(PypiPackageMetadataManager.class);
     private PypiRestApi restApi;
-
-
-    public void setRestApi(PypiRestApi restApi) {
-        this.restApi = restApi;
-    }
-
     private Cache<String, Holder<PipPackageMetadata>> cache;
+    /**
+     * 正在获取的package的集合
+     */
+    private ConcurrentHashSet loading = new ConcurrentHashSet<>();
 
     public PypiPackageMetadataManager() {
         cache = CacheBuilder.<String, Holder<PipPackageMetadata>>newBuilder()
@@ -49,10 +47,9 @@ public class PypiPackageMetadataManager extends RequirementsManager {
                 .build();
     }
 
-    /**
-     * 正在获取的package的集合
-     */
-    private ConcurrentHashSet loading = new ConcurrentHashSet<>();
+    public void setRestApi(PypiRestApi restApi) {
+        this.restApi = restApi;
+    }
 
     public boolean isPackageInRepository(String packageName) {
         try {
@@ -151,25 +148,5 @@ public class PypiPackageMetadataManager extends RequirementsManager {
             }
         }).clearNulls().asList();
     }
-    public Map<String, String> getLicenses(List<String> packageNames){
-        return getLicenses(packageNames,false);
-    }
-    public Map<String, String> getLicenses(List<String> packageNames, boolean allLocalPackage) {
-        Map<String, String> map = Collects.emptyHashMap();
-        if (Objs.isEmpty(packageNames)) {
-            if (allLocalPackage) {
 
-            }
-        } else {
-            Pipeline.of(findMetadatas(packageNames))
-                    .forEach(new Consumer<PipPackageMetadata>() {
-                        @Override
-                        public void accept(PipPackageMetadata pipPackageMetadata) {
-                            map.put(pipPackageMetadata.getInfo().getName(), pipPackageMetadata.getInfo().getLicense());
-                        }
-                    });
-
-        }
-        return map;
-    }
 }

@@ -12,5 +12,5 @@ public interface PackageScanner{
      * @param filter 扫描时过滤器
      * @return 返回搜索到的包
      */
-    Map<PackageGAV, PackageArtifact> scan(String relativePath, Filter<PackageArtifact> filter);
+    Map<PackageGAV, LocalPackageArtifact> scan(String relativePath, Filter<LocalPackageArtifact> filter);
 }

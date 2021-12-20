@@ -1,7 +1,7 @@
 package com.jn.shelltools.supports.pypi;
 
 import com.jn.agileway.vfs.artifact.ArtifactManager;
-import com.jn.agileway.vfs.filter.IsDirectoryFilter;
+import com.jn.agileway.vfs.filter.*;
 import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.Filter;
@@ -18,14 +18,14 @@ import com.jn.langx.util.collection.ConcurrentHashSet;
 import com.jn.langx.util.collection.DistinctLinkedBlockingQueue;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.*;
-import com.jn.langx.util.io.file.filter.IsDirectoryFileFilter;
+import com.jn.langx.util.function.predicate.filter.FilterToPredicateAdapter;
 import com.jn.langx.util.net.URLs;
 import com.jn.langx.util.os.Platform;
 import com.jn.langx.util.struct.Holder;
 import com.jn.langx.util.struct.Pair;
 import com.jn.langx.util.struct.pair.NameValuePair;
 import com.jn.shelltools.core.LocalPackageScanner;
-import com.jn.shelltools.core.PackageArtifact;
+import com.jn.shelltools.core.LocalPackageArtifact;
 import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.supports.pypi.dependency.ArtifactsDependenciesFinder;
 import com.jn.shelltools.supports.pypi.dependency.DefaultArtifactsDependenciesFinder;
@@ -40,6 +40,7 @@ import org.apache.commons.vfs2.Selectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -384,8 +385,9 @@ public class PypiPackageManager implements LocalPackageScanner {
     }
 
     @Override
-    public Map<PackageGAV, PackageArtifact> scan(String relativePath, Filter<PackageArtifact> filter) {
+    public Map<PackageGAV, LocalPackageArtifact> scan(String relativePath, Filter<LocalPackageArtifact> filter) {
         FileObject fileObject = artifactManager.getFile(relativePath);
+        Map<PackageGAV, LocalPackageArtifact> result = new HashMap<PackageGAV, LocalPackageArtifact>();
         try {
             if (fileObject.isFolder()) {
                 // 找到目录下有 -metadata.json
@@ -395,8 +397,10 @@ public class PypiPackageManager implements LocalPackageScanner {
                  */
                 FileObject metadataFile = fileObject.getChild(directoryName + "-metadata.json");
                 if (FileObjects.isExists(metadataFile)) {
+                    List<LocalPackageArtifact> versions = scanPackageVersions(fileObject, filter);
 
                 } else {
+                    // 找到 该目录下所有的 符合条件的子目录
                     List<FileObject> children = FileObjects.findChildren(fileObject, new IsDirectoryFilter());
                     children = Pipeline.of(children).filter(new Predicate<FileObject>() {
                         @Override
@@ -407,17 +411,69 @@ public class PypiPackageManager implements LocalPackageScanner {
                                     return true;
                                 }
                             } catch (Throwable ex) {
-
+                                logger.error(ex.getMessage());
                             }
                             return false;
                         }
                     }).asList();
+
+                    if (!children.isEmpty()) {
+                        Collects.forEach(children, new Consumer<FileObject>() {
+                            @Override
+                            public void accept(FileObject fileObject) {
+                                List<LocalPackageArtifact> versions = scanPackageVersions(fileObject, filter);
+
+                            }
+                        });
+                    }
                 }
             }
         } catch (Throwable ex) {
             logger.error(ex.getMessage(), ex);
         }
         return null;
+    }
+
+    private List<LocalPackageArtifact> scanPackageVersions(FileObject currentPackageRootDir, Filter<LocalPackageArtifact> filter) {
+        final String packageName = currentPackageRootDir.getName().getBaseName();
+        PipPackageMetadata packageMetadata = metadataManager.getOfficialMetadata(packageName);
+        if (packageMetadata == null) {
+            return Collects.immutableList();
+        }
+        // 找到所有的 确认存在的 版本目录：
+        List<FileObject> children = FileObjects.findChildren(currentPackageRootDir, new AllMatchFileFilter(new IsDirectoryFilter(), new FileObjectFilter() {
+            @Override
+            public boolean test(FileObject child) {
+                String childDirectoryName = child.getName().getBaseName();
+                return packageMetadata.getReleases().containsKey(childDirectoryName);
+            }
+        }));
+        return Pipeline.of(children)
+                .filter(new Predicate<FileObject>() {
+                    @Override
+                    public boolean test(FileObject versionDir) {
+                        List<FileObject> mediaFiles = FileObjects.findChildren(versionDir, new AllMatchFileFilter(new IsFileFilter(), new FilenamePrefixFileFilter(false, packageName), new FilenameSuffixFileFilter(true, Pypis.getAllFileExtensions().toArray(new String[0]))));
+                        return Objs.isNotEmpty(mediaFiles);
+                    }
+                })
+                .map(new Function<FileObject, LocalPackageArtifact>() {
+                    @Override
+                    public LocalPackageArtifact apply(FileObject versionDir) {
+                        String version = versionDir.getName().getBaseName();
+                        LocalPackageArtifact artifact = new LocalPackageArtifact();
+                        artifact.setGroupId(packageName);
+                        artifact.setArtifactId(packageName);
+                        artifact.setVersion(version);
+                        artifact.setLocalPath(versionDir.getName().getPath());
+                        try {
+                            artifact.setLastModified(versionDir.getContent().getLastModifiedTime());
+                        } catch (FileSystemException e) {
+                            logger.error(e.getMessage(), e);
+                        }
+                        return artifact;
+                    }
+                }).filter(new FilterToPredicateAdapter<>(filter)).asList();
+
     }
 
     public boolean packageHasManaged(String packageName) {

@@ -1,13 +1,13 @@
 package com.jn.shelltools.supports.maven.model;
 
-import com.jn.shelltools.core.PackageArtifact;
+import com.jn.shelltools.core.LocalPackageArtifact;
 
 import java.util.List;
 
 /**
  * maven java 包的一个发布情况
  */
-public class MavenPackageArtifact extends PackageArtifact {
+public class MavenPackageArtifact extends LocalPackageArtifact {
     private MavenGAV parent;
     private String description;
     private String name;
@@ -16,10 +16,7 @@ public class MavenPackageArtifact extends PackageArtifact {
     private long lastModifiedTime;
     private List<MavenPackageArtifact> dependencies;
     private List<License> licenses;
-    /**
-     * pom 文件所在的本地仓库的目录
-     */
-    private String localPath;
+
 
     public MavenGAV getGav() {
         return new MavenGAV(getGroupId(), getArtifactId(), getVersion());
@@ -79,13 +76,6 @@ public class MavenPackageArtifact extends PackageArtifact {
         this.lastModifiedTime = lastModifiedTime;
     }
 
-    public String getLocalPath() {
-        return localPath;
-    }
-
-    public void setLocalPath(String localPath) {
-        this.localPath = localPath;
-    }
 
     public List<MavenPackageArtifact> getDependencies() {
         return dependencies;

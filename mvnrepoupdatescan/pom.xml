@@ -16,7 +16,7 @@
         <langx.version>4.2.2</langx.version>
         <easyjson.version>3.2.12</easyjson.version>
         <agileway.version>2.6.13</agileway.version>
-        <jackson.version>2.13.0</jackson.version>
+        <jackson.version>2.13.1</jackson.version>
         <log4j2.version>2.17.0</log4j2.version>
     </properties>
 

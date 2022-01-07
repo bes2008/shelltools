@@ -12,7 +12,7 @@
     <properties>
         <spring.version>5.3.13</spring.version>
         <spring.boot.version>2.6.0</spring.boot.version>
-        <slf4j.version>1.7.25</slf4j.version>
+        <slf4j.version>1.7.32</slf4j.version>
         <langx.version>4.2.3</langx.version>
         <easyjson.version>3.2.12</easyjson.version>
         <agileway.version>2.7.0</agileway.version>

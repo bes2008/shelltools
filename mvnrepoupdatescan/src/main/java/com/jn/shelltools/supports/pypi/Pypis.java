@@ -8,15 +8,19 @@ import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
+import com.jn.langx.util.collection.multivalue.CommonMultiValueMap;
 import com.jn.langx.util.collection.multivalue.LinkedMultiValueMap;
 import com.jn.langx.util.collection.multivalue.MultiValueMap;
 import com.jn.langx.util.function.Functions;
 import com.jn.langx.util.function.Predicate;
+import com.jn.langx.util.function.predicate.StringListContainsPredicate;
+import com.jn.shelltools.supports.pypi.packagemetadata.PipPackageInfo;
 import com.jn.shelltools.supports.pypi.versionspecifier.VersionSpecifiers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 
@@ -32,7 +36,7 @@ public class Pypis {
     public static final String PACKAGE_TYPE_BINARY_RPM = "bdist_rpm";
     public static final String PACKAGE_TYPE_BINARY_HPUX_RPM = "bdist_sdux";
     public static final String PACKAGE_TYPE_BINARY_SOLARIS_RPM = "bdist_pkgtool";
-    public static final String PACKAGE_TYPE_BINARY_DMG="bdist_dmg";
+    public static final String PACKAGE_TYPE_BINARY_DMG = "bdist_dmg";
 
     public static final String ARCHIVE_EXTENSION_ZIP = "zip";
     public static final String ARCHIVE_EXTENSION_TAR_GZ = "tar.gz";
@@ -43,7 +47,7 @@ public class Pypis {
     public static final String ARCHIVE_EXTENSION_EGG = "egg";
     public static final String ARCHIVE_EXTENSION_MSI = "msi";
     public static final String ARCHIVE_EXTENSION_RPM = "rpm";
-    public static final String ARCHIVE_EXTENSION_DMG="dmg";
+    public static final String ARCHIVE_EXTENSION_DMG = "dmg";
 
     static {
         /**
@@ -128,7 +132,7 @@ public class Pypis {
             }
         });
         if (Strings.isBlank(str) || Strings.isBlank(extension)) {
-            logger.error(StringTemplates.formatWithPlaceholder("unsupported extension： {}" ,extension));
+            logger.error(StringTemplates.formatWithPlaceholder("unsupported extension： {}", extension));
             logger.error(StringTemplates.formatWithPlaceholder("illegal file name: {}, for package: {}, version: {}, packageType: {}", filename, packageName, version, packageType));
             return null;
         }
@@ -154,4 +158,54 @@ public class Pypis {
 
     }
 
+    public String extractLicense(PipPackageInfo packageInfo) {
+        String license = packageInfo.getLicense();
+        if (Strings.isBlank(license)) {
+            license = Pipeline.of(packageInfo.getClassifiers())
+                    .findFirst(new Predicate<String>() {
+                        @Override
+                        public boolean test(String classifier) {
+                            return Strings.startsWith(classifier, "License ::", true);
+                        }
+                    });
+            if (license != null) {
+                license = Strings.substring(license, "License ::".length()).trim();
+                if (Strings.startsWith(license, "OSI Approved ::", true)) {
+                    license = Strings.substring(license, "OSI Approved ::".length()).trim();
+                }
+            }
+        }
+        if(Strings.isNotEmpty(license)){
+
+        }
+        return license;
+    }
+
+    private static final MultiValueMap<String,Predicate<String>> LICENSE_ALIASES=new CommonMultiValueMap<String, Predicate<String>>();
+    static {
+        LICENSE_ALIASES.put("Apache 2.0", Collects.asList(
+                new StringListContainsPredicate("Apache", "Apache Software License","ASL","Apache 2.0","Apache-2.0 license","Apache License, Version 2.0")
+        ));
+        LICENSE_ALIASES.put("BSD",Collects.asList(
+                new StringListContainsPredicate("BSD", "BSD-2-Clause","BSD-3-Clause","BSD License","BSD 3-Clause License")
+        ));
+        LICENSE_ALIASES.put("MIT",Collects.asList(
+                new StringListContainsPredicate("MIT", "MIT License")
+        ));
+        LICENSE_ALIASES.put("Public Domain",Collects.asList(
+                new StringListContainsPredicate("Public Domain")
+        ));
+        LICENSE_ALIASES.put("GPLv2",Collects.asList(
+                new StringListContainsPredicate("GPLv2","GPL 2","GPL version 2")
+        ));
+        LICENSE_ALIASES.put("LGPLv3",Collects.asList(
+                new StringListContainsPredicate("LGPLv3","GNU Lesser General Public License v3 (LGPLv3)","GNU Lesser General Public License v3")
+        ));
+        LICENSE_ALIASES.put("Expat",Collects.asList(
+                new StringListContainsPredicate("Expat","Expat license")
+        ));
+        LICENSE_ALIASES.put("ZPL 2.1",Collects.asList(
+                new StringListContainsPredicate("ZPL 2.1")
+        ));
+    }
 }

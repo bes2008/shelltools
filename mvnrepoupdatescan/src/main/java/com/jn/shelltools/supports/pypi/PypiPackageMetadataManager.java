@@ -62,10 +62,10 @@ public class PypiPackageMetadataManager extends RequirementsManager {
     }
 
     public PipPackageMetadata getOfficialMetadata(String packageName) {
-        return getOfficialMetadata(packageName, false);
+        return getOfficialMetadata(packageName, false,  0);
     }
 
-    public PipPackageMetadata getOfficialMetadata(String packageName, boolean storeIfAbsent) {
+    public PipPackageMetadata getOfficialMetadata(String packageName, boolean storeIfAbsent, long ttl) {
         if (Strings.isBlank(packageName)) {
             return null;
         }
@@ -96,9 +96,14 @@ public class PypiPackageMetadataManager extends RequirementsManager {
             fileObject = artifactManager.getArtifactFile(artifact);
             if (FileObjects.isExists(fileObject)) {
                 synchronized (this) {
-                    // 查看 last modified 时间，若在10分钟之内， 则认为是有效的
+                    // 查看 last modified 时间
                     long lastModified = fileObject.getContent().getLastModifiedTime();
-                    if (lastModified + TimeUnit.HOURS.toMillis(48) >= System.currentTimeMillis()) {
+                    boolean filterWithLastModified= ttl>=60 * 1000;
+                    boolean metadataFileIsValid = !filterWithLastModified;
+                    if(filterWithLastModified){
+                        metadataFileIsValid = lastModified + ttl >= System.currentTimeMillis();
+                    }
+                    if (metadataFileIsValid) {
                         // 有效
                         InputStream inputStream = fileObject.getContent().getInputStream();
                         InputStreamReader reader = new InputStreamReader(inputStream);

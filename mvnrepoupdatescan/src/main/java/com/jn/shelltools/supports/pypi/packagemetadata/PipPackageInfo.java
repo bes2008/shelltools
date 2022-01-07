@@ -2,6 +2,9 @@ package com.jn.shelltools.supports.pypi.packagemetadata;
 
 
 import com.jn.langx.annotation.Nullable;
+import com.jn.langx.util.Strings;
+import com.jn.langx.util.collection.Pipeline;
+import com.jn.langx.util.function.Predicate;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +37,7 @@ public class PipPackageInfo {
      */
     private String platform;
     private String project_url;
-    private Map<String,String> project_urls;
+    private Map<String, String> project_urls;
     private String release_url;
     private List<String> requires_dist;
     private String requires_python;
@@ -132,6 +135,24 @@ public class PipPackageInfo {
     }
 
     public String getLicense() {
+        if (Strings.isBlank(this.license)) {
+            String license = Pipeline.of(this.classifiers)
+                    .findFirst(new Predicate<String>() {
+                        @Override
+                        public boolean test(String classifier) {
+                            return Strings.startsWith(classifier, "License ::", true);
+                        }
+                    });
+            if (license != null) {
+                license = Strings.substring(license, "License ::".length()).trim();
+                if (Strings.startsWith(license, "OSI Approved ::", true)) {
+                    license = Strings.substring(license, "OSI Approved ::".length()).trim();
+                }
+                if (Strings.isNotEmpty(license)) {
+                    this.license = license;
+                }
+            }
+        }
         return license;
     }
 

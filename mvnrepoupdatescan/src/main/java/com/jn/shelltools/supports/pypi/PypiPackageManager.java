@@ -385,7 +385,10 @@ public class PypiPackageManager implements LocalPackageScanner {
     }
 
     @Override
-    public Map<PackageGAV, LocalPackageArtifact> scan(String relativePath, Filter<LocalPackageArtifact> filter) {
+    public Map<PackageGAV, LocalPackageArtifact> scan(@Nullable String relativePath, Filter<LocalPackageArtifact> filter) {
+        if (Strings.isBlank(relativePath)) {
+            relativePath = "/";
+        }
         FileObject fileObject = artifactManager.getFile(relativePath);
         Map<PackageGAV, LocalPackageArtifact> result = new HashMap<PackageGAV, LocalPackageArtifact>();
         try {
@@ -397,18 +400,8 @@ public class PypiPackageManager implements LocalPackageScanner {
                  */
                 FileObject metadataFile = fileObject.getChild(directoryName + "-metadata.json");
                 if (FileObjects.isExists(metadataFile)) {
-                    List<LocalPackageArtifact> versions = scanPackageVersions(fileObject, filter);
-                    Collects.forEach(versions, new Consumer<LocalPackageArtifact>() {
-                        @Override
-                        public void accept(LocalPackageArtifact localPackageArtifact) {
-                            PackageGAV packageGAV = new PackageGAV();
-                            packageGAV.setGroupId(localPackageArtifact.getGroupId());
-                            packageGAV.setArtifactId(localPackageArtifact.getArtifactId());
-                            packageGAV.setVersion(localPackageArtifact.getVersion());
-
-                            result.put(packageGAV, localPackageArtifact);
-                        }
-                    });
+                    Map<PackageGAV, LocalPackageArtifact> map = scanPackage(fileObject, filter);
+                    result.putAll(map);
                 } else {
                     // 找到 该目录下所有的 符合条件的子目录
                     List<FileObject> children = FileObjects.findChildren(fileObject, new IsDirectoryFilter());
@@ -428,29 +421,40 @@ public class PypiPackageManager implements LocalPackageScanner {
                     }).asList();
 
                     if (!children.isEmpty()) {
+                        // 分批执行
+
                         Collects.forEach(children, new Consumer<FileObject>() {
                             @Override
                             public void accept(FileObject fileObject) {
-                                List<LocalPackageArtifact> versions = scanPackageVersions(fileObject, filter);
-                                Collects.forEach(versions, new Consumer<LocalPackageArtifact>() {
-                                    @Override
-                                    public void accept(LocalPackageArtifact localPackageArtifact) {
-                                        PackageGAV packageGAV = new PackageGAV();
-                                        packageGAV.setGroupId(localPackageArtifact.getGroupId());
-                                        packageGAV.setArtifactId(localPackageArtifact.getArtifactId());
-                                        packageGAV.setVersion(localPackageArtifact.getVersion());
-
-                                        result.put(packageGAV, localPackageArtifact);
-                                    }
-                                });
+                                Map<PackageGAV, LocalPackageArtifact> map = scanPackage(fileObject, filter);
+                                result.putAll(map);
                             }
                         });
                     }
                 }
+            } else {
+                logger.warn("{} is not a directory", relativePath);
             }
         } catch (Throwable ex) {
             logger.error(ex.getMessage(), ex);
         }
+        return result;
+    }
+
+    private Map<PackageGAV, LocalPackageArtifact> scanPackage(FileObject fileObject, Filter<LocalPackageArtifact> filter) {
+        Map<PackageGAV, LocalPackageArtifact> result = new HashMap<PackageGAV, LocalPackageArtifact>();
+        List<LocalPackageArtifact> versions = scanPackageVersions(fileObject, filter);
+        Collects.forEach(versions, new Consumer<LocalPackageArtifact>() {
+            @Override
+            public void accept(LocalPackageArtifact localPackageArtifact) {
+                PackageGAV packageGAV = new PackageGAV();
+                packageGAV.setGroupId(localPackageArtifact.getGroupId());
+                packageGAV.setArtifactId(localPackageArtifact.getArtifactId());
+                packageGAV.setVersion(localPackageArtifact.getVersion());
+
+                result.put(packageGAV, localPackageArtifact);
+            }
+        });
         return result;
     }
 

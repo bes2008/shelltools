@@ -1,6 +1,7 @@
 package com.jn.shelltools.core;
 
 import com.jn.langx.Filter;
+import com.jn.langx.annotation.Nullable;
 
 import java.util.Map;
 
@@ -12,5 +13,5 @@ public interface PackageScanner{
      * @param filter 扫描时过滤器
      * @return 返回搜索到的包
      */
-    Map<PackageGAV, LocalPackageArtifact> scan(String relativePath, Filter<LocalPackageArtifact> filter);
+    Map<PackageGAV, LocalPackageArtifact> scan(@Nullable String relativePath, Filter<LocalPackageArtifact> filter);
 }

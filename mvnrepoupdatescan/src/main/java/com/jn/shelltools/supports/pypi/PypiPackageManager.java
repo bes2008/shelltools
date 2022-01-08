@@ -529,7 +529,7 @@ public class PypiPackageManager implements LocalPackageScanner {
                 .forEach(new Consumer<PipPackageMetadata>() {
                     @Override
                     public void accept(PipPackageMetadata pipPackageMetadata) {
-                        map.put(pipPackageMetadata.getInfo().getName(), pipPackageMetadata.getInfo().getLicense());
+                        map.put(pipPackageMetadata.getInfo().getName(), Pypis.extractLicense( pipPackageMetadata.getInfo()));
                     }
                 });
 

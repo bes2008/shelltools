@@ -13,7 +13,7 @@ import com.jn.langx.util.collection.multivalue.LinkedMultiValueMap;
 import com.jn.langx.util.collection.multivalue.MultiValueMap;
 import com.jn.langx.util.function.Functions;
 import com.jn.langx.util.function.Predicate;
-import com.jn.langx.util.function.predicate.StringListContainsPredicate;
+import com.jn.langx.util.function.predicate.*;
 import com.jn.shelltools.supports.pypi.packagemetadata.PipPackageInfo;
 import com.jn.shelltools.supports.pypi.versionspecifier.VersionSpecifiers;
 import org.slf4j.Logger;
@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 
@@ -158,9 +159,9 @@ public class Pypis {
 
     }
 
-    public String extractLicense(PipPackageInfo packageInfo) {
+    public static String extractLicense(PipPackageInfo packageInfo) {
         String license = packageInfo.getLicense();
-        if (Strings.isBlank(license)) {
+        if (Strings.isBlank(license) || Strings.equalsIgnoreCase(license,"UNKNOWN")) {
             license = Pipeline.of(packageInfo.getClassifiers())
                     .findFirst(new Predicate<String>() {
                         @Override
@@ -175,37 +176,76 @@ public class Pypis {
                 }
             }
         }
-        if(Strings.isNotEmpty(license)){
-
+        if(Strings.isNotEmpty(license) && !Strings.contains(license," or ")){
+            final String _lic = license;
+            Set<Map.Entry<String,Collection<Predicate<String>>> >  entries=LICENSE_ALIASES.entrySet();
+            Map.Entry<String,Collection<Predicate<String>>>  entry = Collects.findFirst(entries, new Predicate<Map.Entry<String, Collection<Predicate<String>>>>() {
+                @Override
+                public boolean test(Map.Entry<String, Collection<Predicate<String>>> entry) {
+                    Collection<Predicate<String>> predicates = entry.getValue();
+                    return Functions.anyPredicate(Collects.asList(predicates))
+                            .test(_lic);
+                }
+            });
+            if (entry != null) {
+                license = entry.getKey();
+            }
         }
         return license;
     }
 
+
     private static final MultiValueMap<String,Predicate<String>> LICENSE_ALIASES=new CommonMultiValueMap<String, Predicate<String>>();
     static {
-        LICENSE_ALIASES.put("Apache 2.0", Collects.asList(
-                new StringListContainsPredicate("Apache", "Apache Software License","ASL","Apache 2.0","Apache-2.0 license","Apache License, Version 2.0")
+        LICENSE_ALIASES.put("Apache 2", Collects.asList(
+                new StringContainsAnyPredicate("Apache","ASL")
         ));
         LICENSE_ALIASES.put("BSD",Collects.asList(
-                new StringListContainsPredicate("BSD", "BSD-2-Clause","BSD-3-Clause","BSD License","BSD 3-Clause License")
+                new StringContainsAnyPredicate("BSD")
         ));
         LICENSE_ALIASES.put("MIT",Collects.asList(
-                new StringListContainsPredicate("MIT", "MIT License")
+                new StringListContainsPredicate("MIT", "MIT License","LICENSE-MIT","\"MIT\""),
+                new StringContainsAnyPredicate("mit-license","MIT LICENSE")
         ));
         LICENSE_ALIASES.put("Public Domain",Collects.asList(
-                new StringListContainsPredicate("Public Domain")
+                new StringListContainsPredicate("Public Domain"),
+                new StringContainsPredicate("public domain",true)
         ));
-        LICENSE_ALIASES.put("GPLv2",Collects.asList(
-                new StringListContainsPredicate("GPLv2","GPL 2","GPL version 2")
+        LICENSE_ALIASES.put("GPL 2",Collects.asList(
+                new StringListContainsPredicate("GPLv2","GPL 2","GPL version 2","LGPL-2.1-or-later"),
+                new StringStartsWithPredicate("GPLv2-or-later")
         ));
-        LICENSE_ALIASES.put("LGPLv3",Collects.asList(
-                new StringListContainsPredicate("LGPLv3","GNU Lesser General Public License v3 (LGPLv3)","GNU Lesser General Public License v3")
+        LICENSE_ALIASES.put("GPL 3",Collects.asList(
+                new StringListContainsPredicate("GPL-3.0","GNU GPL v3","GPL v3","GNU GPLv3+","GNU General Public License v3 or later (GPLv3+)","GNU General Public License v3 (GPLv3)")
+        ));
+        LICENSE_ALIASES.put("LGPL",Collects.asList(
+                new StringListContainsPredicate("GNU Library or Lesser General Public License (LGPL)","GNU Lesser General Public License (LGPL)","GNU Library or Lesser General Public License (LGPL)")
+        ));
+        LICENSE_ALIASES.put("LGPL 2.1",Collects.asList(
+                new StringListContainsPredicate("LGPLv2.1+","LGPL-2.1-only","GNU Lesser General Public License v2 (LGPLv2)")
+        ));
+        LICENSE_ALIASES.put("LGPL 3",Collects.asList(
+                new StringListContainsPredicate("GNU Lesser General Public License (LGPL), Version 3","LGPL-3.0-or-later","GNU LGPL v3+","LGPLv3+","LGPLv3","GNU Lesser General Public License v3 (LGPLv3)","GNU Lesser General Public License v3")
         ));
         LICENSE_ALIASES.put("Expat",Collects.asList(
                 new StringListContainsPredicate("Expat","Expat license")
         ));
+
+        LICENSE_ALIASES.put("AGPL",Collects.asList(
+                new StringListContainsPredicate("AGPL")
+        ));
         LICENSE_ALIASES.put("ZPL 2.1",Collects.asList(
                 new StringListContainsPredicate("ZPL 2.1")
+        ));
+        LICENSE_ALIASES.put("PSFL",Collects.asList(
+                new StringListContainsPredicate("Python license","PSF License","Python Software Foundation License","PSFL (Keccak: CC0 1.0 Universal)")
+        ));
+
+        LICENSE_ALIASES.put("MPL 2",Collects.asList(
+                new StringListContainsPredicate("MPL-2.0","Mozilla Public License 2.0 (MPL 2.0)","MPL 2.0","Mozilla Public License 2.0 (MPL 2.0)")
+        ));
+        LICENSE_ALIASES.put("GFL",Collects.asList(
+                new StringListContainsPredicate("GFL","GUST Font License","GUST Font License (GFL)")
         ));
     }
 }

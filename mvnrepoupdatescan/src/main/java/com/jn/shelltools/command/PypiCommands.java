@@ -15,6 +15,7 @@ import com.jn.langx.util.function.Predicate;
 import com.jn.shelltools.supports.pypi.PypiArtifact;
 import com.jn.shelltools.supports.pypi.PypiPackageManager;
 import com.jn.shelltools.supports.pypi.PypiPackageMetadataManager;
+import com.jn.shelltools.supports.pypi.Pypis;
 import com.jn.shelltools.supports.pypi.dependency.RequirementsManager;
 import com.jn.shelltools.supports.pypi.filter.SourceArtifactPredicate;
 import com.jn.shelltools.supports.pypi.filter.TagsExclusionPredicate;
@@ -99,6 +100,7 @@ public class PypiCommands {
         Collects.forEach(map, new Consumer2<String, String>() {
             @Override
             public void accept(String key, String value) {
+            //    if(!Pypis.LICENSE_ALIASES.keySet().contains(value))
                 ret.add(StringTemplates.formatWithPlaceholder("{} = {}", key, value));
             }
         });

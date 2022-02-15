@@ -75,7 +75,7 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
     }
 
     private MavenGAV parseGav(Document doc) {
-        boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc);
+        boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc, false);
         String namespacePrefix = "x";
         String groupIdXPath = getGavXpath("groupIdXPath", usingCustomNamespace, namespacePrefix);
         String artifactIdXPath = getGavXpath("artifactIdXPath", usingCustomNamespace, namespacePrefix);

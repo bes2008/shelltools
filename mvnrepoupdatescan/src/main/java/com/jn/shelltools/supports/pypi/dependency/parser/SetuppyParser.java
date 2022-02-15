@@ -1,7 +1,6 @@
 package com.jn.shelltools.supports.pypi.dependency.parser;
 
 import com.jn.langx.util.logging.Loggers;
-import org.eclipse.steady.python.Python3FileAnalyzer;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -12,6 +11,7 @@ public class SetuppyParser implements DependenciesParser{
     @Override
     public List<String> parse(File file) {
         try {
+            /*
             Python3FileAnalyzer analyzer = new Python3FileAnalyzer();
             if (analyzer.canAnalyze(file)) {
                 analyzer.analyze(file);
@@ -19,7 +19,7 @@ public class SetuppyParser implements DependenciesParser{
                     //    analyzer.enter
                 }
             }
-
+               */
         }catch (Throwable ex){
             logger.error(ex.getMessage(),ex);
         }

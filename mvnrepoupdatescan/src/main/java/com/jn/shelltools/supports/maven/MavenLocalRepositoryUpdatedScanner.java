@@ -69,20 +69,13 @@ public class MavenLocalRepositoryUpdatedScanner {
                 } else {
                     File pomFile = null;
                     if (file.getName().endsWith(".jar")) {
-                        String pomFilePrefix = null;
-                        if (file.getName().endsWith("-javadoc.jar")) {
-                            pomFilePrefix = file.getName().substring(0, file.getName().length() - ".javadoc.jar".length());
-                        } else if (file.getName().endsWith("-tests.jar")) {
-                            pomFilePrefix = file.getName().substring(0, file.getName().length() - ".tests.jar".length());
-                        } else if (file.getName().endsWith("-sources.jar")) {
-                            pomFilePrefix = file.getName().substring(0, file.getName().length() - ".sources.jar".length());
-                        } else if (file.getName().endsWith(".jar")) {
-                            pomFilePrefix = file.getName().substring(0, file.getName().length() - ".jar".length());
-                        }
+                        String version = file.getParentFile().getName();
+                        String artifactId = file.getParentFile().getParentFile().getName();
+                        String pomFilePrefix = artifactId + "-" + version;
                         pomFile = new File(file.getParentFile(), pomFilePrefix + ".pom");
                     } else if (file.getName().endsWith(".pom")) {
                         pomFile = file;
-                    } else{
+                    } else {
                         return;
                     }
                     if (pomFile.exists()) {
@@ -114,14 +107,14 @@ public class MavenLocalRepositoryUpdatedScanner {
                         if (mavenArtifact != null) {
                             // do filter
                             final Holder<Long> lastModified = new Holder<Long>(pomFile.lastModified());
-                            String[] relatedFileSuffixes = {"-javadoc.jar","-tests.jar","-sources.jar"};
+                            String[] relatedFileSuffixes = {"-javadoc.jar", "-tests.jar", "-sources.jar"};
                             String artifactPrefix = pomFile.getAbsolutePath().substring(0, pomFile.getAbsolutePath().length() - ".pom".length());
                             Collects.forEach(relatedFileSuffixes, new Consumer<String>() {
                                 @Override
                                 public void accept(String relatedFileSuffix) {
-                                    File relatedFile = new File(artifactPrefix+relatedFileSuffix);
-                                    if(relatedFile.exists()){
-                                        lastModified.set(Maths.maxLong(lastModified.get() , relatedFile.lastModified()));
+                                    File relatedFile = new File(artifactPrefix + relatedFileSuffix);
+                                    if (relatedFile.exists()) {
+                                        lastModified.set(Maths.maxLong(lastModified.get(), relatedFile.lastModified()));
                                     }
                                 }
                             });
@@ -140,7 +133,7 @@ public class MavenLocalRepositoryUpdatedScanner {
         return map;
     }
 
-    private static class IgnoreErrorHandler implements ErrorHandler{
+    private static class IgnoreErrorHandler implements ErrorHandler {
         @Override
         public void warning(SAXParseException exception) throws SAXException {
 

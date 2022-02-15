@@ -59,7 +59,7 @@
         <dependency>
             <groupId>org.eclipse.steady</groupId>
             <artifactId>lang-python</artifactId>
-            <version>3.2.0</version>
+            <version>3.2.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>

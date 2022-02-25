@@ -19,7 +19,7 @@
 		<agileway.version>2.6.13</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>
-		<kryo.version>5.0.0-RC9</kryo.version>
+		<kryo.version>5.2.0</kryo.version>
 		<kryo-serializers.version>0.45</kryo-serializers.version>
 		<protostuff.version>1.7.2</protostuff.version>
 		<cglib.version>3.3.0</cglib.version>

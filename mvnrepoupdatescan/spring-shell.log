@@ -50,3 +50,10 @@
 1644645383166:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20220212
 1644648131610:quit
 1644826352681:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20220214
+1644907940522:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20220214_2
+1644910122075:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20220214_3
+1644910179892:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20220214_2
+1644910196696:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20220214_3
+1645754369580:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20220225
+1645754584959:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_2022022 --date 2022-02-24_02:00
+1645766216031:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_2022022 --date 2022-02-25_00:00

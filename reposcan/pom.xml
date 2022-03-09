@@ -12,12 +12,13 @@
     <properties>
         <spring.version>5.2.6.RELEASE</spring.version>
         <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
-        <slf4j.version>1.7.32</slf4j.version>
+        <slf4j.version>1.7.36</slf4j.version>
         <langx.version>4.3.2</langx.version>
         <easyjson.version>3.2.12</easyjson.version>
-        <agileway.version>2.7.2</agileway.version>
+        <agileway.version>2.7.9</agileway.version>
         <jackson.version>2.13.1</jackson.version>
         <log4j2.version>2.17.1</log4j2.version>
+        <junit.version>4.13.2</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -111,7 +112,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.1</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

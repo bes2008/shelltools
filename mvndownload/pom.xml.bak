@@ -15,7 +15,7 @@
 		<easyjson.version>3.2.13</easyjson.version>
 		<sqlhelper.version>3.6.10</sqlhelper.version>
 		<langx-java.version>4.3.7</langx-java.version>
-		<audit.version>2.3.14</audit.version>		
+		<audit.version>2.3.12</audit.version>		
 		<agileway.version>2.7.9</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>

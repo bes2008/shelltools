@@ -10,13 +10,13 @@
 
 
 	<properties>
-	        <slf4j.version>1.7.22</slf4j.version>
-		<esmvc.version>1.2.4</esmvc.version>
-		<easyjson.version>3.1.1</easyjson.version>
-		<sqlhelper.version>3.5.1</sqlhelper.version>
-		<langx-java.version>3.5.0</langx-java.version>
-		<audit.version>2.3.2</audit.version>		
-		<agileway.version>2.4.5</agileway.version>
+	    <slf4j.version>1.7.32</slf4j.version>
+		<esmvc.version>1.3.3</esmvc.version>
+		<easyjson.version>3.2.12</easyjson.version>
+		<sqlhelper.version>3.6.10</sqlhelper.version>
+		<langx-java.version>4.3.5</langx-java.version>
+		<audit.version>2.3.12</audit.version>		
+		<agileway.version>2.7.9</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>
 		<kryo.version>5.0.0-RC9</kryo.version>
@@ -28,6 +28,17 @@
 		<xson.version>1.0.2</xson.version>
 		<jackson.version>2.11.2</jackson.version>
 		<msgpack.version>0.8.22</msgpack.version>
+		<disruptor.version>3.4.4</disruptor.version>
+
+		<jsch.version>0.1.55</jsch.version>
+		<schmizz.sshj.version>0.10.0</schmizz.sshj.version>
+		<ganymed-ssh2.version>1.2.0</ganymed-ssh2.version>
+		<trilead-ssh2.version>1.0.0-build222</trilead-ssh2.version>
+		<j2ssh-core.version>0.2.2</j2ssh-core.version>
+		<maverick-synergy-client.version>3.0.3-FINAL</maverick-synergy-client.version>
+		<bouncycastle.version>1.70</bouncycastle.version>
+        <i2p.crypto.version>0.3.0</i2p.crypto.version>
+		<hierynomus.sshj.version>0.32.0</hierynomus.sshj.version>
 	</properties>
 <dependencies>	
 
@@ -41,6 +52,24 @@
 		<artifactId>langx-java8</artifactId>
 		<version>${langx-java.version}</version>
 	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.langx.security</groupId>
+		<artifactId>langx-java-security-gm-jca-bouncycastle</artifactId>
+		<version>${langx-java.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.langx.security</groupId>
+		<artifactId>langx-java-security-gm-jca-gmsslorg</artifactId>
+		<version>${langx-java.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.langx.security</groupId>
+		<artifactId>langx-java-security-gm-jsse</artifactId>
+		<version>${langx-java.version}</version>
+	</dependency>
+
+
+
 	<dependency>
 		<groupId>com.github.fangjinuo.langx</groupId>
 		<artifactId>langx-java-reflect-aspectj</artifactId>
@@ -207,7 +236,7 @@
 		<artifactId>audit-swagger</artifactId>
 		<version>${audit.version}</version>
 	</dependency>
-	
+
 
 	<dependency>
 		<groupId>com.github.fangjinuo.easyjson</groupId>
@@ -296,18 +325,41 @@
 		<artifactId>esmvc-service</artifactId>
 		<version>${esmvc.version}</version>
 	</dependency>
+		<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-service-rest</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-service-tcp</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
+		<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-spring-boot-common</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
 	<dependency>
 		<groupId>com.github.fangjinuo.esmvc</groupId>
 		<artifactId>esmvc-spring-boot-starter</artifactId>
 		<version>${esmvc.version}</version>
 	</dependency>
-
-
+	<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-spring-boot-starter-rest</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.fangjinuo.esmvc</groupId>
+		<artifactId>esmvc-spring-boot-starter-tcp</artifactId>
+		<version>${esmvc.version}</version>
+	</dependency>
 
 	<dependency>
 		<groupId>com.lmax</groupId>
 		<artifactId>disruptor</artifactId>
-		<version>3.4.2</version>
+		<version>${disruptor.version}</version>
 	</dependency>
 
 	<dependency>
@@ -369,9 +421,103 @@
 		<groupId>com.github.fangjinuo.agileway</groupId>
 		<artifactId>agileway-sshclient</artifactId>
 		<version>${agileway.version}</version>
-	</dependency>		
-	
+	</dependency>	
 	<dependency>
+		<groupId>com.github.fangjinuo.agileway</groupId>
+		<artifactId>agileway-vfs</artifactId>
+		<version>${agileway.version}</version>
+	</dependency>	
+	<dependency>
+		<groupId>com.github.fangjinuo.agileway</groupId>
+		<artifactId>agileway-zip</artifactId>
+		<version>${agileway.version}</version>
+	</dependency>		
+
+	
+	    <dependency>
+            <groupId>com.hierynomus</groupId>
+            <artifactId>sshj</artifactId>
+            <version>${hierynomus.sshj.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcpkix-jdk15on</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--使用 sshj 时，需要接下来的4个依赖-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>${bouncycastle.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>${bouncycastle.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcutil-jdk15on</artifactId>
+            <version>${bouncycastle.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>net.i2p.crypto</groupId>
+            <artifactId>eddsa</artifactId>
+            <version>${i2p.crypto.version}</version>
+            <optional>true</optional>
+        </dependency>
+	
+	    <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>${jsch.version}</version>
+        </dependency>
+	
+        <dependency>
+            <groupId>com.airlenet.yang</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+            <version>${ganymed-ssh2.version}</version>
+        </dependency>
+        
+	    <dependency>
+            <groupId>net.schmizz</groupId>
+            <artifactId>sshj</artifactId>
+            <version>${schmizz.sshj.version}</version>
+        </dependency>
+    	<dependency>
+            <groupId>com.airlenet.yang</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+            <version>${ganymed-ssh2.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.trilead</groupId>
+            <artifactId>trilead-ssh2</artifactId>
+            <version>${trilead-ssh2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>sshtools</groupId>
+            <artifactId>j2ssh-core</artifactId>
+            <version>${j2ssh-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sshtools</groupId>
+            <artifactId>maverick-synergy-client</artifactId>
+            <version>${maverick-synergy-client.version}</version>
+        </dependency>
+	    <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>hessian</artifactId>
             <version>${hessian.version}</version>
@@ -430,39 +576,7 @@
             <artifactId>jackson-dataformat-msgpack</artifactId>
             <version>${msgpack.version}</version>
         </dependency>
-	
-	
-	 <dependency>
-            <groupId>com.jcraft</groupId>
-            <artifactId>jsch</artifactId>
-            <version>0.1.55</version>
-        </dependency>
-	<dependency>
-            <groupId>net.schmizz</groupId>
-            <artifactId>sshj</artifactId>
-            <version>0.10.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet.yang</groupId>
-            <artifactId>ganymed-ssh2</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.trilead</groupId>
-            <artifactId>trilead-ssh2</artifactId>
-            <version>1.0.0-build222</version>        
-        </dependency>
-        <dependency>
-            <groupId>sshtools</groupId>
-            <artifactId>j2ssh-core</artifactId>
-            <version>0.2.9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        
+
         
 
 	</dependencies>

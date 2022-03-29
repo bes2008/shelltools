@@ -8,7 +8,7 @@ cffi==1.12.3
 chardet==3.0.4
 cheroot==6.5.5
 CherryPy==18.1.2
-cryptography==2.7
+cryptography==3.3.2
 cx-Oracle==6.2.1
 ecdsa==0.15
 httpretty==0.9.6

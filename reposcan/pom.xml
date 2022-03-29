@@ -13,12 +13,13 @@
         <spring.version>5.2.6.RELEASE</spring.version>
         <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <langx.version>4.3.2</langx.version>
-        <easyjson.version>3.2.12</easyjson.version>
-        <agileway.version>2.7.9</agileway.version>
-        <jackson.version>2.13.1</jackson.version>
+        <langx.version>4.4.4</langx.version>
+        <easyjson.version>3.2.15</easyjson.version>
+        <agileway.version>2.7.12</agileway.version>
+        <jackson.version>2.13.2</jackson.version>
         <log4j2.version>2.17.1</log4j2.version>
         <junit.version>4.13.2</junit.version>
+        <jsonpath.version>2.7.0</jsonpath.version>
     </properties>
 
     <dependencyManagement>
@@ -128,7 +129,7 @@
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
-            <version>2.6.0</version>
+            <version>${jsonpath.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.fangjinuo.agileway</groupId>

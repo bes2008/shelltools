@@ -4,13 +4,10 @@ import com.jn.agileway.vfs.utils.FileObjects;
 import com.jn.easyjson.core.JSONBuilderProvider;
 import com.jn.langx.cache.Cache;
 import com.jn.langx.cache.CacheBuilder;
-import com.jn.langx.util.Objs;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.Throwables;
-import com.jn.langx.util.collection.Collects;
-import com.jn.langx.util.collection.ConcurrentHashSet;
 import com.jn.langx.util.collection.Pipeline;
-import com.jn.langx.util.function.Consumer;
+import com.jn.langx.util.concurrent.ConcurrentHashSet;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.io.Charsets;
 import com.jn.langx.util.io.IOs;
@@ -27,8 +24,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class PypiPackageMetadataManager extends RequirementsManager {
     private static final Logger logger = Loggers.getLogger(PypiPackageMetadataManager.class);

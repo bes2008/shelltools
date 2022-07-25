@@ -1,6 +1,5 @@
 package com.jn.shelltools.supports.pypi.versionspecifier;
 
-import com.jn.langx.exception.IllegalParameterException;
 import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;

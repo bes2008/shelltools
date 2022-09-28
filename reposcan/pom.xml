@@ -13,9 +13,9 @@
         <spring.version>5.2.6.RELEASE</spring.version>
         <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <langx.version>4.4.4</langx.version>
-        <easyjson.version>3.2.15</easyjson.version>
-        <agileway.version>2.7.12</agileway.version>
+        <langx.version>5.0.1</langx.version>
+        <easyjson.version>4.0.0</easyjson.version>
+        <agileway.version>4.0.0</agileway.version>
         <jackson.version>2.13.2</jackson.version>
         <log4j2.version>2.17.1</log4j2.version>
         <junit.version>4.13.2</junit.version>
@@ -79,7 +79,7 @@
             <version>${spring.boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.fangjinuo.langx</groupId>
+            <groupId>io.github.bes2008.solution.langx</groupId>
             <artifactId>langx-java</artifactId>
             <version>${langx.version}</version>
         </dependency>
@@ -89,7 +89,7 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.fangjinuo.easyjson</groupId>
+            <groupId>io.github.bes2008.solution.easyjson</groupId>
             <artifactId>easyjson-core</artifactId>
             <version>${easyjson.version}</version>
             <exclusions>
@@ -100,12 +100,12 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.github.fangjinuo.easyjson</groupId>
+            <groupId>io.github.bes2008.solution.easyjson</groupId>
             <artifactId>easyjson-jackson</artifactId>
             <version>${easyjson.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>com.github.fangjinuo.langx</groupId>
+                    <groupId>io.github.bes2008.solution.langx</groupId>
                     <artifactId>langx-java</artifactId>
                 </exclusion>
             </exclusions>
@@ -132,27 +132,27 @@
             <version>${jsonpath.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.fangjinuo.agileway</groupId>
+            <groupId>io.github.bes2008.solution.agileway</groupId>
             <artifactId>agileway-vfs</artifactId>
             <version>${agileway.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.fangjinuo.agileway</groupId>
+            <groupId>io.github.bes2008.solution.agileway</groupId>
             <artifactId>agileway-feign</artifactId>
             <version>${agileway.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.fangjinuo.agileway</groupId>
+            <groupId>io.github.bes2008.solution.agileway</groupId>
             <artifactId>agileway-spring</artifactId>
             <version>${agileway.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.fangjinuo.agileway</groupId>
+            <groupId>io.github.bes2008.solution.agileway</groupId>
             <artifactId>agileway-httpclient</artifactId>
-            <version>${agileway.version}</version>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
-            <groupId>com.github.fangjinuo.agileway</groupId>
+            <groupId>io.github.bes2008.solution.agileway</groupId>
             <artifactId>agileway-zip</artifactId>
             <version>${agileway.version}</version>
         </dependency>

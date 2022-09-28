@@ -24,7 +24,7 @@ public class MavenGAV extends PackageGAV implements Comparable<MavenGAV>, IGAV {
      * @return pom文件所在的本地仓库的相对路径
      */
     public String getLocation(){
-       return StringTemplates.format("{0}/{1}/{2}", getGroupId().replace(".","/"), getArtifactId(), getVersion());
+       return StringTemplates.formatWithIndex("{0}/{1}/{2}", getGroupId().replace(".","/"), getArtifactId(), getVersion());
     }
 
     /**
@@ -63,7 +63,7 @@ public class MavenGAV extends PackageGAV implements Comparable<MavenGAV>, IGAV {
     }
 
     private String getLikeUnixPath(){
-        return StringTemplates.format("{0}/{1}/{2}/{1}-{2}", getGroupId().replace(".","/"), getArtifactId(), getVersion());
+        return StringTemplates.formatWithIndex("{0}/{1}/{2}/{1}-{2}", getGroupId().replace(".","/"), getArtifactId(), getVersion());
     }
 
 

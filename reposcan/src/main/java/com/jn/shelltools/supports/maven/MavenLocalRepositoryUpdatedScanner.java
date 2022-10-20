@@ -3,6 +3,8 @@ package com.jn.shelltools.supports.maven;
 import com.jn.langx.Filter;
 import com.jn.langx.annotation.NonNull;
 import com.jn.langx.io.resource.DirectoryBasedFileResourceLoader;
+import com.jn.langx.text.xml.Xmls;
+import com.jn.langx.text.xml.errorhandler.IgnoreErrorHandler;
 import com.jn.langx.text.xml.resolver.NullEntityResolver;
 import com.jn.langx.util.Maths;
 import com.jn.langx.util.collection.Collects;
@@ -85,7 +87,7 @@ public class MavenLocalRepositoryUpdatedScanner {
                             FileInputStream inputStream = null;
                             try {
                                 inputStream = new FileInputStream(pomFile);
-                                Document document = getXmlDoc(null, inputStream, new IgnoreErrorHandler());
+                                Document document = Xmls.getXmlDoc(null, new IgnoreErrorHandler(),inputStream);
                                 mavenArtifact = new MavenPomParser(absolutePath).parse(document);
 
                                 if (rootDirectory.get() == null) {
@@ -133,36 +135,5 @@ public class MavenLocalRepositoryUpdatedScanner {
         return map;
     }
 
-    private static class IgnoreErrorHandler implements ErrorHandler {
-        @Override
-        public void warning(SAXParseException exception) throws SAXException {
 
-        }
-
-        @Override
-        public void error(SAXParseException exception) throws SAXException {
-
-        }
-
-        @Override
-        public void fatalError(SAXParseException exception) throws SAXException {
-
-        }
-    }
-
-
-    public static Document getXmlDoc(EntityResolver entityResolver, final InputStream xml, ErrorHandler errorHandler) throws Exception {
-        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setIgnoringComments(false);
-        factory.setIgnoringElementContentWhitespace(false);
-        factory.setNamespaceAware(true);
-        if (entityResolver != null) {
-            factory.setValidating(true);
-        }
-        final DocumentBuilder builder = factory.newDocumentBuilder();
-        entityResolver = ((entityResolver == null) ? new NullEntityResolver() : entityResolver);
-        builder.setEntityResolver(entityResolver);
-        builder.setErrorHandler(errorHandler);
-        return builder.parse(xml);
-    }
 }

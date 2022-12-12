@@ -1,7 +1,6 @@
 package com.jn.shelltools.config;
 
 import com.jn.agileway.feign.HttpConnectionContext;
-import com.jn.agileway.feign.RestServiceProvider;
 import com.jn.agileway.feign.supports.rpc.rest.EasyjsonDecoder;
 import com.jn.agileway.feign.supports.rpc.rest.RestStubProvider;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;

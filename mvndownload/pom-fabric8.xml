@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>com.examples</groupId>
+    <artifactId>examples</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        
+        <fabric8.maven.plugin.version>4.4.1</fabric8.maven.plugin.version>
+        <fabric8.k8s.client.version>4.9.0</fabric8.k8s.client.version>        
+        <docker-maven-plugin.version>0.31.0</docker-maven-plugin.version>
+    </properties>
+    <dependencies>
+	    <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-core</artifactId>
+            <version>4.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-enricher-api</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-enricher-standard</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-enricher-fabric8</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-api</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-java-exec</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-spring-boot</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-vertx</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-karaf</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-wildfly-swarm</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-quarkus</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-thorntail-v2</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-webapp</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-generator-openliberty</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-watcher-api</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin-watcher-standard</artifactId>
+            <version>${fabric8.maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-client</artifactId>
+            <version>${fabric8.k8s.client.version}</version>
+        </dependency>                
+        
+        
+        
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>${docker-maven-plugin.version}</version>
+        </dependency>
+        
+    </dependencies>   
+</project>

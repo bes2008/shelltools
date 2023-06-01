@@ -10,8 +10,8 @@
 
     <properties>
 	<spring.plugin.version>1.2.0.RELEASE</spring.plugin.version>
-	<spring.boot.version>1.5.22.RELEASE</spring.boot.version>
-	<spring.version>4.3.30.RELEASE</spring.version>
+	<spring.boot.version>2.5.4.RELEASE</spring.boot.version>
+	<spring.version>5.2.22.RELEASE</spring.version>
 
 
 	<elasticsearch.version>6.7.0</elasticsearch.version>

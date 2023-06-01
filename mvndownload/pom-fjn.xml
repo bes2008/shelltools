@@ -10,13 +10,13 @@
 
 
 	<properties>
-	    <slf4j.version>1.7.32</slf4j.version>
-		<esmvc.version>1.3.3</esmvc.version>
-		<easyjson.version>3.2.12</easyjson.version>
-		<sqlhelper.version>3.6.10</sqlhelper.version>
-		<langx-java.version>4.3.5</langx-java.version>
-		<audit.version>2.3.12</audit.version>		
-		<agileway.version>2.7.9</agileway.version>
+        <slf4j.version>1.7.32</slf4j.version>
+		<esorm.version>2.0.1</esorm.version>
+		<easyjson.version>4.1.2</easyjson.version>
+		<sqlhelper.version>4.0.5</sqlhelper.version>
+		<langx-java.version>5.2.6</langx-java.version>
+		<audit.version>3.0.2</audit.version>		
+		<agileway.version>4.2.2</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>
 		<kryo.version>5.0.0-RC9</kryo.version>
@@ -28,8 +28,11 @@
 		<xson.version>1.0.2</xson.version>
 		<jackson.version>2.11.2</jackson.version>
 		<msgpack.version>0.8.22</msgpack.version>
+        <avro.version>1.11.0</avro.version>
+        <activej.version>5.1</activej.version>
+        <mangodb.bson.version>3.12.0</mangodb.bson.version>
+    
 		<disruptor.version>3.4.4</disruptor.version>
-
 		<jsch.version>0.1.55</jsch.version>
 		<schmizz.sshj.version>0.10.0</schmizz.sshj.version>
 		<ganymed-ssh2.version>1.2.0</ganymed-ssh2.version>
@@ -39,402 +42,461 @@
 		<bouncycastle.version>1.70</bouncycastle.version>
         <i2p.crypto.version>0.3.0</i2p.crypto.version>
 		<hierynomus.sshj.version>0.32.0</hierynomus.sshj.version>
+		<joni.version>2.0.0</joni.version>
+		<jcodings.version>1.0.6</jcodings.version>
 	</properties>
-<dependencies>	
-
-	<dependency>
-		<groupId>com.github.fangjinuo.langx</groupId>
-		<artifactId>langx-java</artifactId>
-		<version>${langx-java.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.langx</groupId>
-		<artifactId>langx-java8</artifactId>
-		<version>${langx-java.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.langx.security</groupId>
-		<artifactId>langx-java-security-gm-jca-bouncycastle</artifactId>
-		<version>${langx-java.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.langx.security</groupId>
-		<artifactId>langx-java-security-gm-jca-gmsslorg</artifactId>
-		<version>${langx-java.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.langx.security</groupId>
-		<artifactId>langx-java-security-gm-jsse</artifactId>
-		<version>${langx-java.version}</version>
-	</dependency>
-
-
-
-	<dependency>
-		<groupId>com.github.fangjinuo.langx</groupId>
-		<artifactId>langx-java-reflect-aspectj</artifactId>
-		<version>${langx-java.version}</version>
-	</dependency>
-		
-	<dependency>
-		<groupId>com.github.fangjinuo.langx</groupId>
-		<artifactId>langx-java-reflect-asm</artifactId>
-		<version>${langx-java.version}</version>
-	</dependency>
-
-
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-batchinsert</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-common</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-		<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-datasource</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-dbutils</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-dialect</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-ebean</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-hibernate</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>	
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-jfinal</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-jsqlparser</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mango</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mybatis</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mybatis-over-pagehelper</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mybatis-solon-plugin</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-		<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mybatis-spring-common</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mybatis-spring-boot-starter</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mybatisplus</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>	 
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mybatisplus-spring-boot-starter</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency> 
-		<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mybatisplus_2x</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>	 
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-mybatisplus_2x-spring-boot-starter</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency> 
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-springjdbc</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>	   
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-springjdbc-spring-boot-starter</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>	   
-	<dependency>
-		<groupId>com.github.fangjinuo.sqlhelper</groupId>
-		<artifactId>sqlhelper-tkmapper-spring-boot-starter</artifactId>
-		<version>${sqlhelper.version}</version>
-	</dependency>  
-
-
-	<dependency>
-		<groupId>com.github.fangjinuo.audit</groupId>
-		<artifactId>audit-core</artifactId>
-		<version>${audit.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.audit.entityloader</groupId>
-		<artifactId>audit-entityloader-esmvc</artifactId>
-		<version>${audit.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.audit.entityloader</groupId>
-		<artifactId>audit-entityloader-mybatis</artifactId>
-		<version>${audit.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.audit.entityloader</groupId>
-		<artifactId>audit-entityloader-resttemplate</artifactId>
-		<version>${audit.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.audit</groupId>
-		<artifactId>audit-servlet</artifactId>
-		<version>${audit.version}</version>
-	</dependency>	
-	<dependency>
-		<groupId>com.github.fangjinuo.audit</groupId>
-		<artifactId>audit-spring-boot-starter</artifactId>
-		<version>${audit.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.audit</groupId>
-		<artifactId>audit-spring</artifactId>
-		<version>${audit.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.audit</groupId>
-		<artifactId>audit-swagger</artifactId>
-		<version>${audit.version}</version>
-	</dependency>
-
-
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>androidjson-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>boonjson-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>easyjson-core</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>easyjson-fastjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>easyjson-gson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>easyjson-jackson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>fastjson-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>gson-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>jsonlib-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>jsonsmart-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>minimaljson-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>moshi-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>orgjson-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>progsbase-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.easyjson</groupId>
-		<artifactId>simplejson-to-easyjson</artifactId>
-		<version>${easyjson.version}</version>
-	</dependency>
-	
-
-	<dependency>
-		<groupId>com.github.fangjinuo.esmvc</groupId>
-		<artifactId>esmvc-model</artifactId>
-		<version>${esmvc.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.esmvc</groupId>
-		<artifactId>esmvc-service</artifactId>
-		<version>${esmvc.version}</version>
-	</dependency>
-		<dependency>
-		<groupId>com.github.fangjinuo.esmvc</groupId>
-		<artifactId>esmvc-service-rest</artifactId>
-		<version>${esmvc.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.esmvc</groupId>
-		<artifactId>esmvc-service-tcp</artifactId>
-		<version>${esmvc.version}</version>
-	</dependency>
-		<dependency>
-		<groupId>com.github.fangjinuo.esmvc</groupId>
-		<artifactId>esmvc-spring-boot-common</artifactId>
-		<version>${esmvc.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.esmvc</groupId>
-		<artifactId>esmvc-spring-boot-starter</artifactId>
-		<version>${esmvc.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.esmvc</groupId>
-		<artifactId>esmvc-spring-boot-starter-rest</artifactId>
-		<version>${esmvc.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.esmvc</groupId>
-		<artifactId>esmvc-spring-boot-starter-tcp</artifactId>
-		<version>${esmvc.version}</version>
-	</dependency>
-
-	<dependency>
-		<groupId>com.lmax</groupId>
-		<artifactId>disruptor</artifactId>
-		<version>${disruptor.version}</version>
-	</dependency>
-
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-aop</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-codec</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-dmmq</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-feign</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-httpclient</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-redis</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-redis-springdata2</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-shiro-redis</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-shiro-redis-springdata2</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-spring</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-web</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>	
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-sshclient</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>	
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-vfs</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>	
-	<dependency>
-		<groupId>com.github.fangjinuo.agileway</groupId>
-		<artifactId>agileway-zip</artifactId>
-		<version>${agileway.version}</version>
-	</dependency>		
-
-	
-	    <dependency>
+    <dependencies>	
+    
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java8</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.langx.security</groupId>
+    		<artifactId>langx-java-security-gm-jca-bouncycastle</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.langx.security</groupId>
+    		<artifactId>langx-java-security-gm-jca-gmsslorg</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+     	<dependency>
+    		<groupId>io.github.bes2008.solution.langx.security</groupId>
+    		<artifactId>langx-java-security-pam</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+    
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java-reflect-aspectj</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+    		
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java-reflect-asm</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java-regexp-joni</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+    
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-batchinsert</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-common</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    		<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-datasource</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-dbutils</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-dialect</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-ebean</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-hibernate</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>	
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-jfinal</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-jsqlparser</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mango</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatis</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatis-over-pagehelper</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatis-solon-plugin</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    		<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatis-spring-common</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatis-spring-boot-starter</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatisplus</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>	 
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatisplus-spring-boot-starter</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency> 
+    		<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatisplus_2x</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>	 
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatisplus_2x-spring-boot-starter</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency> 
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-springjdbc</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>	   
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-springjdbc-spring-boot-starter</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>	   
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-tkmapper-spring-boot-starter</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>  
+    
+    
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.audit</groupId>
+    		<artifactId>audit-core</artifactId>
+    		<version>${audit.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.audit.entityloader</groupId>
+    		<artifactId>audit-entityloader-esorm</artifactId>
+    		<version>${audit.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.audit.entityloader</groupId>
+    		<artifactId>audit-entityloader-mybatis</artifactId>
+    		<version>${audit.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.audit.entityloader</groupId>
+    		<artifactId>audit-entityloader-resttemplate</artifactId>
+    		<version>${audit.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.audit</groupId>
+    		<artifactId>audit-servlet</artifactId>
+    		<version>${audit.version}</version>
+    	</dependency>	
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.audit</groupId>
+    		<artifactId>audit-spring-boot-starter</artifactId>
+    		<version>${audit.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.audit</groupId>
+    		<artifactId>audit-spring</artifactId>
+    		<version>${audit.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.audit</groupId>
+    		<artifactId>audit-swagger</artifactId>
+    		<version>${audit.version}</version>
+    	</dependency>
+    
+    
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>androidjson-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>boonjson-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>easyjson-core</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>easyjson-fastjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>easyjson-gson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>easyjson-jackson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>fastjson-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>gson-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>jsonlib-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>jsonsmart-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>minimaljson-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>moshi-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>orgjson-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>easyjson-antlr4json</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency> 
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>progsbase-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>simplejson-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
+    	
+    
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.esorm</groupId>
+    		<artifactId>esorm-model</artifactId>
+    		<version>${esorm.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.esorm</groupId>
+    		<artifactId>esorm-service</artifactId>
+    		<version>${esorm.version}</version>
+    	</dependency>
+    		<dependency>
+    		<groupId>io.github.bes2008.solution.esorm</groupId>
+    		<artifactId>esorm-service-rest</artifactId>
+    		<version>${esorm.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.esorm</groupId>
+    		<artifactId>esorm-service-tcp</artifactId>
+    		<version>${esorm.version}</version>
+    	</dependency>
+    		<dependency>
+    		<groupId>io.github.bes2008.solution.esorm</groupId>
+    		<artifactId>esorm-spring-boot-common</artifactId>
+    		<version>${esorm.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.esorm</groupId>
+    		<artifactId>esorm-spring-boot-starter</artifactId>
+    		<version>${esorm.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.esorm</groupId>
+    		<artifactId>esorm-spring-boot-starter-rest</artifactId>
+    		<version>${esorm.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.esorm</groupId>
+    		<artifactId>esorm-spring-boot-starter-tcp</artifactId>
+    		<version>${esorm.version}</version>
+    	</dependency>
+    
+    	<dependency>
+    		<groupId>com.lmax</groupId>
+    		<artifactId>disruptor</artifactId>
+    		<version>${disruptor.version}</version>
+    	</dependency>
+    
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-aop</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-codec</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-dmmq</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+     	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-jersey</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-feign</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-httpcontainer-common</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-httpclient</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-redis</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-redis-springdata2</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-shiro-redis</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-shiro-redis-springdata2</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-spring</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-web</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>	
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-sshclient</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>	
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-vfs</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>	
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-zip</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>		
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.eipchannel</groupId>
+    		<artifactId>agileway-eipchannel-core</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.eipchannel</groupId>
+    		<artifactId>agileway-eipchannel-topic</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.eipchannel</groupId>
+    		<artifactId>agileway-eipchannel-kafka</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>     
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
+    		<artifactId>agileway-metrics-core</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>   
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
+    		<artifactId>agileway-metrics-supports-csv</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>     
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
+    		<artifactId>agileway-metrics-supports-jdk</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>      
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
+    		<artifactId>agileway-metrics-supports-prometheus</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.syslog</groupId>
+    		<artifactId>agileway-syslog-protocol</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+          
+     
+        <dependency>
             <groupId>com.hierynomus</groupId>
             <artifactId>sshj</artifactId>
             <version>${hierynomus.sshj.version}</version>
@@ -469,20 +531,20 @@
             <version>${i2p.crypto.version}</version>
             <optional>true</optional>
         </dependency>
-	
-	    <dependency>
+    
+        <dependency>
             <groupId>com.jcraft</groupId>
             <artifactId>jsch</artifactId>
             <version>${jsch.version}</version>
         </dependency>
-	
+    
         <dependency>
             <groupId>com.airlenet.yang</groupId>
             <artifactId>ganymed-ssh2</artifactId>
             <version>${ganymed-ssh2.version}</version>
         </dependency>
         
-	    <dependency>
+        <dependency>
             <groupId>net.schmizz</groupId>
             <artifactId>sshj</artifactId>
             <version>${schmizz.sshj.version}</version>
@@ -492,37 +554,37 @@
             <artifactId>ganymed-ssh2</artifactId>
             <version>${ganymed-ssh2.version}</version>
         </dependency>
-
-
+    
+    
         <dependency>
             <groupId>com.trilead</groupId>
             <artifactId>trilead-ssh2</artifactId>
             <version>${trilead-ssh2.version}</version>
         </dependency>
-
+    
         <dependency>
             <groupId>sshtools</groupId>
             <artifactId>j2ssh-core</artifactId>
             <version>${j2ssh-core.version}</version>
         </dependency>
-
+    
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-
+    
         <dependency>
             <groupId>com.sshtools</groupId>
             <artifactId>maverick-synergy-client</artifactId>
             <version>${maverick-synergy-client.version}</version>
         </dependency>
-	    <dependency>
+        <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>hessian</artifactId>
             <version>${hessian.version}</version>
         </dependency>
-
+    
         <dependency>
             <groupId>com.esotericsoftware</groupId>
             <artifactId>kryo</artifactId>            
@@ -538,19 +600,30 @@
             <artifactId>protostuff-runtime</artifactId>
             <version>${protostuff.version}</version>
         </dependency>
-
+    
         <dependency>
             <groupId>io.protostuff</groupId>
             <artifactId>protostuff-core</artifactId>
             <version>${protostuff.version}</version>
         </dependency>
-
+        
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>${avro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.activej</groupId>
+            <artifactId>activej-serializer</artifactId>
+            <version>${activej.version}</version>
+        </dependency>        
+    
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
             <version>3.3.0</version>
         </dependency>
-
+    
         <dependency>
             <groupId>de.ruedigermoeller</groupId>
             <artifactId>fst</artifactId>
@@ -567,6 +640,11 @@
             <version>${xson.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>${mangodb.bson.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-cbor</artifactId>
             <version>${jackson.version}</version>
@@ -576,9 +654,18 @@
             <artifactId>jackson-dataformat-msgpack</artifactId>
             <version>${msgpack.version}</version>
         </dependency>
-
+    
+    	<dependency>
+    		<groupId>org.jruby.jcodings</groupId>
+    		<artifactId>jcodings</artifactId>
+    		<version>${jcodings.version}</version>
+    	</dependency>
         
-
+    	<dependency>
+    		<groupId>org.jruby.joni</groupId>
+    		<artifactId>joni</artifactId>
+    		<version>${joni.version}</version>
+    	</dependency>
 	</dependencies>
 
 	<build>

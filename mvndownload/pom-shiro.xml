@@ -10,14 +10,94 @@
 
 
 	<properties>
-	        <shiro.version>[1.4.2,)</shiro.version>		
+         <shiro.version>1.10.1</shiro.version>		
 	</properties>
 	<dependencies>	
+        <dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-all</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+        <dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-aspectj</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-cache</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>    
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-cas</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>    
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-config-core</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-config-ogdl</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-crypto-core</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-crypto-hash</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>    
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-crypto-cipher</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>        
 		<dependency>
 		    <groupId>org.apache.shiro</groupId>
 		    <artifactId>shiro-core</artifactId>
 		    <version>${shiro.version}</version>
+		</dependency>              
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-ehcache</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>    
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-event</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>    
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-guice</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>    
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-hazelcast</artifactId>
+		    <version>${shiro.version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-jaxrs</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>          
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-quartz</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>			    
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-lang</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>              
 		<dependency>
 		    <groupId>org.apache.shiro</groupId>
 		    <artifactId>shiro-web</artifactId>
@@ -30,54 +110,15 @@
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-ehcache</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>	
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-guice</artifactId>
+		    <artifactId>shiro-spring-boot-starter</artifactId>
 		    <version>${shiro.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-cas</artifactId>
+		    <artifactId>shiro-spring-boot-web-starter</artifactId>
 		    <version>${shiro.version}</version>
 		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-quartz</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>		
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-aspectj</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-jaxrs</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-lang</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>	
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-cache</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-event</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-crypto-core</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
+
 	</dependencies>
 
 	<build>

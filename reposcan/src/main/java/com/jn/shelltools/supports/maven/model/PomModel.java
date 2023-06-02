@@ -3,6 +3,7 @@ package com.jn.shelltools.supports.maven.model;
 import com.jn.shelltools.core.PackageGAV;
 
 import java.util.List;
+import java.util.Map;
 
 public class PomModel extends PackageGAV {
     private MavenGAV parent;
@@ -10,6 +11,7 @@ public class PomModel extends PackageGAV {
     private String name;
     private Packaging packaging;
     private List<DependencyModel> dependencies;
+    private Map<String,String> properties;
 
     public PomModel() {
 
@@ -21,6 +23,13 @@ public class PomModel extends PackageGAV {
         setVersion(version);
     }
 
+    public Map<String, String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Map<String, String> properties) {
+        this.properties = properties;
+    }
 
     public MavenGAV getParent() {
         return parent;

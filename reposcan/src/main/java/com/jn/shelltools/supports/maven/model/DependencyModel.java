@@ -1,13 +1,24 @@
 package com.jn.shelltools.supports.maven.model;
 
+import com.jn.langx.annotation.Nullable;
 import com.jn.shelltools.core.PackageGAV;
 
 import java.util.List;
 
 public class DependencyModel extends PackageGAV {
+    @Nullable
+    private String projectName;
     private boolean optional = false;
     private List<PackageGAV> excludes;
     private Packaging packaging = Packaging.JAR;
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
     public boolean isOptional() {
         return optional;

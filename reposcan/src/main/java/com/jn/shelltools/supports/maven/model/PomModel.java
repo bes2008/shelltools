@@ -9,9 +9,9 @@ public class PomModel extends PackageGAV {
     private MavenGAV parent;
     private String description;
     private String name;
-    private Packaging packaging;
+    private Packaging packaging = Packaging.JAR;
     private List<DependencyModel> dependencies;
-    private Map<String,String> properties;
+    private Map<String, String> properties;
 
     public PomModel() {
 

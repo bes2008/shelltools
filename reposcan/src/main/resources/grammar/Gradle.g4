@@ -1,4 +1,4 @@
-grammar gradle;
+grammar Gradle;
 CLRF: [\n\r\f]+;
 // 公共部分
 SPACE: [ \t]+ -> skip;

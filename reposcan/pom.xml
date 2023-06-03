@@ -21,7 +21,7 @@
         <junit.version>4.13.2</junit.version>
         <jsonpath.version>2.7.0</jsonpath.version>
         <freemarker.version>2.3.32</freemarker.version>
-        <antlr4.version>4.13.0</antlr4.version>
+        <antlr4.version>4.5.3</antlr4.version>
     </properties>
 
     <dependencyManagement>
@@ -39,6 +39,11 @@
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4</artifactId>
+            <version>${antlr4.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
             <version>${antlr4.version}</version>
         </dependency>
 
@@ -203,6 +208,31 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
+                <version>${antlr4.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources: gradle</id>
+                        <goals>
+                            <goal>antlr4</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <encoding>UTF-8</encoding>
+                            <outputDirectory>${project.basedir}/src/main/java/com/jn/shelltools/supports/gradle/generated</outputDirectory>
+                            <includes>
+                                <include>${project.basedir}/src/main/resources/grammar/Gradle.g4</include>
+                            </includes>
+                            <arguments>
+                                <argument>-package</argument>
+                                <argument>com.jn.shelltools.supports.gradle.generated</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

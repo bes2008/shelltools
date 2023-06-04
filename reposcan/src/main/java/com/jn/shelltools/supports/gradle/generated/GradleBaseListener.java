@@ -148,18 +148,6 @@ public class GradleBaseListener implements GradleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuncInvokeWithoutClosure(GradleParser.FuncInvokeWithoutClosureContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFuncInvokeWithoutClosure(GradleParser.FuncInvokeWithoutClosureContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterGroovyStatement(GradleParser.GroovyStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -196,13 +184,13 @@ public class GradleBaseListener implements GradleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuncInvoke(GradleParser.FuncInvokeContext ctx) { }
+	@Override public void enterFuncInvocation(GradleParser.FuncInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFuncInvoke(GradleParser.FuncInvokeContext ctx) { }
+	@Override public void exitFuncInvocation(GradleParser.FuncInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

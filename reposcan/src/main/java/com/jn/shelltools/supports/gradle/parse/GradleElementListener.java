@@ -26,8 +26,5 @@ class GradleElementListener extends GradleBaseListener {
         super.exitProgram(ctx);
     }
 
-    @Override
-    public void enterFuncInvoke(GradleParser.FuncInvokeContext ctx) {
-        super.enterFuncInvoke(ctx);
-    }
+
 }

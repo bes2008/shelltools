@@ -118,16 +118,6 @@ public interface GradleListener extends ParseTreeListener {
 	 */
 	void exitDefineVariable(GradleParser.DefineVariableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GradleParser#funcInvokeWithoutClosure}.
-	 * @param ctx the parse tree
-	 */
-	void enterFuncInvokeWithoutClosure(GradleParser.FuncInvokeWithoutClosureContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GradleParser#funcInvokeWithoutClosure}.
-	 * @param ctx the parse tree
-	 */
-	void exitFuncInvokeWithoutClosure(GradleParser.FuncInvokeWithoutClosureContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GradleParser#groovyStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -158,15 +148,15 @@ public interface GradleListener extends ParseTreeListener {
 	 */
 	void exitClosure(GradleParser.ClosureContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GradleParser#funcInvoke}.
+	 * Enter a parse tree produced by {@link GradleParser#funcInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void enterFuncInvoke(GradleParser.FuncInvokeContext ctx);
+	void enterFuncInvocation(GradleParser.FuncInvocationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GradleParser#funcInvoke}.
+	 * Exit a parse tree produced by {@link GradleParser#funcInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void exitFuncInvoke(GradleParser.FuncInvokeContext ctx);
+	void exitFuncInvocation(GradleParser.FuncInvocationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GradleParser#program}.
 	 * @param ctx the parse tree

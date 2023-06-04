@@ -22,13 +22,17 @@ fragment FALSE: 'false';
 BOOL: TRUE | FALSE;
 
 // 字符串
-STR_FLAG: '"';
+fragment DOUBLE_QUOTE: '"';
+fragment SINGLE_QUOTE: '\'';
 fragment HEX_CHAR: [0-9A-Fa-f];
 fragment UNICODE: '\\u' HEX_CHAR HEX_CHAR HEX_CHAR HEX_CHAR;
 fragment ESCAPE_CHAR: '\\' ["\\/bfnrt];
 fragment SAFE_CODE_POINT: ~[\\\u0000-\u001F];
 // STRING: '"' (SPACE | ESCAPE_CHAR | UNICODE | SAFE_CODE_POINT)* '"';
-STRING: STR_FLAG (~["])* STR_FLAG;
+STRING
+    : (DOUBLE_QUOTE (~["])* DOUBLE_QUOTE)
+    | (SINGLE_QUOTE (~['])* SINGLE_QUOTE)
+    ;
 
 // 注释 要跳过
 fragment SINGLE_COMMENT: '//' (~('\r'|'\n'))* ;
@@ -64,7 +68,7 @@ simple_value
     | BOOL
     | NULL;
 
-sequence: (value | string_to_closure_pair) (SPACE? COMMA SPACE? (value | string_to_closure_pair) )*;
+sequence: SPACE? (value | string_to_closure_pair) (SPACE? COMMA SPACE? (value | string_to_closure_pair) )*;
 
 
 

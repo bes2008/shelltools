@@ -220,7 +220,6 @@
                             <goal>antlr4</goal>
                         </goals>
                         <configuration>
-                            <listener>true</listener>
                             <visitor>true</visitor>
                             <inputEncoding>UTF-8</inputEncoding>
                             <outputDirectory>${project.basedir}/src/main/java/com/jn/shelltools/supports/gradle/generated</outputDirectory>

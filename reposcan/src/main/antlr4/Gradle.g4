@@ -1,8 +1,15 @@
 grammar Gradle;
 
-CLRF: [\n\r\f]+;
+// token 名字是大写
+// rule 名字是小写
+// rule 中可以嵌入 token
+// token 中不能嵌入 rule, token， 但可以嵌入 fragment
+// rule 中不能直接 使用字面量，必须使用 token
+
+
+CLRF: [\n\r\f]+ -> skip;
 // 公共部分
-SPACE: [ \t]+ -> skip;
+SPACE: [ \t]+;
 
 // 数字
 fragment INT: '0' | [1-9][0-9]*; // no leading zeros
@@ -15,11 +22,13 @@ fragment FALSE: 'false';
 BOOL: TRUE | FALSE;
 
 // 字符串
+STR_FLAG: '"';
 fragment HEX_CHAR: [0-9A-Fa-f];
 fragment UNICODE: '\\u' HEX_CHAR HEX_CHAR HEX_CHAR HEX_CHAR;
 fragment ESCAPE_CHAR: '\\' ["\\/bfnrt];
-fragment SAFE_CODE_POINT: ~["\\\u0000-\u001F];
-STRING: '"' (ESCAPE_CHAR | UNICODE | SAFE_CODE_POINT)* '"';
+fragment SAFE_CODE_POINT: ~[\\\u0000-\u001F];
+// STRING: '"' (SPACE | ESCAPE_CHAR | UNICODE | SAFE_CODE_POINT)* '"';
+STRING: STR_FLAG (~["])* STR_FLAG;
 
 // 注释 要跳过
 fragment SINGLE_COMMENT: '//' (~('\r'|'\n'))* ;
@@ -29,40 +38,67 @@ COMMENT: (SINGLE_COMMENT | MULTIPLINE_COMMENT) -> skip;
 // 空
 NULL: 'null';
 
-// 数组
-ARRAY
-    : '[' ']' // []
-    | '[' VALUE (',' VALUE )* ']'
-    ;
+COLON: ':';
+EQUALS: '=';
+COMMA: ',';
+MIDDLE_BRACE_START: '[';
+MIDDLE_BRACE_END: ']';
 
-SYMBOL: [A-Za-z][A-Za-z0-9_]+?;
+
+
+SYMBOL: [A-Za-z][A-Za-z0-9_]*;
+
+
 // hashmap
-KEY_VALUE: SYMBOL ':' VALUE;
-KEY_VALUES: KEY_VALUE (',' KEY_VALUE)*?;
+// keyValue: SYMBOL SPACE? COLON SPACE? value;
+//keyValues: SPACE? keyValue (SPACE? COMMA keyValue)*?;
 
-VALUE
-    : KEY_VALUES
-    | ARRAY
-    | STRING
+simple_key: (STRING|SYMBOL);
+simple_key_value_pair: simple_key SPACE? COLON SPACE? simple_value;
+simple_key_value_pairs: SPACE? simple_key_value_pair (SPACE? COMMA SPACE? simple_key_value_pair)*?;
+string_to_closure_pair: simple_key SPACE closure;
+
+simple_value
+    : STRING
     | NUM
     | BOOL
-    | NULL
+    | NULL;
+
+sequence: (value | string_to_closure_pair) (SPACE? COMMA SPACE? (value | string_to_closure_pair) )*;
+
+
+
+value
+    : simple_value
+    | array
+    | string_to_closure_pair
+    | simple_key_value_pairs
     ;
 
-FUNC_ARGS: VALUE;
-FUNC_NAME: SYMBOL;
+// 数组
+array: MIDDLE_BRACE_START SPACE? sequence? SPACE? MIDDLE_BRACE_END;
 
-// 闭包
-CLOSURE: '{' FUNC_INVOKE*? '}';
+func_name: SYMBOL;
 
+BIG_BRACE_START: '{';
+BIG_BRACE_END: '}';
+SMALL_BRACE_START: '(';
+SMALL_BRACE_END: ')';
+
+var: SYMBOL;
+// 定义变量
+def_var: SPACE? var SPACE? EQUALS SPACE? value;
 
 // 函数调用
-FUNC_INVOKE_WITHOUT_CLOSURE
-    : FUNC_NAME FUNC_ARGS   // 一个参数调用
-    | FUNC_NAME '(' FUNC_ARGS ')' // 多个参数调用
-    | FUNC_NAME; // 无参调用
-FUNC_INVOKE_WITH_CLOSURE: FUNC_INVOKE_WITHOUT_CLOSURE CLOSURE;
-FUNC_INVOKE: FUNC_INVOKE_WITHOUT_CLOSURE | FUNC_INVOKE_WITH_CLOSURE;
+func_invoke_without_closure
+    : SPACE? func_name SPACE? value   // 一个参数调用
+    | SPACE? func_name SPACE? SMALL_BRACE_START SPACE? (value|sequence)? SPACE? SMALL_BRACE_END // 多个参数调用
+    | SPACE? func_name; // 无参调用
 
-// 定义变量
-DEF_VAR: SYMBOL '=' VALUE;
+groovy_statement: def_var|func_invoke;
+closure_body: groovy_statement*;
+closure: (BIG_BRACE_START SPACE? closure_body SPACE? BIG_BRACE_END); // 闭包
+func_invoke: func_invoke_without_closure SPACE? closure?;
+
+
+file: (def_var | func_invoke)+;

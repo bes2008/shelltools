@@ -21,7 +21,7 @@
         <junit.version>4.13.2</junit.version>
         <jsonpath.version>2.7.0</jsonpath.version>
         <freemarker.version>2.3.32</freemarker.version>
-        <antlr4.version>4.5.3</antlr4.version>
+        <antlr4.version>4.7</antlr4.version>
     </properties>
 
     <dependencyManagement>
@@ -221,11 +221,17 @@
                         </goals>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <encoding>UTF-8</encoding>
+                            <listener>true</listener>
+                            <visitor>true</visitor>
+                            <sourceDirectory>${basedir}/src/main/resources/grammar/</sourceDirectory>
+                            <inputEncoding>UTF-8</inputEncoding>
                             <outputDirectory>${project.basedir}/src/main/java/com/jn/shelltools/supports/gradle/generated</outputDirectory>
+                            <outputEncoding>UTF-8</outputEncoding>
+                            <!--
                             <includes>
                                 <include>${project.basedir}/src/main/resources/grammar/Gradle.g4</include>
                             </includes>
+                            -->
                             <arguments>
                                 <argument>-package</argument>
                                 <argument>com.jn.shelltools.supports.gradle.generated</argument>

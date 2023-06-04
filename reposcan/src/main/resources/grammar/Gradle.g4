@@ -93,16 +93,14 @@ var: SYMBOL;
 // 定义变量
 defineVariable: SPACE? var SPACE? EQUALS SPACE? value;
 
-// 函数调用
-funcInvokeWithoutClosure
-    : SPACE? funcName SPACE? value   // 一个参数调用
-    | SPACE? funcName SPACE? SMALL_BRACE_START SPACE? (value|sequence)? SPACE? SMALL_BRACE_END // 多个参数调用
-    | SPACE? funcName; // 无参调用
+groovyStatement: defineVariable|funcInvocation;
 
-groovyStatement: defineVariable|funcInvoke;
 closureBody: groovyStatement*;
 closure: (BIG_BRACE_START SPACE? closureBody SPACE? BIG_BRACE_END); // 闭包
-funcInvoke: funcInvokeWithoutClosure SPACE? closure?;
+funcInvocation
+    :   (SPACE? funcName SPACE? value   // 一个参数调用
+        | SPACE? funcName SPACE? SMALL_BRACE_START SPACE? (value|sequence)? SPACE? SMALL_BRACE_END // 多个参数调用
+        | SPACE? funcName // 无参调用
+        ) SPACE? closure?;
 
-
-program: (defineVariable | funcInvoke)+;
+program: (defineVariable | funcInvocation)+;

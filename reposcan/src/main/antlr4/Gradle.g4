@@ -1,4 +1,5 @@
 grammar Gradle;
+
 CLRF: [\n\r\f]+;
 // 公共部分
 SPACE: [ \t]+ -> skip;
@@ -6,19 +7,19 @@ SPACE: [ \t]+ -> skip;
 // 数字
 fragment INT: '0' | [1-9][0-9]*; // no leading zeros
 fragment SIC: [Ee][+\-]?INT;
-Number: '-'? INT ('.'[0-9]+) ? SIC? ;
+NUM: '-'? INT ('.'[0-9]+) ? SIC? ;
 
 // 布尔值
 fragment TRUE: 'true';
 fragment FALSE: 'false';
-Bool: TRUE | FALSE;
+BOOL: TRUE | FALSE;
 
 // 字符串
 fragment HEX_CHAR: [0-9A-Fa-f];
 fragment UNICODE: '\\u' HEX_CHAR HEX_CHAR HEX_CHAR HEX_CHAR;
 fragment ESCAPE_CHAR: '\\' ["\\/bfnrt];
 fragment SAFE_CODE_POINT: ~["\\\u0000-\u001F];
-String: '"' (ESCAPE_CHAR | UNICODE | SAFE_CODE_POINT)* '"';
+STRING: '"' (ESCAPE_CHAR | UNICODE | SAFE_CODE_POINT)* '"';
 
 // 注释 要跳过
 fragment SINGLE_COMMENT: '//' (~('\r'|'\n'))* ;
@@ -26,33 +27,33 @@ fragment MULTIPLINE_COMMENT: '/*' .*? '*/';
 COMMENT: (SINGLE_COMMENT | MULTIPLINE_COMMENT) -> skip;
 
 // 空
-Null: 'null';
+NULL: 'null';
 
 // 数组
-Array
+ARRAY
     : '[' ']' // []
-    | '[' Value (',' Value )* ']'
+    | '[' VALUE (',' VALUE )* ']'
     ;
 
-Symbol: [A-Za-z][A-Za-z0-9_]+?;
+SYMBOL: [A-Za-z][A-Za-z0-9_]+?;
 // hashmap
-KeyValue: Symbol ':' Value;
-KeyValues: KeyValue (',' KeyValue)*?;
+KEY_VALUE: SYMBOL ':' VALUE;
+KEY_VALUES: KEY_VALUE (',' KEY_VALUE)*?;
 
-Value
-    : KeyValues
-    | Array
-    | String
-    | Number
-    | Bool
-    | Null
+VALUE
+    : KEY_VALUES
+    | ARRAY
+    | STRING
+    | NUM
+    | BOOL
+    | NULL
     ;
 
-FUNC_ARGS: Value;
-FUNC_NAME: Symbol;
+FUNC_ARGS: VALUE;
+FUNC_NAME: SYMBOL;
 
 // 闭包
-Closure: '{' FUNC_INVOKE*? '}';
+CLOSURE: '{' FUNC_INVOKE*? '}';
 
 
 // 函数调用
@@ -60,8 +61,8 @@ FUNC_INVOKE_WITHOUT_CLOSURE
     : FUNC_NAME FUNC_ARGS   // 一个参数调用
     | FUNC_NAME '(' FUNC_ARGS ')' // 多个参数调用
     | FUNC_NAME; // 无参调用
-FUNC_INVOKE_WITH_CLOSURE: FUNC_INVOKE_WITHOUT_CLOSURE;
+FUNC_INVOKE_WITH_CLOSURE: FUNC_INVOKE_WITHOUT_CLOSURE CLOSURE;
 FUNC_INVOKE: FUNC_INVOKE_WITHOUT_CLOSURE | FUNC_INVOKE_WITH_CLOSURE;
 
 // 定义变量
-DEF_VAR: Symbol '=' Value;
+DEF_VAR: SYMBOL '=' VALUE;

@@ -1,7 +1,7 @@
 grammar Gradle;
 
 // token 名字是大写
-// rule 名字是小写
+// rule 名字是小写 或者驼峰
 // rule 中可以嵌入 token
 // token 中不能嵌入 rule, token， 但可以嵌入 fragment
 // rule 中不能直接 使用字面量，必须使用 token
@@ -57,32 +57,32 @@ SYMBOL: [A-Za-z][A-Za-z0-9_]*;
 // keyValue: SYMBOL SPACE? COLON SPACE? value;
 //keyValues: SPACE? keyValue (SPACE? COMMA keyValue)*?;
 
-simple_key: (STRING|SYMBOL);
-simple_key_value_pair: simple_key SPACE? COLON SPACE? simple_value;
-simple_key_value_pairs: SPACE? simple_key_value_pair (SPACE? COMMA SPACE? simple_key_value_pair)*?;
-string_to_closure_pair: simple_key SPACE closure;
+simpleKey: (STRING|SYMBOL);
+simpleKeyValuePair: simpleKey SPACE? COLON SPACE? simpleValue;
+simpleKeyValuePairs: SPACE? simpleKeyValuePair (SPACE? COMMA SPACE? simpleKeyValuePair)*?;
+stringToClosurePair: simpleKey SPACE closure;
 
-simple_value
+simpleValue
     : STRING
     | NUM
     | BOOL
     | NULL;
 
-sequence: SPACE? (value | string_to_closure_pair) (SPACE? COMMA SPACE? (value | string_to_closure_pair) )*;
+sequence: SPACE? (value | stringToClosurePair) (SPACE? COMMA SPACE? (value | stringToClosurePair) )*;
 
 
 
 value
-    : simple_value
+    : simpleValue
     | array
-    | string_to_closure_pair
-    | simple_key_value_pairs
+    | stringToClosurePair
+    | simpleKeyValuePairs
     ;
 
 // 数组
 array: MIDDLE_BRACE_START SPACE? sequence? SPACE? MIDDLE_BRACE_END;
 
-func_name: SYMBOL;
+funcName: SYMBOL;
 
 BIG_BRACE_START: '{';
 BIG_BRACE_END: '}';
@@ -91,18 +91,18 @@ SMALL_BRACE_END: ')';
 
 var: SYMBOL;
 // 定义变量
-def_var: SPACE? var SPACE? EQUALS SPACE? value;
+defineVariable: SPACE? var SPACE? EQUALS SPACE? value;
 
 // 函数调用
-func_invoke_without_closure
-    : SPACE? func_name SPACE? value   // 一个参数调用
-    | SPACE? func_name SPACE? SMALL_BRACE_START SPACE? (value|sequence)? SPACE? SMALL_BRACE_END // 多个参数调用
-    | SPACE? func_name; // 无参调用
+funcInvokeWithoutClosure
+    : SPACE? funcName SPACE? value   // 一个参数调用
+    | SPACE? funcName SPACE? SMALL_BRACE_START SPACE? (value|sequence)? SPACE? SMALL_BRACE_END // 多个参数调用
+    | SPACE? funcName; // 无参调用
 
-groovy_statement: def_var|func_invoke;
-closure_body: groovy_statement*;
-closure: (BIG_BRACE_START SPACE? closure_body SPACE? BIG_BRACE_END); // 闭包
-func_invoke: func_invoke_without_closure SPACE? closure?;
+groovyStatement: defineVariable|funcInvoke;
+closureBody: groovyStatement*;
+closure: (BIG_BRACE_START SPACE? closureBody SPACE? BIG_BRACE_END); // 闭包
+funcInvoke: funcInvokeWithoutClosure SPACE? closure?;
 
 
-file: (def_var | func_invoke)+;
+program: (defineVariable | funcInvoke)+;

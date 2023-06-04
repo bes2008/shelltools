@@ -220,8 +220,8 @@
                             <goal>antlr4</goal>
                         </goals>
                         <configuration>
-                            <visitor>true</visitor>
                             <inputEncoding>UTF-8</inputEncoding>
+                            <sourceDirectory>${project.basedir}/src/main/resources/grammar/</sourceDirectory>
                             <outputDirectory>${project.basedir}/src/main/java/com/jn/shelltools/supports/gradle/generated</outputDirectory>
                             <outputEncoding>UTF-8</outputEncoding>
                             <arguments>

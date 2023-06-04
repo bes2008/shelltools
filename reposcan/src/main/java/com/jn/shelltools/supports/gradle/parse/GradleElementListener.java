@@ -26,5 +26,12 @@ class GradleElementListener extends GradleBaseListener {
         super.exitProgram(ctx);
     }
 
+    @Override
+    public void enterFuncInvocation(GradleParser.FuncInvocationContext ctx) {
+        String functionName = ctx.funcName();
+        if(this.currentLibrary == null){
+
+        }
+    }
 
 }

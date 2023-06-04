@@ -3,6 +3,7 @@ package com.jn.shelltools.supports.gradle;
 import com.jn.langx.Transformer;
 import com.jn.langx.io.resource.Resource;
 import com.jn.shelltools.core.PackageGAV;
+import com.jn.shelltools.supports.gradle.parse.GradleProjectDependenciesParser;
 import com.jn.shelltools.supports.maven.PomXmlGenerator;
 import com.jn.shelltools.supports.maven.model.DependencyModel;
 import com.jn.shelltools.supports.maven.model.PomModel;

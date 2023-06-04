@@ -5,7 +5,7 @@ import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
 import com.jn.shelltools.config.FreemarkerConfig;
 import com.jn.shelltools.core.PackageGAV;
-import com.jn.shelltools.supports.gradle.GradleProjectDependenciesParser;
+import com.jn.shelltools.supports.gradle.parse.GradleProjectDependenciesParser;
 import com.jn.shelltools.supports.gradle.GradleToMavenPomTransformer;
 import com.jn.shelltools.supports.maven.model.DependencyModel;
 import freemarker.template.Configuration;

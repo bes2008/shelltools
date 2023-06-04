@@ -1,4 +1,4 @@
-package com.jn.shelltools.supports.gradle;
+package com.jn.shelltools.supports.gradle.parse;
 
 import com.jn.langx.Parser;
 import com.jn.langx.io.resource.Resource;
@@ -13,9 +13,17 @@ import com.jn.langx.util.io.Charsets;
 import com.jn.langx.util.regexp.Regexp;
 import com.jn.langx.util.regexp.Regexps;
 import com.jn.shelltools.core.PackageGAV;
+import com.jn.shelltools.supports.gradle.generated.GradleLexer;
+import com.jn.shelltools.supports.gradle.generated.GradleParser;
 import com.jn.shelltools.supports.maven.model.DependencyModel;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.apache.commons.compress.utils.Lists;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -131,65 +139,24 @@ public class GradleProjectDependenciesParser implements Parser<Resource, List<De
         }
     }
 
-    static interface ElementListener {
-        void startElement(Element parent, Element context, String line);
-
-        void endElement(Element parent, Element libraryElement);
-    }
-
-    static class LibraryElementListener implements ElementListener{
-        @Override
-        public void startElement(Element parent, Element libraryElement, String line) {
-            Map<String, String> map = Regexps.findNamedGroup(LIBRARY_ELEMENT_START, line);
-            String value = map.get("VALUE");
-            libraryElement.setValue(value);
-            libraryElement.setType(ElementType.LIBRARY);
-        }
-
-        @Override
-        public void endElement(Element parent, Element libraryElement) {
-
-        }
-    }
-
-    static class GroupElementListener implements ElementListener{
-        @Override
-        public void startElement(Element parent, Element libraryElement, String line) {
-            Map<String, String> map = Regexps.findNamedGroup(LIBRARY_ELEMENT_START, line);
-            String value = map.get("VALUE");
-            libraryElement.setValue(value);
-            libraryElement.setType(ElementType.GROUP);
-        }
-
-        @Override
-        public void endElement(Element parent, Element libraryElement) {
-
-        }
-    }
 
     public List<DependencyModel> parse(Resource resource) {
-        final List<DependencyModel> ret = Lists.newArrayList();
-        Iterator<String> lines = Resources.readLines(resource, Charsets.UTF_8).iterator();
-        Element currentElement = null;
-        LibraryElementListener libraryElementListener = new LibraryElementListener();
-        while (lines.hasNext()) {
-            String currentLine = lines.next();
-            String line = Strings.trim(currentLine);
-            if (Strings.isBlank(line)) {
-                continue;
-            }
+        try {
+            CharStream inputStream = CharStreams.fromStream(resource.getInputStream(), Charsets.UTF_8);
+            GradleLexer lexer = new GradleLexer(inputStream);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            GradleParser parser = new GradleParser(tokens);
+            ParseTree textTree = parser.program();
 
-            if (currentElement == null) {
-                if (Regexps.match(LIBRARY_ELEMENT_START, line)) {
-                    libraryElementListener.startElement(null, new Element(), line);
-                }
-                else if(Regexps.match(LIBRARY_GROUP_ELEMENT_START, line)){
-
-                }
-            }
-
+            ParseTreeWalker parseTreeWalker = new ParseTreeWalker();
+            GradleElementListener listener = new GradleElementListener();
+            parseTreeWalker.walk(listener, textTree);
+            List<DependencyModel> dependencies = listener.getDependencies();
+            return dependencies;
+        }catch (IOException e){
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public List<DependencyModel> parse2(Resource resource) {

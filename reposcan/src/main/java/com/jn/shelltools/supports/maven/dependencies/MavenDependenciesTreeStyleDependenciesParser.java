@@ -9,9 +9,11 @@ import com.jn.langx.util.collection.Lists;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.io.Charsets;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.langx.util.regexp.Regexp;
 import com.jn.langx.util.regexp.Regexps;
 import com.jn.shelltools.supports.maven.model.DependencyModel;
+import org.slf4j.Logger;
 
 import java.util.*;
 
@@ -23,6 +25,7 @@ public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Reso
     //
 
     public static final Regexp dependencyExpr = Regexps.compile("(?:((\\|)?\\s+)*?[+\\\\]-+)?(\\s+)?(?<groupId>[^:'\"\\(* \\t]+)\\:(?<artifactId>[^:'\"\\(* \\t]+)\\:(?<version>[^:'\"\\(* \\t]+)(\\s+.*)?");
+    private static final Logger logger = Loggers.getLogger(MavenDependenciesTreeStyleDependenciesParser.class);
 
 
     public List<DependencyModel> parse(Resource resource) {
@@ -41,6 +44,7 @@ public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Reso
 
                             if(Emptys.isNoneEmpty(groupId, artifactId, version)){
                                 DependencyModel dependency = new DependencyModel(groupId, artifactId, version);
+                                logger.info("{}", dependency);
                                 ret.add(dependency);
                             }
                         }

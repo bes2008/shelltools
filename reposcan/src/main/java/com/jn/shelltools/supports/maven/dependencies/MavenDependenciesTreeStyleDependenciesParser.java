@@ -1,4 +1,4 @@
-package com.jn.shelltools.supports.gradle.parse;
+package com.jn.shelltools.supports.maven.dependencies;
 
 import com.jn.langx.Parser;
 import com.jn.langx.io.resource.Resource;
@@ -16,7 +16,7 @@ import com.jn.shelltools.supports.maven.model.DependencyModel;
 import java.util.*;
 
 
-public class GradleProjectDependenciesParser implements Parser<Resource, List<DependencyModel>> {
+public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Resource, List<DependencyModel>> {
 
     // |((|\s+)+\\[-]+)
 

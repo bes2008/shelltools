@@ -1,9 +1,8 @@
-package com.jn.shelltools.supports.gradle;
+package com.jn.shelltools.supports.maven.dependencies;
 
 import com.jn.langx.Transformer;
 import com.jn.langx.io.resource.Resource;
 import com.jn.shelltools.core.PackageGAV;
-import com.jn.shelltools.supports.gradle.parse.GradleProjectDependenciesParser;
 import com.jn.shelltools.supports.maven.PomXmlGenerator;
 import com.jn.shelltools.supports.maven.model.DependencyModel;
 import com.jn.shelltools.supports.maven.model.PomModel;
@@ -11,12 +10,12 @@ import freemarker.template.Configuration;
 
 import java.util.List;
 
-public class GradleToMavenPomTransformer implements Transformer<Resource, String> {
+public class MavenDependenciesTreeStyleToPomTransformer implements Transformer<Resource, String> {
     private PackageGAV packageGav;
     private Configuration freemarkerConfig;
 
     public static String transform(Resource resource, PackageGAV packageGav, Configuration freemarkerConfig){
-        GradleToMavenPomTransformer transformer = new GradleToMavenPomTransformer();
+        MavenDependenciesTreeStyleToPomTransformer transformer = new MavenDependenciesTreeStyleToPomTransformer();
         transformer.setFreemarkerConfig(freemarkerConfig);
         transformer.setPackageGav(packageGav);
         return transformer.transform(resource);
@@ -24,7 +23,7 @@ public class GradleToMavenPomTransformer implements Transformer<Resource, String
 
     @Override
     public String transform(Resource resource) {
-        GradleProjectDependenciesParser parser = new GradleProjectDependenciesParser();
+        MavenDependenciesTreeStyleDependenciesParser parser = new MavenDependenciesTreeStyleDependenciesParser();
         List<DependencyModel> dependencyModels = parser.parse(resource);
 
         PomModel pomModel = new PomModel(packageGav.getGroupId(), packageGav.getArtifactId(), packageGav.getVersion());

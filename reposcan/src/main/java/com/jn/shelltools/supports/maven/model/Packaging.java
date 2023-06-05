@@ -4,7 +4,7 @@ import com.jn.langx.util.enums.base.CommonEnum;
 import com.jn.langx.util.enums.base.EnumDelegate;
 
 public enum Packaging implements CommonEnum {
-    POM("import", 1), JAR("import", 2), IMPORT("import", 3);
+    POM("pom", 1), JAR("jar", 2), IMPORT("import", 3);
 
     private EnumDelegate delegate;
 

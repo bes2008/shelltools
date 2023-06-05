@@ -24,6 +24,8 @@ public class TreeStyleDependenciesParserTests {
         System.out.println(Regexps.match(MavenDependenciesTreeStyleDependenciesParser.dependencyExpr, "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.31"));
         System.out.println(Regexps.match(MavenDependenciesTreeStyleDependenciesParser.dependencyExpr, "org.jetbrains.kotlin:kotlin-stdlib:1.2.31"));
         System.out.println(Regexps.match(MavenDependenciesTreeStyleDependenciesParser.dependencyExpr,"com.android.support:support-annotations:27.1.1"));
+        System.out.println(Regexps.match(MavenDependenciesTreeStyleDependenciesParser.dependencyExpr,"\\\\--- com.android.support.constraint:constraint-layout:1.0.2"));
+
     }
 
     @Test

@@ -22,7 +22,7 @@ public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Reso
 
     //
 
-    public static final Regexp dependencyExpr = Regexps.compile("(?:((\\|)?\\s+)*?[+\\\\]-+)?(\\s+)?(?<groupId>[^:]+)\\:(?<artifactId>[^:]+)\\:(?<version>[^:( \\t]+)(\\s+.*)?");
+    public static final Regexp dependencyExpr = Regexps.compile("(?:((\\|)?\\s+)*?[+\\\\]-+)?(\\s+)?(?<groupId>[^:'\"\\(* \\t]+)\\:(?<artifactId>[^:'\"\\(* \\t]+)\\:(?<version>[^:'\"\\(* \\t]+)(\\s+.*)?");
 
 
     public List<DependencyModel> parse(Resource resource) {

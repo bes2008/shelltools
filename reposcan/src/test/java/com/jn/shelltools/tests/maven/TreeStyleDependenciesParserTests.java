@@ -15,7 +15,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class TreeStyleDependenciesParserTests {
-    private Resource resource = Resources.loadClassPathResource("/maven/dependencies/gradle-dependencies-example.txt");
+    private Resource resource = Resources.loadClassPathResource("/maven/dependencies/spring-boot-2.7.12-dependencies.txt");
     PackageGAV packageGav = new PackageGAV("org.springframework.boot", "boot-all", "2.7.12");
 
     @Test

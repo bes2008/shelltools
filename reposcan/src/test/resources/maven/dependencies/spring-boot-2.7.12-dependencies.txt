@@ -1,0 +1,247 @@
+------------------------------------------------------------
+Project ':spring-boot-project:spring-boot-dependencies' - Spring Boot Dependencies
+------------------------------------------------------------
+
+api (n)
++--- com.datastax.oss:java-driver-bom:4.14.1 (n)
++--- io.dropwizard.metrics:metrics-bom:4.2.18 (n)
++--- org.codehaus.groovy:groovy-bom:3.0.17 (n)
++--- org.infinispan:infinispan-bom:13.0.15.Final (n)
++--- com.fasterxml.jackson:jackson-bom:2.13.5 (n)
++--- org.glassfish.jersey:jersey-bom:2.35 (n)
++--- org.eclipse.jetty:jetty-bom:9.4.51.v20230217 (n)
++--- org.junit:junit-bom:5.8.2 (n)
++--- org.jetbrains.kotlin:kotlin-bom:1.6.21 (n)
++--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.6.4 (n)
++--- org.apache.logging.log4j:log4j-bom:2.17.2 (n)
++--- io.micrometer:micrometer-bom:1.9.11 (n)
++--- org.mockito:mockito-bom:4.5.1 (n)
++--- io.netty:netty-bom:4.1.92.Final (n)
++--- com.squareup.okhttp3:okhttp-bom:4.9.3 (n)
++--- com.oracle.database.jdbc:ojdbc-bom:21.5.0.0 (n)
++--- io.prometheus:simpleclient_bom:0.15.0 (n)
++--- com.querydsl:querydsl-bom:5.0.0 (n)
++--- io.r2dbc:r2dbc-bom:Borca-SR2 (n)
++--- io.projectreactor:reactor-bom:2020.0.32 (n)
++--- io.rest-assured:rest-assured-bom:4.5.1 (n)
++--- io.rsocket:rsocket-bom:1.1.3 (n)
++--- org.springframework.data:spring-data-bom:2021.2.12 (n)
++--- org.springframework:spring-framework-bom:5.3.27 (n)
++--- org.springframework.integration:spring-integration-bom:5.5.18 (n)
++--- org.springframework.security:spring-security-bom:5.7.8 (n)
+\--- org.springframework.session:spring-session-bom:2021.2.1 (n)
+
+apiElements (n)
+No dependencies
+
+apiEnforced (n)
++--- com.datastax.oss:java-driver-bom:4.14.1 (n)
++--- io.dropwizard.metrics:metrics-bom:4.2.18 (n)
++--- org.codehaus.groovy:groovy-bom:3.0.17 (n)
++--- org.infinispan:infinispan-bom:13.0.15.Final (n)
++--- com.fasterxml.jackson:jackson-bom:2.13.5 (n)
++--- org.glassfish.jersey:jersey-bom:2.35 (n)
++--- org.eclipse.jetty:jetty-bom:9.4.51.v20230217 (n)
++--- org.junit:junit-bom:5.8.2 (n)
++--- org.jetbrains.kotlin:kotlin-bom:1.6.21 (n)
++--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.6.4 (n)
++--- org.apache.logging.log4j:log4j-bom:2.17.2 (n)
++--- io.micrometer:micrometer-bom:1.9.11 (n)
++--- org.mockito:mockito-bom:4.5.1 (n)
++--- io.netty:netty-bom:4.1.92.Final (n)
++--- com.squareup.okhttp3:okhttp-bom:4.9.3 (n)
++--- com.oracle.database.jdbc:ojdbc-bom:21.5.0.0 (n)
++--- io.prometheus:simpleclient_bom:0.15.0 (n)
++--- com.querydsl:querydsl-bom:5.0.0 (n)
++--- io.r2dbc:r2dbc-bom:Borca-SR2 (n)
++--- io.projectreactor:reactor-bom:2020.0.32 (n)
++--- io.rest-assured:rest-assured-bom:4.5.1 (n)
++--- io.rsocket:rsocket-bom:1.1.3 (n)
++--- org.springframework.data:spring-data-bom:2021.2.12 (n)
++--- org.springframework:spring-framework-bom:5.3.27 (n)
++--- org.springframework.integration:spring-integration-bom:5.5.18 (n)
++--- org.springframework.security:spring-security-bom:5.7.8 (n)
+\--- org.springframework.session:spring-session-bom:2021.2.1 (n)
+
+archives - Configuration for archive artifacts. (n)
+No dependencies
+
+classpath
++--- com.datastax.oss:java-driver-bom:4.14.1
++--- io.dropwizard.metrics:metrics-bom:4.2.18
++--- org.codehaus.groovy:groovy-bom:3.0.17
++--- org.infinispan:infinispan-bom:13.0.15.Final
++--- com.fasterxml.jackson:jackson-bom:2.13.5
++--- org.glassfish.jersey:jersey-bom:2.35
++--- org.eclipse.jetty:jetty-bom:9.4.51.v20230217
++--- org.junit:junit-bom:5.8.2
++--- org.jetbrains.kotlin:kotlin-bom:1.6.21
++--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.6.4
++--- org.apache.logging.log4j:log4j-bom:2.17.2
++--- io.micrometer:micrometer-bom:1.9.11
++--- org.mockito:mockito-bom:4.5.1
++--- io.netty:netty-bom:4.1.92.Final
++--- com.squareup.okhttp3:okhttp-bom:4.9.3
++--- com.oracle.database.jdbc:ojdbc-bom:21.5.0.0
++--- io.prometheus:simpleclient_bom:0.15.0
++--- com.querydsl:querydsl-bom:5.0.0
++--- io.r2dbc:r2dbc-bom:Borca-SR2
++--- io.projectreactor:reactor-bom:2020.0.32
++--- io.rest-assured:rest-assured-bom:4.5.1
++--- io.rsocket:rsocket-bom:1.1.3
++--- org.springframework.data:spring-data-bom:2021.2.12
++--- org.springframework:spring-framework-bom:5.3.27
++--- org.springframework.integration:spring-integration-bom:5.5.18
++--- org.springframework.security:spring-security-bom:5.7.8
+\--- org.springframework.session:spring-session-bom:2021.2.1
+
+default - Configuration for default artifacts. (n)
+No dependencies
+
+effectiveBom
+No dependencies
+
+enforcedApiElements (n)
+No dependencies
+
+enforcedRuntimeElements (n)
+No dependencies
+
+maven
++--- org.apache.maven:maven-embedder:3.6.2
+|    +--- org.apache.maven:maven-settings:3.6.2
+|    |    \--- org.codehaus.plexus:plexus-utils:3.2.1
+|    +--- org.apache.maven:maven-settings-builder:3.6.2
+|    |    +--- org.apache.maven:maven-builder-support:3.6.2
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- org.codehaus.plexus:plexus-interpolation:1.25
+|    |    +--- org.codehaus.plexus:plexus-utils:3.2.1
+|    |    +--- org.apache.maven:maven-settings:3.6.2 (*)
+|    |    \--- org.sonatype.plexus:plexus-sec-dispatcher:1.4
+|    |         +--- org.codehaus.plexus:plexus-utils:1.5.5 -> 3.2.1
+|    |         \--- org.sonatype.plexus:plexus-cipher:1.4 -> 1.7
+|    +--- org.apache.maven:maven-core:3.6.2
+|    |    +--- org.apache.maven:maven-model:3.6.2
+|    |    |    \--- org.codehaus.plexus:plexus-utils:3.2.1
+|    |    +--- org.apache.maven:maven-settings:3.6.2 (*)
+|    |    +--- org.apache.maven:maven-settings-builder:3.6.2 (*)
+|    |    +--- org.apache.maven:maven-builder-support:3.6.2
+|    |    +--- org.apache.maven:maven-repository-metadata:3.6.2
+|    |    |    \--- org.codehaus.plexus:plexus-utils:3.2.1
+|    |    +--- org.apache.maven:maven-artifact:3.6.2
+|    |    |    +--- org.codehaus.plexus:plexus-utils:3.2.1
+|    |    |    \--- org.apache.commons:commons-lang3:3.8.1
+|    |    +--- org.apache.maven:maven-plugin-api:3.6.2
+|    |    |    +--- org.apache.maven:maven-model:3.6.2 (*)
+|    |    |    +--- org.apache.maven:maven-artifact:3.6.2 (*)
+|    |    |    +--- org.eclipse.sisu:org.eclipse.sisu.plexus:0.3.3
+|    |    |    |    +--- javax.enterprise:cdi-api:1.0
+|    |    |    |    |    +--- javax.annotation:jsr250-api:1.0
+|    |    |    |    |    \--- javax.inject:javax.inject:1
+|    |    |    |    +--- org.eclipse.sisu:org.eclipse.sisu.inject:0.3.3
+|    |    |    |    +--- org.codehaus.plexus:plexus-component-annotations:1.5.5 -> 2.0.0
+|    |    |    |    +--- org.codehaus.plexus:plexus-classworlds:2.5.2 -> 2.6.0
+|    |    |    |    \--- org.codehaus.plexus:plexus-utils:3.0.17 -> 3.2.1
+|    |    |    +--- org.codehaus.plexus:plexus-utils:3.2.1
+|    |    |    \--- org.codehaus.plexus:plexus-classworlds:2.6.0
+|    |    +--- org.apache.maven:maven-model-builder:3.6.2
+|    |    |    +--- org.codehaus.plexus:plexus-utils:3.2.1
+|    |    |    +--- org.codehaus.plexus:plexus-interpolation:1.25
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- org.apache.maven:maven-model:3.6.2 (*)
+|    |    |    +--- org.apache.maven:maven-artifact:3.6.2 (*)
+|    |    |    +--- org.apache.maven:maven-builder-support:3.6.2
+|    |    |    \--- org.eclipse.sisu:org.eclipse.sisu.inject:0.3.3
+|    |    +--- org.apache.maven:maven-resolver-provider:3.6.2
+|    |    |    +--- org.apache.maven:maven-model:3.6.2 (*)
+|    |    |    +--- org.apache.maven:maven-model-builder:3.6.2 (*)
+|    |    |    +--- org.apache.maven:maven-repository-metadata:3.6.2 (*)
+|    |    |    +--- org.apache.maven.resolver:maven-resolver-api:1.4.1
+|    |    |    +--- org.apache.maven.resolver:maven-resolver-spi:1.4.1
+|    |    |    |    \--- org.apache.maven.resolver:maven-resolver-api:1.4.1
+|    |    |    +--- org.apache.maven.resolver:maven-resolver-util:1.4.1
+|    |    |    |    \--- org.apache.maven.resolver:maven-resolver-api:1.4.1
+|    |    |    +--- org.apache.maven.resolver:maven-resolver-impl:1.4.1
+|    |    |    |    +--- org.apache.maven.resolver:maven-resolver-api:1.4.1
+|    |    |    |    +--- org.apache.maven.resolver:maven-resolver-spi:1.4.1 (*)
+|    |    |    |    +--- org.apache.maven.resolver:maven-resolver-util:1.4.1 (*)
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.codehaus.plexus:plexus-utils:3.2.1
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.apache.maven.resolver:maven-resolver-impl:1.4.1 (*)
+|    |    +--- org.apache.maven.resolver:maven-resolver-api:1.4.1
+|    |    +--- org.apache.maven.resolver:maven-resolver-spi:1.4.1 (*)
+|    |    +--- org.apache.maven.resolver:maven-resolver-util:1.4.1 (*)
+|    |    +--- org.apache.maven.shared:maven-shared-utils:3.2.1
+|    |    |    \--- commons-io:commons-io:2.5
+|    |    +--- org.eclipse.sisu:org.eclipse.sisu.plexus:0.3.3 (*)
+|    |    +--- org.eclipse.sisu:org.eclipse.sisu.inject:0.3.3
+|    |    +--- com.google.inject:guice:4.2.1
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:25.1-android
+|    |    |         +--- com.google.code.findbugs:jsr305:3.0.2
+|    |    |         +--- org.checkerframework:checker-compat-qual:2.0.0
+|    |    |         +--- com.google.errorprone:error_prone_annotations:2.1.3
+|    |    |         +--- com.google.j2objc:j2objc-annotations:1.1
+|    |    |         \--- org.codehaus.mojo:animal-sniffer-annotations:1.14
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- org.codehaus.plexus:plexus-utils:3.2.1
+|    |    +--- org.codehaus.plexus:plexus-classworlds:2.6.0
+|    |    +--- org.codehaus.plexus:plexus-component-annotations:2.0.0
+|    |    \--- org.apache.commons:commons-lang3:3.8.1
+|    +--- org.apache.maven:maven-plugin-api:3.6.2 (*)
+|    +--- org.apache.maven:maven-model:3.6.2 (*)
+|    +--- org.apache.maven:maven-model-builder:3.6.2 (*)
+|    +--- org.apache.maven:maven-builder-support:3.6.2
+|    +--- org.apache.maven.resolver:maven-resolver-api:1.4.1
+|    +--- org.apache.maven.resolver:maven-resolver-util:1.4.1 (*)
+|    +--- org.apache.maven.shared:maven-shared-utils:3.2.1 (*)
+|    +--- com.google.inject:guice:4.2.1 (*)
+|    +--- javax.inject:javax.inject:1
+|    +--- javax.annotation:jsr250-api:1.0
+|    +--- org.codehaus.plexus:plexus-utils:3.2.1
+|    +--- org.codehaus.plexus:plexus-classworlds:2.6.0
+|    +--- org.eclipse.sisu:org.eclipse.sisu.plexus:0.3.3 (*)
+|    +--- org.sonatype.plexus:plexus-sec-dispatcher:1.4 (*)
+|    +--- org.sonatype.plexus:plexus-cipher:1.7
+|    +--- org.slf4j:slf4j-api:1.7.25
+|    +--- commons-cli:commons-cli:1.4
+|    \--- org.apache.commons:commons-lang3:3.8.1
++--- org.apache.maven:maven-compat:3.6.2
+|    +--- org.apache.maven:maven-model:3.6.2 (*)
+|    +--- org.apache.maven:maven-model-builder:3.6.2 (*)
+|    +--- org.apache.maven:maven-settings:3.6.2 (*)
+|    +--- org.apache.maven:maven-settings-builder:3.6.2 (*)
+|    +--- org.apache.maven:maven-artifact:3.6.2 (*)
+|    +--- org.apache.maven:maven-core:3.6.2 (*)
+|    +--- org.apache.maven:maven-resolver-provider:3.6.2 (*)
+|    +--- org.apache.maven:maven-repository-metadata:3.6.2 (*)
+|    +--- org.apache.maven.resolver:maven-resolver-api:1.4.1
+|    +--- org.apache.maven.resolver:maven-resolver-util:1.4.1 (*)
+|    +--- org.apache.maven.resolver:maven-resolver-impl:1.4.1 (*)
+|    +--- org.codehaus.plexus:plexus-utils:3.2.1
+|    +--- org.codehaus.plexus:plexus-interpolation:1.25
+|    +--- org.eclipse.sisu:org.eclipse.sisu.plexus:0.3.3 (*)
+|    +--- org.codehaus.plexus:plexus-component-annotations:2.0.0
+|    \--- org.apache.maven.wagon:wagon-provider-api:3.3.3
+|         \--- org.codehaus.plexus:plexus-utils:3.2.0 -> 3.2.1
++--- org.slf4j:slf4j-simple:1.7.5
+|    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.25
++--- org.apache.maven.resolver:maven-resolver-connector-basic:1.4.1
+|    +--- org.apache.maven.resolver:maven-resolver-api:1.4.1
+|    +--- org.apache.maven.resolver:maven-resolver-spi:1.4.1 (*)
+|    +--- org.apache.maven.resolver:maven-resolver-util:1.4.1 (*)
+|    \--- org.slf4j:slf4j-api:1.7.25
+\--- org.apache.maven.resolver:maven-resolver-transport-http:1.4.1
+     +--- org.apache.maven.resolver:maven-resolver-api:1.4.1
+     +--- org.apache.maven.resolver:maven-resolver-spi:1.4.1 (*)
+     +--- org.apache.maven.resolver:maven-resolver-util:1.4.1 (*)
+     +--- org.apache.httpcomponents:httpclient:4.5.6
+     |    +--- org.apache.httpcomponents:httpcore:4.4.10
+     |    \--- commons-codec:commons-codec:1.10
+     +--- org.apache.httpcomponents:httpcore:4.4.10
+     +--- org.slf4j:jcl-over-slf4j:1.7.25
+     |    \--- org.slf4j:slf4j-api:1.7.25
+     \--- org.slf4j:slf4j-api:1.7.25

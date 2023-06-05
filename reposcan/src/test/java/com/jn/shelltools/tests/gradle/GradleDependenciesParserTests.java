@@ -3,6 +3,7 @@ package com.jn.shelltools.tests.gradle;
 import com.jn.easyjson.core.util.JSONs;
 import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
+import com.jn.langx.util.regexp.Regexps;
 import com.jn.shelltools.config.FreemarkerConfig;
 import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.supports.gradle.parse.GradleProjectDependenciesParser;
@@ -14,8 +15,16 @@ import org.junit.Test;
 import java.util.List;
 
 public class GradleDependenciesParserTests {
-    private Resource resource = Resources.loadClassPathResource("/gradle/spring-boot-2.7.12-build.gradle");
+    private Resource resource = Resources.loadClassPathResource("/gradle/gradle-dependencies-example.txt");
     PackageGAV packageGav = new PackageGAV("org.springframework.boot", "boot-all", "2.7.12");
+
+    @Test
+    public void regexpTest(){
+        System.out.println(Regexps.match(GradleProjectDependenciesParser.dependencyExpr, "debugCompileClasspath - Resolved configuration for compilation for variant: debug"));
+        System.out.println(Regexps.match(GradleProjectDependenciesParser.dependencyExpr, "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.31"));
+        System.out.println(Regexps.match(GradleProjectDependenciesParser.dependencyExpr, "org.jetbrains.kotlin:kotlin-stdlib:1.2.31"));
+        System.out.println(Regexps.match(GradleProjectDependenciesParser.dependencyExpr,"com.android.support:support-annotations:27.1.1"));
+    }
 
     @Test
     public void testParse() {

@@ -24,13 +24,12 @@ public class GradleParser extends Parser {
 		RULE_simpleKey = 0, RULE_simpleKeyValuePair = 1, RULE_simpleKeyValuePairs = 2, 
 		RULE_stringToClosurePair = 3, RULE_simpleValue = 4, RULE_sequence = 5, 
 		RULE_value = 6, RULE_array = 7, RULE_funcName = 8, RULE_var = 9, RULE_defineVariable = 10, 
-		RULE_funcInvokeWithoutClosure = 11, RULE_groovyStatement = 12, RULE_closureBody = 13, 
-		RULE_closure = 14, RULE_funcInvoke = 15, RULE_program = 16;
+		RULE_groovyStatement = 11, RULE_closureBody = 12, RULE_closure = 13, RULE_funcInvocation = 14, 
+		RULE_program = 15;
 	public static final String[] ruleNames = {
 		"simpleKey", "simpleKeyValuePair", "simpleKeyValuePairs", "stringToClosurePair", 
 		"simpleValue", "sequence", "value", "array", "funcName", "var", "defineVariable", 
-		"funcInvokeWithoutClosure", "groovyStatement", "closureBody", "closure", 
-		"funcInvoke", "program"
+		"groovyStatement", "closureBody", "closure", "funcInvocation", "program"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -115,7 +114,7 @@ public class GradleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(34);
+			setState(32);
 			_la = _input.LA(1);
 			if ( !(_la==STRING || _la==SYMBOL) ) {
 			_errHandler.recoverInline(this);
@@ -171,31 +170,31 @@ public class GradleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(36);
+			setState(34);
 			simpleKey();
+			setState(36);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==SPACE) {
+				{
+				setState(35);
+				match(SPACE);
+				}
+			}
+
 			setState(38);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==SPACE) {
-				{
-				setState(37);
-				match(SPACE);
-				}
-			}
-
-			setState(40);
 			match(COLON);
-			setState(42);
+			setState(40);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==SPACE) {
 				{
-				setState(41);
+				setState(39);
 				match(SPACE);
 				}
 			}
 
-			setState(44);
+			setState(42);
 			simpleValue();
 			}
 		}
@@ -247,53 +246,53 @@ public class GradleParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(47);
+			setState(45);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==SPACE) {
 				{
-				setState(46);
+				setState(44);
 				match(SPACE);
 				}
 			}
 
-			setState(49);
+			setState(47);
 			simpleKeyValuePair();
-			setState(60);
+			setState(58);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1+1 ) {
 					{
 					{
+					setState(49);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					if (_la==SPACE) {
+						{
+						setState(48);
+						match(SPACE);
+						}
+					}
+
 					setState(51);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					if (_la==SPACE) {
-						{
-						setState(50);
-						match(SPACE);
-						}
-					}
-
-					setState(53);
 					match(COMMA);
-					setState(55);
+					setState(53);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==SPACE) {
 						{
-						setState(54);
+						setState(52);
 						match(SPACE);
 						}
 					}
 
-					setState(57);
+					setState(55);
 					simpleKeyValuePair();
 					}
 					} 
 				}
-				setState(62);
+				setState(60);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
@@ -338,11 +337,11 @@ public class GradleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
+			setState(61);
 			simpleKey();
-			setState(64);
+			setState(62);
 			match(SPACE);
-			setState(65);
+			setState(63);
 			closure();
 			}
 		}
@@ -383,7 +382,7 @@ public class GradleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(67);
+			setState(65);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NUM) | (1L << BOOL) | (1L << STRING) | (1L << NULL))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -449,73 +448,73 @@ public class GradleParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
+			setState(68);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				{
-				setState(69);
+				setState(67);
 				match(SPACE);
 				}
 				break;
 			}
-			setState(74);
+			setState(72);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				{
-				setState(72);
+				setState(70);
 				value();
 				}
 				break;
 			case 2:
 				{
-				setState(73);
+				setState(71);
 				stringToClosurePair();
 				}
 				break;
 			}
-			setState(89);
+			setState(87);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(77);
+					setState(75);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==SPACE) {
 						{
-						setState(76);
+						setState(74);
 						match(SPACE);
 						}
 					}
 
-					setState(79);
+					setState(77);
 					match(COMMA);
-					setState(81);
+					setState(79);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 					case 1:
 						{
-						setState(80);
+						setState(78);
 						match(SPACE);
 						}
 						break;
 					}
-					setState(85);
+					setState(83);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 					case 1:
 						{
-						setState(83);
+						setState(81);
 						value();
 						}
 						break;
 					case 2:
 						{
-						setState(84);
+						setState(82);
 						stringToClosurePair();
 						}
 						break;
@@ -523,7 +522,7 @@ public class GradleParser extends Parser {
 					}
 					} 
 				}
-				setState(91);
+				setState(89);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
 			}
@@ -571,34 +570,34 @@ public class GradleParser extends Parser {
 		ValueContext _localctx = new ValueContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_value);
 		try {
-			setState(96);
+			setState(94);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(92);
+				setState(90);
 				simpleValue();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(93);
+				setState(91);
 				array();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(94);
+				setState(92);
 				stringToClosurePair();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(95);
+				setState(93);
 				simpleKeyValuePairs();
 				}
 				break;
@@ -646,39 +645,39 @@ public class GradleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(98);
+			setState(96);
 			match(MIDDLE_BRACE_START);
-			setState(100);
+			setState(98);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				{
-				setState(99);
+				setState(97);
 				match(SPACE);
 				}
 				break;
 			}
-			setState(103);
+			setState(101);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 			case 1:
 				{
-				setState(102);
+				setState(100);
 				sequence();
 				}
 				break;
 			}
-			setState(106);
+			setState(104);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==SPACE) {
 				{
-				setState(105);
+				setState(103);
 				match(SPACE);
 				}
 			}
 
-			setState(108);
+			setState(106);
 			match(MIDDLE_BRACE_END);
 			}
 		}
@@ -715,7 +714,7 @@ public class GradleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(110);
+			setState(108);
 			match(SYMBOL);
 			}
 		}
@@ -752,7 +751,7 @@ public class GradleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(112);
+			setState(110);
 			match(SYMBOL);
 			}
 		}
@@ -800,206 +799,42 @@ public class GradleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
+			setState(113);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==SPACE) {
+				{
+				setState(112);
+				match(SPACE);
+				}
+			}
+
 			setState(115);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==SPACE) {
-				{
-				setState(114);
-				match(SPACE);
-				}
-			}
-
-			setState(117);
 			var();
-			setState(119);
+			setState(117);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==SPACE) {
 				{
-				setState(118);
+				setState(116);
 				match(SPACE);
 				}
 			}
 
-			setState(121);
+			setState(119);
 			match(EQUALS);
-			setState(123);
+			setState(121);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
 			case 1:
 				{
-				setState(122);
+				setState(120);
 				match(SPACE);
 				}
 				break;
 			}
-			setState(125);
+			setState(123);
 			value();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class FuncInvokeWithoutClosureContext extends ParserRuleContext {
-		public FuncNameContext funcName() {
-			return getRuleContext(FuncNameContext.class,0);
-		}
-		public ValueContext value() {
-			return getRuleContext(ValueContext.class,0);
-		}
-		public List<TerminalNode> SPACE() { return getTokens(GradleParser.SPACE); }
-		public TerminalNode SPACE(int i) {
-			return getToken(GradleParser.SPACE, i);
-		}
-		public TerminalNode SMALL_BRACE_START() { return getToken(GradleParser.SMALL_BRACE_START, 0); }
-		public TerminalNode SMALL_BRACE_END() { return getToken(GradleParser.SMALL_BRACE_END, 0); }
-		public SequenceContext sequence() {
-			return getRuleContext(SequenceContext.class,0);
-		}
-		public FuncInvokeWithoutClosureContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_funcInvokeWithoutClosure; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GradleListener ) ((GradleListener)listener).enterFuncInvokeWithoutClosure(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GradleListener ) ((GradleListener)listener).exitFuncInvokeWithoutClosure(this);
-		}
-	}
-
-	public final FuncInvokeWithoutClosureContext funcInvokeWithoutClosure() throws RecognitionException {
-		FuncInvokeWithoutClosureContext _localctx = new FuncInvokeWithoutClosureContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_funcInvokeWithoutClosure);
-		int _la;
-		try {
-			setState(160);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(128);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if (_la==SPACE) {
-					{
-					setState(127);
-					match(SPACE);
-					}
-				}
-
-				setState(130);
-				funcName();
-				setState(132);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,20,_ctx) ) {
-				case 1:
-					{
-					setState(131);
-					match(SPACE);
-					}
-					break;
-				}
-				setState(134);
-				value();
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(137);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if (_la==SPACE) {
-					{
-					setState(136);
-					match(SPACE);
-					}
-				}
-
-				setState(139);
-				funcName();
-				setState(141);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if (_la==SPACE) {
-					{
-					setState(140);
-					match(SPACE);
-					}
-				}
-
-				setState(143);
-				match(SMALL_BRACE_START);
-				setState(145);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
-				case 1:
-					{
-					setState(144);
-					match(SPACE);
-					}
-					break;
-				}
-				setState(149);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
-				case 1:
-					{
-					setState(147);
-					value();
-					}
-					break;
-				case 2:
-					{
-					setState(148);
-					sequence();
-					}
-					break;
-				}
-				setState(152);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if (_la==SPACE) {
-					{
-					setState(151);
-					match(SPACE);
-					}
-				}
-
-				setState(154);
-				match(SMALL_BRACE_END);
-				}
-				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(157);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if (_la==SPACE) {
-					{
-					setState(156);
-					match(SPACE);
-					}
-				}
-
-				setState(159);
-				funcName();
-				}
-				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -1017,8 +852,8 @@ public class GradleParser extends Parser {
 		public DefineVariableContext defineVariable() {
 			return getRuleContext(DefineVariableContext.class,0);
 		}
-		public FuncInvokeContext funcInvoke() {
-			return getRuleContext(FuncInvokeContext.class,0);
+		public FuncInvocationContext funcInvocation() {
+			return getRuleContext(FuncInvocationContext.class,0);
 		}
 		public GroovyStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1036,23 +871,23 @@ public class GradleParser extends Parser {
 
 	public final GroovyStatementContext groovyStatement() throws RecognitionException {
 		GroovyStatementContext _localctx = new GroovyStatementContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_groovyStatement);
+		enterRule(_localctx, 22, RULE_groovyStatement);
 		try {
-			setState(164);
+			setState(127);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(162);
+				setState(125);
 				defineVariable();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(163);
-				funcInvoke();
+				setState(126);
+				funcInvocation();
 				}
 				break;
 			}
@@ -1091,26 +926,26 @@ public class GradleParser extends Parser {
 
 	public final ClosureBodyContext closureBody() throws RecognitionException {
 		ClosureBodyContext _localctx = new ClosureBodyContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_closureBody);
+		enterRule(_localctx, 24, RULE_closureBody);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(169);
+			setState(132);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,29,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,20,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(166);
+					setState(129);
 					groovyStatement();
 					}
 					} 
 				}
-				setState(171);
+				setState(134);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,29,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,20,_ctx);
 			}
 			}
 		}
@@ -1151,37 +986,37 @@ public class GradleParser extends Parser {
 
 	public final ClosureContext closure() throws RecognitionException {
 		ClosureContext _localctx = new ClosureContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_closure);
+		enterRule(_localctx, 26, RULE_closure);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(172);
+			setState(135);
 			match(BIG_BRACE_START);
-			setState(174);
+			setState(137);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,30,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
 			case 1:
 				{
-				setState(173);
+				setState(136);
 				match(SPACE);
 				}
 				break;
 			}
-			setState(176);
+			setState(139);
 			closureBody();
-			setState(178);
+			setState(141);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==SPACE) {
 				{
-				setState(177);
+				setState(140);
 				match(SPACE);
 				}
 			}
 
-			setState(180);
+			setState(143);
 			match(BIG_BRACE_END);
 			}
 			}
@@ -1197,53 +1032,176 @@ public class GradleParser extends Parser {
 		return _localctx;
 	}
 
-	public static class FuncInvokeContext extends ParserRuleContext {
-		public FuncInvokeWithoutClosureContext funcInvokeWithoutClosure() {
-			return getRuleContext(FuncInvokeWithoutClosureContext.class,0);
+	public static class FuncInvocationContext extends ParserRuleContext {
+		public FuncNameContext funcName() {
+			return getRuleContext(FuncNameContext.class,0);
 		}
-		public TerminalNode SPACE() { return getToken(GradleParser.SPACE, 0); }
+		public ValueContext value() {
+			return getRuleContext(ValueContext.class,0);
+		}
+		public TerminalNode SMALL_BRACE_START() { return getToken(GradleParser.SMALL_BRACE_START, 0); }
+		public TerminalNode SMALL_BRACE_END() { return getToken(GradleParser.SMALL_BRACE_END, 0); }
+		public List<TerminalNode> SPACE() { return getTokens(GradleParser.SPACE); }
+		public TerminalNode SPACE(int i) {
+			return getToken(GradleParser.SPACE, i);
+		}
 		public ClosureContext closure() {
 			return getRuleContext(ClosureContext.class,0);
 		}
-		public FuncInvokeContext(ParserRuleContext parent, int invokingState) {
+		public SequenceContext sequence() {
+			return getRuleContext(SequenceContext.class,0);
+		}
+		public FuncInvocationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_funcInvoke; }
+		@Override public int getRuleIndex() { return RULE_funcInvocation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GradleListener ) ((GradleListener)listener).enterFuncInvoke(this);
+			if ( listener instanceof GradleListener ) ((GradleListener)listener).enterFuncInvocation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GradleListener ) ((GradleListener)listener).exitFuncInvoke(this);
+			if ( listener instanceof GradleListener ) ((GradleListener)listener).exitFuncInvocation(this);
 		}
 	}
 
-	public final FuncInvokeContext funcInvoke() throws RecognitionException {
-		FuncInvokeContext _localctx = new FuncInvokeContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_funcInvoke);
+	public final FuncInvocationContext funcInvocation() throws RecognitionException {
+		FuncInvocationContext _localctx = new FuncInvocationContext(_ctx, getState());
+		enterRule(_localctx, 28, RULE_funcInvocation);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(182);
-			funcInvokeWithoutClosure();
-			setState(184);
+			setState(178);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,31,_ctx) ) {
+			case 1:
+				{
+				setState(146);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==SPACE) {
+					{
+					setState(145);
+					match(SPACE);
+					}
+				}
+
+				setState(148);
+				funcName();
+				setState(150);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
+				case 1:
+					{
+					setState(149);
+					match(SPACE);
+					}
+					break;
+				}
+				setState(152);
+				value();
+				}
+				break;
+			case 2:
+				{
+				setState(155);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==SPACE) {
+					{
+					setState(154);
+					match(SPACE);
+					}
+				}
+
+				setState(157);
+				funcName();
+				setState(159);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==SPACE) {
+					{
+					setState(158);
+					match(SPACE);
+					}
+				}
+
+				setState(161);
+				match(SMALL_BRACE_START);
+				setState(163);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
+				case 1:
+					{
+					setState(162);
+					match(SPACE);
+					}
+					break;
+				}
+				setState(167);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
+				case 1:
+					{
+					setState(165);
+					value();
+					}
+					break;
+				case 2:
+					{
+					setState(166);
+					sequence();
+					}
+					break;
+				}
+				setState(170);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==SPACE) {
+					{
+					setState(169);
+					match(SPACE);
+					}
+				}
+
+				setState(172);
+				match(SMALL_BRACE_END);
+				}
+				break;
+			case 3:
+				{
+				setState(175);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==SPACE) {
+					{
+					setState(174);
+					match(SPACE);
+					}
+				}
+
+				setState(177);
+				funcName();
+				}
+				break;
+			}
+			setState(181);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,32,_ctx) ) {
 			case 1:
 				{
-				setState(183);
+				setState(180);
 				match(SPACE);
 				}
 				break;
 			}
-			setState(187);
+			setState(184);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==BIG_BRACE_START) {
 				{
-				setState(186);
+				setState(183);
 				closure();
 				}
 			}
@@ -1268,11 +1226,11 @@ public class GradleParser extends Parser {
 		public DefineVariableContext defineVariable(int i) {
 			return getRuleContext(DefineVariableContext.class,i);
 		}
-		public List<FuncInvokeContext> funcInvoke() {
-			return getRuleContexts(FuncInvokeContext.class);
+		public List<FuncInvocationContext> funcInvocation() {
+			return getRuleContexts(FuncInvocationContext.class);
 		}
-		public FuncInvokeContext funcInvoke(int i) {
-			return getRuleContext(FuncInvokeContext.class,i);
+		public FuncInvocationContext funcInvocation(int i) {
+			return getRuleContext(FuncInvocationContext.class,i);
 		}
 		public ProgramContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1290,34 +1248,34 @@ public class GradleParser extends Parser {
 
 	public final ProgramContext program() throws RecognitionException {
 		ProgramContext _localctx = new ProgramContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_program);
+		enterRule(_localctx, 30, RULE_program);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(191); 
+			setState(188); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
-				setState(191);
+				setState(188);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
 				case 1:
 					{
-					setState(189);
+					setState(186);
 					defineVariable();
 					}
 					break;
 				case 2:
 					{
-					setState(190);
-					funcInvoke();
+					setState(187);
+					funcInvocation();
 					}
 					break;
 				}
 				}
-				setState(193); 
+				setState(190); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==SYMBOL );
@@ -1335,70 +1293,69 @@ public class GradleParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\23\u00c6\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\23\u00c3\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
-		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\3\2\3\2\3\3\3\3\5\3)\n\3\3\3\3\3\5\3-\n\3\3\3\3\3\3\4\5\4\62\n\4\3\4"+
-		"\3\4\5\4\66\n\4\3\4\3\4\5\4:\n\4\3\4\7\4=\n\4\f\4\16\4@\13\4\3\5\3\5\3"+
-		"\5\3\5\3\6\3\6\3\7\5\7I\n\7\3\7\3\7\5\7M\n\7\3\7\5\7P\n\7\3\7\3\7\5\7"+
-		"T\n\7\3\7\3\7\5\7X\n\7\7\7Z\n\7\f\7\16\7]\13\7\3\b\3\b\3\b\3\b\5\bc\n"+
-		"\b\3\t\3\t\5\tg\n\t\3\t\5\tj\n\t\3\t\5\tm\n\t\3\t\3\t\3\n\3\n\3\13\3\13"+
-		"\3\f\5\fv\n\f\3\f\3\f\5\fz\n\f\3\f\3\f\5\f~\n\f\3\f\3\f\3\r\5\r\u0083"+
-		"\n\r\3\r\3\r\5\r\u0087\n\r\3\r\3\r\3\r\5\r\u008c\n\r\3\r\3\r\5\r\u0090"+
-		"\n\r\3\r\3\r\5\r\u0094\n\r\3\r\3\r\5\r\u0098\n\r\3\r\5\r\u009b\n\r\3\r"+
-		"\3\r\3\r\5\r\u00a0\n\r\3\r\5\r\u00a3\n\r\3\16\3\16\5\16\u00a7\n\16\3\17"+
-		"\7\17\u00aa\n\17\f\17\16\17\u00ad\13\17\3\20\3\20\5\20\u00b1\n\20\3\20"+
-		"\3\20\5\20\u00b5\n\20\3\20\3\20\3\21\3\21\5\21\u00bb\n\21\3\21\5\21\u00be"+
-		"\n\21\3\22\3\22\6\22\u00c2\n\22\r\22\16\22\u00c3\3\22\3>\2\23\2\4\6\b"+
-		"\n\f\16\20\22\24\26\30\32\34\36 \"\2\4\4\2\7\7\17\17\4\2\5\7\t\t\2\u00dc"+
-		"\2$\3\2\2\2\4&\3\2\2\2\6\61\3\2\2\2\bA\3\2\2\2\nE\3\2\2\2\fH\3\2\2\2\16"+
-		"b\3\2\2\2\20d\3\2\2\2\22p\3\2\2\2\24r\3\2\2\2\26u\3\2\2\2\30\u00a2\3\2"+
-		"\2\2\32\u00a6\3\2\2\2\34\u00ab\3\2\2\2\36\u00ae\3\2\2\2 \u00b8\3\2\2\2"+
-		"\"\u00c1\3\2\2\2$%\t\2\2\2%\3\3\2\2\2&(\5\2\2\2\')\7\4\2\2(\'\3\2\2\2"+
-		"()\3\2\2\2)*\3\2\2\2*,\7\n\2\2+-\7\4\2\2,+\3\2\2\2,-\3\2\2\2-.\3\2\2\2"+
-		"./\5\n\6\2/\5\3\2\2\2\60\62\7\4\2\2\61\60\3\2\2\2\61\62\3\2\2\2\62\63"+
-		"\3\2\2\2\63>\5\4\3\2\64\66\7\4\2\2\65\64\3\2\2\2\65\66\3\2\2\2\66\67\3"+
-		"\2\2\2\679\7\f\2\28:\7\4\2\298\3\2\2\29:\3\2\2\2:;\3\2\2\2;=\5\4\3\2<"+
-		"\65\3\2\2\2=@\3\2\2\2>?\3\2\2\2><\3\2\2\2?\7\3\2\2\2@>\3\2\2\2AB\5\2\2"+
-		"\2BC\7\4\2\2CD\5\36\20\2D\t\3\2\2\2EF\t\3\2\2F\13\3\2\2\2GI\7\4\2\2HG"+
-		"\3\2\2\2HI\3\2\2\2IL\3\2\2\2JM\5\16\b\2KM\5\b\5\2LJ\3\2\2\2LK\3\2\2\2"+
-		"M[\3\2\2\2NP\7\4\2\2ON\3\2\2\2OP\3\2\2\2PQ\3\2\2\2QS\7\f\2\2RT\7\4\2\2"+
-		"SR\3\2\2\2ST\3\2\2\2TW\3\2\2\2UX\5\16\b\2VX\5\b\5\2WU\3\2\2\2WV\3\2\2"+
-		"\2XZ\3\2\2\2YO\3\2\2\2Z]\3\2\2\2[Y\3\2\2\2[\\\3\2\2\2\\\r\3\2\2\2][\3"+
-		"\2\2\2^c\5\n\6\2_c\5\20\t\2`c\5\b\5\2ac\5\6\4\2b^\3\2\2\2b_\3\2\2\2b`"+
-		"\3\2\2\2ba\3\2\2\2c\17\3\2\2\2df\7\r\2\2eg\7\4\2\2fe\3\2\2\2fg\3\2\2\2"+
-		"gi\3\2\2\2hj\5\f\7\2ih\3\2\2\2ij\3\2\2\2jl\3\2\2\2km\7\4\2\2lk\3\2\2\2"+
-		"lm\3\2\2\2mn\3\2\2\2no\7\16\2\2o\21\3\2\2\2pq\7\17\2\2q\23\3\2\2\2rs\7"+
-		"\17\2\2s\25\3\2\2\2tv\7\4\2\2ut\3\2\2\2uv\3\2\2\2vw\3\2\2\2wy\5\24\13"+
-		"\2xz\7\4\2\2yx\3\2\2\2yz\3\2\2\2z{\3\2\2\2{}\7\13\2\2|~\7\4\2\2}|\3\2"+
-		"\2\2}~\3\2\2\2~\177\3\2\2\2\177\u0080\5\16\b\2\u0080\27\3\2\2\2\u0081"+
-		"\u0083\7\4\2\2\u0082\u0081\3\2\2\2\u0082\u0083\3\2\2\2\u0083\u0084\3\2"+
-		"\2\2\u0084\u0086\5\22\n\2\u0085\u0087\7\4\2\2\u0086\u0085\3\2\2\2\u0086"+
-		"\u0087\3\2\2\2\u0087\u0088\3\2\2\2\u0088\u0089\5\16\b\2\u0089\u00a3\3"+
-		"\2\2\2\u008a\u008c\7\4\2\2\u008b\u008a\3\2\2\2\u008b\u008c\3\2\2\2\u008c"+
-		"\u008d\3\2\2\2\u008d\u008f\5\22\n\2\u008e\u0090\7\4\2\2\u008f\u008e\3"+
-		"\2\2\2\u008f\u0090\3\2\2\2\u0090\u0091\3\2\2\2\u0091\u0093\7\22\2\2\u0092"+
-		"\u0094\7\4\2\2\u0093\u0092\3\2\2\2\u0093\u0094\3\2\2\2\u0094\u0097\3\2"+
-		"\2\2\u0095\u0098\5\16\b\2\u0096\u0098\5\f\7\2\u0097\u0095\3\2\2\2\u0097"+
-		"\u0096\3\2\2\2\u0097\u0098\3\2\2\2\u0098\u009a\3\2\2\2\u0099\u009b\7\4"+
-		"\2\2\u009a\u0099\3\2\2\2\u009a\u009b\3\2\2\2\u009b\u009c\3\2\2\2\u009c"+
-		"\u009d\7\23\2\2\u009d\u00a3\3\2\2\2\u009e\u00a0\7\4\2\2\u009f\u009e\3"+
-		"\2\2\2\u009f\u00a0\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a1\u00a3\5\22\n\2\u00a2"+
-		"\u0082\3\2\2\2\u00a2\u008b\3\2\2\2\u00a2\u009f\3\2\2\2\u00a3\31\3\2\2"+
-		"\2\u00a4\u00a7\5\26\f\2\u00a5\u00a7\5 \21\2\u00a6\u00a4\3\2\2\2\u00a6"+
-		"\u00a5\3\2\2\2\u00a7\33\3\2\2\2\u00a8\u00aa\5\32\16\2\u00a9\u00a8\3\2"+
-		"\2\2\u00aa\u00ad\3\2\2\2\u00ab\u00a9\3\2\2\2\u00ab\u00ac\3\2\2\2\u00ac"+
-		"\35\3\2\2\2\u00ad\u00ab\3\2\2\2\u00ae\u00b0\7\20\2\2\u00af\u00b1\7\4\2"+
-		"\2\u00b0\u00af\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b4"+
-		"\5\34\17\2\u00b3\u00b5\7\4\2\2\u00b4\u00b3\3\2\2\2\u00b4\u00b5\3\2\2\2"+
-		"\u00b5\u00b6\3\2\2\2\u00b6\u00b7\7\21\2\2\u00b7\37\3\2\2\2\u00b8\u00ba"+
-		"\5\30\r\2\u00b9\u00bb\7\4\2\2\u00ba\u00b9\3\2\2\2\u00ba\u00bb\3\2\2\2"+
-		"\u00bb\u00bd\3\2\2\2\u00bc\u00be\5\36\20\2\u00bd\u00bc\3\2\2\2\u00bd\u00be"+
-		"\3\2\2\2\u00be!\3\2\2\2\u00bf\u00c2\5\26\f\2\u00c0\u00c2\5 \21\2\u00c1"+
-		"\u00bf\3\2\2\2\u00c1\u00c0\3\2\2\2\u00c2\u00c3\3\2\2\2\u00c3\u00c1\3\2"+
-		"\2\2\u00c3\u00c4\3\2\2\2\u00c4#\3\2\2\2&(,\61\659>HLOSW[bfiluy}\u0082"+
-		"\u0086\u008b\u008f\u0093\u0097\u009a\u009f\u00a2\u00a6\u00ab\u00b0\u00b4"+
-		"\u00ba\u00bd\u00c1\u00c3";
+		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\3\2"+
+		"\3\3\3\3\5\3\'\n\3\3\3\3\3\5\3+\n\3\3\3\3\3\3\4\5\4\60\n\4\3\4\3\4\5\4"+
+		"\64\n\4\3\4\3\4\5\48\n\4\3\4\7\4;\n\4\f\4\16\4>\13\4\3\5\3\5\3\5\3\5\3"+
+		"\6\3\6\3\7\5\7G\n\7\3\7\3\7\5\7K\n\7\3\7\5\7N\n\7\3\7\3\7\5\7R\n\7\3\7"+
+		"\3\7\5\7V\n\7\7\7X\n\7\f\7\16\7[\13\7\3\b\3\b\3\b\3\b\5\ba\n\b\3\t\3\t"+
+		"\5\te\n\t\3\t\5\th\n\t\3\t\5\tk\n\t\3\t\3\t\3\n\3\n\3\13\3\13\3\f\5\f"+
+		"t\n\f\3\f\3\f\5\fx\n\f\3\f\3\f\5\f|\n\f\3\f\3\f\3\r\3\r\5\r\u0082\n\r"+
+		"\3\16\7\16\u0085\n\16\f\16\16\16\u0088\13\16\3\17\3\17\5\17\u008c\n\17"+
+		"\3\17\3\17\5\17\u0090\n\17\3\17\3\17\3\20\5\20\u0095\n\20\3\20\3\20\5"+
+		"\20\u0099\n\20\3\20\3\20\3\20\5\20\u009e\n\20\3\20\3\20\5\20\u00a2\n\20"+
+		"\3\20\3\20\5\20\u00a6\n\20\3\20\3\20\5\20\u00aa\n\20\3\20\5\20\u00ad\n"+
+		"\20\3\20\3\20\3\20\5\20\u00b2\n\20\3\20\5\20\u00b5\n\20\3\20\5\20\u00b8"+
+		"\n\20\3\20\5\20\u00bb\n\20\3\21\3\21\6\21\u00bf\n\21\r\21\16\21\u00c0"+
+		"\3\21\3<\2\22\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \2\4\4\2\7\7\17\17"+
+		"\4\2\5\7\t\t\2\u00da\2\"\3\2\2\2\4$\3\2\2\2\6/\3\2\2\2\b?\3\2\2\2\nC\3"+
+		"\2\2\2\fF\3\2\2\2\16`\3\2\2\2\20b\3\2\2\2\22n\3\2\2\2\24p\3\2\2\2\26s"+
+		"\3\2\2\2\30\u0081\3\2\2\2\32\u0086\3\2\2\2\34\u0089\3\2\2\2\36\u00b4\3"+
+		"\2\2\2 \u00be\3\2\2\2\"#\t\2\2\2#\3\3\2\2\2$&\5\2\2\2%\'\7\4\2\2&%\3\2"+
+		"\2\2&\'\3\2\2\2\'(\3\2\2\2(*\7\n\2\2)+\7\4\2\2*)\3\2\2\2*+\3\2\2\2+,\3"+
+		"\2\2\2,-\5\n\6\2-\5\3\2\2\2.\60\7\4\2\2/.\3\2\2\2/\60\3\2\2\2\60\61\3"+
+		"\2\2\2\61<\5\4\3\2\62\64\7\4\2\2\63\62\3\2\2\2\63\64\3\2\2\2\64\65\3\2"+
+		"\2\2\65\67\7\f\2\2\668\7\4\2\2\67\66\3\2\2\2\678\3\2\2\289\3\2\2\29;\5"+
+		"\4\3\2:\63\3\2\2\2;>\3\2\2\2<=\3\2\2\2<:\3\2\2\2=\7\3\2\2\2><\3\2\2\2"+
+		"?@\5\2\2\2@A\7\4\2\2AB\5\34\17\2B\t\3\2\2\2CD\t\3\2\2D\13\3\2\2\2EG\7"+
+		"\4\2\2FE\3\2\2\2FG\3\2\2\2GJ\3\2\2\2HK\5\16\b\2IK\5\b\5\2JH\3\2\2\2JI"+
+		"\3\2\2\2KY\3\2\2\2LN\7\4\2\2ML\3\2\2\2MN\3\2\2\2NO\3\2\2\2OQ\7\f\2\2P"+
+		"R\7\4\2\2QP\3\2\2\2QR\3\2\2\2RU\3\2\2\2SV\5\16\b\2TV\5\b\5\2US\3\2\2\2"+
+		"UT\3\2\2\2VX\3\2\2\2WM\3\2\2\2X[\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z\r\3\2\2"+
+		"\2[Y\3\2\2\2\\a\5\n\6\2]a\5\20\t\2^a\5\b\5\2_a\5\6\4\2`\\\3\2\2\2`]\3"+
+		"\2\2\2`^\3\2\2\2`_\3\2\2\2a\17\3\2\2\2bd\7\r\2\2ce\7\4\2\2dc\3\2\2\2d"+
+		"e\3\2\2\2eg\3\2\2\2fh\5\f\7\2gf\3\2\2\2gh\3\2\2\2hj\3\2\2\2ik\7\4\2\2"+
+		"ji\3\2\2\2jk\3\2\2\2kl\3\2\2\2lm\7\16\2\2m\21\3\2\2\2no\7\17\2\2o\23\3"+
+		"\2\2\2pq\7\17\2\2q\25\3\2\2\2rt\7\4\2\2sr\3\2\2\2st\3\2\2\2tu\3\2\2\2"+
+		"uw\5\24\13\2vx\7\4\2\2wv\3\2\2\2wx\3\2\2\2xy\3\2\2\2y{\7\13\2\2z|\7\4"+
+		"\2\2{z\3\2\2\2{|\3\2\2\2|}\3\2\2\2}~\5\16\b\2~\27\3\2\2\2\177\u0082\5"+
+		"\26\f\2\u0080\u0082\5\36\20\2\u0081\177\3\2\2\2\u0081\u0080\3\2\2\2\u0082"+
+		"\31\3\2\2\2\u0083\u0085\5\30\r\2\u0084\u0083\3\2\2\2\u0085\u0088\3\2\2"+
+		"\2\u0086\u0084\3\2\2\2\u0086\u0087\3\2\2\2\u0087\33\3\2\2\2\u0088\u0086"+
+		"\3\2\2\2\u0089\u008b\7\20\2\2\u008a\u008c\7\4\2\2\u008b\u008a\3\2\2\2"+
+		"\u008b\u008c\3\2\2\2\u008c\u008d\3\2\2\2\u008d\u008f\5\32\16\2\u008e\u0090"+
+		"\7\4\2\2\u008f\u008e\3\2\2\2\u008f\u0090\3\2\2\2\u0090\u0091\3\2\2\2\u0091"+
+		"\u0092\7\21\2\2\u0092\35\3\2\2\2\u0093\u0095\7\4\2\2\u0094\u0093\3\2\2"+
+		"\2\u0094\u0095\3\2\2\2\u0095\u0096\3\2\2\2\u0096\u0098\5\22\n\2\u0097"+
+		"\u0099\7\4\2\2\u0098\u0097\3\2\2\2\u0098\u0099\3\2\2\2\u0099\u009a\3\2"+
+		"\2\2\u009a\u009b\5\16\b\2\u009b\u00b5\3\2\2\2\u009c\u009e\7\4\2\2\u009d"+
+		"\u009c\3\2\2\2\u009d\u009e\3\2\2\2\u009e\u009f\3\2\2\2\u009f\u00a1\5\22"+
+		"\n\2\u00a0\u00a2\7\4\2\2\u00a1\u00a0\3\2\2\2\u00a1\u00a2\3\2\2\2\u00a2"+
+		"\u00a3\3\2\2\2\u00a3\u00a5\7\22\2\2\u00a4\u00a6\7\4\2\2\u00a5\u00a4\3"+
+		"\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\u00a9\3\2\2\2\u00a7\u00aa\5\16\b\2\u00a8"+
+		"\u00aa\5\f\7\2\u00a9\u00a7\3\2\2\2\u00a9\u00a8\3\2\2\2\u00a9\u00aa\3\2"+
+		"\2\2\u00aa\u00ac\3\2\2\2\u00ab\u00ad\7\4\2\2\u00ac\u00ab\3\2\2\2\u00ac"+
+		"\u00ad\3\2\2\2\u00ad\u00ae\3\2\2\2\u00ae\u00af\7\23\2\2\u00af\u00b5\3"+
+		"\2\2\2\u00b0\u00b2\7\4\2\2\u00b1\u00b0\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2"+
+		"\u00b3\3\2\2\2\u00b3\u00b5\5\22\n\2\u00b4\u0094\3\2\2\2\u00b4\u009d\3"+
+		"\2\2\2\u00b4\u00b1\3\2\2\2\u00b5\u00b7\3\2\2\2\u00b6\u00b8\7\4\2\2\u00b7"+
+		"\u00b6\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00ba\3\2\2\2\u00b9\u00bb\5\34"+
+		"\17\2\u00ba\u00b9\3\2\2\2\u00ba\u00bb\3\2\2\2\u00bb\37\3\2\2\2\u00bc\u00bf"+
+		"\5\26\f\2\u00bd\u00bf\5\36\20\2\u00be\u00bc\3\2\2\2\u00be\u00bd\3\2\2"+
+		"\2\u00bf\u00c0\3\2\2\2\u00c0\u00be\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1!"+
+		"\3\2\2\2&&*/\63\67<FJMQUY`dgjsw{\u0081\u0086\u008b\u008f\u0094\u0098\u009d"+
+		"\u00a1\u00a5\u00a9\u00ac\u00b1\u00b4\u00b7\u00ba\u00be\u00c0";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -8,13 +8,13 @@ import com.jn.langx.util.Strings;
 
 public class Maven2LocalRepositoryLayout extends LocalArtifactRepositoryLayout {
     public Maven2LocalRepositoryLayout(){
-        setName("local");
+        setName("m2local");
     }
 
     @Override
     public String toRelativePath(ArtifactRepository repository, Artifact artifact) {
         String relativePath = "";
-        relativePath = addSegment(relativePath, artifact.getGroupId());
+        relativePath = addSegment(relativePath, Strings.replace(artifact.getGroupId(),".","/"));
         relativePath = addSegment(relativePath, artifact.getArtifactId());
         if (Strings.isNotEmpty(artifact.getVersion())) {
             relativePath = addSegment(relativePath, artifact.getVersion());

@@ -36,9 +36,9 @@ public class MavenPackageManager implements ArtifactManagerAware {
         return null;
     }
 
-    public MavenPackageArtifact parsePom(PackageGAV pomGav) {
+    public MavenPackageArtifact parsePom(MavenPomParser.Builder builder, PackageGAV pomGav) {
         File pomXml = getPomFile(pomGav);
-        return MavenPomParser.parsePom(pomXml);
+        return MavenPomParser.parsePom(builder, pomXml);
     }
 
     @Override

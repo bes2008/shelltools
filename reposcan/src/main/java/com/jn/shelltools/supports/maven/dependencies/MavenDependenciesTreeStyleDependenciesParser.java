@@ -1,7 +1,5 @@
 package com.jn.shelltools.supports.maven.dependencies;
 
-import com.jn.agileway.vfs.artifact.ArtifactManager;
-import com.jn.agileway.vfs.artifact.ArtifactManagerAware;
 import com.jn.langx.Parser;
 import com.jn.langx.annotation.Nullable;
 import com.jn.langx.io.resource.Resource;
@@ -14,24 +12,28 @@ import com.jn.langx.util.enums.Enums;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Predicate;
 import com.jn.langx.util.io.Charsets;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.langx.util.regexp.Regexp;
 import com.jn.langx.util.regexp.Regexps;
 import com.jn.shelltools.supports.maven.MavenPackageManager;
+import com.jn.shelltools.supports.maven.MavenPomParser;
 import com.jn.shelltools.supports.maven.model.Dependency;
 import com.jn.shelltools.supports.maven.model.DependencyScope;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 import com.jn.shelltools.supports.maven.model.Packaging;
+import org.slf4j.Logger;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 
-public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Resource, List<Dependency>>{
+public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Resource, List<Dependency>> {
     public static final Regexp dependencyExpr = Regexps.compile("(?:((\\|)?\\s+)*?[+\\\\]-+)?(\\s+)?(?<groupId>[^:'\"\\(* \\t]+)\\:(?<artifactId>[^:'\"\\(* \\t]+)\\:(?<version>[^:'\"\\(* \\t]+)(\\:(?<scope>\\w+))?(\\s+.*)?");
-
+    private static final Logger logger = Loggers.getLogger(MavenDependenciesTreeStyleDependenciesParser.class);
     @Nullable
     private MavenPackageManager mavenPackageManager;
+    private MavenPomParser.Builder builder = new MavenPomParser.Builder().parsePackaging(true);
 
     public void setMavenPackageManager(MavenPackageManager mavenPackageManager) {
         this.mavenPackageManager = mavenPackageManager;
@@ -81,17 +83,25 @@ public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Reso
                         if (mavenPackageManager == null) {
                             dependencyModel.setType(Packaging.JAR);
                         } else {
-                            MavenPackageArtifact artifact = mavenPackageManager.parsePom(dependencyModel);
-                            if (artifact != null) {
-                                Packaging packaging = artifact.getPackaging();
-                                if(packaging!=null) {
-                                    dependencyModel.setType(packaging);
-                                    if(packaging==Packaging.POM){
-                                        dependencyModel.setScope(DependencyScope.IMPORT);
+                            try {
+                                MavenPackageArtifact artifact = mavenPackageManager.parsePom(builder, dependencyModel);
+                                if (artifact != null) {
+                                    Packaging packaging = artifact.getPackaging();
+                                    if (packaging != null) {
+                                        dependencyModel.setType(packaging);
+                                        if (packaging == Packaging.POM) {
+                                            dependencyModel.setScope(DependencyScope.IMPORT);
+                                        }
+                                    } else {
+                                        dependencyModel.setType(Packaging.JAR);
                                     }
                                 }
+                            } catch (Throwable ex) {
+                                logger.error("error when parse pom for : {}", dependencyModel.toString());
+                                if (Objs.isNull(dependencyModel.getType())) {
+                                    dependencyModel.setType(Packaging.JAR);
+                                }
                             }
-
                         }
                     }
                 });

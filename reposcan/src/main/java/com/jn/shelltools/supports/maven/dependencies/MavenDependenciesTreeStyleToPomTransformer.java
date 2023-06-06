@@ -7,7 +7,7 @@ import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
 import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.supports.maven.PomXmlGenerator;
-import com.jn.shelltools.supports.maven.model.DependencyModel;
+import com.jn.shelltools.supports.maven.model.Dependency;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 import com.jn.shelltools.supports.maven.model.Packaging;
 import freemarker.template.Configuration;
@@ -28,17 +28,17 @@ public class MavenDependenciesTreeStyleToPomTransformer implements Transformer<R
     @Override
     public String transform(Resource resource) {
         MavenDependenciesTreeStyleDependenciesParser parser = new MavenDependenciesTreeStyleDependenciesParser();
-        List<DependencyModel> dependencyModels = parser.parse(resource);
+        List<Dependency> dependencyModels = parser.parse(resource);
 
         MavenPackageArtifact pomModel = new MavenPackageArtifact(packageGav.getGroupId(), packageGav.getArtifactId(), packageGav.getVersion());
 
-        List<DependencyModel> jarDependencies = Lists.newArrayList();
-        List<DependencyModel> pomDependencies = Lists.newArrayList();
+        List<Dependency> jarDependencies = Lists.newArrayList();
+        List<Dependency> pomDependencies = Lists.newArrayList();
 
         Pipeline.of(dependencyModels)
-                        .forEach(new Consumer<DependencyModel>() {
+                        .forEach(new Consumer<Dependency>() {
                             @Override
-                            public void accept(DependencyModel dependency) {
+                            public void accept(Dependency dependency) {
                                 if(dependency.getType()== Packaging.POM){
                                     pomDependencies.add(dependency);
                                 }else{

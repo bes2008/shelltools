@@ -15,8 +15,8 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
     private String name;
     private Packaging packaging;
     private DependencyScope scope;
-    private Holder<List<DependencyModel>> dependencyManagement;
-    private List<DependencyModel> dependencies;
+    private Holder<List<Dependency>> dependencyManagement;
+    private List<Dependency> dependencies;
     private List<License> licenses;
 
     private Map<String, String> properties;
@@ -82,11 +82,11 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
     }
 
 
-    public List<DependencyModel> getDependencies() {
+    public List<Dependency> getDependencies() {
         return dependencies;
     }
 
-    public void setDependencies(List<DependencyModel> dependencies) {
+    public void setDependencies(List<Dependency> dependencies) {
         this.dependencies = dependencies;
     }
 
@@ -98,11 +98,11 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
         this.licenses = licenses;
     }
 
-    public Holder<List<DependencyModel>> getDependencyManagement() {
+    public Holder<List<Dependency>> getDependencyManagement() {
         return dependencyManagement;
     }
 
-    public void setDependencyManagement(Holder<List<DependencyModel>> dependencyManagement) {
+    public void setDependencyManagement(Holder<List<Dependency>> dependencyManagement) {
         this.dependencyManagement = dependencyManagement;
     }
 

@@ -5,7 +5,7 @@ import com.jn.shelltools.core.PackageGAV;
 
 import java.util.List;
 
-public class DependencyModel extends PackageGAV {
+public class Dependency extends PackageGAV {
     @Nullable
     private String projectName;
     private boolean optional = false;
@@ -37,11 +37,11 @@ public class DependencyModel extends PackageGAV {
         this.type = type;
     }
 
-    public DependencyModel(){
+    public Dependency(){
 
     }
 
-    public DependencyModel(String groupId, String artifactId, String version){
+    public Dependency(String groupId, String artifactId, String version){
         setGroupId(groupId);
         setArtifactId(artifactId);
         setVersion(version);

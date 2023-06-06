@@ -6,7 +6,7 @@ import com.jn.langx.util.Throwables;
 import com.jn.langx.util.bean.Beans;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Function;
-import com.jn.shelltools.supports.maven.model.DependencyModel;
+import com.jn.shelltools.supports.maven.model.Dependency;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -41,19 +41,19 @@ public class PomXmlGenerator implements PomGenerator {
         final Map<String, String> properties = new LinkedHashMap<String, String>();
         ret.setProperties(properties);
 
-        List<DependencyModel> dependencies = ret.getDependencies();
+        List<Dependency> dependencies = ret.getDependencies();
         dependencies = Pipeline.of(dependencies)
-                .map(new Function<DependencyModel, DependencyModel>() {
+                .map(new Function<Dependency, Dependency>() {
                     @Override
-                    public DependencyModel apply(DependencyModel dependencyModel) {
-                        DependencyModel dependency = new DependencyModel();
+                    public Dependency apply(Dependency dependencyModel) {
+                        Dependency dependency = new Dependency();
                         Beans.copyProperties(dependencyModel, dependency);
                         return dependency;
                     }
                 })
-                .map(new Function<DependencyModel, DependencyModel>() {
+                .map(new Function<Dependency, Dependency>() {
                     @Override
-                    public DependencyModel apply(DependencyModel dependency) {
+                    public Dependency apply(Dependency dependency) {
                         String version = dependency.getVersion();
                         String property;
                         if (Strings.isNotEmpty(dependency.getProjectName())) {

@@ -4,6 +4,7 @@ import com.jn.agileway.feign.HttpConnectionContext;
 import com.jn.agileway.feign.supports.rpc.rest.EasyjsonDecoder;
 import com.jn.agileway.feign.supports.rpc.rest.RestStubProvider;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
+import com.jn.agileway.vfs.artifact.repository.ArtifactRepository;
 import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
 import com.jn.easyjson.core.JsonException;
 import com.jn.easyjson.core.factory.JsonFactorys;
@@ -58,7 +59,10 @@ public class PypiConfig {
         Collects.forEach(pipPackageManagerProperties.getSources(), new Consumer<String>() {
             @Override
             public void accept(String source) {
-                artifactManager.addSource(factory.get(source));
+                ArtifactRepository repository = factory.get(source);
+                if (repository != null) {
+                    artifactManager.addSource(repository);
+                }
             }
         });
         artifactManager.setDestination(factory.get(pipPackageManagerProperties.getDestination()));

@@ -23,7 +23,7 @@ public class MavenPomCommands {
     private MavenDependenciesTreeStyleDependenciesParser dependenciesTreeStyleDependenciesParser;
 
     @ShellMethod(key = "pom-gen", value = "generate pom.xml from dependencies tree")
-    public void genPom(
+    public String genPom(
             @ShellOption(value = "--deps", help = "the file of dependencies") String deps,
             @ShellOption(value = "--out", defaultValue = ".", help = "the out file path") String outdir,
             @ShellOption(defaultValue = "com.jn.sheeltools") String groupId,
@@ -43,7 +43,7 @@ public class MavenPomCommands {
 
         PackageGAV packageGav = new PackageGAV(groupId, artifactId, version);
         String xml = MavenDependenciesTreeStyleToPomTransformer.transform(dependenciesTreeStyleDependenciesParser, resource, packageGav, freemarkerConfig);
-
+        return xml;
     }
 
     @Autowired

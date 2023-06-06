@@ -13,19 +13,16 @@ agileway:
         layout: pypi_local
       - name: maven_tmp_local
         url: file:///d:/tmp/mvenrepo
-        layout: local
+        layout: m2local
       - name: maven_aliyun
         url: https://maven.aliyun.com/repository/public
-        layout: local
-      - name: maven_netease
-        url: https://maven.netease.com/repository/public/
-        layout: local
+        layout: m2local
       - name: maven_huaweicloud
         url: https://repo.huaweicloud.com/repository/maven/
-        layout: local
+        layout: m2local
       - name: maven_center
         url: https://repo1.maven.org/maven2/
-        layout: local
+        layout: m2local
 
 pypi:
   server:

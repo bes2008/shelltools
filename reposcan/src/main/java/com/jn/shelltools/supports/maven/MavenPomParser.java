@@ -83,6 +83,9 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
     }
 
     public static MavenPackageArtifact parsePom(File pomFile) {
+        if (pomFile == null) {
+            return null;
+        }
         FileInputStream inputStream = null;
         MavenPackageArtifact mavenArtifact = null;
         String path = pomFile.getAbsolutePath();

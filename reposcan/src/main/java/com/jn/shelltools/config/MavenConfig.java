@@ -2,9 +2,11 @@ package com.jn.shelltools.config;
 
 import com.jn.agileway.vfs.artifact.ArtifactManager;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
+import com.jn.agileway.vfs.artifact.repository.ArtifactRepository;
 import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
+import com.jn.shelltools.supports.maven.Maven2LocalRepositoryLayout;
 import com.jn.shelltools.supports.maven.MavenPackageManager;
 import com.jn.shelltools.supports.maven.MavenPackageManagerProperties;
 import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeStyleDependenciesParser;
@@ -24,6 +26,11 @@ public class MavenConfig {
         return new MavenPackageManagerProperties();
     }
 
+    @Bean("m2local")
+    public Maven2LocalRepositoryLayout maven2LocalRepositoryLayout(){
+        return new Maven2LocalRepositoryLayout();
+    }
+
     @Bean(name = "mavenArtifactManager")
     public SynchronizedArtifactManager mavenArtifactManager(
             DefaultArtifactRepositoryFactory factory,
@@ -33,7 +40,10 @@ public class MavenConfig {
         Collects.forEach(mavenPackageManagerProperties.getSources(), new Consumer<String>() {
             @Override
             public void accept(String source) {
-                artifactManager.addSource(factory.get(source));
+                ArtifactRepository repository = factory.get(source);
+                if (repository != null) {
+                    artifactManager.addSource(repository);
+                }
             }
         });
         artifactManager.setDestination(factory.get(mavenPackageManagerProperties.getDestination()));
@@ -45,14 +55,14 @@ public class MavenConfig {
     @Autowired
     public MavenPackageManager mavenPackageManager(
             @Qualifier("mavenArtifactManager")
-            ArtifactManager mavenArtifactManager){
+                    ArtifactManager mavenArtifactManager) {
         MavenPackageManager packageManager = new MavenPackageManager();
         packageManager.setArtifactManager(mavenArtifactManager);
         return packageManager;
     }
 
     @Bean
-    public MavenDependenciesTreeStyleDependenciesParser treeStyleDependenciesParser(MavenPackageManager mavenPackageManager){
+    public MavenDependenciesTreeStyleDependenciesParser treeStyleDependenciesParser(MavenPackageManager mavenPackageManager) {
         MavenDependenciesTreeStyleDependenciesParser p = new MavenDependenciesTreeStyleDependenciesParser();
         p.setMavenPackageManager(mavenPackageManager);
         return p;

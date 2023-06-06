@@ -4,6 +4,7 @@ import com.jn.langx.util.struct.Holder;
 import com.jn.shelltools.core.LocalPackageArtifact;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * maven java 包的一个发布情况
@@ -14,10 +15,11 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
     private String name;
     private Packaging packaging;
     private DependencyScope scope;
-    private long lastModifiedTime;
     private Holder<List<DependencyModel>> dependencyManagement;
     private List<DependencyModel> dependencies;
     private List<License> licenses;
+
+    private Map<String, String> properties;
 
     public MavenPackageArtifact() {
 
@@ -79,14 +81,6 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
         this.name = name;
     }
 
-    public long getLastModifiedTime() {
-        return lastModifiedTime;
-    }
-
-    public void setLastModifiedTime(long lastModifiedTime) {
-        this.lastModifiedTime = lastModifiedTime;
-    }
-
 
     public List<DependencyModel> getDependencies() {
         return dependencies;
@@ -110,5 +104,13 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
 
     public void setDependencyManagement(Holder<List<DependencyModel>> dependencyManagement) {
         this.dependencyManagement = dependencyManagement;
+    }
+
+    public Map<String, String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Map<String, String> properties) {
+        this.properties = properties;
     }
 }

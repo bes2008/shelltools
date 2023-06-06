@@ -111,7 +111,7 @@ public class MavenLocalRepositoryUpdatedScanner {
                                     }
                                 }
                             });
-                            mavenArtifact.setLastModifiedTime(lastModified.get());
+                            mavenArtifact.setLastModified(lastModified.get());
                             mavenArtifact.setLocalPath(pomFile.getParentFile().getAbsolutePath());
                             if (filter.accept(mavenArtifact)) {
                                 map.put(mavenArtifact.getGav(), mavenArtifact);

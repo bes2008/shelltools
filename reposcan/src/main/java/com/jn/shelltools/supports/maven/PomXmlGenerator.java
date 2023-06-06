@@ -7,7 +7,7 @@ import com.jn.langx.util.bean.Beans;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Function;
 import com.jn.shelltools.supports.maven.model.DependencyModel;
-import com.jn.shelltools.supports.maven.model.PomModel;
+import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -21,9 +21,9 @@ public class PomXmlGenerator implements PomGenerator {
     private Configuration freemarkerConfiguration;
 
     @Override
-    public String get(PomModel pomModel) {
+    public String get(MavenPackageArtifact pomModel) {
         try {
-            PomModel formatted = format(pomModel);
+            MavenPackageArtifact formatted = format(pomModel);
             Template template = freemarkerConfiguration.getTemplate("pom.xml-model4.0.0.ftl");
             StringWriter stringWriter = new StringWriter();
             template.process(formatted, stringWriter);
@@ -34,8 +34,8 @@ public class PomXmlGenerator implements PomGenerator {
         }
     }
 
-    private PomModel format(PomModel model) {
-        PomModel ret = new PomModel();
+    private MavenPackageArtifact format(MavenPackageArtifact model) {
+        MavenPackageArtifact ret = new MavenPackageArtifact();
         Beans.copyProperties(model, ret);
         // 处理依赖版本
         final Map<String, String> properties = new LinkedHashMap<String, String>();

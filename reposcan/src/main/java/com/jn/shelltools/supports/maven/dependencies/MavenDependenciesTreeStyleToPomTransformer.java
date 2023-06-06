@@ -2,10 +2,14 @@ package com.jn.shelltools.supports.maven.dependencies;
 
 import com.jn.langx.Transformer;
 import com.jn.langx.io.resource.Resource;
+import com.jn.langx.util.collection.Lists;
+import com.jn.langx.util.collection.Pipeline;
+import com.jn.langx.util.function.Consumer;
 import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.supports.maven.PomXmlGenerator;
 import com.jn.shelltools.supports.maven.model.DependencyModel;
-import com.jn.shelltools.supports.maven.model.PomModel;
+import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
+import com.jn.shelltools.supports.maven.model.Packaging;
 import freemarker.template.Configuration;
 
 import java.util.List;
@@ -26,7 +30,23 @@ public class MavenDependenciesTreeStyleToPomTransformer implements Transformer<R
         MavenDependenciesTreeStyleDependenciesParser parser = new MavenDependenciesTreeStyleDependenciesParser();
         List<DependencyModel> dependencyModels = parser.parse(resource);
 
-        PomModel pomModel = new PomModel(packageGav.getGroupId(), packageGav.getArtifactId(), packageGav.getVersion());
+        MavenPackageArtifact pomModel = new MavenPackageArtifact(packageGav.getGroupId(), packageGav.getArtifactId(), packageGav.getVersion());
+
+        List<DependencyModel> jarDependencies = Lists.newArrayList();
+        List<DependencyModel> pomDependencies = Lists.newArrayList();
+
+        Pipeline.of(dependencyModels)
+                        .forEach(new Consumer<DependencyModel>() {
+                            @Override
+                            public void accept(DependencyModel dependency) {
+                                if(dependency.getType()== Packaging.POM){
+                                    pomDependencies.add(dependency);
+                                }else{
+                                    jarDependencies.add(dependency);
+                                }
+                            }
+                        });
+
         pomModel.setDependencies(dependencyModels);
         PomXmlGenerator generator = new PomXmlGenerator();
         generator.setFreemarkerConfiguration(freemarkerConfig);

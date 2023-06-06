@@ -1,9 +1,9 @@
 package com.jn.shelltools.supports.maven;
 
 import com.jn.langx.Factory;
-import com.jn.shelltools.supports.maven.model.PomModel;
+import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 
-public interface PomGenerator extends Factory<PomModel, String> {
+public interface PomGenerator extends Factory<MavenPackageArtifact, String> {
     @Override
-    String get(PomModel pomModel);
+    String get(MavenPackageArtifact pomModel);
 }

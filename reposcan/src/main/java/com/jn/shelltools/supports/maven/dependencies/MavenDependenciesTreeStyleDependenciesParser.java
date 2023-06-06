@@ -1,6 +1,9 @@
 package com.jn.shelltools.supports.maven.dependencies;
 
+import com.jn.agileway.vfs.artifact.ArtifactManager;
+import com.jn.agileway.vfs.artifact.ArtifactManagerAware;
 import com.jn.langx.Parser;
+import com.jn.langx.annotation.Nullable;
 import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
 import com.jn.langx.util.Emptys;
@@ -24,9 +27,10 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Resource, List<Dependency>> {
+public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Resource, List<Dependency>>{
     public static final Regexp dependencyExpr = Regexps.compile("(?:((\\|)?\\s+)*?[+\\\\]-+)?(\\s+)?(?<groupId>[^:'\"\\(* \\t]+)\\:(?<artifactId>[^:'\"\\(* \\t]+)\\:(?<version>[^:'\"\\(* \\t]+)(\\:(?<scope>\\w+))?(\\s+.*)?");
 
+    @Nullable
     private MavenPackageManager mavenPackageManager;
 
     public void setMavenPackageManager(MavenPackageManager mavenPackageManager) {

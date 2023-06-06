@@ -22,10 +22,10 @@
 </#if>
     </properties>
 <#import "pom.xml-model-4.0.0-dependencies.ftl" as deps>
-<#if dependencyManagement?? && dependencyManagement?size gt 0 && dependencyManagement.dependencies?? && dependencyManagement.dependencies?size gt 0>
+    <#if dependencyManagement?? && dependencyManagement?size gt 0 && dependencyManagement.dependencies?? && dependencyManagement.dependencies?size gt 0>
     <dependencyManagement>
         <@deps.printDependencies dependencyManagement.dependencies/>
     </dependencyManagement>
-</#if>
+    </#if>
     <@deps.printDependencies dependencies/>
 </project>

@@ -24,7 +24,7 @@ public class PomXmlGenerator implements PomGenerator {
     public String get(MavenPackageArtifact pomModel) {
         try {
             MavenPackageArtifact formatted = format(pomModel);
-            Template template = freemarkerConfiguration.getTemplate("pom.xml-model4.0.0.ftl");
+            Template template = freemarkerConfiguration.getTemplate("pom.xml-model-4.0.0.ftl");
             StringWriter stringWriter = new StringWriter();
             template.process(formatted, stringWriter);
             stringWriter.flush();

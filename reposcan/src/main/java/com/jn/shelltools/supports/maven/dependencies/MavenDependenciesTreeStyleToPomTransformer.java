@@ -64,17 +64,10 @@ public class MavenDependenciesTreeStyleToPomTransformer implements Transformer<R
         return pomXml;
     }
 
-    public PackageGAV getPackageGav() {
-        return packageGav;
-    }
-
     public void setPackageGav(PackageGAV packageGav) {
         this.packageGav = packageGav;
     }
 
-    public Configuration getFreemarkerConfig() {
-        return freemarkerConfig;
-    }
 
     public void setFreemarkerConfig(Configuration freemarkerConfig) {
         this.freemarkerConfig = freemarkerConfig;

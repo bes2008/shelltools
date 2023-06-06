@@ -101,8 +101,8 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
         String artifactIdXPath = getXpath("artifactId", usingCustomNamespace, namespacePrefix);
         String nameXPath = getXpath("name", usingCustomNamespace, namespacePrefix);
         String versionXPath = getXpath("version", usingCustomNamespace, namespacePrefix);
-        String parentGroupIdXPath = getXpath("parentGroupIdXPath", usingCustomNamespace, namespacePrefix);
-        String parentVersionXPath = getXpath("parentVersionXPath", usingCustomNamespace, namespacePrefix);
+        String parentGroupIdXPath = getXpath("parent.groupId", usingCustomNamespace, namespacePrefix);
+        String parentVersionXPath = getXpath("parent.version", usingCustomNamespace, namespacePrefix);
 
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
@@ -155,12 +155,13 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
     }
 
     private Packaging parsePackaging(Document doc) {
+        Packaging packaging = null;
         try {
             Element element = findElement(doc, "packaging");
             if (element != null) {
                 String text = element.getTextContent();
                 if (Strings.isNotEmpty(text)) {
-                    Packaging packaging = Enums.ofName(Packaging.class, Strings.trim(text));
+                    packaging = Enums.ofName(Packaging.class, Strings.trim(text));
                     if (packaging == null) {
                         logger.error("parse packaging failed, packaging: {}, file: {}", text, pomPath);
                     }
@@ -169,7 +170,7 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
         } catch (Throwable ex) {
             logger.error(ex.getMessage(), ex);
         }
-        return null;
+        return packaging;
     }
 
 

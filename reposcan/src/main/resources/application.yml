@@ -7,17 +7,37 @@ agileway:
       - name: pipserver
         url: https://www.python.org:80
         layout: pypi
-        supportedDigits: [md5, sha256]
+        supportedDigits: [ md5, sha256 ]
       - name: python_local
         url: file:///d:/pip_repo
         layout: pypi_local
+      - name: maven_tmp_local
+        url: file:///d:/tmp/mvenrepo
+        layout: local
+      - name: maven_aliyun
+        url: https://maven.aliyun.com/repository/public
+        layout: local
+      - name: maven_netease
+        url: https://maven.netease.com/repository/public/
+        layout: local
+      - name: maven_huaweicloud
+        url: https://repo.huaweicloud.com/repository/maven/
+        layout: local
+      - name: maven_center
+        url: https://repo1.maven.org/maven2/
+        layout: local
 
 pypi:
   server:
     protocol: https
     nodes: www.python.org:443
-  sources: [pipserver]
+  sources: [ pipserver ]
   destination: python_local
+
+maven:
+  sources: [ maven_aliyun, maven_netease, maven_huaweicloud, maven_center ]
+  destination: maven_tmp_local
+
 
 logging:
   level:

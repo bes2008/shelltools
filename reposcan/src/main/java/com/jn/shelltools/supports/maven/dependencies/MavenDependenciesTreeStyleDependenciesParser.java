@@ -13,41 +13,35 @@ import com.jn.langx.util.regexp.Regexp;
 import com.jn.langx.util.regexp.Regexps;
 import com.jn.shelltools.supports.maven.model.DependencyModel;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Resource, List<DependencyModel>> {
-
-    // |((|\s+)+\\[-]+)
-
-    //
-
     public static final Regexp dependencyExpr = Regexps.compile("(?:((\\|)?\\s+)*?[+\\\\]-+)?(\\s+)?(?<groupId>[^:'\"\\(* \\t]+)\\:(?<artifactId>[^:'\"\\(* \\t]+)\\:(?<version>[^:'\"\\(* \\t]+)(\\s+.*)?");
 
 
     public List<DependencyModel> parse(Resource resource) {
-
-        final List<DependencyModel> ret = Lists.newArrayList();
+        Map<String, DependencyModel> dependencies = new LinkedHashMap<>();
         List<String> lines = Resources.readLines(resource, Charsets.UTF_8);
         Pipeline.of(lines)
                 .forEach(line -> Regexps.match(dependencyExpr, line), new Consumer<String>() {
                     @Override
                     public void accept(String line) {
-                        Map<String, String> map=  Regexps.findNamedGroup(dependencyExpr, line);
-                        if(Objs.isNotEmpty(map)) {
+                        Map<String, String> map = Regexps.findNamedGroup(dependencyExpr, line);
+                        if (Objs.isNotEmpty(map)) {
                             String groupId = map.get("groupId");
                             String artifactId = map.get("artifactId");
                             String version = map.get("version");
-
-                            if(Emptys.isNoneEmpty(groupId, artifactId, version)){
+                            if (Emptys.isNoneEmpty(groupId, artifactId, version)) {
                                 DependencyModel dependency = new DependencyModel(groupId, artifactId, version);
-                                ret.add(dependency);
+                                dependencies.put(dependency.asId(), dependency);
                             }
                         }
                     }
                 });
-        return ret;
+        return Lists.newArrayList(dependencies.values());
     }
-
 
 }

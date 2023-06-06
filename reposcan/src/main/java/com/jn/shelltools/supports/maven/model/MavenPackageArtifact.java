@@ -1,5 +1,6 @@
 package com.jn.shelltools.supports.maven.model;
 
+import com.jn.langx.util.struct.Holder;
 import com.jn.shelltools.core.LocalPackageArtifact;
 
 import java.util.List;
@@ -14,7 +15,8 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
     private Packaging packaging;
     private DependencyScope scope;
     private long lastModifiedTime;
-    private List<MavenPackageArtifact> dependencies;
+    private Holder<List<DependencyModel>> dependencyManagement;
+    private List<DependencyModel> dependencies;
     private List<License> licenses;
 
     public MavenPackageArtifact() {
@@ -86,11 +88,11 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
     }
 
 
-    public List<MavenPackageArtifact> getDependencies() {
+    public List<DependencyModel> getDependencies() {
         return dependencies;
     }
 
-    public void setDependencies(List<MavenPackageArtifact> dependencies) {
+    public void setDependencies(List<DependencyModel> dependencies) {
         this.dependencies = dependencies;
     }
 
@@ -102,4 +104,11 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
         this.licenses = licenses;
     }
 
+    public Holder<List<DependencyModel>> getDependencyManagement() {
+        return dependencyManagement;
+    }
+
+    public void setDependencyManagement(Holder<List<DependencyModel>> dependencyManagement) {
+        this.dependencyManagement = dependencyManagement;
+    }
 }

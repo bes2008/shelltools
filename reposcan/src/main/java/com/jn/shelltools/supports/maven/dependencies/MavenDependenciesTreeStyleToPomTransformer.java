@@ -8,6 +8,7 @@ import com.jn.langx.util.function.Consumer;
 import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.supports.maven.PomXmlGenerator;
 import com.jn.shelltools.supports.maven.model.Dependency;
+import com.jn.shelltools.supports.maven.model.DependencyManagement;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 import com.jn.shelltools.supports.maven.model.Packaging;
 import freemarker.template.Configuration;
@@ -47,7 +48,8 @@ public class MavenDependenciesTreeStyleToPomTransformer implements Transformer<R
                             }
                         });
 
-        pomModel.setDependencies(dependencyModels);
+        pomModel.setDependencies(jarDependencies);
+        pomModel.setDependencyManagement(new DependencyManagement(pomDependencies));
         PomXmlGenerator generator = new PomXmlGenerator();
         generator.setFreemarkerConfiguration(freemarkerConfig);
         String pomXml = generator.get(pomModel);

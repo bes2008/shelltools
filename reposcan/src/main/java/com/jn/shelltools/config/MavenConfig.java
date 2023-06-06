@@ -19,19 +19,19 @@ public class MavenConfig {
         return new MavenPackageManagerProperties();
     }
 
-    @Bean(name = "pipArtifactManager")
-    public SynchronizedArtifactManager pipArtifactManager(
+    @Bean(name = "mavenArtifactManager")
+    public SynchronizedArtifactManager mavenArtifactManager(
             DefaultArtifactRepositoryFactory factory,
-            MavenPackageManagerProperties pipPackageManagerProperties,
+            MavenPackageManagerProperties mavenPackageManagerProperties,
             FileSystemManager fileSystemManager) {
         SynchronizedArtifactManager artifactManager = new SynchronizedArtifactManager();
-        Collects.forEach(pipPackageManagerProperties.getSources(), new Consumer<String>() {
+        Collects.forEach(mavenPackageManagerProperties.getSources(), new Consumer<String>() {
             @Override
             public void accept(String source) {
                 artifactManager.addSource(factory.get(source));
             }
         });
-        artifactManager.setDestination(factory.get(pipPackageManagerProperties.getDestination()));
+        artifactManager.setDestination(factory.get(mavenPackageManagerProperties.getDestination()));
         artifactManager.setFileSystemManager(fileSystemManager);
         return artifactManager;
     }

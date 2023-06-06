@@ -71,9 +71,6 @@ public class PomXmlGenerator implements PomGenerator {
         return ret;
     }
 
-    public Configuration getFreemarkerConfiguration() {
-        return freemarkerConfiguration;
-    }
 
     public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) {
         this.freemarkerConfiguration = freemarkerConfiguration;

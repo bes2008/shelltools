@@ -5,6 +5,8 @@ import com.jn.langx.text.StringTemplates;
 import com.jn.langx.text.xml.Namespaces;
 import com.jn.langx.text.xml.NodeListIterator;
 import com.jn.langx.text.xml.XmlAccessor;
+import com.jn.langx.text.xml.Xmls;
+import com.jn.langx.text.xml.errorhandler.IgnoreErrorHandler;
 import com.jn.langx.util.Emptys;
 import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
@@ -13,21 +15,27 @@ import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Supplier;
-import com.jn.shelltools.supports.maven.model.MavenGAV;
+import com.jn.langx.util.io.IOs;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.shelltools.supports.maven.model.License;
+import com.jn.shelltools.supports.maven.model.MavenGAV;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
+import org.slf4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
     private static final Map<String, String> gavXPathMap = new HashMap<>();
+    private static final Logger logger = Loggers.getLogger(MavenPomParser.class);
 
     static {
         gavXPathMap.put("groupIdXPath", "/project/groupId");
@@ -71,6 +79,22 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
         mavenArtifact.setGav(gav);
         List<License> licenses = parseLicenses(pom);
         mavenArtifact.setLicenses(licenses);
+        return mavenArtifact;
+    }
+
+    public static MavenPackageArtifact parsePom(File pomFile) {
+        FileInputStream inputStream = null;
+        MavenPackageArtifact mavenArtifact = null;
+        String path = pomFile.getAbsolutePath();
+        try {
+            inputStream = new FileInputStream(pomFile);
+            Document document = Xmls.getXmlDoc(null, new IgnoreErrorHandler(), inputStream);
+            mavenArtifact = new MavenPomParser(path).parse(document);
+        } catch (Throwable ex) {
+            logger.error("Error occur when parse {} , error: {}", path, ex.getMessage(), ex);
+        } finally {
+            IOs.close(inputStream);
+        }
         return mavenArtifact;
     }
 

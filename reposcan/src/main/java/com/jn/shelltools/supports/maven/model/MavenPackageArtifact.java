@@ -17,6 +17,15 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
     private List<MavenPackageArtifact> dependencies;
     private List<License> licenses;
 
+    public MavenPackageArtifact() {
+
+    }
+
+    public MavenPackageArtifact(String groupId, String artifactId, String version) {
+        setGroupId(groupId);
+        setArtifactId(artifactId);
+        setVersion(version);
+    }
 
     public MavenGAV getGav() {
         return new MavenGAV(getGroupId(), getArtifactId(), getVersion());

@@ -3,6 +3,7 @@ package com.jn.shelltools.command;
 import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
 import com.jn.langx.text.StringTemplates;
+import com.jn.langx.util.Dates;
 import com.jn.langx.util.io.file.Files;
 import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeStyleDependenciesParser;
@@ -14,6 +15,7 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import java.io.File;
+import java.io.IOException;
 
 @ShellComponent
 public class MavenPomCommands {
@@ -29,7 +31,7 @@ public class MavenPomCommands {
             @ShellOption(defaultValue = "com.jn.sheeltools") String groupId,
             @ShellOption(defaultValue = "reposcan") String artifactId,
             @ShellOption(defaultValue = "1.0.0") String version
-    ) {
+    ) throws IOException {
 
         Resource resource = Resources.loadResource(deps);
         if (!resource.exists()) {
@@ -43,6 +45,13 @@ public class MavenPomCommands {
 
         PackageGAV packageGav = new PackageGAV(groupId, artifactId, version);
         String xml = MavenDependenciesTreeStyleToPomTransformer.transform(dependenciesTreeStyleDependenciesParser, resource, packageGav, freemarkerConfig);
+
+        String filename = StringTemplates.formatWithPlaceholder("{}__{}__{}__{}__pom.xml", groupId, artifactId, version, Dates.now().getTime());
+        File pomFile = new File(outdir, filename);
+        if(!Files.exists(pomFile)){
+            Files.makeFile(pomFile);
+            Files.write(xml, pomFile);
+        }
         return xml;
     }
 

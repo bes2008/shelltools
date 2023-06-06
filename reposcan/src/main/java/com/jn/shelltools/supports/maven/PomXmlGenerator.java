@@ -1,6 +1,7 @@
 package com.jn.shelltools.supports.maven;
 
 import com.jn.langx.text.StringTemplates;
+import com.jn.langx.util.Objs;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.Throwables;
 import com.jn.langx.util.bean.Beans;
@@ -62,6 +63,14 @@ public class PomXmlGenerator implements PomGenerator {
                             property = StringTemplates.formatWithPlaceholder("{}.version", dependency.getGroupId());
                         }
                         properties.putIfAbsent(property, version);
+                        String versionInCache = properties.get(property);
+                        if(!Objs.equals(versionInCache,version)){
+                            if (Strings.isNotEmpty(dependency.getProjectName())) {
+                                property = StringTemplates.formatWithPlaceholder("{}.{}.{}.version", dependency.getProjectName(), dependency.getGroupId(), dependency.getArtifactId());
+                            } else {
+                                property = StringTemplates.formatWithPlaceholder("{}.{}.version", dependency.getGroupId(), dependency.getArtifactId());
+                            }
+                        }
                         dependency.setVersion("${" + property + "}");
                         return dependency;
                     }

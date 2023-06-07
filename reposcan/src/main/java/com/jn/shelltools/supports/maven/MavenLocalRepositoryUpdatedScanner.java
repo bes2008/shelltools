@@ -5,7 +5,6 @@ import com.jn.langx.annotation.NonNull;
 import com.jn.langx.io.resource.DirectoryBasedFileResourceLoader;
 import com.jn.langx.text.xml.Xmls;
 import com.jn.langx.text.xml.errorhandler.IgnoreErrorHandler;
-import com.jn.langx.text.xml.resolver.NullEntityResolver;
 import com.jn.langx.util.Maths;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
@@ -21,16 +20,8 @@ import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,7 +111,7 @@ public class MavenLocalRepositoryUpdatedScanner {
                                     }
                                 }
                             });
-                            mavenArtifact.setLastModifiedTime(lastModified.get());
+                            mavenArtifact.setLastModified(lastModified.get());
                             mavenArtifact.setLocalPath(pomFile.getParentFile().getAbsolutePath());
                             if (filter.accept(mavenArtifact)) {
                                 map.put(mavenArtifact.getGav(), mavenArtifact);

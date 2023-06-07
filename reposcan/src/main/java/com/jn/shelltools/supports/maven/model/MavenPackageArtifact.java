@@ -3,6 +3,7 @@ package com.jn.shelltools.supports.maven.model;
 import com.jn.shelltools.core.LocalPackageArtifact;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * maven java 包的一个发布情况
@@ -13,10 +14,21 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
     private String name;
     private Packaging packaging;
     private DependencyScope scope;
-    private long lastModifiedTime;
-    private List<MavenPackageArtifact> dependencies;
+    private DependencyManagement dependencyManagement;
+    private List<Dependency> dependencies;
     private List<License> licenses;
 
+    private Map<String, String> properties;
+
+    public MavenPackageArtifact() {
+
+    }
+
+    public MavenPackageArtifact(String groupId, String artifactId, String version) {
+        setGroupId(groupId);
+        setArtifactId(artifactId);
+        setVersion(version);
+    }
 
     public MavenGAV getGav() {
         return new MavenGAV(getGroupId(), getArtifactId(), getVersion());
@@ -68,20 +80,12 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
         this.name = name;
     }
 
-    public long getLastModifiedTime() {
-        return lastModifiedTime;
-    }
 
-    public void setLastModifiedTime(long lastModifiedTime) {
-        this.lastModifiedTime = lastModifiedTime;
-    }
-
-
-    public List<MavenPackageArtifact> getDependencies() {
+    public List<Dependency> getDependencies() {
         return dependencies;
     }
 
-    public void setDependencies(List<MavenPackageArtifact> dependencies) {
+    public void setDependencies(List<Dependency> dependencies) {
         this.dependencies = dependencies;
     }
 
@@ -93,4 +97,19 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
         this.licenses = licenses;
     }
 
+    public DependencyManagement getDependencyManagement() {
+        return dependencyManagement;
+    }
+
+    public void setDependencyManagement(DependencyManagement dependencyManagement) {
+        this.dependencyManagement = dependencyManagement;
+    }
+
+    public Map<String, String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Map<String, String> properties) {
+        this.properties = properties;
+    }
 }

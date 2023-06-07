@@ -1,7 +1,7 @@
 package com.jn.shelltools.supports.pypi;
 
 import com.jn.agileway.vfs.utils.FileObjects;
-import com.jn.easyjson.core.JSONBuilderProvider;
+import com.jn.easyjson.core.util.JSONs;
 import com.jn.langx.cache.Cache;
 import com.jn.langx.cache.CacheBuilder;
 import com.jn.langx.util.Strings;
@@ -57,7 +57,7 @@ public class PypiPackageMetadataManager extends RequirementsManager {
     }
 
     public PipPackageMetadata getOfficialMetadata(String packageName) {
-        return getOfficialMetadata(packageName, false,  0);
+        return getOfficialMetadata(packageName, false, 0);
     }
 
     public PipPackageMetadata getOfficialMetadata(String packageName, boolean storeIfAbsent, long ttl) {
@@ -93,16 +93,16 @@ public class PypiPackageMetadataManager extends RequirementsManager {
                 synchronized (this) {
                     // 查看 last modified 时间
                     long lastModified = fileObject.getContent().getLastModifiedTime();
-                    boolean filterWithLastModified= ttl>=60 * 1000;
+                    boolean filterWithLastModified = ttl >= 60 * 1000;
                     boolean metadataFileIsValid = !filterWithLastModified;
-                    if(filterWithLastModified){
+                    if (filterWithLastModified) {
                         metadataFileIsValid = lastModified + ttl >= System.currentTimeMillis();
                     }
                     if (metadataFileIsValid) {
                         // 有效
                         InputStream inputStream = fileObject.getContent().getInputStream();
                         InputStreamReader reader = new InputStreamReader(inputStream);
-                        metadata = JSONBuilderProvider.simplest().fromJson(reader, PipPackageMetadata.class);
+                        metadata = JSONs.parse(reader, PipPackageMetadata.class);
                         IOs.close(reader);
                     }
                 }
@@ -111,7 +111,7 @@ public class PypiPackageMetadataManager extends RequirementsManager {
                 metadata = this.restApi.packageMetadata(packageName);
                 if (metadata != null && storeIfAbsent) {
                     // 写到本地仓库
-                    String str = JSONBuilderProvider.create().prettyFormat(true).build().toJson(metadata);
+                    String str = JSONs.toJson(metadata, true);
                     if (!fileObject.exists()) {
                         fileObject.getParent().createFolder();
                         fileObject.createFile();

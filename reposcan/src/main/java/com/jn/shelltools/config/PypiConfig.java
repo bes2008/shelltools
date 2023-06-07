@@ -4,10 +4,11 @@ import com.jn.agileway.feign.HttpConnectionContext;
 import com.jn.agileway.feign.supports.rpc.rest.EasyjsonDecoder;
 import com.jn.agileway.feign.supports.rpc.rest.RestStubProvider;
 import com.jn.agileway.vfs.artifact.SynchronizedArtifactManager;
+import com.jn.agileway.vfs.artifact.repository.ArtifactRepository;
 import com.jn.agileway.vfs.artifact.repository.DefaultArtifactRepositoryFactory;
-import com.jn.easyjson.core.JSON;
 import com.jn.easyjson.core.JsonException;
 import com.jn.easyjson.core.factory.JsonFactorys;
+import com.jn.easyjson.core.util.JSONs;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.function.Consumer;
 import com.jn.shelltools.supports.pypi.PypiPackageManager;
@@ -58,7 +59,10 @@ public class PypiConfig {
         Collects.forEach(pipPackageManagerProperties.getSources(), new Consumer<String>() {
             @Override
             public void accept(String source) {
-                artifactManager.addSource(factory.get(source));
+                ArtifactRepository repository = factory.get(source);
+                if (repository != null) {
+                    artifactManager.addSource(repository);
+                }
             }
         });
         artifactManager.setDestination(factory.get(pipPackageManagerProperties.getDestination()));
@@ -79,7 +83,7 @@ public class PypiConfig {
                 if (response != null && response.body() != null && response.status()==200) {
                     Reader reader = response.body().asReader();
                     try {
-                        Object obj = ((JSON)JsonFactorys.getJSONFactory().get()).fromJson(reader, type);
+                        Object obj = JSONs.parse(reader, type);
                         return obj;
                     } catch (JsonException var5) {
                         throw new DecodeException(var5.getMessage(), var5);
@@ -99,8 +103,10 @@ public class PypiConfig {
     }
 
     @Bean
-    public PypiPackageMetadataManager pypiPackageMetadataManager(PypiRestApi pipService, @Qualifier("pipArtifactManager")
-                                                                         SynchronizedArtifactManager pipArtifactManager){
+    public PypiPackageMetadataManager pypiPackageMetadataManager(
+            PypiRestApi pipService,
+            @Qualifier("pipArtifactManager") SynchronizedArtifactManager pipArtifactManager
+    ){
         PypiPackageMetadataManager metadataManager = new PypiPackageMetadataManager();
         metadataManager.setArtifactManager(pipArtifactManager);
         metadataManager.setRestApi(pipService);

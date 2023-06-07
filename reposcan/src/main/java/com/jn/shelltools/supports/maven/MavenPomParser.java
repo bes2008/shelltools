@@ -5,38 +5,41 @@ import com.jn.langx.text.StringTemplates;
 import com.jn.langx.text.xml.Namespaces;
 import com.jn.langx.text.xml.NodeListIterator;
 import com.jn.langx.text.xml.XmlAccessor;
+import com.jn.langx.text.xml.Xmls;
+import com.jn.langx.text.xml.errorhandler.IgnoreErrorHandler;
 import com.jn.langx.util.Emptys;
 import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
 import com.jn.langx.util.collection.Pipeline;
+import com.jn.langx.util.enums.Enums;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Function;
 import com.jn.langx.util.function.Supplier;
-import com.jn.shelltools.supports.maven.model.MavenGAV;
+import com.jn.langx.util.io.IOs;
+import com.jn.langx.util.logging.Loggers;
 import com.jn.shelltools.supports.maven.model.License;
+import com.jn.shelltools.supports.maven.model.MavenGAV;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
+import com.jn.shelltools.supports.maven.model.Packaging;
+import org.slf4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.util.HashMap;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
-import java.util.Map;
 
 public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
-    private static final Map<String, String> gavXPathMap = new HashMap<>();
+    private static final Logger logger = Loggers.getLogger(MavenPomParser.class);
 
-    static {
-        gavXPathMap.put("groupIdXPath", "/project/groupId");
-        gavXPathMap.put("artifactIdXPath", "/project/artifactId");
-        gavXPathMap.put("nameXPath", "/project/name");
-        gavXPathMap.put("versionXPath", "/project/version");
-        gavXPathMap.put("parentGroupIdXPath", "/project/parent/groupId");
-        gavXPathMap.put("parentVersionXPath", "/project/parent/version");
-    }
+    private boolean parseLicenses = false;
+    private boolean parsePackaging = false;
+
 
     private String pomPath;
 
@@ -44,14 +47,6 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
         this.pomPath = pomPath;
     }
 
-    public static String getGavXpath(String key, boolean usingCustomNamespace, String namespacePrefix) {
-        String xpath = gavXPathMap.get(key);
-
-        if (usingCustomNamespace && Emptys.isNotEmpty(xpath)) {
-            return useNamespacePrefix(xpath, namespacePrefix);
-        }
-        return xpath;
-    }
 
     private static String useNamespacePrefix(String xpath, final String namespacePrefix) {
         String[] segments = Strings.split(xpath, "/");
@@ -69,20 +64,45 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
         MavenPackageArtifact mavenArtifact = new MavenPackageArtifact();
         MavenGAV gav = parseGav(pom);
         mavenArtifact.setGav(gav);
-        List<License> licenses = parseLicenses(pom);
-        mavenArtifact.setLicenses(licenses);
+        if (parseLicenses) {
+            List<License> licenses = parseLicenses(pom);
+            mavenArtifact.setLicenses(licenses);
+        }
+        if (parsePackaging) {
+            Packaging packaging = parsePackaging(pom);
+            mavenArtifact.setPackaging(packaging);
+        }
+        return mavenArtifact;
+    }
+
+    public static MavenPackageArtifact parsePom(MavenPomParser.Builder builder, File pomFile) {
+        if (pomFile == null) {
+            return null;
+        }
+        FileInputStream inputStream = null;
+        MavenPackageArtifact mavenArtifact = null;
+        String path = pomFile.getAbsolutePath();
+        try {
+            inputStream = new FileInputStream(pomFile);
+            Document document = Xmls.getXmlDoc(null, new IgnoreErrorHandler(), inputStream);
+            mavenArtifact = builder.pomPath(path).build().parse(document);
+        } catch (Throwable ex) {
+            logger.error("Error occur when parse {} , error: {}", path, ex.getMessage(), ex);
+        } finally {
+            IOs.close(inputStream);
+        }
         return mavenArtifact;
     }
 
     private MavenGAV parseGav(Document doc) {
         boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc, true);
         String namespacePrefix = "x";
-        String groupIdXPath = getGavXpath("groupIdXPath", usingCustomNamespace, namespacePrefix);
-        String artifactIdXPath = getGavXpath("artifactIdXPath", usingCustomNamespace, namespacePrefix);
-        String nameXPath = getGavXpath("nameXPath", usingCustomNamespace, namespacePrefix);
-        String versionXPath = getGavXpath("versionXPath", usingCustomNamespace, namespacePrefix);
-        String parentGroupIdXPath = getGavXpath("parentGroupIdXPath", usingCustomNamespace, namespacePrefix);
-        String parentVersionXPath = getGavXpath("parentVersionXPath", usingCustomNamespace, namespacePrefix);
+        String groupIdXPath = getXpath("groupId", usingCustomNamespace, namespacePrefix);
+        String artifactIdXPath = getXpath("artifactId", usingCustomNamespace, namespacePrefix);
+        String nameXPath = getXpath("name", usingCustomNamespace, namespacePrefix);
+        String versionXPath = getXpath("version", usingCustomNamespace, namespacePrefix);
+        String parentGroupIdXPath = getXpath("parent.groupId", usingCustomNamespace, namespacePrefix);
+        String parentVersionXPath = getXpath("parent.version", usingCustomNamespace, namespacePrefix);
 
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
@@ -134,19 +154,31 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
         }
     }
 
-    private List<License> parseLicenses(Document doc) {
-        boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc);
-        String namespacePrefix = "x";
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
-
-        String xpath = "/licenses/license";
-        if (usingCustomNamespace) {
-            xpath = useNamespacePrefix(xpath, namespacePrefix);
+    private Packaging parsePackaging(Document doc) {
+        Packaging packaging = null;
+        try {
+            Element element = findElement(doc, "packaging");
+            if (element != null) {
+                String text = element.getTextContent();
+                if (Strings.isNotEmpty(text)) {
+                    packaging = Enums.ofName(Packaging.class, Strings.trim(text));
+                    if (packaging == null) {
+                        logger.error("parse packaging failed, packaging: {}, file: {}", text, pomPath);
+                    }
+                }
+            }
+        } catch (Throwable ex) {
+            logger.error(ex.getMessage(), ex);
         }
+        return packaging;
+    }
+
+
+    private List<License> parseLicenses(Document doc) {
+
         List<License> licenses = Collects.emptyArrayList();
         try {
-            NodeList licenseNodes = xmlAccessor.getNodeList(doc, xPathFactory, xpath);
+            NodeList licenseNodes = findNodeList(doc, "licenses.license");
             Collects.forEach(new NodeListIterator(licenseNodes), new Consumer<Node>() {
                 @Override
                 public void accept(Node node) {
@@ -183,4 +215,75 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
         return licenses;
     }
 
+    private NodeList findNodeList(Document doc, String key) throws XPathExpressionException {
+        boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc);
+        String namespacePrefix = "x";
+        XPathFactory xPathFactory = XPathFactory.newInstance();
+        XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
+
+        String xpath = getXpath(key, usingCustomNamespace, namespacePrefix);
+        NodeList nodes = xmlAccessor.getNodeList(doc, xPathFactory, xpath);
+        return nodes;
+    }
+
+    private Element findElement(Document doc, String key) throws XPathExpressionException {
+        boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc);
+        String namespacePrefix = "x";
+        XPathFactory xPathFactory = XPathFactory.newInstance();
+        XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
+
+        String xpath = getXpath(key, usingCustomNamespace, namespacePrefix);
+        Element element = xmlAccessor.getElement(doc, xPathFactory, xpath);
+        return element;
+    }
+
+    private static String getXpath(String key, boolean usingCustomNamespace, String namespacePrefix) {
+        String xpath = Strings.replace(key, ".", "/");
+        if (!Strings.startsWith(xpath, "/project/")) {
+            xpath = "/project/" + xpath;
+        }
+        if (usingCustomNamespace && Emptys.isNotEmpty(xpath)) {
+            return useNamespacePrefix(xpath, namespacePrefix);
+        }
+        return xpath;
+    }
+
+
+    public void setParseLicenses(boolean parseLicenses) {
+        this.parseLicenses = parseLicenses;
+    }
+
+    public void setParsePackaging(boolean parsePackaging) {
+        this.parsePackaging = parsePackaging;
+    }
+
+    public static class Builder implements com.jn.langx.Builder<MavenPomParser> {
+        private String pomPath;
+        private boolean parseLicenses;
+        private boolean parsePackaging;
+
+        public Builder pomPath(String pomPath) {
+            this.pomPath = pomPath;
+            return this;
+        }
+
+
+        public Builder parseLicenses(boolean parseLicenses) {
+            this.parseLicenses = parseLicenses;
+            return this;
+        }
+
+        public Builder parsePackaging(boolean parsePackaging) {
+            this.parsePackaging = parsePackaging;
+            return this;
+        }
+
+        @Override
+        public MavenPomParser build() {
+            MavenPomParser mavenPomParser = new MavenPomParser(pomPath);
+            mavenPomParser.setParseLicenses(parseLicenses);
+            mavenPomParser.setParsePackaging(parsePackaging);
+            return mavenPomParser;
+        }
+    }
 }

@@ -66,11 +66,16 @@ public class PackageGAV implements IGAV {
 
     @Override
     public String toString() {
-        return StringTemplates.formatWithPlaceholder( "{}:{}:{}", groupId, artifactId, version);
+        return asId();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder().with(groupId).with(artifactId).with(version).build();
+    }
+
+
+    public String asId(){
+        return StringTemplates.formatWithPlaceholder( "{}:{}:{}", groupId, artifactId, version);
     }
 }

@@ -8,7 +8,7 @@ import com.jn.shelltools.config.FreemarkerConfig;
 import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeStyleDependenciesParser;
 import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeStyleToPomTransformer;
-import com.jn.shelltools.supports.maven.model.DependencyModel;
+import com.jn.shelltools.supports.maven.model.Dependency;
 import freemarker.template.Configuration;
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class TreeStyleDependenciesParserTests {
 
     @Test
     public void testParse() {
-        List<DependencyModel> gavs = new MavenDependenciesTreeStyleDependenciesParser().parse(resource);
+        List<Dependency> gavs = new MavenDependenciesTreeStyleDependenciesParser().parse(resource);
         System.out.println(JSONs.toJson(gavs, true));
     }
 

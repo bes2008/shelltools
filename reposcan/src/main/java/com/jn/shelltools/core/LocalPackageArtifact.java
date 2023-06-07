@@ -19,10 +19,6 @@ public class LocalPackageArtifact extends AbstractArtifact {
         return null;
     }
 
-    @Override
-    public String getExtension() {
-        return null;
-    }
 
     public long getLastModified() {
         return lastModified;

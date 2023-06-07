@@ -5,12 +5,13 @@ import com.jn.shelltools.core.PackageGAV;
 
 import java.util.List;
 
-public class DependencyModel extends PackageGAV {
+public class Dependency extends PackageGAV {
     @Nullable
     private String projectName;
     private boolean optional = false;
-    private List<PackageGAV> excludes;
-    private Packaging packaging = Packaging.JAR;
+    private List<PackageGAV> exclusions;
+    private Packaging type;
+    private DependencyScope scope;
 
     public String getProjectName() {
         return projectName;
@@ -28,29 +29,37 @@ public class DependencyModel extends PackageGAV {
         this.optional = optional;
     }
 
-    public Packaging getPackaging() {
-        return packaging;
+    public Packaging getType() {
+        return type;
     }
 
-    public void setPackaging(Packaging packaging) {
-        this.packaging = packaging;
+    public void setType(Packaging type) {
+        this.type = type;
     }
 
-    public DependencyModel(){
+    public Dependency(){
 
     }
 
-    public DependencyModel(String groupId, String artifactId, String version){
+    public Dependency(String groupId, String artifactId, String version){
         setGroupId(groupId);
         setArtifactId(artifactId);
         setVersion(version);
     }
 
-    public List<PackageGAV> getExcludes() {
-        return excludes;
+    public List<PackageGAV> getExclusions() {
+        return exclusions;
     }
 
-    public void setExcludes(List<PackageGAV> excludes) {
-        this.excludes = excludes;
+    public void setExclusions(List<PackageGAV> exclusions) {
+        this.exclusions = exclusions;
+    }
+
+    public DependencyScope getScope() {
+        return scope;
+    }
+
+    public void setScope(DependencyScope scope) {
+        this.scope = scope;
     }
 }

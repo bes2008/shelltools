@@ -62,7 +62,7 @@ public class MavenLocalRepositoryCommands {
         Map<MavenGAV, MavenPackageArtifact> map = scanner.scan(new File(repositoryLocation), new Filter<MavenPackageArtifact>() {
             @Override
             public boolean accept(MavenPackageArtifact mavenArtifact) {
-                return mavenArtifact.getLastModifiedTime() >= baselineTime;
+                return mavenArtifact.getLastModified() >= baselineTime;
             }
         });
         return map;

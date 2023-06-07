@@ -1,4 +1,4 @@
-package com.jn.shelltools.supports.maven;
+package com.jn.shelltools.supports.maven.pom;
 
 public class PomParseException extends RuntimeException{
     public PomParseException() {

@@ -16,7 +16,7 @@ import com.jn.langx.util.logging.Loggers;
 import com.jn.langx.util.regexp.Regexp;
 import com.jn.langx.util.regexp.Regexps;
 import com.jn.shelltools.supports.maven.MavenPackageManager;
-import com.jn.shelltools.supports.maven.MavenPomParser;
+import com.jn.shelltools.supports.maven.pom.MavenPomParser;
 import com.jn.shelltools.supports.maven.model.Dependency;
 import com.jn.shelltools.supports.maven.model.DependencyScope;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;

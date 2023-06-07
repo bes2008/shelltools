@@ -4,7 +4,7 @@ import com.jn.langx.io.resource.Resource;
 import com.jn.langx.io.resource.Resources;
 import com.jn.langx.text.xml.Xmls;
 import com.jn.langx.text.xml.errorhandler.IgnoreErrorHandler;
-import com.jn.shelltools.supports.maven.MavenPomParser;
+import com.jn.shelltools.supports.maven.pom.MavenPomParser;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
 import org.junit.Test;
 import org.w3c.dom.Document;

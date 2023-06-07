@@ -6,7 +6,7 @@ import com.jn.langx.util.collection.Lists;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.function.Consumer;
 import com.jn.shelltools.core.PackageGAV;
-import com.jn.shelltools.supports.maven.PomXmlGenerator;
+import com.jn.shelltools.supports.maven.pom.PomXmlGenerator;
 import com.jn.shelltools.supports.maven.model.Dependency;
 import com.jn.shelltools.supports.maven.model.DependencyManagement;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;

@@ -1,4 +1,4 @@
-package com.jn.shelltools.supports.maven;
+package com.jn.shelltools.supports.maven.pom;
 
 import com.jn.langx.Parser;
 import com.jn.langx.text.StringTemplates;

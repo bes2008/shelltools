@@ -7,6 +7,7 @@ import com.jn.langx.util.logging.Loggers;
 import com.jn.langx.util.net.URLs;
 import com.jn.shelltools.core.PackageGAV;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
+import com.jn.shelltools.supports.maven.pom.MavenPomParser;
 import org.apache.commons.vfs2.FileObject;
 import org.slf4j.Logger;
 

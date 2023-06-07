@@ -9,7 +9,7 @@ import com.jn.langx.util.function.Consumer;
 import com.jn.shelltools.supports.maven.Maven2LocalRepositoryLayout;
 import com.jn.shelltools.supports.maven.MavenPackageManager;
 import com.jn.shelltools.supports.maven.MavenPackageManagerProperties;
-import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeStyleDependenciesParser;
+import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeParser;
 import org.apache.commons.vfs2.FileSystemManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -62,8 +62,8 @@ public class MavenConfig {
     }
 
     @Bean
-    public MavenDependenciesTreeStyleDependenciesParser treeStyleDependenciesParser(MavenPackageManager mavenPackageManager) {
-        MavenDependenciesTreeStyleDependenciesParser p = new MavenDependenciesTreeStyleDependenciesParser();
+    public MavenDependenciesTreeParser treeStyleDependenciesParser(MavenPackageManager mavenPackageManager) {
+        MavenDependenciesTreeParser p = new MavenDependenciesTreeParser();
         p.setMavenPackageManager(mavenPackageManager);
         return p;
     }

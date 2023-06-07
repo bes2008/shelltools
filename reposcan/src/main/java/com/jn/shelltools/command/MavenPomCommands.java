@@ -6,8 +6,8 @@ import com.jn.langx.text.StringTemplates;
 import com.jn.langx.util.Dates;
 import com.jn.langx.util.io.file.Files;
 import com.jn.shelltools.core.PackageGAV;
-import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeStyleDependenciesParser;
-import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeStyleToPomTransformer;
+import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeParser;
+import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeToPomTransformer;
 import freemarker.template.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
@@ -22,7 +22,7 @@ public class MavenPomCommands {
 
     private Configuration freemarkerConfig;
 
-    private MavenDependenciesTreeStyleDependenciesParser dependenciesTreeStyleDependenciesParser;
+    private MavenDependenciesTreeParser dependenciesTreeStyleDependenciesParser;
 
     @ShellMethod(key = "pom-gen", value = "generate pom.xml from dependencies tree")
     public String genPom(
@@ -44,7 +44,7 @@ public class MavenPomCommands {
         }
 
         PackageGAV packageGav = new PackageGAV(groupId, artifactId, version);
-        String xml = MavenDependenciesTreeStyleToPomTransformer.transform(dependenciesTreeStyleDependenciesParser, resource, packageGav, freemarkerConfig);
+        String xml = MavenDependenciesTreeToPomTransformer.transform(dependenciesTreeStyleDependenciesParser, resource, packageGav, freemarkerConfig);
 
         String filename = StringTemplates.formatWithPlaceholder("{}__{}__{}__{}__pom.xml", groupId, artifactId, version, Dates.now().getTime());
         File pomFile = new File(outdir, filename);
@@ -61,7 +61,7 @@ public class MavenPomCommands {
     }
 
     @Autowired
-    public void setDependenciesTreeStyleDependenciesParser(MavenDependenciesTreeStyleDependenciesParser dependenciesTreeStyleDependenciesParser) {
+    public void setDependenciesTreeStyleDependenciesParser(MavenDependenciesTreeParser dependenciesTreeStyleDependenciesParser) {
         this.dependenciesTreeStyleDependenciesParser = dependenciesTreeStyleDependenciesParser;
     }
 }

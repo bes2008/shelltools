@@ -28,9 +28,9 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MavenDependenciesTreeStyleDependenciesParser implements Parser<Resource, List<Dependency>> {
+public class MavenDependenciesTreeParser implements Parser<Resource, List<Dependency>> {
     public static final Regexp dependencyExpr = Regexps.compile("(?:((\\|)?\\s+)*?[+\\\\]-+)?(\\s+)?(?<groupId>[^:'\"\\(* \\t]+)\\:(?<artifactId>[^:'\"\\(* \\t]+)\\:(?<version>[^:'\"\\(* \\t]+)(\\:(?<scope>\\w+))?(\\s+.*)?");
-    private static final Logger logger = Loggers.getLogger(MavenDependenciesTreeStyleDependenciesParser.class);
+    private static final Logger logger = Loggers.getLogger(MavenDependenciesTreeParser.class);
     @Nullable
     private MavenPackageManager mavenPackageManager;
     private MavenPomParser.Builder builder = new MavenPomParser.Builder().parsePackaging(true);

@@ -15,17 +15,17 @@ import freemarker.template.Configuration;
 
 import java.util.List;
 
-public class MavenDependenciesTreeStyleToPomTransformer implements Transformer<Resource, String> {
+public class MavenDependenciesTreeToPomTransformer implements Transformer<Resource, String> {
     private PackageGAV packageGav;
     private Configuration freemarkerConfig;
-    private MavenDependenciesTreeStyleDependenciesParser parser;
+    private MavenDependenciesTreeParser parser;
 
     public static String transform(Resource resource, PackageGAV packageGav, Configuration freemarkerConfig) {
         return transform(null, resource, packageGav, freemarkerConfig);
     }
 
-    public static String transform(MavenDependenciesTreeStyleDependenciesParser parser, Resource resource, PackageGAV packageGav, Configuration freemarkerConfig) {
-        MavenDependenciesTreeStyleToPomTransformer transformer = new MavenDependenciesTreeStyleToPomTransformer();
+    public static String transform(MavenDependenciesTreeParser parser, Resource resource, PackageGAV packageGav, Configuration freemarkerConfig) {
+        MavenDependenciesTreeToPomTransformer transformer = new MavenDependenciesTreeToPomTransformer();
         transformer.setParser(parser);
         transformer.setFreemarkerConfig(freemarkerConfig);
         transformer.setPackageGav(packageGav);
@@ -35,7 +35,7 @@ public class MavenDependenciesTreeStyleToPomTransformer implements Transformer<R
     @Override
     public String transform(Resource resource) {
         if (parser == null) {
-            parser = new MavenDependenciesTreeStyleDependenciesParser();
+            parser = new MavenDependenciesTreeParser();
         }
         List<Dependency> dependencyModels = parser.parse(resource);
 
@@ -73,11 +73,11 @@ public class MavenDependenciesTreeStyleToPomTransformer implements Transformer<R
         this.freemarkerConfig = freemarkerConfig;
     }
 
-    public MavenDependenciesTreeStyleDependenciesParser getParser() {
+    public MavenDependenciesTreeParser getParser() {
         return parser;
     }
 
-    public void setParser(MavenDependenciesTreeStyleDependenciesParser parser) {
+    public void setParser(MavenDependenciesTreeParser parser) {
         this.parser = parser;
     }
 

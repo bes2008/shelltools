@@ -70,6 +70,7 @@ public class PomXmlGenerator implements PomGenerator {
                             } else {
                                 property = StringTemplates.formatWithPlaceholder("{}.{}.version", dependency.getGroupId(), dependency.getArtifactId());
                             }
+                            properties.putIfAbsent(property, version);
                         }
                         dependency.setVersion("${" + property + "}");
                         return dependency;

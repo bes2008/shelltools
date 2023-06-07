@@ -9,7 +9,7 @@ public enum DependencyScope implements CommonEnum {
     TEST("test", 3),
     IMPORT("import", 4),
     PROVIDER("provider", 5),
-    System("system", 6);
+    SYSTEM("system", 6);
 
     private EnumDelegate delegate;
 

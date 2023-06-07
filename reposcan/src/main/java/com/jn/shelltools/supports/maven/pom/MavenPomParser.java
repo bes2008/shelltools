@@ -2,12 +2,8 @@ package com.jn.shelltools.supports.maven.pom;
 
 import com.jn.langx.Parser;
 import com.jn.langx.text.StringTemplates;
-import com.jn.langx.text.xml.Namespaces;
-import com.jn.langx.text.xml.NodeListIterator;
-import com.jn.langx.text.xml.XmlAccessor;
-import com.jn.langx.text.xml.Xmls;
+import com.jn.langx.text.xml.*;
 import com.jn.langx.text.xml.errorhandler.IgnoreErrorHandler;
-import com.jn.langx.util.Emptys;
 import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
@@ -28,7 +24,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.FileInputStream;
@@ -97,15 +92,15 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
     private MavenGAV parseGav(Document doc) {
         boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc, true);
         String namespacePrefix = "x";
-        String groupIdXPath = getXpath("groupId", usingCustomNamespace, namespacePrefix);
-        String artifactIdXPath = getXpath("artifactId", usingCustomNamespace, namespacePrefix);
-        String nameXPath = getXpath("name", usingCustomNamespace, namespacePrefix);
-        String versionXPath = getXpath("version", usingCustomNamespace, namespacePrefix);
-        String parentGroupIdXPath = getXpath("parent.groupId", usingCustomNamespace, namespacePrefix);
-        String parentVersionXPath = getXpath("parent.version", usingCustomNamespace, namespacePrefix);
+        String groupIdXPath = XPaths.wrapXpath(mappingToXpath("groupId"), usingCustomNamespace, namespacePrefix);
+        String artifactIdXPath = XPaths.wrapXpath(mappingToXpath("artifactId"), usingCustomNamespace, namespacePrefix);
+        String nameXPath = XPaths.wrapXpath(mappingToXpath("name"), usingCustomNamespace, namespacePrefix);
+        String versionXPath = XPaths.wrapXpath(mappingToXpath("version"), usingCustomNamespace, namespacePrefix);
+        String parentGroupIdXPath = XPaths.wrapXpath(mappingToXpath("parent.groupId"), usingCustomNamespace, namespacePrefix);
+        String parentVersionXPath = XPaths.wrapXpath(mappingToXpath("parent.version"), usingCustomNamespace, namespacePrefix);
 
         XPathFactory xPathFactory = XPathFactory.newInstance();
-        XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
+        XmlAccessor xmlAccessor = new XmlAccessor(usingCustomNamespace ? namespacePrefix : null);
         try {
             // groupId
             Element groupIdElement = xmlAccessor.getElement(doc, xPathFactory, groupIdXPath);
@@ -157,7 +152,7 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
     private Packaging parsePackaging(Document doc) {
         Packaging packaging = null;
         try {
-            Element element = findElement(doc, "packaging");
+            Element element = Xmls.findElement(doc, mappingToXpath("packaging"));
             if (element != null) {
                 String text = element.getTextContent();
                 if (Strings.isNotEmpty(text)) {
@@ -178,7 +173,7 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
 
         List<License> licenses = Collects.emptyArrayList();
         try {
-            NodeList licenseNodes = findNodeList(doc, "licenses.license");
+            NodeList licenseNodes = Xmls.findNodeList(doc, mappingToXpath("licenses.license"));
             Collects.forEach(new NodeListIterator(licenseNodes), new Consumer<Node>() {
                 @Override
                 public void accept(Node node) {
@@ -215,35 +210,11 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
         return licenses;
     }
 
-    private NodeList findNodeList(Document doc, String key) throws XPathExpressionException {
-        boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc);
-        String namespacePrefix = "x";
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
 
-        String xpath = getXpath(key, usingCustomNamespace, namespacePrefix);
-        NodeList nodes = xmlAccessor.getNodeList(doc, xPathFactory, xpath);
-        return nodes;
-    }
-
-    private Element findElement(Document doc, String key) throws XPathExpressionException {
-        boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc);
-        String namespacePrefix = "x";
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XmlAccessor xmlAccessor = usingCustomNamespace ? new XmlAccessor(namespacePrefix) : new XmlAccessor();
-
-        String xpath = getXpath(key, usingCustomNamespace, namespacePrefix);
-        Element element = xmlAccessor.getElement(doc, xPathFactory, xpath);
-        return element;
-    }
-
-    private static String getXpath(String key, boolean usingCustomNamespace, String namespacePrefix) {
-        String xpath = Strings.replace(key, ".", "/");
+    private static String mappingToXpath(String xpath) {
+        xpath = Strings.replace(xpath, ".", "/");
         if (!Strings.startsWith(xpath, "/project/")) {
-            xpath = "/project/" + xpath;
-        }
-        if (usingCustomNamespace && Emptys.isNotEmpty(xpath)) {
-            return useNamespacePrefix(xpath, namespacePrefix);
+            xpath = "/project" + (Strings.startsWith(xpath, "/") ? "" : "/") + xpath;
         }
         return xpath;
     }

@@ -95,3 +95,5 @@
 1686047076070:pom-gen --deps "file:///D:/projects/shelltools/reposcan/src/test/resources/maven/dependencies/spring-boot-2.7.12-dependencies.txt"
 1686048949633:stacktrace
 1686049054557:pom-gen --deps "file:///D:/projects/shelltools/reposcan/src/test/resources/maven/dependencies/spring-boot-2.7.12-dependencies.txt"
+1686117924029:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20230607 --date 2023-06-05_00:00
+1686131814929:pom-gen --deps "file:///D:/projects/shelltools/reposcan/src/test/resources/maven/dependencies/spring-boot-2.7.12-dependencies.txt"

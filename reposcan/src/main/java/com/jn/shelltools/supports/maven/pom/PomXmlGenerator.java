@@ -6,6 +6,7 @@ import com.jn.langx.util.Strings;
 import com.jn.langx.util.Throwables;
 import com.jn.langx.util.bean.Beans;
 import com.jn.langx.util.collection.Pipeline;
+import com.jn.langx.util.comparator.StringComparator;
 import com.jn.langx.util.function.Function;
 import com.jn.shelltools.supports.maven.model.Dependency;
 import com.jn.shelltools.supports.maven.model.MavenPackageArtifact;
@@ -13,9 +14,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 import java.io.StringWriter;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PomXmlGenerator implements PomGenerator {
 
@@ -35,11 +34,13 @@ public class PomXmlGenerator implements PomGenerator {
         }
     }
 
+    private static final StringComparator DEPENDENCIES_COMPARATOR= new StringComparator(true);
+
     private MavenPackageArtifact format(MavenPackageArtifact model) {
         MavenPackageArtifact ret = new MavenPackageArtifact();
         Beans.copyProperties(model, ret);
         // 处理依赖版本
-        final Map<String, String> properties = new LinkedHashMap<String, String>();
+        final Map<String, String> properties = new TreeMap<>(DEPENDENCIES_COMPARATOR);
         ret.setProperties(properties);
 
         List<Dependency> dependencies = ret.getDependencies();
@@ -74,6 +75,11 @@ public class PomXmlGenerator implements PomGenerator {
                         }
                         dependency.setVersion("${" + property + "}");
                         return dependency;
+                    }
+                }).sort(new Comparator<Dependency>() {
+                    @Override
+                    public int compare(Dependency o1, Dependency o2) {
+                        return DEPENDENCIES_COMPARATOR.compare(o1.getGroupId()+"/"+o1.getArtifactId(),o2.getGroupId()+"/"+o2.getArtifactId());
                     }
                 }).asList();
         ret.setDependencies(dependencies);

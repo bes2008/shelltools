@@ -101,6 +101,10 @@ public class MavenPackageArtifact extends LocalPackageArtifact {
         return dependencyManagement;
     }
 
+    public void setDependencyManagement(List<Dependency> dependencies) {
+        setDependencyManagement(new DependencyManagement(dependencies));
+    }
+
     public void setDependencyManagement(DependencyManagement dependencyManagement) {
         this.dependencyManagement = dependencyManagement;
     }

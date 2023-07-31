@@ -13,10 +13,10 @@
         <slf4j.version>1.7.32</slf4j.version>
 		<esorm.version>2.0.1</esorm.version>
 		<easyjson.version>4.1.2</easyjson.version>
-		<sqlhelper.version>4.0.5</sqlhelper.version>
-		<langx-java.version>5.2.6</langx-java.version>
-		<audit.version>3.0.2</audit.version>		
-		<agileway.version>4.2.2</agileway.version>
+		<sqlhelper.version>4.0.7</sqlhelper.version>
+		<langx-java.version>5.2.8</langx-java.version>
+		<audit.version>3.0.3</audit.version>		
+		<agileway.version>4.3.1</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>
 		<kryo.version>5.0.0-RC9</kryo.version>
@@ -325,7 +325,11 @@
     		<artifactId>simplejson-to-easyjson</artifactId>
     		<version>${easyjson.version}</version>
     	</dependency>
-    	
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>easyjson-supports-jsonpath</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>
     
     	<dependency>
     		<groupId>io.github.bes2008.solution.esorm</groupId>
@@ -438,12 +442,7 @@
     		<groupId>io.github.bes2008.solution.agileway</groupId>
     		<artifactId>agileway-web</artifactId>
     		<version>${agileway.version}</version>
-    	</dependency>	
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.agileway</groupId>
-    		<artifactId>agileway-sshclient</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>	
+    	</dependency>	    
     	<dependency>
     		<groupId>io.github.bes2008.solution.agileway</groupId>
     		<artifactId>agileway-vfs</artifactId>
@@ -494,7 +493,41 @@
     		<artifactId>agileway-syslog-protocol</artifactId>
     		<version>${agileway.version}</version>
     	</dependency>
-          
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.ssh</groupId>
+    		<artifactId>agileway-sshclient</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>	
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.ssh</groupId>
+    		<artifactId>agileway-sshclient-ganymedssh2</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.ssh</groupId>
+    		<artifactId>agileway-sshclient-j2ssh</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.ssh</groupId>
+    		<artifactId>agileway-sshclient-jsch</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.ssh</groupId>
+    		<artifactId>agileway-sshclient-sshj</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>     
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.ssh</groupId>
+    		<artifactId>agileway-sshclient-synergy</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>      
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.ssh</groupId>
+    		<artifactId>agileway-sshclient-trileadssh2</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>      
      
         <dependency>
             <groupId>com.hierynomus</groupId>

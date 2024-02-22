@@ -38,6 +38,6 @@ maven:
 
 logging:
   level:
-    root: error
+    root: debug
     com.jn.agileway.zip.archive: warn
     com.jn.shelltools.supports: info

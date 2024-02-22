@@ -13,9 +13,9 @@
         <spring.version>5.2.6.RELEASE</spring.version>
         <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <langx.version>5.2.9</langx.version>
-        <easyjson.version>4.1.2</easyjson.version>
-        <agileway.version>4.2.2</agileway.version>
+        <langx.version>5.3.4</langx.version>
+        <easyjson.version>4.1.5</easyjson.version>
+        <agileway.version>4.4.0</agileway.version>
         <jackson.version>2.13.2</jackson.version>
         <log4j2.version>2.17.1</log4j2.version>
         <junit.version>4.13.2</junit.version>
@@ -91,6 +91,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring.boot.version}</version>
+            <exclusions>
+                <!--
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+                -->
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -100,6 +108,11 @@
         <dependency>
             <groupId>io.github.bes2008.solution.langx</groupId>
             <artifactId>langx-java</artifactId>
+            <version>${langx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bes2008.solution.langx</groupId>
+            <artifactId>langx-java-el</artifactId>
             <version>${langx.version}</version>
         </dependency>
         <dependency>
@@ -164,6 +177,12 @@
             <groupId>io.github.bes2008.solution.agileway</groupId>
             <artifactId>agileway-spring</artifactId>
             <version>${agileway.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-data-redis</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.github.bes2008.solution.agileway</groupId>
@@ -186,6 +205,11 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.29</version>
         </dependency>
     </dependencies>
 

@@ -10,18 +10,33 @@
     <name>shelltools</name>
 
     <properties>
-        <spring.version>5.2.6.RELEASE</spring.version>
-        <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
+        <spring.version>6.0.14</spring.version>
+        <spring.boot.version>3.1.6</spring.boot.version>
+        <spring.shell.version>3.1.6</spring.shell.version>
+
         <slf4j.version>1.7.36</slf4j.version>
         <langx.version>5.3.4</langx.version>
         <easyjson.version>4.1.5</easyjson.version>
-        <agileway.version>4.4.0</agileway.version>
+        <agileway.version>4.4.1</agileway.version>
         <jackson.version>2.13.2</jackson.version>
         <log4j2.version>2.17.1</log4j2.version>
         <junit.version>4.13.2</junit.version>
         <jsonpath.version>2.7.0</jsonpath.version>
         <freemarker.version>2.3.32</freemarker.version>
         <antlr4.version>4.7</antlr4.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- 1.8 -->
+        <!--
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        -->
+        <!-- 17 -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
     </properties>
 
     <dependencyManagement>
@@ -29,7 +44,7 @@
             <dependency>
                 <groupId>org.springframework.shell</groupId>
                 <artifactId>spring-shell-starter</artifactId>
-                <version>2.0.1.RELEASE</version>
+                <version>${spring.shell.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -92,12 +107,10 @@
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring.boot.version}</version>
             <exclusions>
-                <!--
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
-                -->
             </exclusions>
         </dependency>
         <dependency>
@@ -209,7 +222,7 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>1.29</version>
+            <version>${snakeyaml.version}</version>
         </dependency>
     </dependencies>
 
@@ -260,11 +273,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

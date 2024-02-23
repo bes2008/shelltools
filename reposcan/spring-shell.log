@@ -108,3 +108,11 @@
 1708571692666:maven_local_repo_updated_scan --repository-location D:/mvn_repo_download_test --date 2024-02-22_00:00
 1708571783037:maven_local_repo_updated_scan --repository-location D:/mvn_repo_download_test
 1708573371480:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20240222
+1708590678430:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20240222 --date --date 2024-02-22_16:00
+1708590704577:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20240222 --date 2024-02-22_16:00
+1708590834560:maven_local_repo_copyUpdated --repository-location "D:/mvn_repo_download_test" --dest-location D:/maven_repo_20240222 --date 2024-02-22_16:00
+1708590866040:maven_local_repo_copyUpdated --repository-location D:/mvn_repo_download_test --dest-location D:/maven_repo_20240222 --date 2024-02-22_16:00
+1708592804842:maven_local_repo_copyUpdated --dest-location D:/maven_repo_20240222 --date 2024-02-22_16:00 --repository-location D:/mvn_repo_download_test
+1708601800411:maven_local_repo_copyUpdated --dest-location D:/maven_repo_20240222 --date 2024-02-22_18:00 --repository-location D:/mvn_repo_download_test
+1708658672488:maven_local_repo_copyUpdated --dest-location D:/maven_repo_20240223_grpc --date 2024-02-23_10:00 --repository-location D:/mvn_repo_download_test
+1708670164612:maven_local_repo_copyUpdated --dest-location D:/maven_repo_20240223_slf4j --date 2024-02-23_14:00 --repository-location D:/mvn_repo_download_test

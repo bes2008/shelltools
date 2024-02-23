@@ -32,7 +32,7 @@ public class MavenLocalRepositoryCommands {
      * @param date
      */
     @ShellMethod(key = "maven_local_repo_updated_scan", value = "scan all dependencies after the specified time")
-    public void scanUpdated(@ShellOption(defaultValue = ".") String repositoryLocation,
+    public void scanUpdated(@ShellOption(value = "--repository-location", defaultValue = ".") String repositoryLocation,
                             @ShellOption(value = "--date", defaultValue = ".", help = "format: yyyy-MM-dd_HH:mm, the default is the day of you execute it") String date) {
         Map<MavenGAV, MavenPackageArtifact> map = scanUpdated0(repositoryLocation, date);
         Collects.forEach(map, new Consumer2<MavenGAV, MavenPackageArtifact>() {
@@ -69,9 +69,9 @@ public class MavenLocalRepositoryCommands {
     }
 
     @ShellMethod(key = "maven_local_repo_copyUpdated", value = "scan all dependencies after the specified time")
-    public void copyUpdated(@ShellOption(defaultValue = ".") String repositoryLocation,
+    public void copyUpdated(@ShellOption(value = "--repository-location", defaultValue = ".") String repositoryLocation,
                             @ShellOption(value = "--date", defaultValue = ".", help = "format: yyyy-MM-dd_HH:mm, the default is the day of you execute it") String date,
-                            @ShellOption(defaultValue = ".") String destLocation
+                            @ShellOption(value = "--dest-location" ,defaultValue = ".") String destLocation
                             ){
         File destRootDirectory = new File(destLocation);
         if(!destRootDirectory.exists()){

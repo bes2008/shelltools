@@ -15,9 +15,9 @@
         <spring.shell.version>3.1.6</spring.shell.version>
 
         <slf4j.version>1.7.36</slf4j.version>
-        <langx.version>5.3.4</langx.version>
+        <langx.version>5.3.8</langx.version>
         <easyjson.version>4.1.5</easyjson.version>
-        <agileway.version>4.4.1</agileway.version>
+        <agileway.version>4.4.5</agileway.version>
         <jackson.version>2.13.2</jackson.version>
         <log4j2.version>2.17.1</log4j2.version>
         <junit.version>4.13.2</junit.version>
@@ -50,6 +50,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>4.0.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.antlr</groupId>

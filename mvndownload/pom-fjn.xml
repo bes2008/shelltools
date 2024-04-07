@@ -11,12 +11,11 @@
 
 	<properties>
         <slf4j.version>1.7.32</slf4j.version>
-		<esorm.version>2.0.1</esorm.version>
-		<easyjson.version>4.1.3</easyjson.version>
-		<sqlhelper.version>4.0.7</sqlhelper.version>
-		<langx-java.version>5.2.8</langx-java.version>
-		<audit.version>3.0.3</audit.version>		
-		<agileway.version>4.3.1</agileway.version>
+		
+		<easyjson.version>4.1.5</easyjson.version>
+		<sqlhelper.version>4.1.1</sqlhelper.version>
+		<langx-java.version>5.3.8</langx-java.version>				
+		<agileway.version>4.4.5</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>
 		<kryo.version>5.0.0-RC9</kryo.version>
@@ -46,7 +45,11 @@
 		<jcodings.version>1.0.6</jcodings.version>
 	</properties>
     <dependencies>	
-    
+   	    <dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java-all</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>    
     	<dependency>
     		<groupId>io.github.bes2008.solution.langx</groupId>
     		<artifactId>langx-java</artifactId>
@@ -57,28 +60,41 @@
     		<artifactId>langx-java8</artifactId>
     		<version>${langx-java.version}</version>
     	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java-asn1</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java-distributed</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java-el</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java-fastdateformat</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.langx</groupId>
+    		<artifactId>langx-java-pinyin</artifactId>
+    		<version>${langx-java.version}</version>
+    	</dependency>
     	<dependency>
     		<groupId>io.github.bes2008.solution.langx.security</groupId>
     		<artifactId>langx-java-security-gm-jca-bouncycastle</artifactId>
     		<version>${langx-java.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.langx.security</groupId>
-    		<artifactId>langx-java-security-gm-jca-gmsslorg</artifactId>
-    		<version>${langx-java.version}</version>
-    	</dependency>
-     	<dependency>
-    		<groupId>io.github.bes2008.solution.langx.security</groupId>
-    		<artifactId>langx-java-security-pam</artifactId>
-    		<version>${langx-java.version}</version>
-    	</dependency>
-    
+    	</dependency>  
     	<dependency>
     		<groupId>io.github.bes2008.solution.langx</groupId>
     		<artifactId>langx-java-reflect-aspectj</artifactId>
     		<version>${langx-java.version}</version>
-    	</dependency>
-    		
+    	</dependency>    		
     	<dependency>
     		<groupId>io.github.bes2008.solution.langx</groupId>
     		<artifactId>langx-java-reflect-asm</artifactId>
@@ -89,6 +105,8 @@
     		<artifactId>langx-java-regexp-joni</artifactId>
     		<version>${langx-java.version}</version>
     	</dependency>
+     
+     
     
     	<dependency>
     		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
@@ -100,9 +118,14 @@
     		<artifactId>sqlhelper-common</artifactId>
     		<version>${sqlhelper.version}</version>
     	</dependency>
-    		<dependency>
+   		<dependency>
     		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
     		<artifactId>sqlhelper-datasource</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-datasource-flyway</artifactId>
     		<version>${sqlhelper.version}</version>
     	</dependency>
     	<dependency>
@@ -168,6 +191,11 @@
     	</dependency>
     	<dependency>
     		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
+    		<artifactId>sqlhelper-mybatisplus-commons</artifactId>
+    		<version>${sqlhelper.version}</version>
+    	</dependency>	      
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
     		<artifactId>sqlhelper-mybatisplus</artifactId>
     		<version>${sqlhelper.version}</version>
     	</dependency>	 
@@ -200,51 +228,10 @@
     		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
     		<artifactId>sqlhelper-tkmapper-spring-boot-starter</artifactId>
     		<version>${sqlhelper.version}</version>
-    	</dependency>  
-    
-    
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.audit</groupId>
-    		<artifactId>audit-core</artifactId>
-    		<version>${audit.version}</version>
     	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.audit.entityloader</groupId>
-    		<artifactId>audit-entityloader-esorm</artifactId>
-    		<version>${audit.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.audit.entityloader</groupId>
-    		<artifactId>audit-entityloader-mybatis</artifactId>
-    		<version>${audit.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.audit.entityloader</groupId>
-    		<artifactId>audit-entityloader-resttemplate</artifactId>
-    		<version>${audit.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.audit</groupId>
-    		<artifactId>audit-servlet</artifactId>
-    		<version>${audit.version}</version>
-    	</dependency>	
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.audit</groupId>
-    		<artifactId>audit-spring-boot-starter</artifactId>
-    		<version>${audit.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.audit</groupId>
-    		<artifactId>audit-spring</artifactId>
-    		<version>${audit.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.audit</groupId>
-    		<artifactId>audit-swagger</artifactId>
-    		<version>${audit.version}</version>
-    	</dependency>
-    
-    
+     
+     
+        
     	<dependency>
     		<groupId>io.github.bes2008.solution.easyjson</groupId>
     		<artifactId>androidjson-to-easyjson</artifactId>
@@ -255,6 +242,11 @@
     		<artifactId>boonjson-to-easyjson</artifactId>
     		<version>${easyjson.version}</version>
     	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>easyjson-antlr4json</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>     
     	<dependency>
     		<groupId>io.github.bes2008.solution.easyjson</groupId>
     		<artifactId>easyjson-core</artifactId>
@@ -277,6 +269,16 @@
     	</dependency>
     	<dependency>
     		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>easyjson-javaxjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>     
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>easyjson-supports-jsonpath</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>         
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
     		<artifactId>fastjson-to-easyjson</artifactId>
     		<version>${easyjson.version}</version>
     	</dependency>
@@ -285,6 +287,11 @@
     		<artifactId>gson-to-easyjson</artifactId>
     		<version>${easyjson.version}</version>
     	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.easyjson</groupId>
+    		<artifactId>jettison-to-easyjson</artifactId>
+    		<version>${easyjson.version}</version>
+    	</dependency>     
     	<dependency>
     		<groupId>io.github.bes2008.solution.easyjson</groupId>
     		<artifactId>jsonlib-to-easyjson</artifactId>
@@ -312,11 +319,6 @@
     	</dependency>
     	<dependency>
     		<groupId>io.github.bes2008.solution.easyjson</groupId>
-    		<artifactId>easyjson-antlr4json</artifactId>
-    		<version>${easyjson.version}</version>
-    	</dependency> 
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.easyjson</groupId>
     		<artifactId>progsbase-to-easyjson</artifactId>
     		<version>${easyjson.version}</version>
     	</dependency>
@@ -325,52 +327,8 @@
     		<artifactId>simplejson-to-easyjson</artifactId>
     		<version>${easyjson.version}</version>
     	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.easyjson</groupId>
-    		<artifactId>easyjson-supports-jsonpath</artifactId>
-    		<version>${easyjson.version}</version>
-    	</dependency>
-    
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.esorm</groupId>
-    		<artifactId>esorm-model</artifactId>
-    		<version>${esorm.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.esorm</groupId>
-    		<artifactId>esorm-service</artifactId>
-    		<version>${esorm.version}</version>
-    	</dependency>
-    		<dependency>
-    		<groupId>io.github.bes2008.solution.esorm</groupId>
-    		<artifactId>esorm-service-rest</artifactId>
-    		<version>${esorm.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.esorm</groupId>
-    		<artifactId>esorm-service-tcp</artifactId>
-    		<version>${esorm.version}</version>
-    	</dependency>
-    		<dependency>
-    		<groupId>io.github.bes2008.solution.esorm</groupId>
-    		<artifactId>esorm-spring-boot-common</artifactId>
-    		<version>${esorm.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.esorm</groupId>
-    		<artifactId>esorm-spring-boot-starter</artifactId>
-    		<version>${esorm.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.esorm</groupId>
-    		<artifactId>esorm-spring-boot-starter-rest</artifactId>
-    		<version>${esorm.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.esorm</groupId>
-    		<artifactId>esorm-spring-boot-starter-tcp</artifactId>
-    		<version>${esorm.version}</version>
-    	</dependency>
+        
+        
     
     	<dependency>
     		<groupId>com.lmax</groupId>
@@ -378,11 +336,47 @@
     		<version>${disruptor.version}</version>
     	</dependency>
     
+    
     	<dependency>
     		<groupId>io.github.bes2008.solution.agileway</groupId>
     		<artifactId>agileway-aop</artifactId>
     		<version>${agileway.version}</version>
     	</dependency>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway.audit</groupId>
+            <artifactId>agileway-audit-core</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>    
+	    <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.audit.entityloader</groupId>
+            <artifactId>agileway-audit-entityloader-mybatis</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>        
+	    <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.audit.entityloader</groupId>
+            <artifactId>agileway-audit-entityloader-resttemplate</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency> 
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway.audit</groupId>
+            <artifactId>agileway-audit-springboot1_2-web</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>    
+   	    <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.audit</groupId>
+            <artifactId>agileway-audit-springboot3-web</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>     
+	    <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.audit</groupId>
+            <artifactId>agileway-audit-swagger</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>        
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-cmd</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>          
     	<dependency>
     		<groupId>io.github.bes2008.solution.agileway</groupId>
     		<artifactId>agileway-codec</artifactId>
@@ -393,14 +387,19 @@
     		<artifactId>agileway-dmmq</artifactId>
     		<version>${agileway.version}</version>
     	</dependency>
-     	<dependency>
-    		<groupId>io.github.bes2008.solution.agileway</groupId>
-    		<artifactId>agileway-jersey</artifactId>
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway.eipchannel</groupId>
+    		<artifactId>agileway-eipchannel-core</artifactId>
     		<version>${agileway.version}</version>
-    	</dependency>
+    	</dependency>     
     	<dependency>
     		<groupId>io.github.bes2008.solution.agileway</groupId>
     		<artifactId>agileway-feign</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>     
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-httpclient</artifactId>
     		<version>${agileway.version}</version>
     	</dependency>
         <dependency>
@@ -408,11 +407,47 @@
     		<artifactId>agileway-httpcontainer-common</artifactId>
     		<version>${agileway.version}</version>
     	</dependency>
-    	<dependency>
+     	<dependency>
     		<groupId>io.github.bes2008.solution.agileway</groupId>
-    		<artifactId>agileway-httpclient</artifactId>
+    		<artifactId>agileway-jaxrs</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>     
+     	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-jersey</artifactId>
     		<version>${agileway.version}</version>
     	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.jwt</groupId>
+    		<artifactId>agileway-jwt-core</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.jwt</groupId>
+    		<artifactId>agileway-jwt-plugin-nimbusds</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
+    		<artifactId>agileway-metrics-core</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>   
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
+    		<artifactId>agileway-metrics-supports-csv</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>     
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
+    		<artifactId>agileway-metrics-supports-jdk</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>      
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
+    		<artifactId>agileway-metrics-supports-prometheus</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+
     	<dependency>
     		<groupId>io.github.bes2008.solution.agileway</groupId>
     		<artifactId>agileway-redis</artifactId>
@@ -440,59 +475,14 @@
     	</dependency>
     	<dependency>
     		<groupId>io.github.bes2008.solution.agileway</groupId>
-    		<artifactId>agileway-web</artifactId>
+    		<artifactId>agileway-springboot1_2-web</artifactId>
     		<version>${agileway.version}</version>
-    	</dependency>	    
+    	</dependency>
     	<dependency>
     		<groupId>io.github.bes2008.solution.agileway</groupId>
-    		<artifactId>agileway-vfs</artifactId>
+    		<artifactId>agileway-springboot3-web</artifactId>
     		<version>${agileway.version}</version>
-    	</dependency>	
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.agileway</groupId>
-    		<artifactId>agileway-zip</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>		
-        <dependency>
-    		<groupId>io.github.bes2008.solution.agileway.eipchannel</groupId>
-    		<artifactId>agileway-eipchannel-core</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>
-        <dependency>
-    		<groupId>io.github.bes2008.solution.agileway.eipchannel</groupId>
-    		<artifactId>agileway-eipchannel-topic</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>
-        <dependency>
-    		<groupId>io.github.bes2008.solution.agileway.eipchannel</groupId>
-    		<artifactId>agileway-eipchannel-kafka</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>     
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
-    		<artifactId>agileway-metrics-core</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>   
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
-    		<artifactId>agileway-metrics-supports-csv</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>     
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
-    		<artifactId>agileway-metrics-supports-jdk</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>      
-        <dependency>
-    		<groupId>io.github.bes2008.solution.agileway.metrics</groupId>
-    		<artifactId>agileway-metrics-supports-prometheus</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>
-        <dependency>
-    		<groupId>io.github.bes2008.solution.agileway.syslog</groupId>
-    		<artifactId>agileway-syslog-protocol</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>
+    	</dependency>	    	    
         <dependency>
     		<groupId>io.github.bes2008.solution.agileway.ssh</groupId>
     		<artifactId>agileway-sshclient</artifactId>
@@ -527,7 +517,35 @@
     		<groupId>io.github.bes2008.solution.agileway.ssh</groupId>
     		<artifactId>agileway-sshclient-trileadssh2</artifactId>
     		<version>${agileway.version}</version>
-    	</dependency>      
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway.syslog</groupId>
+    		<artifactId>agileway-syslog-protocol</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>     
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-vfs</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>	
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-web-javaee</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>
+        <dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-web-jakarta</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>				
+    	<dependency>
+    		<groupId>io.github.bes2008.solution.agileway</groupId>
+    		<artifactId>agileway-zip</artifactId>
+    		<version>${agileway.version}</version>
+    	</dependency>	     
+    
+    	
+        
      
         <dependency>
             <groupId>com.hierynomus</groupId>

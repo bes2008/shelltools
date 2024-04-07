@@ -10,16 +10,16 @@
 
 
 	<properties>
-	        <xstream.version>1.4.16</xstream.version>
+	        <xstream.version>1.4.20</xstream.version>
 	</properties>
 	<dependencies>	
 		<dependency>
-    			<groupId>com.thoughtworks.xstream</groupId>
-    			<artifactId>xstream</artifactId>
-    			<version>${xstream.version}</version>
-		</dependency>
-
-	</dependencies>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.20</version>
+        </dependency>
+        
+ 	</dependencies>
 
 	<build>
 		<plugins>

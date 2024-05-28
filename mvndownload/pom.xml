@@ -26,7 +26,7 @@
 		<fst.version>2.57</fst.version>
 		<fse.version>aegean-2.1</fse.version>
 		<xson.version>1.0.2</xson.version>
-		<jackson.version>2.11.2</jackson.version>
+		<jackson.version>2.17.1</jackson.version>
 		<msgpack.version>0.8.22</msgpack.version>
 		<disruptor.version>3.4.4</disruptor.version>
 
@@ -445,7 +445,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--Ê¹ÓÃ sshj Ê±£¬ÐèÒª½ÓÏÂÀ´µÄ4¸öÒÀÀµ-->
+        <!--Ê¹ï¿½ï¿½ sshj Ê±ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>

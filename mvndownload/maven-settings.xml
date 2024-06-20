@@ -6,56 +6,8 @@
   <localRepository>D:\mvn_repo_download_test</localRepository>
   
 
-  <pluginGroups>
-  </pluginGroups>
 
-  <proxies>
-  </proxies>
 
-  <servers>
-  </servers>
 
-  <mirrors>
-       <mirror>    
-          <id>maven-central</id>    
-          <mirrorOf>*</mirrorOf>    
-          <name>maven-central</name>    
-          <url>https://repo1.maven.org/maven2/</url>    
-        </mirror>  
-  
-<!--
 
-      <mirror>
-        <id>aliyun</id>
-        <mirrorOf>*</mirrorOf>
-        <name>aliyun maven</name>
-        <url>https://maven.aliyun.com/nexus/content/repositories/central/</url>
-     </mirror>
-	 -->  
- 
-  </mirrors>
-
-  <profiles>
-    <profile>
-      <id>myprofile</id>
-      <repositories>
-        <repository>
-        	<id>maven2</id>
-        	<name>center</name>
-        	<url>https://central.maven.org/maven2/</url>
-        	<layout>default</layout>	
-        </repository>
-        <repository>
-        	<id>sonatype</id>
-        	<name>sonatype</name>
-        	<url>https://oss.sonatype.org/content/repositories/releases/</url>
-        	<layout>default</layout>
-        </repository>     
-      </repositories>
-    </profile>
-  </profiles>
-
-  <activeProfiles>
-	<activeProfile>myprofile</activeProfile>
-  </activeProfiles>
 </settings>

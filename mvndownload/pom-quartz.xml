@@ -14,9 +14,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         
-        <quartz.version>2.5.0-rc1</quartz.version>
+        <!--2.5 需要 jdk11-->
+        <!--2.4 需要 jdk8-->
+        <quartz.version>2.4.0-rc1</quartz.version>
     </properties>
     <dependencies>
+
 	    <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>

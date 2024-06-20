@@ -1,0 +1,2 @@
+set JAVA_HOME=%JAVA_8_HOME%
+set PATH=%JAVA_8_HOME%\bin;%PATH%

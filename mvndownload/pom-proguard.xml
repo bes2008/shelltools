@@ -14,9 +14,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<proguard.version>7.4.2</proguard.version>
+		<proguard.version>7.4.1</proguard.version>
+        <proguard.maven.plugin.version>2.6.1</proguard.maven.plugin.version>
+        <proguard.core.version>9.1.1</proguard.core.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.guardsquare</groupId>
+            <artifactId>proguard-core</artifactId>
+            <version>${proguard.core.version}</version>
+        </dependency>
+            
+        <dependency>
+            <groupId>com.github.wvengen</groupId>
+            <artifactId>proguard-maven-plugin</artifactId>
+            <version>${proguard.maven.plugin.version}</version>
+        </dependency>
+
+    
         <dependency>
             <groupId>com.guardsquare</groupId>
             <artifactId>proguard-gradle</artifactId>

@@ -10,7 +10,7 @@
 
 
 	<properties>
-	        <jackson.version>2.14.0</jackson.version>
+	   <jackson.version>2.13.5</jackson.version>
 	</properties>
 	<dependencies>	
 	
@@ -161,31 +161,43 @@
 		<!--module-->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.module</groupId>
-		    <artifactId>jackson-module-jaxb-annotations</artifactId>
+		    <artifactId>jackson-module-kotlin</artifactId>
 		    <version>${jackson.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.fasterxml.jackson.module</groupId>
 		    <artifactId>jackson-module-parameter-names</artifactId>
 		    <version>${jackson.version}</version>
+		</dependency>		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.module</groupId>
+		    <artifactId>jackson-module-jaxb-annotations</artifactId>
+		    <version>${jackson.version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.module</groupId>
+		    <artifactId>jackson-module-kotlin</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.fasterxml.jackson.module</groupId>
+		    <artifactId>jackson-module-jakarta-xmlbind-annotations</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>		
 		<dependency>
 		    <groupId>com.fasterxml.jackson.module</groupId>
 		    <artifactId>jackson-module-jsonSchema</artifactId>
 		    <version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.fasterxml.jackson.module</groupId>
-		    <artifactId>jackson-modules-java8</artifactId>
-		    <version>${jackson.version}</version>
-		    <type>pom</type>
-		    <scope>runtime</scope>
-		</dependency>
+		</dependency>			
+
 		<dependency>
 		    <groupId>com.fasterxml.jackson.module</groupId>
 		    <artifactId>jackson-module-afterburner</artifactId>
 		    <version>${jackson.version}</version>
 		</dependency>
+
+	
 		<dependency>
 		    <groupId>com.fasterxml.jackson.module</groupId>
 		    <artifactId>jackson-module-paranamer</artifactId>
@@ -193,14 +205,43 @@
 		</dependency>		
 		<dependency>
 		    <groupId>com.fasterxml.jackson.module</groupId>
+		    <artifactId>jackson-module-guice</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>				
+		<dependency>
+		    <groupId>com.fasterxml.jackson.module</groupId>
 		    <artifactId>jackson-module-mrbean</artifactId>
 		    <version>${jackson.version}</version>
 		</dependency>
+				
 		<dependency>
 		    <groupId>com.fasterxml.jackson.module</groupId>
 		    <artifactId>jackson-module-osgi</artifactId>
 		    <version>${jackson.version}</version>
 		</dependency>
+
+		<dependency>
+		    <groupId>com.fasterxml.jackson.module</groupId>
+		    <artifactId>jackson-module-JAXB-annotations</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.module</groupId>
+		    <artifactId>jackson-modules-java8</artifactId>
+		    <version>${jackson.version}</version>		
+		    <type>pom</type>		    
+		</dependency>
+		
+		
+		<!-- 2.15.0 开始 -->		
+		<!--
+		<dependency>
+		    <groupId>com.fasterxml.jackson.module</groupId>
+		    <artifactId>jackson-module-jsonSchema-jakarta</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>
+		
+		-->
 	</dependencies>
 
 	<build>

@@ -15,7 +15,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.version>3.2.2</maven.version>
 		
-		<logback.version>1.5.0</logback.version>
+    
+        <!--1.3.x 对应 jdk 1.8以上 -->
+        <!--1.4.x 对应 jdk 11 以上 -->
+		<logback.version>1.3.14</logback.version>
     </properties>
     <dependencies>
 		<dependency>

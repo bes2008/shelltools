@@ -13,30 +13,24 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
-        <mybatis.version>3.5.16</mybatis.version>
-        <mybatis.spring.version>3.0.3</mybatis.spring.version>
-        <mybatis.springboot.version>3.0.3</mybatis.springboot.version>
+
+		<easyexcel.version>3.3.4</easyexcel.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>${mybatis.version}</version>
+		<dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>${easyexcel.version}</version>
         </dependency>
-		
         <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>${mybatis.spring.version}</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel-core</artifactId>
+            <version>${easyexcel.version}</version>
         </dependency>
-        
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.springboot.version}</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel-support</artifactId>
+            <version>${easyexcel.version}</version>
         </dependency>
-
-        
     </dependencies>    
 </project>

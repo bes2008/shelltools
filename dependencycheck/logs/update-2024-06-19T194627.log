@@ -1,0 +1,2021 @@
+2024-06-19 19:46:27,962 org.owasp.dependencycheck.utils.Settings:960
+DEBUG - Properties updated via merge:
+
+analyzer.cocoapods.enabled='true'
+proxy.disableSchemas='true'
+analyzer.dependencybundling.enabled='true'
+odc.ecosystem.maxquerylimit.native='1000'
+data.connection_string='jdbc:h2:file:%s;AUTOCOMMIT=ON;CACHE_SIZE=65536;RETENTION_TIME=1000;MAX_COMPACT_TIME=10000;'
+archive.scan.depth='3'
+analyzer.cmake.enabled='true'
+analyzer.pipfile.enabled='true'
+odc.application.name='Dependency-Check Core'
+analyzer.retirejs.repo.validforhours='24'
+analyzer.node.package.enabled='true'
+analyzer.central.url='https://search.maven.org/solrsearch/select'
+analyzer.pe.enabled='true'
+analyzer.poetry.enabled='true'
+downloader.quick.query.timestamp='true'
+analyzer.archive.enabled='true'
+analyzer.retirejs.repo.js.url='https://raw.githubusercontent.com/Retirejs/retire.js/master/repository/jsrepository.json'
+analyzer.swift.package.resolved.enabled='true'
+cpe.url='https://static.nvd.nist.gov/feeds/xml/cpe/dictionary/official-cpe-dictionary_v2.3.xml.gz'
+analyzer.ossindex.url='https://ossindex.sonatype.org'
+analyzer.nvdcve.enabled='true'
+analyzer.jar.enabled='true'
+analyzer.cpe.enabled='true'
+analyzer.knownexploited.enabled='true'
+nvd.api.check.validforhours='4'
+analyzer.cpanfile.enabled='true'
+data.writelock.shutdownhook='org.owasp.dependencycheck.utils.WriteLockCleanupHook'
+analyzer.central.query='%s?q=1:%s&wt=xml'
+analyzer.bundle.audit.enabled='true'
+analyzer.node.audit.use.cache='true'
+odc.settings.mask='.*password.*,.*token.*,.*api.key.*'
+analyzer.dependencymerging.enabled='true'
+cpe.validfordays='30'
+analyzer.pnpm.audit.enabled='true'
+junit.fail.on.cvss='0'
+central.content.url='https://search.maven.org/remotecontent?filepath='
+analyzer.node.audit.url='https://registry.npmjs.org/-/npm/v1/security/audits'
+odc.application.version='9.2.0'
+analyzer.msbuildproject.enabled='true'
+data.user='dcuser'
+engine.version.url='https://jeremylong.github.io/DependencyCheck/current.txt'
+odc.autoupdate='true'
+analyzer.autoconf.enabled='true'
+analyzer.cpesuppression.enabled='true'
+nvd.api.max.retry.count='10'
+analyzer.retirejs.enabled='true'
+hosted.suppressions.validforhours='2'
+analyzer.versionfilter.enabled='true'
+analyzer.assembly.enabled='true'
+cve.cpe.startswith.filter='cpe:2.3:a:'
+analyzer.golang.dep.enabled='true'
+odc.analysis.timeout='180'
+analyzer.nexus.url='https://repository.sonatype.org/service/local/'
+analyzer.hint.enabled='true'
+analyzer.dart.enabled='true'
+hosted.suppressions.enabled='true'
+analyzer.retired.enabled='false'
+database.batchinsert.enabled='false'
+analyzer.openssl.enabled='true'
+analyzer.swift.package.manager.enabled='true'
+analyzer.nuspec.enabled='true'
+analyzer.central.retry.count='7'
+analyzer.central.use.cache='true'
+updater.nvdcve.enabled='true'
+analyzer.mix.audit.enabled='true'
+max.download.threads='1'
+analyzer.central.enabled='true'
+analyzer.python.distribution.enabled='true'
+analyzer.nexus.enabled='false'
+odc.reports.pretty.print='false'
+analyzer.artifactory.enabled='false'
+analyzer.retirejs.filternonvulnerable='false'
+analyzer.ossindex.enabled='true'
+analyzer.central.parallel.analysis='false'
+analyzer.nexus.proxy='true'
+analyzer.maveninstall.enabled='true'
+odc.ecosystem.maxquerylimit.default='100'
+downloader.tls.protocols='TLSv1.1,TLSv1.2,TLSv1.3'
+data.file_name='odc.mv.db'
+nvd.api.delay='0'
+analyzer.ruby.gemspec.enabled='true'
+analyzer.carthage.enabled='true'
+analyzer.composer.lock.enabled='true'
+data.version='5.4'
+kev.check.validforhours='24'
+analyzer.vulnerabilitysuppression.enabled='true'
+analyzer.libman.enabled='true'
+data.directory='[JAR]/data/9.0'
+analyzer.experimental.enabled='false'
+analyzer.golang.mod.enabled='true'
+analyzer.filename.enabled='true'
+analyzer.ossindex.use.cache='true'
+analyzer.python.package.enabled='true'
+updater.versioncheck.enabled='true'
+nvd.api.datafeed.validfordays='7'
+ecosystem.skip.cpeanalyzer='npm'
+kev.url='https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json'
+analyzer.pip.enabled='true'
+analyzer.falsepositive.enabled='true'
+analyzer.node.audit.enabled='true'
+analyzer.yarn.audit.enabled='true'
+analyzer.npm.cpe.enabled='true'
+database.batchinsert.maxsize='1000'
+data.driver_name='org.h2.Driver'
+hosted.suppressions.url='https://jeremylong.github.io/DependencyCheck/suppressions/publishedSuppressions.xml'
+data.password='********'
+analyzer.nugetconf.enabled='true'
+
+2024-06-19 19:46:27,964 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: data.directory='/home/bes/programs/dependency-check/dependency-check/data'
+2024-06-19 19:46:27,964 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.jar.enabled='true'
+2024-06-19 19:46:27,965 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.msbuildproject.enabled='true'
+2024-06-19 19:46:27,965 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.archive.enabled='true'
+2024-06-19 19:46:27,965 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.knownexploited.enabled='true'
+2024-06-19 19:46:27,965 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.python.distribution.enabled='true'
+2024-06-19 19:46:27,965 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.python.package.enabled='true'
+2024-06-19 19:46:27,965 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.autoconf.enabled='true'
+2024-06-19 19:46:27,965 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.maveninstall.enabled='true'
+2024-06-19 19:46:27,965 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.pip.enabled='true'
+2024-06-19 19:46:27,965 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.pipfile.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.poetry.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.cmake.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.nuspec.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.nugetconf.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.assembly.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.bundle.audit.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.filename.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.mix.audit.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.openssl.enabled='true'
+2024-06-19 19:46:27,966 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.composer.lock.enabled='true'
+2024-06-19 19:46:27,967 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.cpanfile.enabled='true'
+2024-06-19 19:46:27,967 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.golang.dep.enabled='true'
+2024-06-19 19:46:27,967 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.golang.mod.enabled='true'
+2024-06-19 19:46:27,967 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.dart.enabled='true'
+2024-06-19 19:46:27,967 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.node.package.enabled='true'
+2024-06-19 19:46:27,967 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.node.audit.enabled='true'
+2024-06-19 19:46:27,967 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.yarn.audit.enabled='true'
+2024-06-19 19:46:27,967 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.pnpm.audit.enabled='true'
+2024-06-19 19:46:27,967 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.node.audit.use.cache='true'
+2024-06-19 19:46:27,968 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.retirejs.enabled='true'
+2024-06-19 19:46:27,968 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.swift.package.manager.enabled='true'
+2024-06-19 19:46:27,968 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.swift.package.resolved.enabled='true'
+2024-06-19 19:46:27,968 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.cocoapods.enabled='true'
+2024-06-19 19:46:27,968 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.carthage.enabled='true'
+2024-06-19 19:46:27,968 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.ruby.gemspec.enabled='true'
+2024-06-19 19:46:27,968 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.central.enabled='true'
+2024-06-19 19:46:27,968 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.central.use.cache='true'
+2024-06-19 19:46:27,968 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.ossindex.enabled='true'
+2024-06-19 19:46:27,969 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.ossindex.use.cache='true'
+2024-06-19 19:46:27,969 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: junit.fail.on.cvss='0.0'
+2024-06-19 19:46:27,969 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: analyzer.nexus.proxy='true'
+2024-06-19 19:46:27,969 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: data.driver_name='com.mysql.cj.jdbc.Driver'
+2024-06-19 19:46:27,969 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: data.connection_string='jdbc:mysql://192.168.137.133:3306/dependencycheck?useSSL=false&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&useServerPrepStmts=false&connectTimeout=20000&allowPublicKeyRetrieval=true'
+2024-06-19 19:46:27,969 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: data.user='bes'
+2024-06-19 19:46:27,969 org.owasp.dependencycheck.CliParser:699
+WARN  - dbPassword used on the command line, consider moving the password to a properties file using the key `data.password` and using the --propertyfile argument instead
+2024-06-19 19:46:27,970 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: data.password='********'
+2024-06-19 19:46:27,970 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: hosted.suppressions.enabled='true'
+2024-06-19 19:46:27,970 org.owasp.dependencycheck.utils.Settings:973
+DEBUG - Setting: odc.autoupdate='true'
+2024-06-19 19:46:28,006 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Archive Analyzer
+2024-06-19 19:46:28,007 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer File Name Analyzer
+2024-06-19 19:46:28,028 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Jar Analyzer
+2024-06-19 19:46:28,029 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Hint Analyzer
+2024-06-19 19:46:28,031 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer CPE Analyzer
+2024-06-19 19:46:28,033 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer False Positive Analyzer
+2024-06-19 19:46:28,042 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Dependency Bundling Analyzer
+2024-06-19 19:46:28,043 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Dependency Merging Analyzer
+2024-06-19 19:46:28,043 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer NVD CVE Analyzer
+2024-06-19 19:46:28,044 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Vulnerability Suppression Analyzer
+2024-06-19 19:46:28,045 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Central Analyzer
+2024-06-19 19:46:28,045 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Nexus Analyzer
+2024-06-19 19:46:28,046 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Artifactory Analyzer
+2024-06-19 19:46:28,046 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Nuspec Analyzer
+2024-06-19 19:46:28,047 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Nugetconf Analyzer
+2024-06-19 19:46:28,051 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer MSBuild Project Analyzer
+2024-06-19 19:46:28,052 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Assembly Analyzer
+2024-06-19 19:46:28,060 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer OpenSSL Source Analyzer
+2024-06-19 19:46:28,062 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Node.js Package Analyzer
+2024-06-19 19:46:28,065 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Node Audit Analyzer
+2024-06-19 19:46:28,066 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Yarn Audit Analyzer
+2024-06-19 19:46:28,067 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Pnpm Audit Analyzer
+2024-06-19 19:46:28,070 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer RetireJS Analyzer
+2024-06-19 19:46:28,072 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Ruby Bundle Audit Analyzer
+2024-06-19 19:46:28,078 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Version Filter Analyzer
+2024-06-19 19:46:28,080 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Sonatype OSS Index Analyzer
+2024-06-19 19:46:28,146 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Known Exploited Vulnerability Analyzer
+2024-06-19 19:46:28,158 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Unused Suppression Rule Analyzer
+2024-06-19 19:46:28,159 org.owasp.dependencycheck.analyzer.AnalyzerService:113
+DEBUG - Loaded Analyzer Libman Analyzer
+2024-06-19 19:46:28,160 org.owasp.dependencycheck.utils.Settings:1174
+DEBUG - Settings.getDataFile() - file: '/home/bes/programs/dependency-check/dependency-check/data'
+2024-06-19 19:46:28,352 org.owasp.dependencycheck.data.nvdcve.DatabaseManager:143
+DEBUG - Loading driver 'com.mysql.cj.jdbc.Driver'
+2024-06-19 19:46:28,359 org.owasp.dependencycheck.data.nvdcve.DatabaseManager:178
+DEBUG - Loading database connection
+2024-06-19 19:46:28,359 org.owasp.dependencycheck.data.nvdcve.DatabaseManager:179
+DEBUG - Connection String: jdbc:mysql://192.168.137.133:3306/dependencycheck?useSSL=false&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&useServerPrepStmts=false&connectTimeout=20000&allowPublicKeyRetrieval=true
+2024-06-19 19:46:28,359 org.owasp.dependencycheck.data.nvdcve.DatabaseManager:180
+DEBUG - Database User: bes
+2024-06-19 19:46:28,624 org.owasp.dependencycheck.data.nvdcve.DatabaseManager:244
+DEBUG - Database product: mysql
+2024-06-19 19:46:28,667 org.owasp.dependencycheck.data.nvdcve.DatabaseManager:505
+DEBUG - DC Schema: 5.4
+2024-06-19 19:46:28,676 org.owasp.dependencycheck.data.nvdcve.DatabaseManager:506
+DEBUG - DB Schema: 5.4
+2024-06-19 19:46:28,865 org.owasp.dependencycheck.Engine:897
+INFO  - Checking for updates
+2024-06-19 19:46:28,886 org.owasp.dependencycheck.data.update.NvdApiDataSource:318
+WARN  - An NVD API Key was not provided - it is highly recommended to use an NVD API key as the update can take a VERY long time without an API Key
+2024-06-19 19:46:28,890 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:127
+DEBUG - rate limited call delay: 10000
+2024-06-19 19:46:29,261 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=0
+2024-06-19 19:46:29,281 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:83
+DEBUG - Ticket taken At: 19:46:29; count: 1; by 19
+2024-06-19 19:46:29,281 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:46:29; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=0
+2024-06-19 19:46:51,113 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:46:51; count: 2; by 19
+2024-06-19 19:46:51,289 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:46:52,006 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=2000
+2024-06-19 19:46:52,031 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=4000
+2024-06-19 19:46:52,032 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=6000
+2024-06-19 19:46:52,032 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=8000
+2024-06-19 19:46:52,032 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=10000
+2024-06-19 19:46:52,032 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=12000
+2024-06-19 19:46:52,032 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=14000
+2024-06-19 19:46:52,033 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=16000
+2024-06-19 19:46:52,033 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=18000
+2024-06-19 19:46:52,033 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=20000
+2024-06-19 19:46:52,033 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=22000
+2024-06-19 19:46:52,033 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=24000
+2024-06-19 19:46:52,033 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=26000
+2024-06-19 19:46:52,034 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=28000
+2024-06-19 19:46:52,034 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=30000
+2024-06-19 19:46:52,034 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=32000
+2024-06-19 19:46:52,034 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=34000
+2024-06-19 19:46:52,034 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=36000
+2024-06-19 19:46:52,034 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=38000
+2024-06-19 19:46:52,035 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=40000
+2024-06-19 19:46:52,035 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=42000
+2024-06-19 19:46:52,035 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=44000
+2024-06-19 19:46:52,035 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=46000
+2024-06-19 19:46:52,035 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=48000
+2024-06-19 19:46:52,036 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=50000
+2024-06-19 19:46:52,036 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=52000
+2024-06-19 19:46:52,036 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=54000
+2024-06-19 19:46:52,036 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=56000
+2024-06-19 19:46:52,036 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=58000
+2024-06-19 19:46:52,036 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=60000
+2024-06-19 19:46:52,037 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=62000
+2024-06-19 19:46:52,037 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=64000
+2024-06-19 19:46:52,037 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=66000
+2024-06-19 19:46:52,037 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=68000
+2024-06-19 19:46:52,037 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=70000
+2024-06-19 19:46:52,037 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=72000
+2024-06-19 19:46:52,038 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=74000
+2024-06-19 19:46:52,038 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=76000
+2024-06-19 19:46:52,038 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=78000
+2024-06-19 19:46:52,038 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=80000
+2024-06-19 19:46:52,038 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=82000
+2024-06-19 19:46:52,038 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=84000
+2024-06-19 19:46:52,039 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=86000
+2024-06-19 19:46:52,039 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=88000
+2024-06-19 19:46:52,039 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=90000
+2024-06-19 19:46:52,039 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=92000
+2024-06-19 19:46:52,039 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=94000
+2024-06-19 19:46:52,040 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=96000
+2024-06-19 19:46:52,040 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=98000
+2024-06-19 19:46:52,040 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=100000
+2024-06-19 19:46:52,040 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=102000
+2024-06-19 19:46:52,040 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=104000
+2024-06-19 19:46:52,040 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=106000
+2024-06-19 19:46:52,041 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=108000
+2024-06-19 19:46:52,041 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=110000
+2024-06-19 19:46:52,041 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=112000
+2024-06-19 19:46:52,041 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=114000
+2024-06-19 19:46:52,042 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=116000
+2024-06-19 19:46:52,042 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:83
+DEBUG - Ticket taken At: 19:46:52; count: 2; by 19
+2024-06-19 19:46:52,042 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:46:52; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=2000
+2024-06-19 19:46:52,042 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=118000
+2024-06-19 19:46:52,047 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=120000
+2024-06-19 19:46:52,047 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=122000
+2024-06-19 19:46:52,047 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=124000
+2024-06-19 19:46:52,047 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=126000
+2024-06-19 19:46:52,047 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=128000
+2024-06-19 19:46:52,047 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=130000
+2024-06-19 19:46:52,047 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=132000
+2024-06-19 19:46:52,048 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=134000
+2024-06-19 19:46:52,048 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=136000
+2024-06-19 19:46:52,048 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=138000
+2024-06-19 19:46:52,048 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=140000
+2024-06-19 19:46:52,048 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=142000
+2024-06-19 19:46:52,048 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=144000
+2024-06-19 19:46:52,048 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=146000
+2024-06-19 19:46:52,049 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=148000
+2024-06-19 19:46:52,049 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=150000
+2024-06-19 19:46:52,049 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=152000
+2024-06-19 19:46:52,049 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=154000
+2024-06-19 19:46:52,049 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=156000
+2024-06-19 19:46:52,049 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=158000
+2024-06-19 19:46:52,049 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=160000
+2024-06-19 19:46:52,050 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=162000
+2024-06-19 19:46:52,050 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=164000
+2024-06-19 19:46:52,050 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=166000
+2024-06-19 19:46:52,050 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=168000
+2024-06-19 19:46:52,050 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=170000
+2024-06-19 19:46:52,050 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=172000
+2024-06-19 19:46:52,050 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=174000
+2024-06-19 19:46:52,051 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=176000
+2024-06-19 19:46:52,051 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=178000
+2024-06-19 19:46:52,051 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=180000
+2024-06-19 19:46:52,051 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=182000
+2024-06-19 19:46:52,051 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=184000
+2024-06-19 19:46:52,051 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=186000
+2024-06-19 19:46:52,051 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=188000
+2024-06-19 19:46:52,052 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=190000
+2024-06-19 19:46:52,052 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=192000
+2024-06-19 19:46:52,052 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=194000
+2024-06-19 19:46:52,052 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=196000
+2024-06-19 19:46:52,052 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=198000
+2024-06-19 19:46:52,052 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=200000
+2024-06-19 19:46:52,052 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=202000
+2024-06-19 19:46:52,053 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=204000
+2024-06-19 19:46:52,053 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=206000
+2024-06-19 19:46:52,053 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=208000
+2024-06-19 19:46:52,053 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=210000
+2024-06-19 19:46:52,053 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=212000
+2024-06-19 19:46:52,053 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=214000
+2024-06-19 19:46:52,053 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=216000
+2024-06-19 19:46:52,054 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=218000
+2024-06-19 19:46:52,054 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=220000
+2024-06-19 19:46:52,054 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=222000
+2024-06-19 19:46:52,054 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=224000
+2024-06-19 19:46:52,054 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=226000
+2024-06-19 19:46:52,054 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=228000
+2024-06-19 19:46:52,054 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=230000
+2024-06-19 19:46:52,055 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=232000
+2024-06-19 19:46:52,055 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=234000
+2024-06-19 19:46:52,055 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=236000
+2024-06-19 19:46:52,055 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=238000
+2024-06-19 19:46:52,055 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=240000
+2024-06-19 19:46:52,055 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=242000
+2024-06-19 19:46:52,055 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=244000
+2024-06-19 19:46:52,056 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=246000
+2024-06-19 19:46:52,056 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=248000
+2024-06-19 19:46:52,056 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=250000
+2024-06-19 19:46:52,056 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=252000
+2024-06-19 19:46:52,056 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:260
+DEBUG - requesting URI: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=2000&startIndex=254000
+2024-06-19 19:46:52,056 org.owasp.dependencycheck.data.update.NvdApiDataSource:352
+INFO  - NVD API has 254,432 records in this update
+2024-06-19 19:46:52,127 org.owasp.dependencycheck.utils.FileUtils:125
+DEBUG - Temporary directory is `/tmp/dctemp84705b67-9c60-4c92-ad6b-6f5abe9888da`
+2024-06-19 19:47:14,610 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:47:14; count: 3; by 19
+2024-06-19 19:47:14,611 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:83
+DEBUG - Ticket taken At: 19:47:14; count: 3; by 19
+2024-06-19 19:47:14,611 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:47:14; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=4000
+2024-06-19 19:47:14,666 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:47:44,020 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:47:44; count: 4; by 19
+2024-06-19 19:47:44,020 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:83
+DEBUG - Ticket taken At: 19:47:44; count: 4; by 19
+2024-06-19 19:47:44,020 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:47:44; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=6000
+2024-06-19 19:47:44,089 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:47:50,674 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:47:50; count: 5; by 19
+2024-06-19 19:47:50,675 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:189
+DEBUG - Rate Limited API call - waiting for 3346ms
+2024-06-19 19:47:51,018 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:47:54,022 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:83
+DEBUG - Ticket taken At: 19:47:54; count: 5; by 19
+2024-06-19 19:47:54,023 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:47:54; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=8000
+2024-06-19 19:48:11,513 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:48:11; count: 6; by 19
+2024-06-19 19:48:11,515 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:48:11; count: 5
+2024-06-19 19:48:11,515 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:48:11; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=10000
+2024-06-19 19:48:11,915 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:48:12,237 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 10,000/254,432 (4%)
+2024-06-19 19:48:43,507 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:48:43; count: 6; by 19
+2024-06-19 19:48:43,507 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:48:43; count: 5
+2024-06-19 19:48:43,507 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:48:43; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=12000
+2024-06-19 19:48:43,761 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:49:10,780 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:49:10; count: 6; by 19
+2024-06-19 19:49:10,781 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:49:10; count: 5
+2024-06-19 19:49:10,782 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:49:10; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=14000
+2024-06-19 19:49:10,993 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:49:43,675 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:49:43; count: 6; by 19
+2024-06-19 19:49:43,676 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:49:43; count: 5
+2024-06-19 19:49:43,676 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:49:43; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=16000
+2024-06-19 19:49:43,902 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:49:59,609 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:49:59; count: 6; by 19
+2024-06-19 19:49:59,610 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:49:59; count: 5
+2024-06-19 19:49:59,610 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:49:59; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=18000
+2024-06-19 19:49:59,651 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:50:27,179 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:50:27; count: 6; by 19
+2024-06-19 19:50:27,180 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:50:27; count: 5
+2024-06-19 19:50:27,180 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:50:27; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=20000
+2024-06-19 19:50:27,399 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:50:27,633 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 20,000/254,432 (8%)
+2024-06-19 19:50:31,146 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:50:31; count: 6; by 19
+2024-06-19 19:50:31,146 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:189
+DEBUG - Rate Limited API call - waiting for 6034ms
+2024-06-19 19:50:31,635 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:50:37,180 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:50:37; count: 5
+2024-06-19 19:50:37,180 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:50:37; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=22000
+2024-06-19 19:51:08,158 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:51:08; count: 6; by 19
+2024-06-19 19:51:08,159 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:51:08; count: 5
+2024-06-19 19:51:08,159 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:51:08; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=24000
+2024-06-19 19:51:08,375 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:51:13,799 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:51:13; count: 6; by 19
+2024-06-19 19:51:13,800 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:189
+DEBUG - Rate Limited API call - waiting for 4359ms
+2024-06-19 19:51:14,087 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:51:18,159 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:51:18; count: 5
+2024-06-19 19:51:18,159 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:51:18; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=26000
+2024-06-19 19:51:25,114 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:51:25; count: 6; by 19
+2024-06-19 19:51:25,114 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:189
+DEBUG - Rate Limited API call - waiting for 3046ms
+2024-06-19 19:51:25,419 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:51:28,161 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:51:28; count: 5
+2024-06-19 19:51:28,161 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:51:28; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=28000
+2024-06-19 19:51:47,764 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:51:47; count: 6; by 19
+2024-06-19 19:51:47,764 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:51:47; count: 5
+2024-06-19 19:51:47,764 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:51:47; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=30000
+2024-06-19 19:51:48,167 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:51:48,460 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 30,000/254,432 (12%)
+2024-06-19 19:52:19,622 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:52:19; count: 6; by 19
+2024-06-19 19:52:19,623 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:52:19; count: 5
+2024-06-19 19:52:19,623 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:52:19; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=32000
+2024-06-19 19:52:19,979 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:52:46,214 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:52:46; count: 6; by 19
+2024-06-19 19:52:46,215 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:52:46; count: 5
+2024-06-19 19:52:46,215 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:52:46; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=34000
+2024-06-19 19:52:46,233 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:53:22,371 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:53:22; count: 6; by 19
+2024-06-19 19:53:22,371 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:53:22; count: 5
+2024-06-19 19:53:22,371 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:53:22; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=36000
+2024-06-19 19:53:22,535 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:53:45,989 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:53:45; count: 6; by 19
+2024-06-19 19:53:45,989 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:53:45; count: 5
+2024-06-19 19:53:45,989 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:53:45; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=38000
+2024-06-19 19:53:46,274 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:54:19,334 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:54:19; count: 6; by 19
+2024-06-19 19:54:19,335 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:54:19; count: 5
+2024-06-19 19:54:19,335 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:54:19; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=40000
+2024-06-19 19:54:19,596 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:54:19,987 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 40,000/254,432 (16%)
+2024-06-19 19:54:44,717 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:54:44; count: 6; by 19
+2024-06-19 19:54:44,717 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:54:44; count: 5
+2024-06-19 19:54:44,717 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:54:44; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=42000
+2024-06-19 19:54:45,011 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:54:51,950 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:54:51; count: 6; by 19
+2024-06-19 19:54:51,950 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:189
+DEBUG - Rate Limited API call - waiting for 2768ms
+2024-06-19 19:54:52,306 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:54:54,719 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:54:54; count: 5
+2024-06-19 19:54:54,719 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:54:54; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=44000
+2024-06-19 19:55:22,281 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:55:22; count: 6; by 19
+2024-06-19 19:55:22,282 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:55:22; count: 5
+2024-06-19 19:55:22,282 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:55:22; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=46000
+2024-06-19 19:55:22,591 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:56:05,805 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:56:05; count: 6; by 19
+2024-06-19 19:56:05,809 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:56:05; count: 5
+2024-06-19 19:56:05,809 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:56:05; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=48000
+2024-06-19 19:56:06,020 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:56:56,962 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:56:56; count: 6; by 19
+2024-06-19 19:56:56,969 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:56:56; count: 5
+2024-06-19 19:56:56,970 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:56:56; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=50000
+2024-06-19 19:56:57,443 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:56:57,749 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 50,000/254,432 (20%)
+2024-06-19 19:57:30,312 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:57:30; count: 6; by 19
+2024-06-19 19:57:30,316 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:57:30; count: 5
+2024-06-19 19:57:30,316 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:57:30; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=52000
+2024-06-19 19:57:30,775 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:57:38,916 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:57:38; count: 6; by 19
+2024-06-19 19:57:38,918 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:189
+DEBUG - Rate Limited API call - waiting for 1399ms
+2024-06-19 19:57:39,261 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:57:40,318 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:57:40; count: 5
+2024-06-19 19:57:40,318 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:57:40; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=54000
+2024-06-19 19:58:09,981 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:58:09; count: 6; by 19
+2024-06-19 19:58:09,983 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:58:09; count: 5
+2024-06-19 19:58:09,984 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:58:09; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=56000
+2024-06-19 19:58:10,035 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:59:04,023 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:59:04; count: 6; by 19
+2024-06-19 19:59:04,031 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:59:04; count: 5
+2024-06-19 19:59:04,032 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:59:04; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=58000
+2024-06-19 19:59:04,127 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:59:40,529 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 19:59:40; count: 6; by 19
+2024-06-19 19:59:40,530 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 19:59:40; count: 5
+2024-06-19 19:59:40,530 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 19:59:40; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=60000
+2024-06-19 19:59:40,651 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 19:59:41,074 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 60,000/254,432 (24%)
+2024-06-19 20:00:03,607 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:00:03; count: 6; by 19
+2024-06-19 20:00:03,609 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:00:03; count: 5
+2024-06-19 20:00:03,610 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:00:03; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=62000
+2024-06-19 20:00:04,105 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:00:58,795 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:00:58; count: 6; by 19
+2024-06-19 20:00:58,796 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:00:58; count: 5
+2024-06-19 20:00:58,797 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:00:58; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=64000
+2024-06-19 20:00:58,921 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:01:33,089 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:01:33; count: 6; by 19
+2024-06-19 20:01:33,092 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:01:33; count: 5
+2024-06-19 20:01:33,092 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:01:33; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=66000
+2024-06-19 20:01:33,157 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:01:58,674 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:01:58; count: 6; by 19
+2024-06-19 20:01:58,674 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:01:58; count: 5
+2024-06-19 20:01:58,675 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:01:58; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=68000
+2024-06-19 20:01:58,932 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:02:53,852 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:02:53; count: 6; by 19
+2024-06-19 20:02:53,853 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:02:53; count: 5
+2024-06-19 20:02:53,853 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:02:53; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=70000
+2024-06-19 20:02:54,148 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:02:54,381 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 70,000/254,432 (28%)
+2024-06-19 20:03:27,991 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:03:27; count: 6; by 19
+2024-06-19 20:03:27,991 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:03:27; count: 5
+2024-06-19 20:03:27,991 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:03:27; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=72000
+2024-06-19 20:03:28,400 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:03:46,809 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:03:46; count: 6; by 19
+2024-06-19 20:03:46,809 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:03:46; count: 5
+2024-06-19 20:03:46,809 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:03:46; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=74000
+2024-06-19 20:03:47,118 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:04:26,720 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:04:26; count: 6; by 19
+2024-06-19 20:04:26,819 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:04:26; count: 5
+2024-06-19 20:04:26,821 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:04:26; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=76000
+2024-06-19 20:04:26,873 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:04:50,214 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:04:50; count: 6; by 19
+2024-06-19 20:04:50,215 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:04:50; count: 5
+2024-06-19 20:04:50,216 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:04:50; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=78000
+2024-06-19 20:04:50,376 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:05:35,990 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:05:35; count: 6; by 19
+2024-06-19 20:05:35,992 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:05:35; count: 5
+2024-06-19 20:05:35,992 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:05:35; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=80000
+2024-06-19 20:05:36,186 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:05:36,680 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 80,000/254,432 (31%)
+2024-06-19 20:06:13,062 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:06:13; count: 6; by 19
+2024-06-19 20:06:13,063 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:06:13; count: 5
+2024-06-19 20:06:13,063 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:06:13; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=82000
+2024-06-19 20:06:13,232 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:06:26,316 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:06:26; count: 6; by 19
+2024-06-19 20:06:26,317 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:06:26; count: 5
+2024-06-19 20:06:26,317 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:06:26; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=84000
+2024-06-19 20:06:26,554 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:06:49,975 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:06:49; count: 6; by 19
+2024-06-19 20:06:49,976 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:06:49; count: 5
+2024-06-19 20:06:49,976 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:06:49; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=86000
+2024-06-19 20:06:50,282 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:07:23,417 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:07:23; count: 6; by 19
+2024-06-19 20:07:23,421 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:07:23; count: 5
+2024-06-19 20:07:23,421 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:07:23; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=88000
+2024-06-19 20:07:23,592 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:07:55,992 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:07:55; count: 6; by 19
+2024-06-19 20:07:55,993 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:07:55; count: 5
+2024-06-19 20:07:55,993 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:07:55; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=90000
+2024-06-19 20:07:56,200 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:07:56,306 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 90,000/254,432 (35%)
+2024-06-19 20:08:09,191 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:08:09; count: 6; by 19
+2024-06-19 20:08:09,193 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:08:09; count: 5
+2024-06-19 20:08:09,194 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:08:09; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=92000
+2024-06-19 20:08:09,329 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:08:32,876 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:08:32; count: 6; by 19
+2024-06-19 20:08:32,877 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:08:32; count: 5
+2024-06-19 20:08:32,877 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:08:32; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=94000
+2024-06-19 20:08:32,884 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:09:12,544 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:09:12; count: 6; by 19
+2024-06-19 20:09:12,546 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:09:12; count: 5
+2024-06-19 20:09:12,546 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:09:12; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=96000
+2024-06-19 20:09:12,915 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:09:47,569 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:09:47; count: 6; by 19
+2024-06-19 20:09:47,569 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:09:47; count: 5
+2024-06-19 20:09:47,569 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:09:47; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=98000
+2024-06-19 20:09:47,645 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:09:58,546 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:09:58; count: 6; by 19
+2024-06-19 20:09:58,546 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:09:58; count: 5
+2024-06-19 20:09:58,546 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:09:58; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=100000
+2024-06-19 20:09:58,832 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:09:59,011 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 100,000/254,432 (39%)
+2024-06-19 20:10:22,918 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:10:22; count: 6; by 19
+2024-06-19 20:10:22,919 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:10:22; count: 5
+2024-06-19 20:10:22,919 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:10:22; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=102000
+2024-06-19 20:10:23,077 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:10:58,376 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:10:58; count: 6; by 19
+2024-06-19 20:10:58,376 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:10:58; count: 5
+2024-06-19 20:10:58,376 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:10:58; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=104000
+2024-06-19 20:10:58,789 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:11:26,389 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:11:26; count: 6; by 19
+2024-06-19 20:11:26,389 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:11:26; count: 5
+2024-06-19 20:11:26,390 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:11:26; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=106000
+2024-06-19 20:11:26,461 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:12:26,077 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:12:26; count: 6; by 19
+2024-06-19 20:12:26,079 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:12:26; count: 5
+2024-06-19 20:12:26,079 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:12:26; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=108000
+2024-06-19 20:12:26,504 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:13:05,356 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:13:05; count: 6; by 19
+2024-06-19 20:13:05,356 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:13:05; count: 5
+2024-06-19 20:13:05,357 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:13:05; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=110000
+2024-06-19 20:13:05,701 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:13:05,969 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 110,000/254,432 (43%)
+2024-06-19 20:13:22,188 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:13:22; count: 6; by 19
+2024-06-19 20:13:22,189 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:13:22; count: 5
+2024-06-19 20:13:22,189 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:13:22; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=112000
+2024-06-19 20:13:22,481 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:14:29,559 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:14:29; count: 6; by 19
+2024-06-19 20:14:29,559 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:14:29; count: 5
+2024-06-19 20:14:29,559 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:14:29; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=114000
+2024-06-19 20:14:29,794 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:15:15,999 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:15:15; count: 6; by 19
+2024-06-19 20:15:15,999 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:15:15; count: 5
+2024-06-19 20:15:16,000 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:15:16; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=116000
+2024-06-19 20:15:16,121 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:16:21,123 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:16:21; count: 6; by 19
+2024-06-19 20:16:21,129 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:16:21; count: 5
+2024-06-19 20:16:21,130 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:16:21; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=118000
+2024-06-19 20:16:21,200 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:16:48,739 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:16:48; count: 6; by 19
+2024-06-19 20:16:48,739 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:16:48; count: 5
+2024-06-19 20:16:48,739 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:16:48; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=120000
+2024-06-19 20:16:48,968 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:16:49,164 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 120,000/254,441 (47%)
+2024-06-19 20:17:31,643 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:78
+DEBUG - Retrying request 2 time
+2024-06-19 20:19:39,982 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:19:39; count: 6; by 19
+2024-06-19 20:19:39,982 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:19:39; count: 5
+2024-06-19 20:19:39,982 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:19:39; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=122000
+2024-06-19 20:19:40,439 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:21:49,145 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:21:49; count: 6; by 19
+2024-06-19 20:21:49,156 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:21:49; count: 5
+2024-06-19 20:21:49,156 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:21:49; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=124000
+2024-06-19 20:21:49,480 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:22:56,210 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:22:56; count: 6; by 19
+2024-06-19 20:22:56,211 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:22:56; count: 5
+2024-06-19 20:22:56,212 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:22:56; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=126000
+2024-06-19 20:22:56,307 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:24:25,259 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:24:25; count: 6; by 19
+2024-06-19 20:24:25,260 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:24:25; count: 5
+2024-06-19 20:24:25,260 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:24:25; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=128000
+2024-06-19 20:24:25,726 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:25:34,128 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:25:34; count: 6; by 19
+2024-06-19 20:25:34,128 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:25:34; count: 5
+2024-06-19 20:25:34,128 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:25:34; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=130000
+2024-06-19 20:25:34,134 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:25:34,358 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 130,000/254,441 (51%)
+2024-06-19 20:26:44,693 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:26:44; count: 6; by 19
+2024-06-19 20:26:44,694 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:26:44; count: 5
+2024-06-19 20:26:44,694 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:26:44; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=132000
+2024-06-19 20:26:44,997 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:28:06,864 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:28:06; count: 6; by 19
+2024-06-19 20:28:06,864 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:28:06; count: 5
+2024-06-19 20:28:06,864 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:28:06; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=134000
+2024-06-19 20:28:06,975 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:29:37,857 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:29:37; count: 6; by 19
+2024-06-19 20:29:37,862 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:29:37; count: 5
+2024-06-19 20:29:37,862 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:29:37; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=136000
+2024-06-19 20:29:37,864 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:31:06,462 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:31:06; count: 6; by 19
+2024-06-19 20:31:06,463 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:31:06; count: 5
+2024-06-19 20:31:06,463 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:31:06; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=138000
+2024-06-19 20:31:06,689 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:33:09,706 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:33:09; count: 6; by 19
+2024-06-19 20:33:09,706 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:33:09; count: 5
+2024-06-19 20:33:09,706 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:33:09; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=140000
+2024-06-19 20:33:10,193 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:33:10,446 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 140,000/254,441 (55%)
+2024-06-19 20:34:28,144 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:34:28; count: 6; by 19
+2024-06-19 20:34:28,144 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:34:28; count: 5
+2024-06-19 20:34:28,144 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:34:28; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=142000
+2024-06-19 20:34:28,642 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:36:18,846 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:36:18; count: 6; by 19
+2024-06-19 20:36:18,847 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:36:18; count: 5
+2024-06-19 20:36:18,847 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:36:18; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=144000
+2024-06-19 20:36:19,116 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:36:29,099 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:68
+DEBUG - Retrying request /rest/json/cves/2.0?resultsPerPage=2000&startIndex=144000 : 2 time
+2024-06-19 20:37:04,841 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:78
+DEBUG - Retrying request 3 time
+2024-06-19 20:38:00,703 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:38:00; count: 6; by 19
+2024-06-19 20:38:00,704 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:38:00; count: 5
+2024-06-19 20:38:00,704 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:38:00; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=146000
+2024-06-19 20:38:01,133 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:38:10,955 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:68
+DEBUG - Retrying request /rest/json/cves/2.0?resultsPerPage=2000&startIndex=146000 : 2 time
+2024-06-19 20:38:12,017 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:78
+DEBUG - Retrying request 3 time
+2024-06-19 20:39:43,090 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:78
+DEBUG - Retrying request 4 time
+2024-06-19 20:39:51,178 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:39:51; count: 6; by 19
+2024-06-19 20:39:51,179 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:39:51; count: 5
+2024-06-19 20:39:51,179 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:39:51; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=148000
+2024-06-19 20:39:51,677 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:40:44,813 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:40:44; count: 6; by 19
+2024-06-19 20:40:44,813 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:40:44; count: 5
+2024-06-19 20:40:44,813 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:40:44; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=150000
+2024-06-19 20:40:44,967 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:40:45,242 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 150,000/254,441 (59%)
+2024-06-19 20:41:41,284 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:41:41; count: 6; by 19
+2024-06-19 20:41:41,284 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:41:41; count: 5
+2024-06-19 20:41:41,284 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:41:41; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=152000
+2024-06-19 20:41:41,300 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:42:19,559 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:42:19; count: 6; by 19
+2024-06-19 20:42:19,559 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:42:19; count: 5
+2024-06-19 20:42:19,559 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:42:19; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=154000
+2024-06-19 20:42:19,738 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:43:01,263 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:78
+DEBUG - Retrying request 2 time
+2024-06-19 20:43:04,742 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:43:04; count: 6; by 19
+2024-06-19 20:43:04,742 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:43:04; count: 5
+2024-06-19 20:43:04,742 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:43:04; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=156000
+2024-06-19 20:43:05,002 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:43:12,961 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:43:12; count: 6; by 19
+2024-06-19 20:43:12,963 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:189
+DEBUG - Rate Limited API call - waiting for 1779ms
+2024-06-19 20:43:13,247 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:43:14,744 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:43:14; count: 5
+2024-06-19 20:43:14,744 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:43:14; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=158000
+2024-06-19 20:43:38,491 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:43:38; count: 6; by 19
+2024-06-19 20:43:38,491 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:43:38; count: 5
+2024-06-19 20:43:38,492 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:43:38; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=160000
+2024-06-19 20:43:38,566 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:43:39,179 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 160,000/254,441 (63%)
+2024-06-19 20:44:16,921 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:44:16; count: 6; by 19
+2024-06-19 20:44:16,925 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:44:16; count: 5
+2024-06-19 20:44:16,925 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:44:16; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=162000
+2024-06-19 20:44:17,277 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:44:42,670 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:44:42; count: 6; by 19
+2024-06-19 20:44:42,670 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:44:42; count: 5
+2024-06-19 20:44:42,670 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:44:42; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=164000
+2024-06-19 20:44:43,151 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:45:40,047 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:45:40; count: 6; by 19
+2024-06-19 20:45:40,048 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:45:40; count: 5
+2024-06-19 20:45:40,048 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:45:40; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=166000
+2024-06-19 20:45:40,530 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:46:12,221 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:46:12; count: 6; by 19
+2024-06-19 20:46:12,222 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:46:12; count: 5
+2024-06-19 20:46:12,222 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:46:12; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=168000
+2024-06-19 20:46:12,374 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:46:53,957 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:78
+DEBUG - Retrying request 2 time
+2024-06-19 20:46:58,959 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:46:58; count: 6; by 19
+2024-06-19 20:46:58,960 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:46:58; count: 5
+2024-06-19 20:46:58,960 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:46:58; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=170000
+2024-06-19 20:46:59,193 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:46:59,410 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 170,000/254,441 (67%)
+2024-06-19 20:47:05,522 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:47:05; count: 6; by 19
+2024-06-19 20:47:05,522 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:189
+DEBUG - Rate Limited API call - waiting for 3438ms
+2024-06-19 20:47:05,914 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:47:08,961 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:47:08; count: 5
+2024-06-19 20:47:08,961 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:47:08; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=172000
+2024-06-19 20:47:34,790 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:47:34; count: 6; by 19
+2024-06-19 20:47:34,790 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:47:34; count: 5
+2024-06-19 20:47:34,790 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:47:34; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=174000
+2024-06-19 20:47:34,830 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:48:15,323 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:48:15; count: 6; by 19
+2024-06-19 20:48:15,323 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:48:15; count: 5
+2024-06-19 20:48:15,323 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:48:15; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=176000
+2024-06-19 20:48:15,678 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:48:56,269 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:48:56; count: 6; by 19
+2024-06-19 20:48:56,270 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:48:56; count: 5
+2024-06-19 20:48:56,270 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:48:56; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=178000
+2024-06-19 20:48:56,462 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:49:01,304 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:49:01; count: 6; by 19
+2024-06-19 20:49:01,305 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:189
+DEBUG - Rate Limited API call - waiting for 4965ms
+2024-06-19 20:49:01,750 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:49:02,061 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 180,000/254,441 (71%)
+2024-06-19 20:49:06,270 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:49:06; count: 5
+2024-06-19 20:49:06,271 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:49:06; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=180000
+2024-06-19 20:49:26,343 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:49:26; count: 6; by 19
+2024-06-19 20:49:26,344 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:49:26; count: 5
+2024-06-19 20:49:26,344 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:49:26; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=182000
+2024-06-19 20:49:26,612 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:49:56,176 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:49:56; count: 6; by 19
+2024-06-19 20:49:56,176 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:49:56; count: 5
+2024-06-19 20:49:56,176 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:49:56; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=184000
+2024-06-19 20:49:56,476 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:50:06,444 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:68
+DEBUG - Retrying request /rest/json/cves/2.0?resultsPerPage=2000&startIndex=184000 : 2 time
+2024-06-19 20:50:07,512 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:78
+DEBUG - Retrying request 3 time
+2024-06-19 20:51:31,630 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:78
+DEBUG - Retrying request 4 time
+2024-06-19 20:52:49,861 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:52:49; count: 6; by 19
+2024-06-19 20:52:49,862 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:52:49; count: 5
+2024-06-19 20:52:49,862 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:52:49; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=186000
+2024-06-19 20:52:49,977 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:55:03,905 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:55:03; count: 6; by 19
+2024-06-19 20:55:03,916 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:55:03; count: 5
+2024-06-19 20:55:03,916 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:55:03; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=188000
+2024-06-19 20:55:04,322 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:57:34,170 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:57:34; count: 6; by 19
+2024-06-19 20:57:34,171 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:57:34; count: 5
+2024-06-19 20:57:34,171 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:57:34; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=190000
+2024-06-19 20:57:34,288 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 20:57:34,578 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 190,000/254,441 (75%)
+2024-06-19 20:57:57,187 io.github.jeremylong.openvulnerability.client.nvd.NvdApiRetryStrategy:78
+DEBUG - Retrying request 2 time
+2024-06-19 20:59:12,845 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 20:59:12; count: 6; by 19
+2024-06-19 20:59:12,845 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 20:59:12; count: 5
+2024-06-19 20:59:12,846 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 20:59:12; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=192000
+2024-06-19 20:59:13,191 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:01:07,689 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:01:07; count: 6; by 19
+2024-06-19 21:01:07,695 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:01:07; count: 5
+2024-06-19 21:01:07,695 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:01:07; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=194000
+2024-06-19 21:01:08,045 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:03:44,249 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:03:44; count: 6; by 19
+2024-06-19 21:03:44,253 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:03:44; count: 5
+2024-06-19 21:03:44,253 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:03:44; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=196000
+2024-06-19 21:03:44,457 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:06:13,383 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:06:13; count: 6; by 19
+2024-06-19 21:06:13,389 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:06:13; count: 5
+2024-06-19 21:06:13,389 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:06:13; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=198000
+2024-06-19 21:06:13,402 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:08:29,402 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:08:29; count: 6; by 19
+2024-06-19 21:08:29,408 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:08:29; count: 5
+2024-06-19 21:08:29,408 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:08:29; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=200000
+2024-06-19 21:08:29,814 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:08:30,382 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 200,000/254,441 (79%)
+2024-06-19 21:10:52,712 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:10:52; count: 6; by 19
+2024-06-19 21:10:52,714 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:10:52; count: 5
+2024-06-19 21:10:52,714 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:10:52; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=202000
+2024-06-19 21:10:53,031 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:12:10,474 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:12:10; count: 6; by 19
+2024-06-19 21:12:10,476 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:12:10; count: 5
+2024-06-19 21:12:10,476 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:12:10; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=204000
+2024-06-19 21:12:10,909 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:14:54,040 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:14:54; count: 6; by 19
+2024-06-19 21:14:54,040 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:14:54; count: 5
+2024-06-19 21:14:54,040 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:14:54; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=206000
+2024-06-19 21:14:54,260 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:18:11,431 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:18:11; count: 6; by 19
+2024-06-19 21:18:11,432 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:18:11; count: 5
+2024-06-19 21:18:11,432 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:18:11; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=208000
+2024-06-19 21:18:11,764 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:20:55,211 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:20:55; count: 6; by 19
+2024-06-19 21:20:55,215 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:20:55; count: 5
+2024-06-19 21:20:55,215 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:20:55; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=210000
+2024-06-19 21:20:55,551 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:20:55,786 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 210,000/254,451 (83%)
+2024-06-19 21:23:04,766 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:23:04; count: 6; by 19
+2024-06-19 21:23:04,770 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:23:04; count: 5
+2024-06-19 21:23:04,770 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:23:04; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=212000
+2024-06-19 21:23:04,906 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:26:09,489 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:26:09; count: 6; by 19
+2024-06-19 21:26:09,495 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:26:09; count: 5
+2024-06-19 21:26:09,495 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:26:09; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=214000
+2024-06-19 21:26:09,901 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:28:30,831 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:28:30; count: 6; by 19
+2024-06-19 21:28:30,834 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:28:30; count: 5
+2024-06-19 21:28:30,834 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:28:30; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=216000
+2024-06-19 21:28:30,872 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:32:51,645 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:32:51; count: 6; by 19
+2024-06-19 21:32:51,645 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:32:51; count: 5
+2024-06-19 21:32:51,645 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:32:51; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=218000
+2024-06-19 21:32:51,903 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:37:07,119 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:37:07; count: 6; by 19
+2024-06-19 21:37:07,127 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:37:07; count: 5
+2024-06-19 21:37:07,127 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:37:07; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=220000
+2024-06-19 21:37:07,611 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:37:08,850 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 220,000/254,451 (86%)
+2024-06-19 21:40:19,493 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:40:19; count: 6; by 19
+2024-06-19 21:40:19,494 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:40:19; count: 5
+2024-06-19 21:40:19,494 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:40:19; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=222000
+2024-06-19 21:40:19,600 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:42:45,207 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:42:45; count: 6; by 19
+2024-06-19 21:42:45,210 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:42:45; count: 5
+2024-06-19 21:42:45,210 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:42:45; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=224000
+2024-06-19 21:42:45,594 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:45:22,414 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:45:22; count: 6; by 19
+2024-06-19 21:45:22,423 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:45:22; count: 5
+2024-06-19 21:45:22,424 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:45:22; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=226000
+2024-06-19 21:45:22,918 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:48:49,125 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:48:49; count: 6; by 19
+2024-06-19 21:48:49,126 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:48:49; count: 5
+2024-06-19 21:48:49,126 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:48:49; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=228000
+2024-06-19 21:48:49,624 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:51:43,513 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:51:43; count: 6; by 19
+2024-06-19 21:51:43,513 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:51:43; count: 5
+2024-06-19 21:51:43,513 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:51:43; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=230000
+2024-06-19 21:51:43,931 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:51:44,800 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 230,000/254,451 (90%)
+2024-06-19 21:55:04,994 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:55:04; count: 6; by 19
+2024-06-19 21:55:04,999 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:55:04; count: 5
+2024-06-19 21:55:04,999 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:55:04; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=232000
+2024-06-19 21:55:05,108 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 21:58:30,375 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 21:58:30; count: 6; by 19
+2024-06-19 21:58:30,379 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 21:58:30; count: 5
+2024-06-19 21:58:30,379 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 21:58:30; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=234000
+2024-06-19 21:58:30,854 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:02:00,300 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:02:00; count: 6; by 19
+2024-06-19 22:02:00,301 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:02:00; count: 5
+2024-06-19 22:02:00,301 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:02:00; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=236000
+2024-06-19 22:02:00,530 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:04:47,852 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:04:47; count: 6; by 19
+2024-06-19 22:04:47,861 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:04:47; count: 5
+2024-06-19 22:04:47,861 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:04:47; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=238000
+2024-06-19 22:04:48,057 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:06:42,858 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:06:42; count: 6; by 19
+2024-06-19 22:06:42,860 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:06:42; count: 5
+2024-06-19 22:06:42,860 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:06:42; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=240000
+2024-06-19 22:06:43,230 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:06:43,427 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 240,000/254,451 (94%)
+2024-06-19 22:09:03,983 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:09:03; count: 6; by 19
+2024-06-19 22:09:03,988 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:09:03; count: 5
+2024-06-19 22:09:03,988 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:09:03; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=242000
+2024-06-19 22:09:04,194 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:11:29,506 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:11:29; count: 6; by 19
+2024-06-19 22:11:29,507 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:11:29; count: 5
+2024-06-19 22:11:29,507 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:11:29; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=244000
+2024-06-19 22:11:29,687 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:13:21,975 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:13:21; count: 6; by 19
+2024-06-19 22:13:21,977 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:13:21; count: 5
+2024-06-19 22:13:21,977 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:13:21; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=246000
+2024-06-19 22:13:22,172 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:15:39,228 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:15:39; count: 6; by 19
+2024-06-19 22:15:39,229 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:15:39; count: 5
+2024-06-19 22:15:39,230 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:15:39; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=248000
+2024-06-19 22:15:39,572 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:18:16,116 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:18:16; count: 6; by 19
+2024-06-19 22:18:16,117 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:18:16; count: 5
+2024-06-19 22:18:16,117 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:18:16; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=250000
+2024-06-19 22:18:16,605 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:18:16,821 org.owasp.dependencycheck.data.update.NvdApiDataSource:366
+INFO  - Downloaded 250,000/254,541 (98%)
+2024-06-19 22:21:15,042 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:21:15; count: 6; by 19
+2024-06-19 22:21:15,042 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:21:15; count: 5
+2024-06-19 22:21:15,042 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:21:15; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=252000
+2024-06-19 22:21:15,050 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:23:23,867 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:23:23; count: 6; by 19
+2024-06-19 22:23:23,868 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:76
+DEBUG - Ticket taken At: 22:23:23; count: 5
+2024-06-19 22:23:23,868 io.github.jeremylong.openvulnerability.client.nvd.RateLimitedClient:197
+DEBUG - Requested At: 22:23:23; URI: /rest/json/cves/2.0?resultsPerPage=2000&startIndex=254000
+2024-06-19 22:23:24,055 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:24:15,877 io.github.jeremylong.openvulnerability.client.nvd.RateMeter:95
+DEBUG - Ticket returned At: 22:24:15; count: 6; by 19
+2024-06-19 22:24:16,314 io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient:329
+DEBUG - Content-Type Received: application/json
+2024-06-19 22:24:16,773 org.owasp.dependencycheck.data.update.NvdApiDataSource:392
+INFO  - Downloaded 254,541/254,541 (100%)
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 1/128 (1%) in 10,739ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 2/128 (2%) in 10,929ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 3/128 (2%) in 14,122ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 4/128 (3%) in 21,382ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 5/128 (4%) in 17,172ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 6/128 (5%) in 15,399ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 7/128 (5%) in 16,159ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 8/128 (6%) in 18,322ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 9/128 (7%) in 20,119ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 10/128 (8%) in 18,428ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 11/128 (9%) in 30,133ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 12/128 (9%) in 17,379ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 13/128 (10%) in 25,797ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 14/128 (11%) in 34,074ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 15/128 (12%) in 28,510ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 16/128 (13%) in 19,601ms
+2024-06-19 22:24:16,774 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 17/128 (13%) in 23,505ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 18/128 (14%) in 19,538ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 19/128 (15%) in 29,580ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 20/128 (16%) in 33,832ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 21/128 (16%) in 41,228ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 22/128 (17%) in 73,909ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 23/128 (18%) in 99,864ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 24/128 (19%) in 112,072ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 25/128 (20%) in 101,161ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 26/128 (20%) in 116,675ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 27/128 (21%) in 150,948ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 28/128 (22%) in 158,379ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 29/128 (23%) in 138,419ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 30/128 (23%) in 133,021ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 31/128 (24%) in 137,354ms
+2024-06-19 22:24:16,775 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 32/128 (25%) in 110,705ms
+2024-06-19 22:24:16,776 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 33/128 (26%) in 93,317ms
+2024-06-19 22:24:16,776 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 34/128 (27%) in 87,129ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 35/128 (27%) in 53,235ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 36/128 (28%) in 40,720ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 37/128 (29%) in 36,349ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 38/128 (30%) in 21,004ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 39/128 (30%) in 18,355ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 40/128 (31%) in 14,716ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 41/128 (32%) in 16,477ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 42/128 (33%) in 12,774ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 43/128 (34%) in 12,380ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 44/128 (34%) in 2,235ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 45/128 (35%) in 3,202ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 46/128 (36%) in 12,821ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 47/128 (37%) in 12,672ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 48/128 (38%) in 13,293ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 49/128 (38%) in 11,833ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 50/128 (39%) in 10,687ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 51/128 (40%) in 10,721ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 52/128 (41%) in 5,536ms
+2024-06-19 22:24:16,777 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 53/128 (41%) in 8,145ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 54/128 (42%) in 8,545ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 55/128 (43%) in 9,466ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 56/128 (44%) in 9,497ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 57/128 (45%) in 14,212ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 58/128 (45%) in 35,797ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 59/128 (46%) in 9,166ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 60/128 (47%) in 7,265ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 61/128 (48%) in 13,417ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 62/128 (48%) in 11,417ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 63/128 (49%) in 9,240ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 64/128 (50%) in 9,620ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 65/128 (51%) in 9,704ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 66/128 (52%) in 10,648ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 67/128 (52%) in 7,616ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 68/128 (53%) in 15,278ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 69/128 (54%) in 13,435ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 70/128 (55%) in 10,015ms
+2024-06-19 22:24:16,778 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 71/128 (55%) in 8,946ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 72/128 (56%) in 7,491ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 73/128 (57%) in 7,947ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 74/128 (58%) in 9,419ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 75/128 (59%) in 7,313ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 76/128 (59%) in 14,527ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 77/128 (60%) in 7,979ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 78/128 (61%) in 7,991ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 79/128 (62%) in 7,647ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 80/128 (63%) in 8,918ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 81/128 (63%) in 8,421ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 82/128 (64%) in 8,930ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 83/128 (65%) in 6,936ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 84/128 (66%) in 8,913ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 85/128 (66%) in 8,666ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 86/128 (67%) in 11,374ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 87/128 (68%) in 8,247ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 88/128 (69%) in 7,368ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 89/128 (70%) in 6,098ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 90/128 (70%) in 10,707ms
+2024-06-19 22:24:16,779 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 91/128 (71%) in 7,568ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 92/128 (72%) in 6,960ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 93/128 (73%) in 12,459ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 94/128 (73%) in 7,914ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 95/128 (74%) in 7,025ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 96/128 (75%) in 7,723ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 97/128 (76%) in 6,568ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 98/128 (77%) in 7,356ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 99/128 (77%) in 6,881ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 100/128 (78%) in 10,120ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 101/128 (79%) in 6,788ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 102/128 (80%) in 6,151ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 103/128 (80%) in 6,556ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 104/128 (81%) in 8,232ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 105/128 (82%) in 5,678ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 106/128 (83%) in 6,490ms
+2024-06-19 22:24:16,780 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 107/128 (84%) in 7,599ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 108/128 (84%) in 5,380ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 109/128 (85%) in 8,139ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 110/128 (86%) in 9,811ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 111/128 (87%) in 9,821ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 112/128 (88%) in 8,695ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 113/128 (88%) in 6,408ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 114/128 (89%) in 9,760ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 115/128 (90%) in 9,936ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 116/128 (91%) in 9,859ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 117/128 (91%) in 7,238ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 118/128 (92%) in 8,598ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 119/128 (93%) in 7,732ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 120/128 (94%) in 2,089ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 121/128 (95%) in 409ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 122/128 (95%) in 483ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 123/128 (96%) in 568ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 124/128 (97%) in 1,570ms
+2024-06-19 22:24:16,781 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 125/128 (98%) in 296ms
+2024-06-19 22:24:16,782 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 126/128 (98%) in 329ms
+2024-06-19 22:24:16,782 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 127/128 (99%) in 1,835ms
+2024-06-19 22:24:16,782 org.owasp.dependencycheck.data.update.NvdApiDataSource:401
+INFO  - Completed processing batch 128/128 (100%) in 154ms
+2024-06-19 22:24:16,897 org.owasp.dependencycheck.utils.Settings:1174
+DEBUG - Settings.getDataFile() - file: '/home/bes/programs/dependency-check/dependency-check/data'
+2024-06-19 22:24:16,901 org.owasp.dependencycheck.data.update.RetireJSDataSource:125
+DEBUG - Last updated: 1718766026346
+2024-06-19 22:24:16,901 org.owasp.dependencycheck.data.update.RetireJSDataSource:126
+DEBUG - Now: 1718807056901
+2024-06-19 22:24:16,901 org.owasp.dependencycheck.data.update.RetireJSDataSource:130
+INFO  - Skipping RetireJS update since last update was within 24 hours.
+2024-06-19 22:24:16,902 org.owasp.dependencycheck.utils.Settings:1174
+DEBUG - Settings.getDataFile() - file: '/home/bes/programs/dependency-check/dependency-check/data'
+2024-06-19 22:24:16,902 org.owasp.dependencycheck.data.update.HostedSuppressionsDataSource:126
+DEBUG - Last updated: 1718788277884
+2024-06-19 22:24:16,902 org.owasp.dependencycheck.data.update.HostedSuppressionsDataSource:127
+DEBUG - Now: 1718807056902
+2024-06-19 22:24:16,902 org.owasp.dependencycheck.data.update.HostedSuppressionsDataSource:86
+DEBUG - Begin Hosted Suppressions file update
+2024-06-19 22:24:16,902 org.owasp.dependencycheck.utils.Settings:1174
+DEBUG - Settings.getDataFile() - file: '/home/bes/programs/dependency-check/dependency-check/data'
+2024-06-19 22:24:16,933 org.owasp.dependencycheck.utils.WriteLock:168
+DEBUG - Lock file created (main) 3dd5e1ccd01d44ee82bf88fc5cf93e49 @ 2024-06-19 22:24:16.933
+2024-06-19 22:24:16,935 org.owasp.dependencycheck.data.update.HostedSuppressionsDataSource:151
+DEBUG - Hosted Suppressions URL: https://jeremylong.github.io/DependencyCheck/suppressions/publishedSuppressions.xml
+2024-06-19 22:24:16,939 org.owasp.dependencycheck.utils.HttpResourceConnection:200
+DEBUG - Attempting retrieval of https://jeremylong.github.io/DependencyCheck/suppressions/publishedSuppressions.xml
+2024-06-19 22:24:16,973 org.owasp.dependencycheck.utils.SSLSocketFactoryEx:283
+DEBUG - Available Protocols:
+2024-06-19 22:24:16,973 org.owasp.dependencycheck.utils.SSLSocketFactoryEx:285
+DEBUG - SSLv2Hello
+2024-06-19 22:24:16,973 org.owasp.dependencycheck.utils.SSLSocketFactoryEx:285
+DEBUG - SSLv3
+2024-06-19 22:24:16,973 org.owasp.dependencycheck.utils.SSLSocketFactoryEx:285
+DEBUG - TLSv1
+2024-06-19 22:24:16,974 org.owasp.dependencycheck.utils.SSLSocketFactoryEx:285
+DEBUG - TLSv1.1
+2024-06-19 22:24:16,974 org.owasp.dependencycheck.utils.SSLSocketFactoryEx:285
+DEBUG - TLSv1.2
+2024-06-19 22:24:16,974 org.owasp.dependencycheck.utils.SSLSocketFactoryEx:285
+DEBUG - TLSv1.3
+2024-06-19 22:24:27,103 org.owasp.dependencycheck.utils.WriteLock:240
+DEBUG - Lock released (main) 3dd5e1ccd01d44ee82bf88fc5cf93e49 @ 2024-06-19 22:24:27.103
+2024-06-19 22:24:27,111 org.owasp.dependencycheck.data.update.HostedSuppressionsDataSource:94
+WARN  - Failed to update hosted suppressions file, results may contain false positives already resolved by the DependencyCheck project
+org.owasp.dependencycheck.data.update.exception.UpdateException: Failed to update the hosted suppressions file
+	at org.owasp.dependencycheck.data.update.HostedSuppressionsDataSource.fetchHostedSuppressions(HostedSuppressionsDataSource.java:156)
+	at org.owasp.dependencycheck.data.update.HostedSuppressionsDataSource.update(HostedSuppressionsDataSource.java:87)
+	at org.owasp.dependencycheck.Engine.doUpdates(Engine.java:906)
+	at org.owasp.dependencycheck.Engine.doUpdates(Engine.java:878)
+	at org.owasp.dependencycheck.App.runUpdateOnly(App.java:427)
+	at org.owasp.dependencycheck.App.run(App.java:172)
+	at org.owasp.dependencycheck.App.main(App.java:89)
+Caused by: org.owasp.dependencycheck.utils.DownloadFailedException: Download failed, unable to copy 'https://jeremylong.github.io/DependencyCheck/suppressions/publishedSuppressions.xml' to '/home/bes/programs/dependency-check/dependency-check/data/publishedSuppressions.xml'; Error downloading file https://jeremylong.github.io/DependencyCheck/suppressions/publishedSuppressions.xml; unable to connect.
+	at org.owasp.dependencycheck.utils.Downloader.fetchFile(Downloader.java:152)
+	at org.owasp.dependencycheck.utils.Downloader.fetchFile(Downloader.java:83)
+	at org.owasp.dependencycheck.data.update.HostedSuppressionsDataSource.fetchHostedSuppressions(HostedSuppressionsDataSource.java:154)
+	... 6 common frames omitted
+Caused by: org.owasp.dependencycheck.utils.DownloadFailedException: Error downloading file https://jeremylong.github.io/DependencyCheck/suppressions/publishedSuppressions.xml; unable to connect.
+	at org.owasp.dependencycheck.utils.HttpResourceConnection.obtainConnection(HttpResourceConnection.java:267)
+	at org.owasp.dependencycheck.utils.HttpResourceConnection.fetch(HttpResourceConnection.java:163)
+	at org.owasp.dependencycheck.utils.Downloader.fetchFile(Downloader.java:138)
+	... 8 common frames omitted
+Caused by: java.net.SocketTimeoutException: Connect timed out
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:551)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:602)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:178)
+	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:534)
+	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:639)
+	at java.base/sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:266)
+	at java.base/sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:380)
+	at java.base/sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:193)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1242)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1128)
+	at java.base/sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:179)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:142)
+	at org.owasp.dependencycheck.utils.HttpResourceConnection.obtainConnection(HttpResourceConnection.java:206)
+	... 10 common frames omitted
+2024-06-19 22:24:27,327 org.owasp.dependencycheck.data.update.KnownExploitedDataSource:77
+INFO  - Updating CISA Known Exploited Vulnerability list: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+2024-06-19 22:24:27,327 org.owasp.dependencycheck.utils.HttpResourceConnection:200
+DEBUG - Attempting retrieval of https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+2024-06-19 22:24:30,217 org.owasp.dependencycheck.data.nvdcve.CveDB:310
+DEBUG - Closing database
+2024-06-19 22:24:30,217 org.owasp.dependencycheck.data.nvdcve.CveDB:312
+DEBUG - Cache cleared
+2024-06-19 22:24:30,221 org.owasp.dependencycheck.data.nvdcve.CveDB:315
+DEBUG - Connection closed
+2024-06-19 22:24:30,221 org.owasp.dependencycheck.data.nvdcve.CveDB:321
+DEBUG - Resources released
+2024-06-19 22:24:30,221 org.owasp.dependencycheck.data.nvdcve.DriverLoader:57
+DEBUG - Begin deregister driver
+2024-06-19 22:24:30,222 org.owasp.dependencycheck.data.nvdcve.DriverLoader:59
+DEBUG - End deregister driver
+2024-06-19 22:24:30,222 org.owasp.dependencycheck.Engine:920
+INFO  - Check for updates complete (9481357 ms)
+2024-06-19 22:24:30,239 org.owasp.dependencycheck.utils.Settings:885
+DEBUG - Deleting ALL temporary files from `/tmp/dctemp84705b67-9c60-4c92-ad6b-6f5abe9888da`
+2024-06-19 22:24:30,264 org.owasp.dependencycheck.App:90
+DEBUG - Exit code: 0

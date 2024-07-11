@@ -34,7 +34,7 @@ public class MavenLocalRepositoryCommands {
     @ShellMethod(key = "maven_local_repo_updated_scan", value = "scan all dependencies after the specified time")
     public void scanUpdated(@ShellOption(value = "--repository-location", defaultValue = ".") String repositoryLocation,
                             @ShellOption(value = "--date", defaultValue = ".", help = "format: yyyy-MM-dd_HH:mm, the default is the day of you execute it") String date) {
-        Map<MavenGAV, MavenPackageArtifact> map = scanUpdated0(repositoryLocation, date);
+        Map<MavenGAV, MavenPackageArtifact> map = scanUpdated0(repositoryLocation, date,null);
         Collects.forEach(map, new Consumer2<MavenGAV, MavenPackageArtifact>() {
             @Override
             public void accept(MavenGAV key, MavenPackageArtifact value) {
@@ -43,35 +43,51 @@ public class MavenLocalRepositoryCommands {
         });
     }
 
-    private Map<MavenGAV, MavenPackageArtifact> scanUpdated0(String repositoryLocation, String date){
-        Date d = null;
-        if (ShellOption.NONE.equals(date) || ShellOption.NULL.equals(date) || ".".equals(date)) {
-            date = null;
+    private Map<MavenGAV, MavenPackageArtifact> scanUpdated0(String repositoryLocation, String startDate, String endDate){
+        Date start = null;
+        if (ShellOption.NONE.equals(startDate) || ShellOption.NULL.equals(startDate) || ".".equals(startDate)) {
+            startDate = null;
         }
-        if (Strings.isBlank(date)) {
-            d = new Date();
-            d = Dates.setHours(d, 0);
-            d = Dates.setMinutes(d, 0);
-            d = Dates.setSeconds(d, 0);
-            d = Dates.setMilliseconds(d, 0);
+        if (Strings.isBlank(startDate)) {
+            start = new Date();
+            start = Dates.setHours(start, 0);
+            start = Dates.setMinutes(start, 0);
+            start = Dates.setSeconds(start, 0);
+            start = Dates.setMilliseconds(start, 0);
         } else {
-            d = Dates.parse(date, "yyyy-MM-dd_HH:mm");
+            start = Dates.parse(startDate, "yyyy-MM-dd_HH:mm");
         }
-        final long baselineTime = d.getTime();
+
+        Date end = null;
+        if (ShellOption.NONE.equals(endDate) || ShellOption.NULL.equals(endDate) || ".".equals(endDate)) {
+            end = null;
+        }
+        if (Strings.isBlank(endDate)) {
+            end = new Date();
+        } else {
+            end = Dates.parse(endDate, "yyyy-MM-dd_HH:mm");
+        }
+        final long baselineTime = start.getTime();
+        final long endTime = end.getTime();
         MavenLocalRepositoryUpdatedScanner scanner = new MavenLocalRepositoryUpdatedScanner();
         Map<MavenGAV, MavenPackageArtifact> map = scanner.scan(new File(repositoryLocation), new Filter<MavenPackageArtifact>() {
             @Override
             public boolean accept(MavenPackageArtifact mavenArtifact) {
-                return mavenArtifact.getLastModified() >= baselineTime;
+                return mavenArtifact.getLastModified() >= baselineTime && mavenArtifact.getLastModified()< endTime;
             }
         });
         return map;
     }
 
     @ShellMethod(key = "maven_local_repo_copyUpdated", value = "scan all dependencies after the specified time")
-    public void copyUpdated(@ShellOption(value = "--repository-location", defaultValue = ".") String repositoryLocation,
-                            @ShellOption(value = "--date", defaultValue = ".", help = "format: yyyy-MM-dd_HH:mm, the default is the day of you execute it") String date,
-                            @ShellOption(value = "--dest-location" ,defaultValue = ".") String destLocation
+    public void copyUpdated(@ShellOption(value = "--repository-location", defaultValue = ".")
+                                String repositoryLocation,
+                            @ShellOption(value = "--start", defaultValue = ".", help = "format: yyyy-MM-dd_HH:mm, the default is the zero hours of a day of you execute it")
+                                String start,
+                            @ShellOption(value = "--end", defaultValue = ".", help = "format: yyyy-MM-dd_HH:mm, the default is the day of you execute it")
+                                String end,
+                            @ShellOption(value = "--dest-location" ,defaultValue = ".")
+                                String destLocation
                             ){
         File destRootDirectory = new File(destLocation);
         if(!destRootDirectory.exists()){
@@ -79,7 +95,7 @@ public class MavenLocalRepositoryCommands {
         }
         Preconditions.checkTrue(destRootDirectory.exists());
         Preconditions.checkTrue(destRootDirectory.isDirectory());
-        Map<MavenGAV, MavenPackageArtifact> map = scanUpdated0(repositoryLocation, date);
+        Map<MavenGAV, MavenPackageArtifact> map = scanUpdated0(repositoryLocation, start, end);
         Collects.forEach(map, new Consumer2<MavenGAV, MavenPackageArtifact>() {
             @Override
             public void accept(MavenGAV gav, MavenPackageArtifact mavenArtifact) {

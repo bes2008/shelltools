@@ -170,3 +170,6 @@
 1719407504706:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240626_lx --date 2024-06-26_00:00 --repository-location D:/mvn_repo_download_test
 1719998016785:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240703_dc --date 2024-07-03_00:00 --repository-location D:/mvn_repo_download_test
 1720603169921:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240710_lx --date 2024-07-10_00:00 --repository-location D:/mvn_repo_download_test
+1720614711564:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240710_pulsar --date 2024-07-10_00:00 --repository-location D:/mvn_repo_download_test
+1720662967333:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240711_okhttp3 --start 2024-06-07_00:00 --end 2024-06-08_00:00 --repository-location D:/mvn_repo_download_test
+1720663783400:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240711_okhttp3 --start 2023-06-07_00:00 --end 2023-06-08_00:00 --repository-location D:/mvn_repo_download_test

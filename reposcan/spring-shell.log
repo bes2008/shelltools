@@ -173,3 +173,11 @@
 1720614711564:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240710_pulsar --date 2024-07-10_00:00 --repository-location D:/mvn_repo_download_test
 1720662967333:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240711_okhttp3 --start 2024-06-07_00:00 --end 2024-06-08_00:00 --repository-location D:/mvn_repo_download_test
 1720663783400:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240711_okhttp3 --start 2023-06-07_00:00 --end 2023-06-08_00:00 --repository-location D:/mvn_repo_download_test
+1721269516268:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240718_kingbase8 --start 2024-07-18_00:00 --end 2024-07-18_10:30 --repository-location D:/mvn_repo_download_test
+1721354877929:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240719_curvesapi --start 2024-07-19_00:00 --end 2024-07-19_10:30 --repository-location D:/mvn_repo_download_test
+1721706974121:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240723_la --start 2024-07-23_00:00 --end 2024-07-23_12:00 --repository-location D:/mvn_repo_download_test
+1721792741978:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240724_micrometer --start 2024-07-24_00:00 --end 2024-07-24_12:00 --repository-location D:/mvn_repo_download_test
+1721809804542:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240724_sbootdeps --start 2024-07-24_12:00 --end 2024-07-24_16:30 --repository-location D:/mvn_repo_download_test
+1721814471434:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240724_aspectj --start 2024-07-24_16:30 --end 2024-07-24_17:50 --repository-location D:/mvn_repo_download_test
+1721900020581:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240725_fastjson2 --start 2024-07-25_16:30 --end 2024-07-24_17:35 --repository-location D:/mvn_repo_download_test
+1721900231193:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240725_fastjson2 --start 2024-07-25_16:30 --end 2024-07-25_17:35 --repository-location D:/mvn_repo_download_test

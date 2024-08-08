@@ -85,8 +85,8 @@ public class PypiConfig {
                     try {
                         Object obj = JSONs.parse(reader, type);
                         return obj;
-                    } catch (JsonException var5) {
-                        throw new DecodeException(var5.getMessage(), var5);
+                    } catch (JsonException ex) {
+                        throw new DecodeException(500,ex.getMessage(), response.request());
                     }
                 } else {
                     return null;

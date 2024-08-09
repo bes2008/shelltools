@@ -13,9 +13,9 @@
         <slf4j.version>1.7.32</slf4j.version>
 		
 		<easyjson.version>4.1.5</easyjson.version>
-		<sqlhelper.version>4.1.1</sqlhelper.version>
-		<langx-java.version>5.3.8</langx-java.version>				
-		<agileway.version>4.4.5</agileway.version>
+		<sqlhelper.version>5.0.1</sqlhelper.version>
+		<langx-java.version>5.4.1</langx-java.version>
+		<agileway.version>5.0.4</agileway.version>
 		
 		<hessian.version>4.0.63</hessian.version>
 		<kryo.version>5.0.0-RC9</kryo.version>
@@ -60,11 +60,7 @@
     		<artifactId>langx-java8</artifactId>
     		<version>${langx-java.version}</version>
     	</dependency>
-        <dependency>
-    		<groupId>io.github.bes2008.solution.langx</groupId>
-    		<artifactId>langx-java-asn1</artifactId>
-    		<version>${langx-java.version}</version>
-    	</dependency>
+
         <dependency>
     		<groupId>io.github.bes2008.solution.langx</groupId>
     		<artifactId>langx-java-distributed</artifactId>
@@ -204,16 +200,7 @@
     		<artifactId>sqlhelper-mybatisplus-spring-boot-starter</artifactId>
     		<version>${sqlhelper.version}</version>
     	</dependency> 
-    		<dependency>
-    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
-    		<artifactId>sqlhelper-mybatisplus_2x</artifactId>
-    		<version>${sqlhelper.version}</version>
-    	</dependency>	 
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
-    		<artifactId>sqlhelper-mybatisplus_2x-spring-boot-starter</artifactId>
-    		<version>${sqlhelper.version}</version>
-    	</dependency> 
+  
     	<dependency>
     		<groupId>io.github.bes2008.solution.sqlhelper</groupId>
     		<artifactId>sqlhelper-springjdbc</artifactId>
@@ -450,17 +437,7 @@
 
     	<dependency>
     		<groupId>io.github.bes2008.solution.agileway</groupId>
-    		<artifactId>agileway-redis</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.agileway</groupId>
     		<artifactId>agileway-redis-springdata2</artifactId>
-    		<version>${agileway.version}</version>
-    	</dependency>
-    	<dependency>
-    		<groupId>io.github.bes2008.solution.agileway</groupId>
-    		<artifactId>agileway-shiro-redis</artifactId>
     		<version>${agileway.version}</version>
     	</dependency>
     	<dependency>

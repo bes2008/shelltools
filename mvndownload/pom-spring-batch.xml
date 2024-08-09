@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>a</groupId>
+  <artifactId>a</artifactId>
+  <version>1</version>
+  
+  <name>Spring Batch BOM</name>
+  
+  <properties>
+	<spring-batch.version>5.0.6</spring-batch.version>
+  </properties>
+  
+  
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.batch</groupId>
+        <artifactId>spring-batch-core</artifactId>
+        <version>${spring-batch.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.batch</groupId>
+        <artifactId>spring-batch-infrastructure</artifactId>
+        <version>${spring-batch.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.batch</groupId>
+        <artifactId>spring-batch-integration</artifactId>
+        <version>${spring-batch.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.batch</groupId>
+        <artifactId>spring-batch-test</artifactId>
+        <version>${spring-batch.version}</version>
+      </dependency>
+    </dependencies>
+
+</project>

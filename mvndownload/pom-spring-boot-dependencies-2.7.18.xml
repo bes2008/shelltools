@@ -167,7 +167,7 @@
     <mysql.version>8.0.33</mysql.version>
     <nekohtml.version>1.9.22</nekohtml.version>
     <neo4j-java-driver.version>4.4.12</neo4j-java-driver.version>
-    <netty.version>4.1.101.Final</netty.version>
+    <netty.version>4.1.109.Final</netty.version>
     <okhttp.version>4.9.3</okhttp.version>
     <oracle-database.version>21.5.0.0</oracle-database.version>
     <pooled-jms.version>1.2.6</pooled-jms.version>

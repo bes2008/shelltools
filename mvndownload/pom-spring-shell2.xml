@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>com.examples</groupId>
+    <artifactId>examples</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<spring.shell.version>2.1.15</spring.shell.version>
+    </properties>
+    <dependencies>
+		
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-starter</artifactId>
+            <version>${spring.shell.version}</version>
+        </dependency>
+                
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-core</artifactId>
+            <version>${spring.shell.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-standard</artifactId>
+            <version>${spring.shell.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-table</artifactId>
+            <version>${spring.shell.version}</version>
+        </dependency>
+                
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-standard-commands</artifactId>
+            <version>${spring.shell.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-autoconfigure</artifactId>
+            <version>${spring.shell.version}</version>
+        </dependency>
+        
+
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-starter-jna</artifactId>
+            <version>${spring.shell.version}</version>
+        </dependency>
+
+
+    </dependencies>    
+</project>

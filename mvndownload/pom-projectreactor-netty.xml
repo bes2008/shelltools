@@ -14,10 +14,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<reactor-netty.version>1.1.18</reactor-netty.version>
+		<reactor-netty.version>1.0.45</reactor-netty.version>
     </properties>
     <dependencies>
-		<dependency>
+		
+        <dependency>
             <groupId>io.projectreactor.netty</groupId>
             <artifactId>reactor-netty</artifactId>
             <version>${reactor-netty.version}</version>
@@ -37,7 +38,6 @@
             <artifactId>reactor-netty-http-brave</artifactId>
             <version>${reactor-netty.version}</version>
         </dependency>
-   
-   
+
     </dependencies>    
 </project>

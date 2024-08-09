@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.datastax.oss</groupId>
+  <artifactId>java-driver-bom</artifactId>
+  <version>4.15.0</version>
+  <packaging>pom</packaging>
+  <name>DataStax Java driver for Apache Cassandra(R) - Bill Of Materials</name>
+  <description>A driver for Apache Cassandra(R) 2.1+ that works exclusively with the Cassandra Query Language version 3 (CQL3) and Cassandra's native protocol versions 3 and above.</description>
+  <url>https://github.com/datastax/java-driver/java-driver-bom</url>
+  
+
+<properties>
+	<cassandra-driver.version>4.15.0</cassandra-driver.version>
+</properties>
+
+    <dependencies>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>java-driver-core</artifactId>
+        <version>${cassandra-driver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>java-driver-core-shaded</artifactId>
+        <version>${cassandra-driver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>java-driver-mapper-processor</artifactId>
+        <version>${cassandra-driver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>java-driver-mapper-runtime</artifactId>
+        <version>${cassandra-driver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>java-driver-query-builder</artifactId>
+        <version>${cassandra-driver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>java-driver-test-infra</artifactId>
+        <version>${cassandra-driver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>java-driver-metrics-micrometer</artifactId>
+        <version>${cassandra-driver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>java-driver-metrics-microprofile</artifactId>
+        <version>${cassandra-driver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>native-protocol</artifactId>
+        <version>1.5.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.oss</groupId>
+        <artifactId>java-driver-shaded-guava</artifactId>
+        <version>25.1-jre-graal-sub-1</version>
+      </dependency>
+    </dependencies>
+
+</project>

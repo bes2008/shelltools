@@ -15,8 +15,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
         <mybatis.version>3.5.16</mybatis.version>
+        <!--
         <mybatis.spring.version>3.0.3</mybatis.spring.version>
         <mybatis.springboot.version>3.0.3</mybatis.springboot.version>
+        -->
+        <mybatis.spring.version>2.1.2</mybatis.spring.version>
+        <mybatis.springboot.version>2.3.2</mybatis.springboot.version>
     </properties>
     <dependencies>
         <dependency>

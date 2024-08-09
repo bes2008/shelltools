@@ -183,3 +183,5 @@
 1721900231193:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240725_fastjson2 --start 2024-07-25_16:30 --end 2024-07-25_17:35 --repository-location D:/mvn_repo_download_test
 1722425573862:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240731_kafka2.5 --start 2024-07-31_00:30 --end 2024-07-31_19:30 --repository-location D:/mvn_repo_download_test
 1722910182999:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240806_junit5 --start 2024-08-06_00:30 --end 2024-08-06_10:10 --repository-location D:/mvn_repo_download_test
+1723113329250:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240806_springboot612 --start 2024-08-06_10:10 --end 2024-08-08_18:35 --repository-location D:/mvn_repo_download_test
+1723189713839:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240809_springboot612 --start 2024-08-06_10:10 --end 2024-08-09_15:50 --repository-location D:/mvn_repo_download_test

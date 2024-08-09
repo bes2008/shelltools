@@ -10,6 +10,7 @@ import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeParser
 import com.jn.shelltools.supports.maven.dependencies.MavenDependenciesTreeToPomTransformer;
 import freemarker.template.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
@@ -56,7 +57,7 @@ public class MavenPomCommands {
     }
 
     @Autowired
-    public void setFreemarkerConfig(Configuration freemarkerConfig) {
+    public void setFreemarkerConfig(@Qualifier("templateConfig") Configuration freemarkerConfig) {
         this.freemarkerConfig = freemarkerConfig;
     }
 

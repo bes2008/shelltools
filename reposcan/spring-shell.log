@@ -185,3 +185,10 @@
 1722910182999:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240806_junit5 --start 2024-08-06_00:30 --end 2024-08-06_10:10 --repository-location D:/mvn_repo_download_test
 1723113329250:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240806_springboot612 --start 2024-08-06_10:10 --end 2024-08-08_18:35 --repository-location D:/mvn_repo_download_test
 1723189713839:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240809_springboot612 --start 2024-08-06_10:10 --end 2024-08-09_15:50 --repository-location D:/mvn_repo_download_test
+1723434154953:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240812_mvnplugins --start 2024-08-12_06:10 --end 2024-08-12_11:45 --repository-location D:/mvn_repo_download_test
+1723435055499:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240812_mvnplugins --start 2024-08-12_06:10 --end 2024-08-12_12:00 --repository-location D:/mvn_repo_download_test
+1723447102631:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240808_springretry --start 2024-08-08_11:50 --end 2024-08-08_13:40 --repository-location D:/mvn_repo_download_test
+1723455598259:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240712_janino --start 2024-07-12_00:00 --end 2024-07-13_00:00 --repository-location D:/mvn_repo_download_test
+1723458037126:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240812_ssoauth --start 2024-08-12_18:10 --end 2024-08-12_18:21 --repository-location D:/mvn_repo_download_test
+1723458232349:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240812_ssoauth --start 2024-08-12_18:10 --end 2024-08-12_18:25 --repository-location D:/mvn_repo_download_test
+1723617838642:maven_local_repo_copyUpdated --dest-location D:/mvn_repo_20240808_springretry --start 2024-08-08_11:50 --end 2024-08-08_13:40 --repository-location D:/mvn_repo_download_test

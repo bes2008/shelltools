@@ -7,10 +7,12 @@ import com.jn.langx.text.xml.errorhandler.IgnoreErrorHandler;
 import com.jn.langx.util.Preconditions;
 import com.jn.langx.util.Strings;
 import com.jn.langx.util.collection.Collects;
+import com.jn.langx.util.collection.Maps;
 import com.jn.langx.util.collection.Pipeline;
 import com.jn.langx.util.enums.Enums;
 import com.jn.langx.util.function.Consumer;
 import com.jn.langx.util.function.Function;
+import com.jn.langx.util.function.Predicate;
 import com.jn.langx.util.function.Supplier;
 import com.jn.langx.util.io.IOs;
 import com.jn.langx.util.logging.Loggers;
@@ -28,6 +30,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
+import java.util.Map;
 
 public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
     private static final Logger logger = Loggers.getLogger(MavenPomParser.class);
@@ -143,10 +146,59 @@ public class MavenPomParser implements Parser<Document, MavenPackageArtifact> {
                 }
             }, this.pomPath);
             String artifactId = artifactElement.getTextContent().trim();
+
+            boolean gavContainsVariable = Pipeline.<String>of(groupId, artifactId, version).anyMatch(new Predicate<String>() {
+                @Override
+                public boolean test(String value) {
+                    return value.contains("${") && value.contains("}") ;
+                }
+            });
+            if(gavContainsVariable){
+               Map<String,String> properties= parseProperties(doc);
+               groupId=StringTemplates.formatWithMap(groupId, properties);
+               artifactId=StringTemplates.formatWithMap(artifactId, properties);
+               version=StringTemplates.formatWithMap(version, properties);
+            }
+
             return new MavenGAV(groupId, artifactId, version);
         } catch (Throwable ex) {
             throw new PomParseException(ex);
         }
+    }
+
+    private Map<String,String> parseProperties(Document doc){
+
+        boolean usingCustomNamespace = Namespaces.hasCustomNamespace(doc, true);
+        String namespacePrefix = "x";
+        // 解析 properties
+        XPathFactory xPathFactory = XPathFactory.newInstance();
+        XmlAccessor xmlAccessor = new XmlAccessor(usingCustomNamespace ? namespacePrefix : null);
+        Map<String,String> properties= Maps.newLinkedHashMap();
+        try {
+            String propertiesXPath = XPaths.wrapXpath(mappingToXpath("properties"), usingCustomNamespace, namespacePrefix);
+            Element propertiesElement = xmlAccessor.getElement(doc, xPathFactory, propertiesXPath);
+            if(propertiesElement!=null) {
+                NodeList nodeList = propertiesElement.getChildNodes();
+
+                Pipeline.<Node>of(new NodeListIterator(nodeList)).forEach( new Predicate<Node>() {
+                    @Override
+                    public boolean test(Node node) {
+                        return node.getNodeType() == Node.ELEMENT_NODE;
+                    }
+                }, new Consumer<Node>() {
+                    @Override
+                    public void accept(Node node) {
+                        Element propertyElement = (Element) node;
+                        String propertyKey = propertyElement.getTagName();
+                        String propertyValue = propertyElement.getTextContent().trim();
+                        properties.put(propertyKey, propertyValue);
+                    }
+                });
+            }
+        }catch (Throwable ex){
+            throw new PomParseException(ex);
+        }
+        return properties;
     }
 
     private Packaging parsePackaging(Document doc) {

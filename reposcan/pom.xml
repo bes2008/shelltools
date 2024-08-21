@@ -15,7 +15,7 @@
         <spring.shell.version>3.1.6</spring.shell.version>
 
         <slf4j.version>1.7.36</slf4j.version>
-        <langx.version>5.4.1</langx.version>
+        <langx.version>5.4.3</langx.version>
         <easyjson.version>4.1.5</easyjson.version>
         <agileway.version>5.0.4</agileway.version>
         <jackson.version>2.13.2</jackson.version>
@@ -137,6 +137,11 @@
         <dependency>
             <groupId>io.github.bes2008.solution.langx</groupId>
             <artifactId>langx-java-el</artifactId>
+            <version>${langx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bes2008.solution.langx</groupId>
+            <artifactId>langx-java8</artifactId>
             <version>${langx.version}</version>
         </dependency>
         <dependency>

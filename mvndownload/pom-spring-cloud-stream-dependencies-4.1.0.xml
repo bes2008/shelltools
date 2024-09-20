@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>a</groupId>
+  <artifactId>a</artifactId>
+  <version>1</version>
+
+  
+  <properties>
+	<spring-cloud-stream.version>4.1.0</spring-cloud-stream.version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-dependencies</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+     </dependencies>
+  </dependencyManagement>
+        
+  
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-test-binder</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-test-support</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-binder-kafka-reactive</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-binder-kafka-streams</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-binder-kafka-core</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-stream-kafka</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-binder-rabbit-core</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-binder-rabbit-test-support</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-schema-registry-client</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-schema-registry-core</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-stream-schema-registry-server</artifactId>
+        <version>${spring-cloud-stream.version}</version>
+      </dependency>
+    </dependencies>
+  
+  
+</project>

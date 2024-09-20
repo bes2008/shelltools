@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>a</groupId>
+  <artifactId>a</artifactId>
+  <version>1</version>
+    
+<properties>
+	<spring-cloud-function.version>4.1.0</spring-cloud-function.version>
+</properties>
+    
+  <dependencyManagement>
+	<dependencies>
+	<dependency>
+	 <groupId>org.springframework.cloud</groupId>
+	  <artifactId>spring-cloud-function-dependencies</artifactId>
+	  <version>${spring-cloud-function.version}</version>
+	  <type>pom</type>
+	  <scope>import</scope>
+	  </dependency>
+	</dependencies>
+  </dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-context</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-core</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-web</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-function-web</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-function-webflux</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-deployer</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-adapter-aws</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-adapter-azure</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-adapter-gcp</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-integration</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-kotlin</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-rsocket</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-grpc</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-grpc-cloudevent-ext</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-function-serverless-web</artifactId>
+        <version>${spring-cloud-function.version}</version>
+      </dependency>
+    </dependencies>
+  
+  
+</project>

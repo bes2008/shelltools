@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>a</groupId>
+  <artifactId>a</artifactId>
+  <version>1</version>
+  
+  
+  <properties>
+	<spring-cloud-bus.version>4.1.0</spring-cloud-bus.version>
+  </properties>
+  
+  
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-bus-dependencies</artifactId>
+		  <version>${spring-cloud-bus.version}</version>
+		  <type>pom</type>
+		  <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+    <dependencies>
+      <dependency>        
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        <version>${spring-cloud-bus.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-bus-kafka</artifactId>
+        <version>${spring-cloud-bus.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-bus-stream</artifactId>
+        <version>${spring-cloud-bus.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-bus</artifactId>
+        <version>${spring-cloud-bus.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-bus-rsocket</artifactId>
+        <version>${spring-cloud-bus.version}</version>
+      </dependency>
+    </dependencies>
+  
+  
+</project>

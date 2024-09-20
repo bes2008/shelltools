@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>a</groupId>
+  <artifactId>a</artifactId>
+  <version>1</version>
+  
+  <properties>
+	<spring-cloud-gateway.version>4.1.0</spring-cloud-gateway.version>
+  </properties>
+  
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-gateway-dependencies</artifactId>
+        <version>${spring-cloud-gateway.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>      
+    </dependencies>
+  </dependencyManagement>
+  
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-gateway-webflux</artifactId>
+        <version>${spring-cloud-gateway.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-gateway-mvc</artifactId>
+        <version>${spring-cloud-gateway.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-gateway-server</artifactId>
+        <version>${spring-cloud-gateway.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-gateway</artifactId>
+        <version>${spring-cloud-gateway.version}</version>
+      </dependency>
+    </dependencies>
+  
+  
+</project>

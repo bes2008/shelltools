@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>a</groupId>
+  <artifactId>a</artifactId>
+  <version>1</version>
+
+  <properties>
+    <feign-form.version>3.8.0</feign-form.version>
+    <feign.version>13.1</feign.version>
+    <spring-cloud-openfeign.version>4.1.0</spring-cloud-openfeign.version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-openfeign-dependencies</artifactId>
+		  <version>${spring-cloud-openfeign.version}</version>
+        <type>pom</type>
+        <scope>import</scope>		  
+      </dependency>
+      <dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-bom</artifactId>
+        <version>${feign.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>      
+
+    <dependencies>
+      <dependency>
+      
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-openfeign-core</artifactId>
+        <version>${spring-cloud-openfeign.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-openfeign</artifactId>
+        <version>${spring-cloud-openfeign.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.github.openfeign.form</groupId>
+        <artifactId>feign-form-spring</artifactId>
+        <version>${feign-form.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-fileupload</artifactId>
+            <groupId>commons-fileupload</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.5</version>
+      </dependency>
+    </dependencies>
+  
+  
+</project>

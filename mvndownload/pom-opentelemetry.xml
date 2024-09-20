@@ -10,7 +10,7 @@
   <name>OpenTelemetry Java</name>
 
 <properties>
-	<opentelemetry.version>1.25.0</opentelemetry.version>
+	<opentelemetry.version>1.36.0</opentelemetry.version>
 </properties>
  
     <dependencies>

@@ -17,7 +17,7 @@
         <!--
 		<nacos-spring.version>1.1.2</nacos-spring.version>
         -->
-        <nacos-spring.version>2.1.0-RC</nacos-spring.version>
+        <nacos-spring.version>2.1.1-RC</nacos-spring.version>
     </properties>
     <dependencies>
 		

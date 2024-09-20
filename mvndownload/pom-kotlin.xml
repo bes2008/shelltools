@@ -7,7 +7,7 @@
 
     <groupId>a</groupId>
     <artifactId>a</artifactId>
-    <version>1.8.22</version>
+    <version>1</version>
     
     <properties>
         <!--
@@ -17,7 +17,7 @@ org.jetbrains.kotlin
         it isn't affected by the same named property in a consumer project,
         neither it is visible in the consumer project.
         -->
-        <kotlin.version>1.8.22</kotlin.version>
+        <kotlin.version>1.9.23</kotlin.version>
     </properties>
 
         <dependencies>

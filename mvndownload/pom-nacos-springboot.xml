@@ -17,16 +17,8 @@
 		<nacos.springboot.version>0.3.0-RC</nacos.springboot.version>
     </properties>
     <dependencies>
-		<dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-config-spring-boot-starter</artifactId>
-            <version>${nacos.springboot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-discovery-spring-boot-starter</artifactId>
-            <version>${nacos.springboot.version}</version>
-        </dependency>
+
+
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-spring-boot-base</artifactId>
@@ -37,6 +29,8 @@
             <artifactId>nacos-spring-boot-aot</artifactId>
             <version>${nacos.springboot.version}</version>
         </dependency>
+
+        
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-config-spring-boot-actuator</artifactId>
@@ -47,6 +41,13 @@
             <artifactId>nacos-config-spring-boot-autoconfigure</artifactId>
             <version>${nacos.springboot.version}</version>
         </dependency>
+		<dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-config-spring-boot-starter</artifactId>
+            <version>${nacos.springboot.version}</version>
+        </dependency>        
+        
+        
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-discovery-spring-boot-autoconfigure</artifactId>
@@ -55,6 +56,11 @@
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-discovery-spring-boot-actuator</artifactId>
+            <version>${nacos.springboot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-discovery-spring-boot-starter</artifactId>
             <version>${nacos.springboot.version}</version>
         </dependency>
 

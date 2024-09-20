@@ -15,7 +15,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		
-        <bouncycastle.jdk18on.version>1.77</bouncycastle.jdk18on.version>
+        <bouncycastle.jdk18on.version>1.78.1</bouncycastle.jdk18on.version>
     </properties>
     <dependencies>		
         <dependency>

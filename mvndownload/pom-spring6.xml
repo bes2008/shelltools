@@ -12,7 +12,18 @@
   <properties>
 	<spring.version>6.0.21</spring.version>
   </properties>
-  
+    
+  <dependencyManagement>
+	  <dependencies>
+		 <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-framework-bom</artifactId>
+			<version>${spring.version}</version>
+			<scope>import</scope>
+			<type>pom</type>
+		  </dependency>
+	  </dependencies>
+  </dependencyManagement>
   
     <dependencies>
       <dependency>

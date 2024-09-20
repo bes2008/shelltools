@@ -16,7 +16,7 @@
         <maven.version>3.2.2</maven.version>
 
 
-        <grpc.version>1.61.1</grpc.version>
+        <grpc.version>1.65.1</grpc.version>
     </properties>
     <dependencies>        
         <dependency>
@@ -129,8 +129,44 @@
             <groupId>io.grpc</groupId>
             <artifactId>grpc-inprocess</artifactId>
             <version>${grpc.version}</version>
-        </dependency>           
-                            
+        </dependency>   
+                
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>protoc-gen-grpc-java</artifactId>
+            <version>${grpc.version}</version>
+            <type>exe</type>
+            <classifier>windows-x86_64</classifier>
+        </dependency>   
+		
+		<dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>protoc-gen-grpc-java</artifactId>
+            <version>${grpc.version}</version>
+            <type>exe</type>
+            <classifier>linux-x86_64</classifier>
+        </dependency>      
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>protoc-gen-grpc-java</artifactId>
+            <version>${grpc.version}</version>
+            <type>exe</type>
+            <classifier>linux-s390_64</classifier>
+        </dependency>               
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>protoc-gen-grpc-java</artifactId>
+            <version>${grpc.version}</version>
+            <type>exe</type>
+            <classifier>linux-ppcle_64</classifier>
+        </dependency>       
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>protoc-gen-grpc-java</artifactId>
+            <version>${grpc.version}</version>
+            <type>exe</type>
+            <classifier>linux-aarch_64</classifier>
+        </dependency>                        
     </dependencies>
 
     <build>

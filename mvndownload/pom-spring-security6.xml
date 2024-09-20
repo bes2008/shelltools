@@ -14,7 +14,7 @@
   <name>a</name>
   
   <properties>
-	<spring-security.version>6.1.9</spring-security.version>
+	<spring-security.version>6.3.1</spring-security.version>
   </properties>
   
   

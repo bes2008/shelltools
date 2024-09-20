@@ -14,14 +14,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
-		<eclipse-angus-mail.version>1.1.0</eclipse-angus-mail.version>
+		<eclipse-angus-mail.version>1.0.0</eclipse-angus-mail.version>
+		<!-- 最高到2.0.2 版本 -->
+		<eclipse-angus-mail-activation.version>2.0.2</eclipse-angus-mail-activation.version>
     </properties>
     <dependencies>
     
 		<dependency>
 			<groupId>org.eclipse.angus</groupId>
 			<artifactId>angus-activation</artifactId>
-			<version>${eclipse-angus-mail.version}</version>
+			<version>${eclipse-angus-mail-activation.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.angus</groupId>

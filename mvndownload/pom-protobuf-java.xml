@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         
-        <protobuf-java.version>3.25.3</protobuf-java.version>
+        <protobuf-java.version>4.27.2</protobuf-java.version>
         
     </properties>
     <dependencies>
@@ -38,5 +38,42 @@
             <artifactId>protobuf-kotlin</artifactId>
             <version>${protobuf-java.version}</version>
         </dependency>
+        
+        
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protoc</artifactId>
+            <version>${protobuf-java.version}</version>
+            <type>exe</type>
+            <classifier>windows-x86_64</classifier>
+        </dependency>        
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protoc</artifactId>
+            <version>${protobuf-java.version}</version>
+            <type>exe</type>
+            <classifier>linux-x86_64</classifier>
+        </dependency>     
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protoc</artifactId>
+            <version>${protobuf-java.version}</version>
+            <type>exe</type>
+            <classifier>linux-s390_64</classifier>
+        </dependency>    
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protoc</artifactId>
+            <version>${protobuf-java.version}</version>
+            <type>exe</type>
+            <classifier>linux-ppcle_64</classifier>
+        </dependency>    
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protoc</artifactId>
+            <version>${protobuf-java.version}</version>
+            <type>exe</type>
+            <classifier>linux-aarch_64</classifier>
+        </dependency>          
     </dependencies>    
 </project>

@@ -5,16 +5,15 @@
 
   <groupId>a</groupId>
   <artifactId>a</artifactId>
-  <version>4.1.110.Final</version>
+  <version>1</version>
   <packaging>pom</packaging>
 
   <name>Netty/BOM</name>
  
 
-  <properties>
-    <!-- Keep in sync with ../pom.xml -->
+  <properties>   
     <tcnative.version>2.0.65.Final</tcnative.version>
-    <netty.version>4.1.110.Final</netty.version>
+    <netty.version>4.1.112.Final</netty.version>
   </properties>
 
     <dependencies>

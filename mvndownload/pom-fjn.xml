@@ -13,9 +13,10 @@
         <slf4j.version>1.7.32</slf4j.version>
 		
 		<easyjson.version>4.1.5</easyjson.version>
-		<sqlhelper.version>5.0.1</sqlhelper.version>
-		<langx-java.version>5.4.1</langx-java.version>
+		<sqlhelper.version>5.0.7</sqlhelper.version>
+		<langx-java.version>5.4.4</langx-java.version>
 		<agileway.version>5.0.4</agileway.version>
+		<nacosplugins.version>2.0.8</nacosplugins.version>
 		
 		<hessian.version>4.0.63</hessian.version>
 		<kryo.version>5.0.0-RC9</kryo.version>
@@ -45,6 +46,12 @@
 		<jcodings.version>1.0.6</jcodings.version>
 	</properties>
     <dependencies>	
+		<dependency>
+			<groupId>io.github.bes2008.solution.nacosplugins</groupId>
+			<artifactId>nacosplugin-all</artifactId>
+			<version>${nacosplugins.version}</version>
+		</dependency>
+    
    	    <dependency>
     		<groupId>io.github.bes2008.solution.langx</groupId>
     		<artifactId>langx-java-all</artifactId>
@@ -577,12 +584,6 @@
             <artifactId>sshj</artifactId>
             <version>${schmizz.sshj.version}</version>
         </dependency>
-    	<dependency>
-            <groupId>com.airlenet.yang</groupId>
-            <artifactId>ganymed-ssh2</artifactId>
-            <version>${ganymed-ssh2.version}</version>
-        </dependency>
-    
     
         <dependency>
             <groupId>com.trilead</groupId>

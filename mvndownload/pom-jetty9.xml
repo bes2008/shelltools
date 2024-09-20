@@ -14,11 +14,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-<!--
-		<jetty.version>9.4.54.v20240208</jetty.version>
-		-->
+
 		
-		<jetty.version>11.0.21</jetty.version>
+		<jetty.version>9.4.54.v20240208</jetty.version>
+
+		<!--
+		<jetty.version>9.4.56.v20240826</jetty.version>
+		-->
     </properties>
     <dependencies>
 		
@@ -30,7 +32,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
-            <version>9.4.54.v20240208</version>
+            <version>${jetty.version}</version>
         </dependency>
         
         <dependency>

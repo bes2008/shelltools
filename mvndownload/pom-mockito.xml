@@ -14,8 +14,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+<!--
 		<mockito.version>5.3.1</mockito.version>
+-->		
+		<mockito.version>4.11.0</mockito.version>
     </properties>
+    
+    <dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-bom</artifactId>
+				<version>4.11.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+        </dependencies>
+    </dependencyManagement>
+    
     <dependencies>
 		
         <dependency>
@@ -46,6 +62,13 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-subclass</artifactId>
+			<version>${mockito.version}</version>
+		</dependency>
+		
+		<!-- 5.x 版本，移除了 -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-inline</artifactId>
 			<version>${mockito.version}</version>
 		</dependency>
     </dependencies>    
